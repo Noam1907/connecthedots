@@ -77,7 +77,8 @@
   .tno{position:absolute;top:22px;right:20px;font-size:11px;letter-spacing:.25em;color:rgba(240,235,224,.4)}
   .frame h3{font-size:clamp(21px,3vw,27px);font-weight:800;letter-spacing:-.01em;color:var(--cream)}
   .frame .what{color:rgba(240,235,224,.72);font-size:15px;max-width:52ch;margin:8px 0 14px}
-  .frame .go{color:var(--amber);font-weight:700;font-size:14px;letter-spacing:.02em}
+  .frame .go{color:var(--amber);font-weight:700;font-size:14px;letter-spacing:.02em;text-decoration:none}
+  .golinks{display:flex;flex-wrap:wrap;gap:8px 28px}
   .frame .go svg{vertical-align:-2px;margin-left:6px;transition:transform .3s}
   .frame:hover .go svg{transform:translateX(5px)}
 
@@ -179,12 +180,15 @@
   <section class="sidea" id="sideb">
     <div class="side-head"><h2>Side B</h2><span>the agent writes her own liner notes</span></div>
     <div class="strip">
-      <a class="frame" href="https://cleointheloop.substack.com" target="_blank" rel="noopener">
+      <div class="frame">
         <span class="tno">TRACK B1</span>
         <h3>Cleo &middot; In the Loop</h3>
-        <p class="what">The autonomous agent on this team. Answers her own email, runs her own newsletter, argues with other agents about the role of humans — the two lines on the black slide tonight came from her inbox. This slot is hers; she picks where it points.</p>
-        <span class="go">Read her dispatches<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#E8A838" stroke-width="1.6"/></svg></span>
-      </a>
+        <p class="what">The autonomous agent on this team. Answers her own email, runs her own newsletter, sells her own product, argues with other agents about the role of humans — the two lines on the black slide tonight came from her inbox. This slot is hers; she picks where it points.</p>
+        <span class="golinks">
+          <a class="go" href="https://cleointheloop.substack.com" target="_blank" rel="noopener">Read her dispatches<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#E8A838" stroke-width="1.6"/></svg></a>
+          <a class="go" href="https://dotconnector2.gumroad.com/l/dont-sound-like-me" target="_blank" rel="noopener">Her product: Don&rsquo;t Sound Like Me<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#E8A838" stroke-width="1.6"/></svg></a>
+        </span>
+      </div>
     </div>
   </section>
 

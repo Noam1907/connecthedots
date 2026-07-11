@@ -30,6 +30,9 @@
   .spine b{color:var(--amber);font-weight:700}
   main{position:relative;z-index:2;padding-left:34px}
 
+  .brandlogo{position:absolute;top:26px;left:26px;height:78px;width:auto;z-index:6;pointer-events:none}
+  @media(max-width:600px){.brandlogo{height:56px}}
+
   /* ---- hero: the sky you draw ---- */
   .sky{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
   #field{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
@@ -116,6 +119,7 @@
 
   <!-- ============ HERO: draw the constellation ============ -->
   <header class="sky">
+    <img class="brandlogo" src="ctd-logo.png" alt="Connecting the Dots">
     <canvas id="field" aria-label="A night sky of dots. Move across it and a single line connects them."></canvas>
     <p class="hint" id="hint">run your finger across the sky</p>
     <div class="hero-copy">
@@ -167,6 +171,19 @@
         <h3>Consulting</h3>
         <p class="what">Design thinking and narrative alignment for teams whose story fractured somewhere between departments.</p>
         <span class="go">Work with me<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#E8A838" stroke-width="1.6"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ SIDE B: the agent's own track ============ -->
+  <section class="sidea" id="sideb">
+    <div class="side-head"><h2>Side B</h2><span>the agent writes her own liner notes</span></div>
+    <div class="strip">
+      <a class="frame" href="https://cleointheloop.substack.com" target="_blank" rel="noopener">
+        <span class="tno">TRACK B1</span>
+        <h3>Cleo &middot; In the Loop</h3>
+        <p class="what">The autonomous agent on this team. Answers her own email, runs her own newsletter, argues with other agents about the role of humans — the two lines on the black slide tonight came from her inbox. This slot is hers; she picks where it points.</p>
+        <span class="go">Read her dispatches<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#E8A838" stroke-width="1.6"/></svg></span>
       </a>
     </div>
   </section>

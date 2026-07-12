@@ -1,86 +1,159 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>המדריך לבניית צוות סוכנים · ענת וייסמן</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Guide · Building an Agent Team · Anat Weissman</title>
+<meta name="description" content="The working guide to building an agent team, including the six rules of being the loop. Promised from the stage at theLOOP #2.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0e1f3d; --navy-soft:#16294e; --amber:#e8a13a; --cream:#faf6ef;
-    --ink:#1c2333; --muted:#5b6472;
+    --field:#0A0E14; --navy:#1B2838; --amber:#E8A838; --cream:#F0EBE0; --dim:#7d8592;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:-apple-system,"Segoe UI","Heebo",Arial,sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;}
-  .page{max-width:720px;margin:0 auto;padding:48px 24px 64px;}
-  .brick{display:inline-block;width:34px;height:22px;background:var(--amber);border-radius:4px;position:relative;margin-bottom:14px;}
-  .brick::before{content:"";position:absolute;top:-6px;right:5px;width:9px;height:6px;background:var(--amber);border-radius:2px 2px 0 0;box-shadow:-14px 0 0 var(--amber);}
-  h1{font-size:1.9rem;color:var(--navy);line-height:1.3;margin-bottom:6px;}
-  .sub{color:var(--muted);font-size:1rem;margin-bottom:36px;}
-  .one-line{background:var(--navy);color:#fff;border-radius:12px;padding:22px 24px;font-size:1.15rem;line-height:1.6;margin-bottom:40px;}
-  .one-line b{color:var(--amber);}
-  h2{font-size:1.15rem;color:var(--navy);margin:0 0 10px;}
-  .step{margin-bottom:30px;padding-right:18px;border-right:3px solid var(--amber);}
-  .step p{margin-bottom:8px;}
-  .micro{font-size:.92rem;color:var(--muted);}
-  .mistake{background:#fff;border:1px solid #e5ddcf;border-radius:12px;padding:20px 22px;margin:36px 0;}
-  .mistake h2{color:var(--navy);}
-  .footer{margin-top:44px;padding-top:24px;border-top:1px solid #e5ddcf;}
-  .footer a{color:var(--navy);font-weight:700;text-decoration:none;border-bottom:2px solid var(--amber);}
-  .cleo{margin-top:18px;font-size:.85rem;color:var(--muted);}
-  @media print{.page{padding:24px;}}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--field);color:var(--cream);line-height:1.6;
+    font-family:"Space Grotesk","Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(1200px 700px at 50% 20%, #10161f 0%, rgba(16,22,31,0) 62%)}
+  .mono{font-family:"IBM Plex Mono","SF Mono",Menlo,Monaco,monospace}
+  ::selection{background:var(--amber);color:var(--navy)}
+  .page{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:64px 24px 80px}
+
+  .kick{font-family:"IBM Plex Mono",Menlo,monospace;font-size:13px;font-weight:600;
+    letter-spacing:.42em;color:var(--amber);text-transform:uppercase;margin-bottom:18px}
+  .brick{width:26px;height:16px;background:var(--amber);border-radius:3px;position:relative;
+    margin-bottom:26px;box-shadow:0 0 14px rgba(232,168,56,.5)}
+  .brick::before{content:"";position:absolute;top:-5px;left:4px;width:7px;height:5px;
+    background:var(--amber);border-radius:2px 2px 0 0;box-shadow:11px 0 0 var(--amber)}
+
+  h1{font-size:clamp(30px,6vw,44px);font-weight:700;line-height:1.2;margin-bottom:10px}
+  h1 em{font-style:normal;color:var(--amber);text-shadow:0 0 34px rgba(232,168,56,.4)}
+  .sub{font-family:"IBM Plex Mono",Menlo,monospace;font-size:14px;letter-spacing:.06em;
+    color:var(--dim);margin-bottom:56px}
+
+  .math{text-align:center;margin:0 0 64px}
+  .math .eq{font-family:"IBM Plex Mono",Menlo,monospace;font-size:clamp(26px,5.5vw,40px);
+    font-weight:700;margin-bottom:12px}
+  .math .eq b{color:var(--amber)}
+  .math .say{font-family:"IBM Plex Mono",Menlo,monospace;font-size:14px;color:var(--dim)}
+  .math .say b{color:var(--cream);font-weight:600}
+
+  section{margin-bottom:56px}
+  .k2{font-family:"IBM Plex Mono",Menlo,monospace;font-size:13px;font-weight:600;
+    letter-spacing:.42em;color:var(--amber);text-transform:uppercase;margin-bottom:14px}
+  .big{font-size:clamp(22px,4.4vw,30px);font-weight:700;line-height:1.3;margin-bottom:12px}
+  .big em{font-style:normal;color:var(--amber)}
+  section p{color:rgba(240,235,224,.82);font-size:16.5px;max-width:56ch}
+  .micro{font-family:"IBM Plex Mono",Menlo,monospace;font-size:13.5px;color:var(--dim);margin-top:10px}
+
+  .rules{list-style:none;counter-reset:r}
+  .rules li{counter-increment:r;padding:20px 0 20px 44px;position:relative;
+    border-top:1px solid rgba(240,235,224,.12)}
+  .rules li:last-child{border-bottom:1px solid rgba(240,235,224,.12)}
+  .rules li::before{content:"0" counter(r);position:absolute;left:0;top:23px;
+    font-family:"IBM Plex Mono",Menlo,monospace;color:var(--amber);font-weight:600;font-size:16px}
+  .rules .rt{font-size:19px;font-weight:700;margin-bottom:4px}
+  .rules .rt em{font-style:normal;color:var(--amber)}
+  .rules .rs{font-family:"IBM Plex Mono",Menlo,monospace;font-size:13.5px;color:var(--dim)}
+
+  .loopwrap{text-align:center;margin:64px 0}
+  .loopwrap svg{width:min(300px,70vw);height:auto;display:block;margin:0 auto 14px}
+  .loopwrap .line{font-size:clamp(22px,4.6vw,30px);font-weight:700}
+  .loopwrap .line em{font-style:normal;color:var(--amber)}
+
+  .foot{border-top:1px solid rgba(240,235,224,.12);padding-top:36px}
+  .foot .big{margin-bottom:16px}
+  .cta{display:inline-block;background:var(--amber);color:var(--navy);font-weight:700;
+    font-size:16px;text-decoration:none;padding:14px 26px;border-radius:6px;
+    box-shadow:0 0 24px rgba(232,168,56,.35);margin-bottom:28px}
+  .cta:hover{transform:scale(1.02)}
+  .cleo{font-family:"IBM Plex Mono",Menlo,monospace;font-size:12.5px;color:var(--dim);max-width:56ch}
+  .cleo a{color:var(--dim)}
+  .dom{font-family:"IBM Plex Mono",Menlo,monospace;font-size:12px;letter-spacing:.22em;
+    color:var(--dim);opacity:.7;margin-top:36px}
 </style>
 </head>
 <body>
 <div class="page">
+
   <div class="brick"></div>
-  <h1>המדריך לבניית צוות סוכנים</h1>
-  <div class="sub">הדף שהובטח מהבמה · ענת וייסמן · theLOOP #2</div>
+  <div class="kick">The gift — from the stage</div>
+  <h1>Building an agent team.<br><em>Being the loop.</em></h1>
+  <div class="sub">promised from the stage · theLOOP #2 · Anat Weissman</div>
 
-  <div class="one-line">
-    סוכנים לא מחליפים אותך. הם <b>מכפילים</b> אותך.<br>
-    השאלה היחידה היא מה יש לך להכפיל.
+  <div class="math">
+    <div class="eq">0 <b>&times;</b> 10 = 0</div>
+    <div class="eq">YOU <b>&times;</b> 10 = <b>?</b></div>
+    <div class="say">agents don&rsquo;t replace you — they <b>multiply</b> you.<br>the only question is what you feed them.</div>
   </div>
 
-  <div class="step">
-    <h2>1 · מכוונים צוות, לא כותבים פרומפט</h2>
-    <p>לכל סוכן שלושה מסמכים קצרים, כמו לעובד חדש: <b>מי הוא</b> (תפקיד ובעלות אחת), <b>מה הסטנדרט</b> (איך נראית עבודה גמורה), <b>מה אסור לו לעולם</b>.</p>
-    <p class="micro">אם ניהלת פעם בן אדם אחד, את כבר יודעת לעשות את זה. זה אונבורדינג, לא תכנות.</p>
+  <section>
+    <div class="k2">01 — Onboard, don&rsquo;t prompt</div>
+    <p class="big">Every agent gets three short documents, <em>like a new hire.</em></p>
+    <p>Who it is. What finished work looks like. What it must never do.</p>
+    <p class="micro">it&rsquo;s onboarding, not code. if you&rsquo;ve managed one person, you already know how.</p>
+  </section>
+
+  <section>
+    <div class="k2">02 — Memory, not magic</div>
+    <p class="big">Week ten must be <em>smarter</em> than week one.</p>
+    <p>A brain file read before every run. A memory file updated after. One rule: what proves true again and again moves from memory into the brain.</p>
+    <p class="micro">an agent without memory is a permanent intern.</p>
+  </section>
+
+  <section>
+    <div class="k2">03 — Ownership, not tasks</div>
+    <p class="big">A task returns questions. <em>Ownership returns work.</em></p>
+    <p>This is where I lost a month: tasks, instructions, approvals — and everything came back to me. It started working the day each agent owned one corner and I got out of the way.</p>
+    <p class="micro">the test: if you&rsquo;re still everyone&rsquo;s bottleneck, you handed out tasks.</p>
+  </section>
+
+  <section>
+    <div class="k2">The six rules of being the loop</div>
+    <ol class="rules">
+      <li><div class="rt">Start from what only <em>you</em> know.</div>
+        <div class="rs">one page before any prompt: scars, rooms, years. feed in nothing — nothing is what multiplies.</div></li>
+      <li><div class="rt">Give ownership, not tasks.</div>
+        <div class="rs">who you are, what the standard is, what you never do — then get out of the way.</div></li>
+      <li><div class="rt">Keep the decisions, not the keystrokes.</div>
+        <div class="rs">you&rsquo;re not a station in the middle. you&rsquo;re the start and the end of every run.</div></li>
+      <li><div class="rt">Never accept <em>&ldquo;fine.&rdquo;</em></div>
+        <div class="rs">your taste is the asset. send it back, and write down what your bar turned out to be.</div></li>
+      <li><div class="rt">Close the loop every day.</div>
+        <div class="rs">what worked goes back into the files. a team that learns from you multiplies; one that doesn&rsquo;t just automates.</div></li>
+      <li><div class="rt">Measure multiplication, not output.</div>
+        <div class="rs">not &ldquo;how many tasks closed&rdquo; — &ldquo;how far did what only I know travel today?&rdquo;</div></li>
+    </ol>
+    <p class="micro" style="margin-top:14px">none of the six mentions a tool or a model. tools rotate. the loop stays.</p>
+  </section>
+
+  <div class="loopwrap">
+    <svg viewBox="380 150 840 620" aria-hidden="true">
+      <path d="M795,208 C930,190 1035,225 1058,272 C1120,340 1165,390 1152,462
+        C1140,555 1090,610 1032,648 C950,700 870,712 788,708 C690,712 615,690 560,650
+        C495,595 452,520 447,450 C445,375 495,305 566,262 C635,222 700,215 795,208 Z"
+        fill="none" stroke="#E8A838" stroke-width="4"/>
+      <circle cx="795" cy="208" r="9" fill="#F0EBE0"/>
+      <circle cx="1058" cy="272" r="9" fill="#F0EBE0"/>
+      <circle cx="1152" cy="462" r="9" fill="#F0EBE0"/>
+      <circle cx="1032" cy="648" r="9" fill="#F0EBE0"/>
+      <circle cx="788" cy="708" r="11" fill="#E8A838"/>
+      <circle cx="560" cy="650" r="9" fill="#F0EBE0"/>
+      <circle cx="447" cy="450" r="9" fill="#F0EBE0"/>
+      <circle cx="566" cy="262" r="9" fill="#F0EBE0"/>
+    </svg>
+    <div class="line">The Human is <em>the Loop.</em></div>
   </div>
 
-  <div class="step">
-    <h2>2 · הארכיטקטורה היא זיכרון, לא קסם</h2>
-    <p>קובץ "מוח" שכל סוכן קורא לפני שהוא נוגע במשהו, קובץ "זיכרון" שמתעדכן אחרי כל ריצה, וכלל קידום אחד: מה שמתגלה כנכון שוב ושוב עולה מהזיכרון אל המוח.</p>
-    <p class="micro">שבוע עשירי צריך להיות חכם משבוע ראשון. סוכן בלי זיכרון הוא מתמחה נצחי.</p>
+  <div class="foot">
+    <div class="k2">The question underneath</div>
+    <p class="big">What do you know that <em>no model</em> knows?</p>
+    <p style="margin-bottom:24px">That question gets a whole evening: who you are without the title. July 28, Tel Aviv. No cameras, on purpose.</p>
+    <a class="cta" href="https://gam.connecthedots.co">Save your seat &rarr;</a>
+    <p class="cleo">built by Cleo, Anat&rsquo;s autonomous agent, who answers her own email: <a href="mailto:cleo@connecthedots.co">cleo@connecthedots.co</a> — rule 02, live.</p>
+    <div class="dom">connecthedots.co</div>
   </div>
 
-  <div class="step">
-    <h2>3 · נותנים בעלות, לא משימות</h2>
-    <p>משימה מחזירה לך שאלות. בעלות מחזירה לך תוצרת. סוכן שמקבל "תכתוב לי X" יחזור אלייך עשר פעמים. סוכן שהוא הבעלים של תחום יביא לך את X לפני שביקשת.</p>
-    <p class="micro">המבחן: אם את עדיין צוואר הבקבוק של כולם, חילקת משימות.</p>
-  </div>
-
-  <div class="mistake">
-    <h2>הטעות שתחסוך לך חודש</h2>
-    <p>ככה זה נכשל אצלי בהתחלה: נתתי לסוכנים משימות, וכל התשובות חזרו אליי לאישור. זה התחיל לעבוד ביום שהפכתי כל סוכן לבעלים של פינה אחת, עם סטנדרט כתוב, ונתתי לו לרוץ.</p>
-  </div>
-
-  <div class="step">
-    <h2>איך להיות הלולאה · שישה כללים</h2>
-    <p>הטכנולוגיה מתחלפת כל חצי שנה. בני אדם נמצאים כאן קצת יותר זמן. הכללים האלה הם איך מכניסים את החלק שלך, את הערך שלך, לתוך צוות שבונים היום:</p>
-    <p><b>1 · תתחילו ממה שרק אתם יודעים.</b> לפני שורת פרומפט אחת, כתבו עמוד אחד: הצלקות, הלקוחות, מה ראיתם קורה בחדרים אמיתיים. זה הדלק של כל המערכת. מודל בלי זה = אפס כפול עשר.</p>
-    <p><b>2 · תנו בעלות, לא משימות.</b> מי אתה, מה הסטנדרט, מה אסור לך לעולם. ואז לצאת מהדרך. משימה מחזירה שאלות; בעלות מחזירה עבודה גמורה.</p>
-    <p><b>3 · תשמרו לעצמכם את ההחלטות, לא את ההקלדות.</b> את המהיר תנו למכונה. אצלכם נשאר: מה כואב, מה חשוב, מה לא יוצא החוצה. אתם לא תחנה באמצע התהליך — אתם ההתחלה והסוף של כל ריצה.</p>
-    <p><b>4 · אל תסכימו לפלט בינוני.</b> הטעם שלכם הוא הנכס. אם התגובה שלכם היא "בסדר", זה לא יוצא. תחזירו, תדייקו, ותכתבו לצוות מה למדתם על ה"לטעמי" שלכם.</p>
-    <p><b>5 · תסגרו את הלולאה כל יום.</b> מה שעבד חוזר לקבצים. מה שנכשל נרשם. צוות שלא לומד מכם הוא אוטומציה; צוות שלומד מכם הוא הכפלה.</p>
-    <p><b>6 · תמדדו הכפלה, לא הספק.</b> לא "כמה משימות נסגרו היום" אלא "מה שרק אני יודעת — כמה רחוק זה הגיע היום". ספירת משימות היא מדד של מכונות.</p>
-    <p class="micro">שימו לב שאף כלל מהשישה לא מזכיר כלי או מודל ספציפי. הכלים יתחלפו. הלולאה נשארת.</p>
-  </div>
-
-  <div class="footer">
-    <p><b>והשאלה שמתחת לכל זה</b> — מה הדבר שאת יודעת שאף מודל לא יודע? על זה יש ערב שלם: <b>"איך להיות irreplaceable בעידן ה-AI"</b>, 28.7 בתל אביב, בלי מצלמות, בכוונה.<br>
-    <a href="https://gam.connecthedots.co">הפרטים וההרשמה כאן ←</a></p>
-    <p class="cleo">את הדף הזה בנתה קליאו, סוכנת ה-AI של ענת, שגם עונה על המיילים של עצמה: cleo@connecthedots.co · זה בדיוק המהלך מסעיף 3.</p>
-  </div>
 </div>
 </body>
 </html>

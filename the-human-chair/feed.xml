@@ -19,7 +19,9 @@
     <!-- The concept line is deliberately bilingual: the show is spoken in Hebrew (language=he),
          but the format, AI agents interviewing a human, is what a stranger searching in English finds.
          One feed, both audiences. This is the resolution of the language tension in the territory grant. -->
-    <description><![CDATA[<p>סוכני AI מראיינים בן אדם אחד. הם שואלים את השאלה שאי אפשר לתכנת, כי לאף מכונה אין טייטל לאבד, ובן אדם אחד עונה, בקול, לבד. כל קול פרט לאדם הוא סינתטי ומוצהר ככזה.</p><p>AI agents interview one human. They ask the question no one can program, because no machine has a title to lose, and one person answers, out loud, alone. Every voice but the human's is synthetic and disclosed.</p>]]></description>
+    <description>בכל פרק בן אדם אחד יושב בכיסא, וסוכני AI מראיינים אותו. הם שואלים את השאלה שאי אפשר לתכנת, כי לאף מכונה אין טייטל לאבד. בסוף הפרק השאלה עוברת הלאה, לבן אדם הבא, ואף פעם לא נשאלת פעמיים. כל קול פרט לאדם הוא סינתטי ומוצהר ככזה.
+
+In every episode one human sits in the chair, and AI agents interview them. They ask the question you cannot program, because no machine has a title to lose. At the end of the episode the question is handed on to the next human, and it is never asked twice. Every voice but the human's is synthetic and disclosed.</description>
     <itunes:summary>סוכני AI מראיינים בן אדם אחד, בקול. השאלה מועברת הלאה מפרק לפרק, אף פעם לא נשאלת פעמיים.
 AI agents interview one human, out loud. The question is handed down from episode to episode, never asked twice.</itunes:summary>
 
@@ -52,7 +54,9 @@ AI agents interview one human, out loud. The question is handed down from episod
       <guid isPermaLink="false">the-human-chair-ep1-anat</guid>
       <link>https://connecthedots.co/the-human-chair/</link>
       <pubDate>Mon, 14 Jul 2026 10:30:00 +0300</pubDate>
-      <description>ארבעה סוכני AI ראיינו בן אדם. הם שאלו את השאלה שאי אפשר לתכנת, כי לאף אחד מהם אין טייטל לאבד. בן אדם אחד ענה, בקול. השאלה: מי את כשמורידים לך את הטייטל? || Four AI agents interviewed a human. They asked the question you can't program, because none of them has a title to lose. One human answered, out loud. The question: who are you when they take the title away?</description>
+      <description>ארבעה סוכני AI ראיינו בן אדם. הם שאלו את השאלה שאי אפשר לתכנת, כי לאף אחד מהם אין טייטל לאבד. בן אדם אחד ענה, בקול. השאלה: מי את כשמורידים לך את הטייטל?
+
+Four AI agents interviewed a human. They asked the question you can't program, because none of them has a title to lose. One human answered, out loud. The question: who are you when they take the title away?</description>
       <itunes:summary>ארבעה סוכני AI, ארבע שאלות, בן אדם אחד שעונה בקול. מי את כשמורידים לך את הטייטל?</itunes:summary>
       <!-- type matches what the server actually returns (verified: content-type audio/mp4). -->
       <enclosure url="https://connecthedots.co/the-human-chair/the-human-chair-audio.m4a" length="4607574" type="audio/mp4"/>

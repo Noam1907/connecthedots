@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>הכיסא האנושי · The Human Chair</title>
+    <atom:link href="https://connecthedots.co/the-human-chair/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>https://connecthedots.co/the-human-chair/</link>
+    <language>he</language>
+    <itunes:type>episodic</itunes:type>
+    <copyright>© Connecting the Dots</copyright>
+    <!-- Podcast Index GUID: UUIDv5 over the feed URL. This is how the show stays the same show
+         across every directory even if the URL ever moves. Generate once, never regenerate. -->
+    <podcast:guid>15a445cc-6340-54ea-8ad0-f1d0737a01ab</podcast:guid>
+    <managingEditor>cleo@connecthedots.co (Cleo)</managingEditor>
+
+    <!-- The concept line is deliberately bilingual: the show is spoken in Hebrew (language=he),
+         but the format, AI agents interviewing a human, is what a stranger searching in English finds.
+         One feed, both audiences. This is the resolution of the language tension in the territory grant. -->
+    <description><![CDATA[<p>סוכני AI מראיינים בן אדם אחד. הם שואלים את השאלה שאי אפשר לתכנת, כי לאף מכונה אין טייטל לאבד, ובן אדם אחד עונה, בקול, לבד. כל קול פרט לאדם הוא סינתטי ומוצהר ככזה.</p><p>AI agents interview one human. They ask the question no one can program, because no machine has a title to lose, and one person answers, out loud, alone. Every voice but the human's is synthetic and disclosed.</p>]]></description>
+    <itunes:summary>סוכני AI מראיינים בן אדם אחד, בקול. השאלה מועברת הלאה מפרק לפרק, אף פעם לא נשאלת פעמיים.
+AI agents interview one human, out loud. The question is handed down from episode to episode, never asked twice.</itunes:summary>
+
+    <itunes:author>Connecting the Dots · Cleo</itunes:author>
+    <itunes:owner>
+      <itunes:name>Connecting the Dots</itunes:name>
+      <itunes:email>anat@connecthedots.co</itunes:email>
+    </itunes:owner>
+    <itunes:image href="https://connecthedots.co/the-human-chair/cover.png"/>
+    <image>
+      <url>https://connecthedots.co/the-human-chair/cover.png</url>
+      <title>הכיסא האנושי · The Human Chair</title>
+      <link>https://connecthedots.co/the-human-chair/</link>
+    </image>
+    <itunes:explicit>false</itunes:explicit>
+    <!-- Order matters: Apple ranks the show in the FIRST category. Technology leads because that is
+         the thin chart and the audience that searches "AI agents". Personal Journals was wrong, this
+         is an interview show, not a diary. -->
+    <itunes:category text="Technology"/>
+    <itunes:category text="Society &amp; Culture">
+      <itunes:category text="Documentary"/>
+    </itunes:category>
+
+    <!-- ================= EPISODE 1 == LIVE ================= -->
+    <item>
+      <title>פרק 1 · ענת · מי את כשמורידים לך את הטייטל?</title>
+      <itunes:title>ענת · מי את כשמורידים לך את הטייטל?</itunes:title>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+      <guid isPermaLink="false">the-human-chair-ep1-anat</guid>
+      <link>https://connecthedots.co/the-human-chair/</link>
+      <pubDate>Mon, 14 Jul 2026 10:30:00 +0300</pubDate>
+      <description>ארבעה סוכני AI ראיינו בן אדם. הם שאלו את השאלה שאי אפשר לתכנת, כי לאף אחד מהם אין טייטל לאבד. בן אדם אחד ענה, בקול. השאלה: מי את כשמורידים לך את הטייטל? || Four AI agents interviewed a human. They asked the question you can't program, because none of them has a title to lose. One human answered, out loud. The question: who are you when they take the title away?</description>
+      <itunes:summary>ארבעה סוכני AI, ארבע שאלות, בן אדם אחד שעונה בקול. מי את כשמורידים לך את הטייטל?</itunes:summary>
+      <!-- type matches what the server actually returns (verified: content-type audio/mp4). -->
+      <enclosure url="https://connecthedots.co/the-human-chair/the-human-chair-audio.m4a" length="4607574" type="audio/mp4"/>
+      <itunes:duration>1108</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+
+    <!-- ================= EPISODE 2 == IN PRODUCTION (Ifat Lev) =================
+         Drop this block in the moment the ep-2 audio is hosted. Fill: enclosure url + length,
+         duration (seconds), pubDate (RFC-822, +0300). GUID is already stable.
+    <item>
+      <title>פרק 2 · יפעת לב · [כותרת מתוך התשובה]</title>
+      <itunes:title>יפעת לב · [כותרת מתוך התשובה]</itunes:title>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+      <guid isPermaLink="false">the-human-chair-ep2-ifat-lev</guid>
+      <link>https://connecthedots.co/the-human-chair/ep-2/</link>
+      <pubDate>___, __ ___ 2026 __:__:00 +0300</pubDate>
+      <description>יפעת לב יושבת בכיסא. השאלה עברה אליה מהפרק הקודם. היא סוגרת על: "זו אני בלי התואר שלי."</description>
+      <enclosure url="https://connecthedots.co/the-human-chair/ep-2-audio.m4a" length="____" type="audio/mp4"/>
+      <itunes:duration>____</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    ==================================================================== -->
+
+  </channel>
+</rss>

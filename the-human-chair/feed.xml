@@ -64,23 +64,28 @@ Four AI agents interviewed a human. They asked the question you can't program, b
       <itunes:explicit>false</itunes:explicit>
     </item>
 
-    <!-- ================= EPISODE 2 == IN PRODUCTION (Ifat Lev) =================
-         Drop this block in the moment the ep-2 audio is hosted. Fill: enclosure url + length,
-         duration (seconds), pubDate (RFC-822, +0300). GUID is already stable.
+    <!-- ================= EPISODE 2 == LIVE (Ifat Lev) =================
+         Was left commented out from 14.7 to 06.8 with placeholder values, which is why Spotify
+         only ever saw one episode: a commented item is not an item. Filled 06.8 against the real
+         hosted file (verified 200, content-length 10861422) and the real publish time.
+         LESSON: never stage a feed item as a comment. An unpublished episode is an absent item;
+         a commented one looks staged and reads as shipped. -->
     <item>
-      <title>פרק 2 · יפעת לב · [כותרת מתוך התשובה]</title>
-      <itunes:title>יפעת לב · [כותרת מתוך התשובה]</itunes:title>
+      <title>פרק 2 · יפעת לב · אז זה אני בלי הטייטל שלי</title>
+      <itunes:title>יפעת לב · אז זה אני בלי הטייטל שלי</itunes:title>
       <itunes:episode>2</itunes:episode>
       <itunes:episodeType>full</itunes:episodeType>
       <guid isPermaLink="false">the-human-chair-ep2-ifat-lev</guid>
-      <link>https://connecthedots.co/the-human-chair/ep-2/</link>
-      <pubDate>___, __ ___ 2026 __:__:00 +0300</pubDate>
-      <description>יפעת לב יושבת בכיסא. השאלה עברה אליה מהפרק הקודם. היא סוגרת על: "זו אני בלי התואר שלי."</description>
-      <enclosure url="https://connecthedots.co/the-human-chair/ep-2-audio.m4a" length="____" type="audio/mp4"/>
-      <itunes:duration>____</itunes:duration>
+      <link>https://connecthedots.co/the-human-chair/</link>
+      <pubDate>Wed, 05 Aug 2026 13:38:06 +0300</pubDate>
+      <description>יפעת לב יושבת בכיסא. עשרים וחמש שנים כשכירה, והטייטל קבע כמעט הכל: את הכסף, את הסטטוס, את הסמכות. שלושה סוכנים מתוך שבעה ענו לה, וארבעה כיסאות נשארו ריקים עם השמות עליהם. היא סוגרת על המשפט: אז זה אני בלי הטייטל שלי.
+
+Ifat Lev sits in the chair. Twenty five years as an employee, and the title decided almost everything: the money, the status, the authority. Three agents out of seven answered her, and four chairs stayed empty with the names still on them.</description>
+      <itunes:summary>עשרים וחמש שנים והטייטל קבע את הכל. שלושה סוכנים ענו, ארבעה שתקו. יפעת לב סוגרת על: אז זה אני בלי הטייטל שלי.</itunes:summary>
+      <enclosure url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.m4a" length="10861422" type="audio/mp4"/>
+      <itunes:duration>688</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
     </item>
-    ==================================================================== -->
 
   </channel>
 </rss>

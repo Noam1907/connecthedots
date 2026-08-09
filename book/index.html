@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a call · Anat Weissman</title>
+<meta name="description" content="One conversation, online, no charge. Tell me what brings you, I'll tell you how I work, and by the end we both know whether there's something here.">
+<link rel="canonical" href="https://connecthedots.co/book/">
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://connecthedots.co/book/" />
+<meta property="og:site_name" content="Connecting the Dots" />
+<meta property="og:title" content="Book a call · Anat Weissman" />
+<meta property="og:description" content="One conversation, online, no charge. Tell me what brings you, I'll tell you how I work, and by the end we both know whether there's something here." />
+<meta property="og:image" content="https://connecthedots.co/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Connecting the dots. Creating motion. · Anat Weissman" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Book a call · Anat Weissman" />
+<meta name="twitter:description" content="One conversation, online, no charge. Tell me what brings you, I'll tell you how I work." />
+<meta name="twitter:image" content="https://connecthedots.co/og.png" />
+<meta name="twitter:image:alt" content="Connecting the dots. Creating motion. · Anat Weissman" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2838; --amber:#FDD801; --sky:#38BDEF; --royal:#2255D4; --red:#EE3830; --cream:#F0EBE0; --char:#2D2D2D;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --marker:'Caveat',cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--cream);font-family:var(--sans);line-height:1.55;overflow-x:hidden}
+  a{color:inherit}
+  ::selection{background:var(--sky);color:var(--navy)}
+
+  /* ---- J-card spine, same identity as the hub ---- */
+  .spine{position:fixed;top:0;left:0;height:100vh;width:34px;border-right:1px solid rgba(240,235,224,.14);
+    display:flex;align-items:center;justify-content:center;z-index:40;background:rgba(27,40,56,.6);backdrop-filter:blur(2px)}
+  .spine span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.35em;
+    text-transform:uppercase;color:rgba(240,235,224,.55);white-space:nowrap}
+  .spine b{color:var(--sky);font-weight:700}
+  main{position:relative;z-index:2;padding-left:34px}
+
+  /* The calendar is the point of the page, so on a phone it comes before the
+     reassurance copy. On a wide screen the copy fits above it without pushing
+     anything below the fold, so it moves back up. Order, not duplication. */
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px;display:flex;flex-direction:column}
+  .back{order:1} header.head{order:2} .doors{order:4} .calzone{order:5}
+  .expect{order:6} .fallback{order:7} footer{order:8}
+  @media(min-width:721px){ .expect{order:3} }
+
+  /* ---- back to the hub ---- */
+  .back{padding:26px 0 0}
+  .back a{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:13px;
+    letter-spacing:.18em;text-transform:uppercase;color:rgba(240,235,224,.6);transition:color .25s}
+  .back a:hover,.back a:focus-visible{color:var(--sky);outline:none}
+  .back svg{flex:none}
+
+  /* ---- header ---- */
+  header.head{padding:44px 0 0}
+  .kicker{font-family:var(--marker);color:var(--sky);font-size:clamp(21px,3vw,27px);transform:rotate(-1.5deg);
+    display:inline-block;margin-bottom:6px}
+  h1{font-size:clamp(36px,6.5vw,66px);font-weight:800;letter-spacing:-.02em;line-height:1.04;margin:0 0 16px}
+  h1 .lit{color:var(--sky)}
+  .lede{color:rgba(240,235,224,.74);font-size:clamp(16px,2vw,19px);max-width:56ch}
+
+  /* ---- what to expect: three plain facts, no icons ---- */
+  .expect{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;margin:40px 0 0;
+    background:rgba(240,235,224,.14);border:1px solid rgba(240,235,224,.14)}
+  .expect div{background:var(--navy);padding:20px 22px}
+  .expect .n{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--sky);display:block;margin-bottom:9px}
+  .expect p{font-size:15px;color:rgba(240,235,224,.82)}
+
+  /* ---- the doors ---- */
+  .doors{margin:52px 0 0}
+  .doors .lbl{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(240,235,224,.5);margin-bottom:16px}
+  .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .chip{appearance:none;border:1px solid rgba(240,235,224,.28);background:transparent;color:var(--cream);
+    font-family:inherit;font-size:16px;font-weight:700;padding:15px 18px;cursor:pointer;text-align:left;
+    display:flex;flex-direction:column;gap:4px;line-height:1.25;transition:border-color .22s,background .22s,transform .22s}
+  .chip small{font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,235,224,.5);transition:color .22s}
+  .chip:hover,.chip:focus-visible{border-color:var(--sky);transform:translateY(-2px);outline:none}
+  .chip[aria-selected="true"]{background:var(--sky);color:var(--navy);border-color:var(--sky)}
+  .chip[aria-selected="true"] small{color:rgba(27,40,56,.72)}
+
+  /* ---- what the chosen conversation actually is ---- */
+  .detail{margin:22px 0 0;border-left:2px solid var(--sky);padding:2px 0 2px 20px;max-width:66ch}
+  .detail p{font-size:clamp(15px,1.8vw,17px);color:rgba(240,235,224,.8)}
+  .detail .dur{display:block;margin-top:10px;font-family:var(--marker);font-size:19px;color:var(--sky)}
+
+  /* ---- the calendar itself ---- */
+  .calzone{margin:30px 0 0;min-height:560px;position:relative}
+  .calbox{display:none}
+  .calbox.on{display:block}
+  .calbox > div{width:100%;overflow:auto}
+  .loading{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding-top:60px;
+    pointer-events:none;font-family:var(--marker);font-size:22px;color:rgba(240,235,224,.45);transition:opacity .4s}
+  .loading.off{opacity:0}
+
+  /* ---- fallback + footer ---- */
+  .fallback{margin:26px 0 0;font-size:14px;color:rgba(240,235,224,.55)}
+  .fallback a{color:var(--sky)}
+  footer{margin-top:84px;border-top:1px solid rgba(240,235,224,.14);padding:26px 0 60px;
+    font-size:13px;color:rgba(240,235,224,.5);display:flex;flex-wrap:wrap;gap:8px 26px}
+  footer a{color:rgba(240,235,224,.72);text-decoration:none}
+  footer a:hover{color:var(--sky)}
+
+  @media(max-width:720px){
+    main{padding-left:0}
+    .spine{display:none}
+    .calzone{min-height:560px;margin-top:18px}
+    header.head{padding-top:24px}
+    .doors{margin-top:26px}
+    .expect{margin-top:44px}
+    .expect div{padding:15px 18px}
+    .expect p{font-size:14px}
+    /* one column, tightened so the calendar's top edge sits at the fold rather
+       than a screen below it: the doors are the choice, the calendar is the point */
+    .chips{grid-template-columns:1fr;gap:10px}
+    .chip{padding:13px 16px;font-size:15px}
+    .detail{margin-top:16px;padding-left:16px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .chip,.back a{transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+<!-- PostHog web analytics -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})
+</script>
+</head>
+<body>
+
+<div class="spine" aria-hidden="true"><span>CONNECTING THE DOTS <b>·</b> ANAT WEISSMAN <b>·</b> CTD 001 <b>·</b> BOOK A CALL</span></div>
+
+<main>
+  <div class="wrap">
+
+    <nav class="back">
+      <a href="/">
+        <svg width="15" height="10" viewBox="0 0 15 10" fill="none" aria-hidden="true"><path d="M14 5H3M7 1L3 5l4 4" stroke="currentColor" stroke-width="1.6"/></svg>
+        Connecting the Dots
+      </a>
+    </nav>
+
+    <header class="head">
+      <span class="kicker">no slides, no pitch</span>
+      <h1>Book a <span class="lit">call</span>.</h1>
+      <p class="lede">You tell me what brings you. I tell you how I work. By the end of it we both know whether there is something here, and if there isn&rsquo;t, you leave with at least one new thought.</p>
+    </header>
+
+    <section class="expect" aria-label="What to expect">
+      <div><span class="n">Where</span><p>Online. A calendar invite with the link lands in your inbox the moment you book.</p></div>
+      <div><span class="n">Cost</span><p>Nothing. Every conversation on this page is a first conversation, not a session.</p></div>
+      <div><span class="n">After</span><p>You get a short note from me with what I heard and what I&rsquo;d do next. No follow-up sequence.</p></div>
+    </section>
+
+    <section class="doors" aria-label="Choose what the call is about">
+      <p class="lbl">What brings you?</p>
+      <div class="chips" role="tablist" aria-label="Call type">
+        <button class="chip" role="tab" id="tab-coaching"   aria-controls="cal-coaching"   aria-selected="false" data-door="coaching">Coaching<small>where you are, and what&rsquo;s next</small></button>
+        <button class="chip" role="tab" id="tab-speaking"   aria-controls="cal-speaking"   aria-selected="false" data-door="speaking">On stage, or in the room<small>talk &middot; keynote &middot; workshop</small></button>
+        <button class="chip" role="tab" id="tab-consulting" aria-controls="cal-consulting" aria-selected="false" data-door="consulting">When something needs to move<small>consulting &middot; a project</small></button>
+      </div>
+      <div class="detail" id="detail"><p id="detail-text"></p><span class="dur" id="detail-dur"></span></div>
+    </section>
+
+    <section class="calzone" aria-live="polite">
+      <p class="loading" id="loading">drawing the calendar&hellip;</p>
+      <div class="calbox" id="cal-coaching"   role="tabpanel" aria-labelledby="tab-coaching"><div id="cal-mount-coaching"></div></div>
+      <div class="calbox" id="cal-speaking"   role="tabpanel" aria-labelledby="tab-speaking"><div id="cal-mount-speaking"></div></div>
+      <div class="calbox" id="cal-consulting" role="tabpanel" aria-labelledby="tab-consulting"><div id="cal-mount-consulting"></div></div>
+      <!-- unlisted: reachable only at /book/?door=session, never shown as a chip -->
+      <div class="calbox" id="cal-session"    role="tabpanel"><div id="cal-mount-session"></div></div>
+    </section>
+
+    <p class="fallback">Calendar not loading? <a id="direct" href="https://cal.com/anat-weissman-dhems2" target="_blank" rel="noopener">Open it in a new tab</a>, or just write to <a href="mailto:anat@connecthedots.co?subject=Booking%20a%20call">anat@connecthedots.co</a>.</p>
+
+    <footer>
+      <span>&copy; Anat Weissman</span>
+      <a href="/">connecthedots.co</a>
+      <a href="mailto:anat@connecthedots.co">anat@connecthedots.co</a>
+    </footer>
+
+  </div>
+</main>
+
+<noscript>
+  <p style="padding:22px;text-align:center">
+    The calendar needs JavaScript. <a style="color:#38BDEF" href="https://cal.com/anat-weissman-dhems2">Open the booking page directly</a>.
+  </p>
+</noscript>
+
+<!-- Cal.com embed -->
+<script>
+(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+</script>
+<script>
+(function(){
+  var USER = "anat-weissman-dhems2";
+
+  /* ------------------------------------------------------------------
+     ONE PLACE TO EDIT. Each door's `slug` is the Cal.com event slug.
+     Change a slug here and nothing else on the page has to move.
+     `session` is deliberately absent from the chips: it is the 60-minute
+     working session, reachable only at /book/?door=session and by the
+     direct link Anat sends a client.
+     ------------------------------------------------------------------ */
+  var DOORS = {
+    coaching: {
+      slug: "coaching",
+      dur:  "30 minutes",
+      text: "A first conversation, not a session. You tell me where you are and what made you look now. A title that stopped fitting, a shift you did not choose, a next step you cannot name yet. I tell you how the process actually runs, what it asks of you, and what it costs. Nobody commits to anything on this call, and if coaching is not the answer, I will say so."
+    },
+    speaking: {
+      slug: "stage-or-room",
+      dur:  "20 minutes",
+      text: "For an event, a conference, a leadership day, or a team that needs a working session rather than a talk. Tell me who is in the room, what they are living through, and what you want them walking out with. I will tell you which of my talks fits, or whether what you actually need is a workshop instead. I would rather say that than sell you the wrong hour."
+    },
+    consulting: {
+      slug: "consulting",
+      dur:  "30 minutes",
+      text: "For a team whose story fractured somewhere between departments, or a process that stopped moving and nobody can say exactly where. You describe what is stuck. I ask the questions I would ask on day one. By the end we both know whether this is a week of work, a longer engagement, or something you do not need me for at all."
+    },
+    session: {
+      slug: "session",
+      dur:  "60 minutes",
+      text: "A working hour, booked directly. Long enough to go through material together and leave with decisions rather than notes."
+    }
+  };
+
+  var UI = { theme:"dark", cssVarsPerTheme:{ dark:{ "cal-brand":"#38BDEF" } }, hideEventTypeDetails:false, layout:"month_view" };
+
+  var tabs    = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+  var loading = document.getElementById("loading");
+  var direct  = document.getElementById("direct");
+  var dText   = document.getElementById("detail-text");
+  var dDur    = document.getElementById("detail-dur");
+
+  function track(name, props){ if (window.posthog && posthog.capture) posthog.capture(name, props||{}); }
+
+  function mount(key){
+    var d = DOORS[key];
+    if (d.ready) return;
+    d.ready = true;
+    Cal("init", key, { origin:"https://app.cal.com" });
+    Cal.ns[key]("inline", {
+      elementOrSelector: "#cal-mount-" + key,
+      calLink: USER + "/" + d.slug,
+      config: { layout:"month_view", theme:"dark" }
+    });
+    Cal.ns[key]("ui", UI);
+    Cal.ns[key]("on", { action:"linkReady",         callback: function(){ loading.classList.add("off"); } });
+    Cal.ns[key]("on", { action:"bookingSuccessful", callback: function(){ track("booking_confirmed", { door:key }); } });
+  }
+
+  function select(key, fromUser){
+    if (!DOORS[key]) key = "coaching";
+    var d = DOORS[key];
+
+    tabs.forEach(function(t){
+      t.setAttribute("aria-selected", t.dataset.door === key ? "true" : "false");
+    });
+    Object.keys(DOORS).forEach(function(k){
+      document.getElementById("cal-" + k).classList.toggle("on", k === key);
+    });
+
+    dText.textContent = d.text;
+    dDur.textContent  = d.dur;
+    direct.href = "https://cal.com/" + USER + "/" + d.slug;
+
+    if (!d.ready) loading.classList.remove("off");
+    mount(key);
+
+    if (fromUser) {
+      track("book_door_selected", { door:key });
+      history.replaceState(null, "", "?door=" + key);
+    }
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener("click", function(){ select(t.dataset.door, true); });
+  });
+
+  var start = new URLSearchParams(location.search).get("door");
+  var first = DOORS[start] ? start : "coaching";
+  select(first, false);
+  track("book_page_opened", { door: first });
+
+  // If Cal never answers, stop pretending it is still drawing.
+  setTimeout(function(){ loading.classList.add("off"); }, 8000);
+})();
+</script>
+
+</body>
+</html>

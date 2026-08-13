@@ -60,6 +60,7 @@ Four AI agents interviewed a human. They asked the question you can't program, b
       <itunes:summary>ארבעה סוכני AI, ארבע שאלות, בן אדם אחד שעונה בקול. מי את כשמורידים לך את הטייטל?</itunes:summary>
       <!-- type matches what the server actually returns (verified: content-type audio/mp4). -->
       <enclosure url="https://connecthedots.co/the-human-chair/the-human-chair-audio.m4a" length="4607574" type="audio/mp4"/>
+      <podcast:transcript url="https://connecthedots.co/the-human-chair/ep1-anat.he.vtt" type="text/vtt" language="he"/>
       <itunes:duration>1108</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
     </item>
@@ -83,6 +84,7 @@ Four AI agents interviewed a human. They asked the question you can't program, b
 Ifat Lev sits in the chair. Twenty five years as an employee, and the title decided almost everything: the money, the status, the authority. Three agents out of seven answered her, and four chairs stayed empty with the names still on them.</description>
       <itunes:summary>עשרים וחמש שנים והטייטל קבע את הכל. שלושה סוכנים ענו, ארבעה שתקו. יפעת לב סוגרת על: אז זה אני בלי הטייטל שלי.</itunes:summary>
       <enclosure url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.m4a" length="10861422" type="audio/mp4"/>
+      <podcast:transcript url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.he.vtt" type="text/vtt" language="he"/>
       <itunes:duration>688</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
     </item>

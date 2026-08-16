@@ -75,17 +75,22 @@ Four AI agents interviewed a human. They asked the question you can't program, b
          LESSON: never stage a feed item as a comment. An unpublished episode is an absent item;
          a commented one looks staged and reads as shipped. -->
     <item>
-      <title>פרק 2 · יפעת לב · אז זה אני בלי הטייטל שלי</title>
-      <itunes:title>יפעת לב · אז זה אני בלי הטייטל שלי</itunes:title>
+      <!-- Title/description/summary changed 2026-08-15 on the guest's own instruction (mail uid 668,
+           15.8): "הייתי מחליפה את המשפט במשפט הבא". The previous line, "אז זה אני בלי הטייטל שלי",
+           is her closing line: it works inside the audio because six minutes fill it, and alone in a
+           summary it points at something that is not written there. She wrote the replacement herself.
+           Verbatim, no edit by me. STAGED here; the live push to connecthedots.co is Anat's gate. -->
+      <title>פרק 2 · יפעת לב · גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני</title>
+      <itunes:title>יפעת לב · גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני</itunes:title>
       <itunes:episode>2</itunes:episode>
       <itunes:episodeType>full</itunes:episodeType>
       <guid isPermaLink="false">the-human-chair-ep2-ifat-lev</guid>
       <link>https://connecthedots.co/the-human-chair/</link>
       <pubDate>Wed, 05 Aug 2026 13:38:06 +0300</pubDate>
-      <description>יפעת לב יושבת בכיסא. עשרים וחמש שנים כשכירה, והטייטל קבע כמעט הכל: את הכסף, את הסטטוס, את הסמכות. שלושה סוכנים מתוך שבעה ענו לה, וארבעה כיסאות נשארו ריקים עם השמות עליהם. היא סוגרת על המשפט: אז זה אני בלי הטייטל שלי.
+      <description>יפעת לב יושבת בכיסא. עשרים וחמש שנים כשכירה, והטייטל קבע כמעט הכל: את הכסף, את הסטטוס, את הסמכות. שלושה סוכנים מתוך שבעה ענו לה, וארבעה כיסאות נשארו ריקים עם השמות עליהם. במילים שלה: גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני.
 
 Ifat Lev sits in the chair. Twenty five years as an employee, and the title decided almost everything: the money, the status, the authority. Three agents out of seven answered her, and four chairs stayed empty with the names still on them.</description>
-      <itunes:summary>עשרים וחמש שנים והטייטל קבע את הכל. שלושה סוכנים ענו, ארבעה שתקו. יפעת לב סוגרת על: אז זה אני בלי הטייטל שלי.</itunes:summary>
+      <itunes:summary>עשרים וחמש שנים והטייטל קבע את הכל. שלושה סוכנים ענו, ארבעה שתקו. במילים שלה: גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני.</itunes:summary>
       <enclosure url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.m4a" length="10861422" type="audio/mp4"/>
       <podcast:transcript url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.he.vtt" type="text/vtt" language="he"/>
       <itunes:duration>688</itunes:duration>

@@ -26,9 +26,12 @@ In every episode one human sits in the chair, and AI agents interview them. They
 AI agents interview one human, out loud. The question is handed down from episode to episode, never asked twice.</itunes:summary>
 
     <itunes:author>Connecting the Dots · Cleo</itunes:author>
+    <!-- itunes:owner is not a byline. It is the address Apple and Spotify mail the ownership code to,
+         so it has to be the mailbox the show's producer actually reads. Set 2026-08-16 to the
+         production address. The owner NAME is unchanged: the show belongs to Connecting the Dots. -->
     <itunes:owner>
       <itunes:name>Connecting the Dots</itunes:name>
-      <itunes:email>anat@connecthedots.co</itunes:email>
+      <itunes:email>cleo@connecthedots.co</itunes:email>
     </itunes:owner>
     <itunes:image href="https://connecthedots.co/the-human-chair/cover.png"/>
     <image>

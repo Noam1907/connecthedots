@@ -1,0 +1,152 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הצהרת נגישות | ענת ויסמן</title>
+<meta name="description" content="הצהרת הנגישות של האתרים שבניהול ענת ויסמן: מה הונגש, מה עדיין לא, ואיך לקבל את אותו השירות בערוץ חלופי.">
+<link rel="canonical" href="https://connecthedots.co/accessibility.html">
+<meta name="robots" content="index,follow">
+<style>
+  :root{
+    --navy:#1B2838; --sky:#38BDEF; --cream:#F0EBE0;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;
+      transition-duration:.01ms !important;scroll-behavior:auto !important}
+  }
+  body{background:var(--navy);color:var(--cream);font-family:var(--sans);line-height:1.75;
+    letter-spacing:0;font-size:17px;-webkit-text-size-adjust:100%}
+  ::selection{background:var(--sky);color:var(--navy)}
+
+  .skip{position:absolute;right:-9999px;top:0;background:var(--sky);color:var(--navy);
+    font-weight:700;padding:12px 20px;z-index:99;text-decoration:none}
+  .skip:focus{right:12px;top:12px}
+
+  a{color:var(--sky)}
+  a:hover{color:var(--cream)}
+  :focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+  /* the skip link moves focus to main; main is a scroll target, not a control, so it never draws */
+  [tabindex="-1"]:focus,[tabindex="-1"]:focus-visible{outline:none}
+
+  .wrap{max-width:720px;margin:0 auto;padding:64px 22px 96px}
+
+  .backlink{display:inline-block;font-size:14px;font-weight:700;text-decoration:none;
+    border-bottom:1px solid rgba(56,189,239,.5);padding-bottom:2px;margin-bottom:40px}
+
+  h1{font-size:clamp(30px,6vw,46px);font-weight:800;line-height:1.15;letter-spacing:0;margin-bottom:10px}
+  h1 .lit{color:var(--sky)}
+  .updated{color:rgba(240,235,224,.6);font-size:15px;margin-bottom:44px}
+
+  h2{font-size:clamp(19px,3vw,23px);font-weight:800;letter-spacing:0;margin:46px 0 14px;
+    border-right:3px solid var(--sky);padding-right:14px}
+
+  p{margin-bottom:14px;color:rgba(240,235,224,.88)}
+  strong{color:var(--cream)}
+
+  ul{margin:0 0 14px;padding-right:22px;color:rgba(240,235,224,.88)}
+  li{margin-bottom:9px}
+
+  .urls{list-style:none;padding:0;margin:0 0 14px}
+  .urls li{margin-bottom:8px}
+  .urls a{direction:ltr;unicode-bidi:embed;display:inline-block;font-weight:700}
+
+  .box{border:1px solid rgba(240,235,224,.18);padding:22px 24px;margin:18px 0 8px}
+  .box p:last-child{margin-bottom:0}
+
+  .en{direction:ltr;text-align:left;border-top:1px solid rgba(240,235,224,.14);
+    margin-top:64px;padding-top:40px}
+  .en h2{border-right:0;border-left:3px solid var(--sky);padding-right:0;padding-left:14px}
+  .en ul{padding-right:0;padding-left:22px}
+
+  .mark{direction:ltr;text-align:left;margin-top:56px;font-size:12px;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;color:rgba(56,189,239,.8)}
+
+  @media(max-width:600px){
+    body{font-size:16px}
+    .wrap{padding:40px 18px 72px}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">דילוג לתוכן המרכזי</a>
+
+<div class="wrap">
+
+  <a class="backlink" href="/">חזרה לעמוד הבית</a>
+
+  <main id="main" tabindex="-1">
+
+    <h1>הצהרת <span class="lit">נגישות</span></h1>
+    <p class="updated">עודכן לאחרונה: 12 באוגוסט 2026</p>
+
+    <p>אנחנו רואים בנגישות חלק מהשירות עצמו, ולא תוספת לו. העמוד הזה מרכז מה כבר נעשה באתרים שבניהולנו, מה עדיין לא הושלם, ואיך לקבל את אותו השירות בדיוק גם אם משהו כאן חוסם אתכם.</p>
+
+    <h2>על אילו אתרים ההצהרה חלה</h2>
+    <ul class="urls">
+      <li><a href="https://connecthedots.co/">connecthedots.co</a></li>
+      <li><a href="https://storyos.connecthedots.co/">storyos.connecthedots.co</a></li>
+    </ul>
+    <p>ההצהרה חלה על התכנים והעמודים שבשליטתנו. שירותים חיצוניים שאנחנו משתמשים בהם, כמו מערכת קביעת הפגישות ומערכת התשלום, נמצאים בשליטת ספקים אחרים. פירוט בהמשך.</p>
+
+    <h2>התקן שאנחנו מכוונים אליו</h2>
+    <p>אנחנו מכוונים לתקן הישראלי לנגישות תכנים באינטרנט, ת"י 5568, ברמת הנגשה AA. התקן מבוסס על הנחיות הנגישות הבינלאומיות לתוכן אינטרנטי בגרסה 2.0.</p>
+    <p><strong>שקיפות מלאה:</strong> ביקורת מלאה ומסודרת מול כל דרישות התקן טרם הושלמה. אנחנו לא מצהירים כאן על התאמה מלאה שלא נבדקה. מה שכן נבדק ותוקן מפורט להלן, ומה שידוע לנו שחסר מפורט אחריו.</p>
+
+    <h2>מה כבר קיים באתר</h2>
+    <p>הרשימה הזו מדויקת לעמודים שהיא מזכירה בשמם. במקום שבו משהו נכון בחלק מהעמודים בלבד, כתבנו באילו.</p>
+    <ul>
+      <li>מבנה כותרות היררכי בעמוד הבית, בעמוד המוצר ובעמוד הזה, כך שקורא מסך יכול לנווט לפי מבנה התוכן.</li>
+      <li>ניווט באמצעות מקלדת בכל העמודים. כל הקישורים והכפתורים נבנו כרכיבים סטנדרטיים ולכן נגישים למקלדת.</li>
+      <li>טקסט חלופי לתמונות בעמוד הבית ובעמוד המוצר.</li>
+      <li>כיבוד מלא של הגדרת מערכת ההפעלה להפחתת תנועה, בעמוד הזה. מי שסימן במכשיר שלו שהוא מעדיף פחות אנימציות, לא יקבל אותן כאן.</li>
+      <li>קישור דילוג לתוכן המרכזי בעמוד הזה.</li>
+      <li>טקסט שניתן להגדלה בדפדפן בלי שהתוכן נשבר.</li>
+    </ul>
+
+    <h2>מה עדיין לא נגיש, ואנחנו יודעים את זה</h2>
+    <ul>
+      <li>בחלק מהעמודים סימון הפוקוס במקלדת חלש מדי או הוסר לגמרי, כך שמי שמנווט בלי עכבר יתקשה לדעת איפה הוא נמצא. זה בתיקון.</li>
+      <li>בעמוד הבית ובעמוד קביעת הפגישה אנחנו מכבדים את הגדרת הפחתת התנועה בחלק מהרכיבים ולא בכולם. האנימציה הגדולה בעמוד הבית אכן נעצרת, אבל נשארו כמה מעברים קצרים שרצים בכל מקרה. גם זה בדרך לתיקון.</li>
+      <li>בעמוד המדריך ובעמוד קביעת הפגישה אין מבנה כותרות פנימי, ולכן ניווט לפי כותרות בקורא מסך מגיע בהם לתחנה אחת בלבד.</li>
+      <li>בעמוד המוצר יש תרשים שמסביר את לב הרעיון ואין לו כרגע חלופה טקסטואלית. עד שיהיה, נשמח להסביר אותו בכתב או בשיחה לכל מי שמבקש.</li>
+      <li>אזור הפתיחה של עמוד הבית כולל שכבת ציור אינטראקטיבית שמופעלת בעכבר או במגע ואינה ניתנת להפעלה במקלדת. השכבה היא קישוט בלבד. כל המידע והפעולות בעמוד זמינים בלעדיה.</li>
+      <li>מערכת קביעת הפגישות המוטמעת בעמוד קביעת הפגישה היא רכיב של ספק חיצוני ואינה בשליטתנו המלאה. מי שמתקשה איתה מוזמן לתאם פגישה מולנו ישירות בדוא"ל, ונקבע אותה עבורו.</li>
+      <li>עמוד התשלום של המוצר הדיגיטלי מופעל על ידי ספק סליקה חיצוני ואינו בשליטתנו. מי שמתקשה איתו מוזמן לפנות אלינו ונשלים את הרכישה והמסירה בערוץ אחר.</li>
+      <li>חלק מהעמודים באתר כתובים באנגלית. אנחנו נשמח למסור את אותו המידע בעברית, בכתב או בשיחה, לכל מי שמבקש.</li>
+      <li>ביקורת נגישות מלאה מול ת"י 5568 טרם בוצעה, והיא בתוכנית העבודה שלנו.</li>
+    </ul>
+
+    <h2>נגישות חלופית: איך לקבל את אותו השירות</h2>
+    <div class="box">
+      <p>אם משהו באתר חוסם אתכם, אתם לא צריכים להתמודד איתו. כתבו אלינו ותקבלו את אותו התוכן ואת אותו השירות בערוץ אחר, בלי הבדל במחיר ובלי הבדל בתנאים. זה כולל מסירה של קבצים בפורמט נגיש, תיאום פגישה מטעמנו, השלמת רכישה, והסבר בעל פה על כל תוכן שנמצא כאן.</p>
+      <p>אנחנו משתדלים להשיב תוך שני ימי עסקים.</p>
+    </div>
+
+    <h2>פנייה בנושא נגישות</h2>
+    <p>אחראית נגישות: ענת ויסמן</p>
+    <ul class="urls">
+      <li><a href="mailto:anat@connecthedots.co?subject=%D7%A0%D7%92%D7%99%D7%A9%D7%95%D7%AA">anat@connecthedots.co</a></li>
+    </ul>
+    <p>כשאתם פונים, יעזור לנו מאוד אם תכתבו באיזה עמוד נתקלתם בבעיה, מה ניסיתם לעשות, ובאיזו טכנולוגיה מסייעת אתם משתמשים אם אתם משתמשים באחת. זה מקצר את הטיפול.</p>
+    <p>אם פניתם ולא קיבלתם מענה מספק, אפשר לפנות לנציבות שוויון זכויות לאנשים עם מוגבלות שבמשרד המשפטים.</p>
+
+    <div class="en" lang="en">
+      <h2>Accessibility statement</h2>
+      <p>We treat accessibility as part of the service, not an addition to it. This site aims at Israeli Standard 5568 (based on WCAG 2.0) at level AA. A full audit against the standard has not been completed yet, so we do not claim full conformance. The Hebrew section above lists what is in place, what we know is still missing, and how to get the same service through another channel.</p>
+      <p>If anything here blocks you, write to <a href="mailto:anat@connecthedots.co?subject=Accessibility">anat@connecthedots.co</a> and you will get the same content and the same service another way, at the same price and on the same terms. We aim to answer within two business days.</p>
+      <p>Accessibility contact: Anat Weissman.</p>
+    </div>
+
+    <p class="mark">CONNECTING THE DOTS &middot; CREATING MOTION</p>
+
+  </main>
+</div>
+
+</body>
+</html>

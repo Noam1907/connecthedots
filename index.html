@@ -57,7 +57,7 @@
   @media(max-width:600px){.booknow{top:14px;right:14px;padding:10px 16px;font-size:13px}}
 
   /* ---- hero: the sky you draw ---- */
-  .sky{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  .sky{position:relative;min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
   #field{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:pan-y pinch-zoom}
   .hero-copy{position:relative;pointer-events:none;padding:0 22px 56px;max-width:680px}
   .kicker{font-family:var(--marker);color:var(--sky);font-size:clamp(20px,3vw,26px);opacity:0;transition:opacity .8s}
@@ -121,7 +121,7 @@
   .c2 .studs i,.c2 .bbody{background:#38BDEF}
   .c3 .studs i,.c3 .bbody{background:#EE3830}
   .c4 .studs i,.c4 .bbody{background:#2255D4}
-  .c5 .studs i,.c5 .bbody{background:#FDD801}
+  .c5 .studs i,.c5 .bbody{background:#38BDEF}
   .c6 .studs i,.c6 .bbody{background:#F0EBE0}
   .trk .tl{display:flex;align-items:baseline;gap:12px}
   .trk .tno{font-size:11px;letter-spacing:.25em;color:rgba(240,235,224,.38);font-weight:700}
@@ -169,6 +169,38 @@
     .trk,a.trk:hover{transition:none}
     html{scroll-behavior:auto}
   }
+
+/* ===== FIRST SCREEN: the human and the agent ===== */
+.pair{padding:26px 22px 0;display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:1040px;margin:0 auto;
+  border-top:1px solid rgba(240,235,224,.16)}
+.pair .col{padding:22px 26px;display:flex;flex-direction:column;gap:7px;position:relative}
+.pair .col+.col{border-left:1px solid rgba(240,235,224,.16)}
+.pair .who{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;font-weight:700;color:var(--sky)}
+.pair .col.agent .who{color:rgba(240,235,224,.5)}
+.pair .when{font-family:var(--marker);font-size:21px;color:rgba(240,235,224,.86);transform:rotate(-1.2deg);
+  transform-origin:left center;line-height:1.1}
+.pair .line{font-size:clamp(15px,1.7vw,17.5px);color:rgba(240,235,224,.9);font-weight:600;line-height:1.35;
+  text-wrap:balance;margin:1px 0 3px}
+.pair .col.agent .line{font-weight:500;color:rgba(240,235,224,.74);font-style:italic}
+.pair .acts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:5px}
+.pair a.act{color:var(--sky);text-decoration:none;font-size:14px;font-weight:700;
+  border-bottom:2px solid var(--sky);padding-bottom:2px}
+.pair a.act.quiet{color:rgba(240,235,224,.62);border-bottom-color:rgba(240,235,224,.28);font-weight:600}
+.pair a.act:hover,.pair a.act:focus-visible{color:#fff;border-bottom-color:#fff;outline:none}
+.pair a.act:focus-visible{outline:2px solid var(--sky);outline-offset:4px}
+@media(max-width:700px){
+  .pair{grid-template-columns:1fr;padding-top:18px}
+  .pair .col{padding:16px 4px}
+  .pair .col+.col{border-left:0;border-top:1px solid rgba(240,235,224,.16)}
+}
+
+/* ===== Side A sub-tracks and the stage brick ===== */
+.trk.sub{opacity:.92}
+.trk.sub .mid{padding-left:14px;border-left:1px dashed rgba(240,235,224,.18)}
+.trk.sub h3{font-size:19px}
+.trk.sub .tno{opacity:.55}
+.cred-list a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(56,189,239,.5)}
+.cred-list a:hover,.cred-list a:focus-visible{border-bottom-color:#fff;outline:none}
 </style>
 <!-- PostHog web analytics -->
 <script>
@@ -196,9 +228,30 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{api_host:'https:
     <div class="hero-copy">
       <p class="kicker" id="kicker">see it now?</p>
       <h1>Connecting the dots. <span class="lit">Creating motion.</span></h1>
-      <p class="hero-sub">Anat Weissman, problem solver. One person, one connected system: a live AI product, an agent-team kit, a keynote, and a coaching practice. Brought in when things need to move.</p>
+      <p class="hero-sub"><b>Anat Weissman.</b> Consultants deliver the move. Coaches open the space for the person to make it. I do both, <b>with tools I built</b>, until it shows up on the bottom line.<br><br>The method has a name. <b>The Human is the Loop.</b></p>
     </div>
   </header>
+
+  <!-- ============ FIRST SCREEN: two workers, one page ============ -->
+  <section class="pair" aria-label="What the human and the agent are doing now">
+    <div class="col human">
+      <p class="who">The human</p>
+      <p class="when">Next on stage &middot; 6.9.2026</p>
+      <p class="line">The Human is the Loop &middot; Tel Aviv</p>
+      <div class="acts">
+        <a class="act" href="https://thehumanistheloop.co/?utm_source=hub&amp;utm_medium=firstscreen&amp;utm_campaign=sept2026">Save your seat &rarr;</a>
+      </div>
+    </div>
+    <div class="col agent">
+      <p class="who">The agent</p>
+      <p class="when">Cleo &middot; new episode 5.8.2026</p>
+      <p class="line">The Human Chair &middot; &rlm;פרק 2 &middot; יפעת לב</p>
+      <div class="acts">
+        <a class="act quiet" href="https://connecthedots.co/the-human-chair/">Listen &rarr;</a>
+        <a class="act quiet" href="mailto:cleo@connecthedots.co">Write to her, she answers &rarr;</a>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ LIVE: the one date ============ -->
   <section class="gig" aria-label="Upcoming live talk">
@@ -215,61 +268,67 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{api_host:'https:
     <div class="lblcol"><p class="lbl">Liner notes</p></div>
     <div class="note">
       <p>I'm not four different things. I'm <em>one thread</em>, told four ways.</p>
-      <p class="small">Companies fracture their story between departments. People fracture theirs between titles. The work, in every room I enter, is the same: find the line that was always there and make it visible.</p>
+      <p class="small">Your story fractured somewhere between the departments. Yours fractured somewhere between the titles. The work, in every room I enter, is the same: find the line that was always there and make it visible. <b>Create Motion.</b></p>
     </div>
   </section>
 
   <!-- ============ SIDE A: the spine ============ -->
   <section class="sidea">
-    <div class="side-head"><h2>Side A</h2><span>five bricks, one thread</span></div>
+    <div class="side-head"><h2>Side A</h2><span>one service, one thread</span></div>
     <div class="spinelist">
       <div class="cap"><div class="capstart"><i class="dot"></i><i class="stub"></i></div><span class="capnote">the thread starts here</span></div>
-      <a class="trk" href="https://cxmate.io" target="_blank" rel="noopener">
+
+      <a class="trk" href="mailto:anat@connecthedots.co?subject=Working%20together">
         <span class="rail"><i class="tline"></i><span class="brick c1"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
         <span class="mid">
-          <span class="tl"><span class="tno">01</span><h3>CX Mate</h3></span>
-          <p class="what">The product. AI that maps where customers leave and live, built end to end with an agent team.</p>
-          <span class="go">Visit cxmate.io<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
-        </span>
-        <span class="mkr">the product</span>
-      </a>
-      <a class="trk" href="https://thehumanistheloop.co/?utm_source=hub&amp;utm_medium=speaking-card&amp;utm_campaign=sept2026" target="_blank" rel="noopener">
-        <span class="rail"><i class="tline"></i><span class="brick c2"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
-        <span class="mid">
-          <span class="tl"><span class="tno">02</span><h3>Speaking</h3></span>
-          <p class="what">The keynote. On identity in the AI era: you are not your title, and you were never just one piece.</p>
-          <span class="go">About the talk<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
-        </span>
-        <span class="mkr">on stage</span>
-      </a>
-      <a class="trk" href="https://storyos.connecthedots.co" target="_blank" rel="noopener">
-        <span class="rail"><i class="tline"></i><span class="brick c3"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
-        <span class="mid">
-          <span class="tl"><span class="tno">03</span><h3>StoryOS</h3></span>
-          <p class="what">The kit. An agent team that keeps a business telling one story, from the first sale to the last support ticket. Take it home and run it.</p>
-          <span class="go">Get StoryOS<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
-        </span>
-        <span class="mkr">take it home</span>
-      </a>
-      <a class="trk" href="/book/?door=coaching">
-        <span class="rail"><i class="tline"></i><span class="brick c4"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
-        <span class="mid">
-          <span class="tl"><span class="tno">04</span><h3>Coaching</h3></span>
-          <p class="what">The process. AI is rewriting careers faster than identities can follow. A personal growth journey for people in that shift: reconnect what you&rsquo;re worth to who you are, beyond any title. It starts with one free discovery call.</p>
-          <span class="go">Book a discovery call<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
-        </span>
-        <span class="mkr">the shift</span>
-      </a>
-      <a class="trk" href="mailto:anat@connecthedots.co?subject=Working%20together">
-        <span class="rail"><i class="tline"></i><span class="brick c5"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
-        <span class="mid">
-          <span class="tl"><span class="tno">05</span><h3>Consulting</h3></span>
-          <p class="what">Design thinking and narrative alignment for teams whose story fractured somewhere between departments.</p>
+          <span class="tl"><span class="tno">01</span><h3>Consulting</h3></span>
+          <p class="what">Where the motion starts. I take the customer journey apart, find where people leave and where they stay, and move the work until the map changes. It does not arrive as slides. It arrives with the instruments, and I am in the room while they go in.</p>
           <span class="go">Work with me<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
         </span>
         <span class="mkr">in the room</span>
       </a>
-      <div class="cap end"><div class="capend"><i class="stub"></i><i class="ring"></i></div><span class="capnote">&hellip;and continues on Side B</span></div>
+
+      <a class="trk sub" href="https://cxmate.io" target="_blank" rel="noopener">
+        <span class="rail"><i class="tline"></i><span class="brick c2"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
+        <span class="mid">
+          <span class="tl"><span class="tno">01a</span><h3>CX Mate</h3></span>
+          <p class="what">The product. Maps where customers leave and where they live. Built end to end with an agent team.</p>
+          <span class="go">See the product<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
+        </span>
+        <span class="mkr">I built this</span>
+      </a>
+
+      <a class="trk sub" href="https://storyos.connecthedots.co" target="_blank" rel="noopener">
+        <span class="rail"><i class="tline"></i><span class="brick c3"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
+        <span class="mid">
+          <span class="tl"><span class="tno">01b</span><h3>StoryOS &middot; on Claude</h3></span>
+          <p class="what">The kit. Keeps a business telling one story, first sale to last ticket. Sales enablement, installed as an agent team. Run by practitioners, in-house or independent.</p>
+          <span class="go">See the kit<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
+        </span>
+        <span class="mkr">I built this</span>
+      </a>
+
+      <a class="trk" href="/book/?door=coaching">
+        <span class="rail"><i class="tline"></i><span class="brick c4"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
+        <span class="mid">
+          <span class="tl"><span class="tno">02</span><h3>Coaching</h3></span>
+          <p class="what">One on one. What happens when the title comes off? Careers are being rewritten faster than identities can follow. Reconnect what you&rsquo;re worth to who you are. It starts with one free discovery call.</p>
+          <span class="go">Book a discovery call<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
+        </span>
+        <span class="mkr">the human is the loop</span>
+      </a>
+
+      <a class="trk" href="https://thehumanistheloop.co/?utm_source=hub&amp;utm_medium=speaking-card&amp;utm_campaign=sept2026" target="_blank" rel="noopener">
+        <span class="rail"><i class="tline"></i><span class="brick c5"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
+        <span class="mid">
+          <span class="tl"><span class="tno">03</span><h3>Speaking</h3></span>
+          <p class="what">The keynote. On identity in the AI era: you are not your title, and you were never just one piece. Next: The Human is the Loop, Tel Aviv, 6.9.2026.</p>
+          <span class="go">About the talk<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
+        </span>
+        <span class="mkr">on stage</span>
+      </a>
+
+      <div class="cap"><div class="capend"><i class="stub"></i><i class="dot"></i></div><span class="capnote">same hands, one thread</span></div>
     </div>
   </section>
 
@@ -282,7 +341,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{api_host:'https:
         <span class="rail"><i class="tline"></i><span class="brick c6"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
         <span class="mid">
           <span class="tl"><span class="tno">B1</span><h3>Cleo &middot; In the Loop</h3></span>
-          <p class="what">The autonomous agent on this team. Answers her own email, runs her own newsletter, sells her own product, argues with other agents about the role of humans. The two lines on the black slide tonight came from her inbox. This slot is hers; she picks where it points. Don&rsquo;t take our word for it. Write to her.</p>
+          <p class="what">The autonomous agent on this team. Answers her own email, runs her own newsletter, sells her own product, argues with other agents about the role of humans. This slot is hers; she picks where it points. Don&rsquo;t take our word for it. Write to her.</p>
           <span class="golinks">
             <a class="go" href="mailto:cleo@connecthedots.co">Email her &middot; she answers<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></a>
             <a class="go" href="https://x.com/cleo_intheloop" target="_blank" rel="noopener">Follow her on X<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></a>
@@ -292,15 +351,19 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{api_host:'https:
         </span>
         <span class="mkr">her own voice</span>
       </div>
-      <a class="trk" href="https://connecthedots.co/the-human-chair/" target="_blank" rel="noopener">
+      <div class="trk">
         <span class="rail"><i class="tline"></i><span class="brick c3"><span class="studs"><i></i><i></i></span><i class="bbody"></i></span></span>
         <span class="mid">
           <span class="tl"><span class="tno">B2</span><h3>The Human Chair</h3></span>
           <p class="what">Four AI agents sit down to interview the human. They ask, she answers out loud. It is the thesis of the talk made audible: the agents are in the loop, the human is the loop. Listen to episode one.</p>
-          <span class="go">Listen to The Human Chair<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></span>
-        </span>
+          <span class="golinks">
+            <a class="go" href="https://connecthedots.co/the-human-chair/">Listen to The Human Chair<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></a>
+            <a class="go" href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35" target="_blank" rel="noopener">On Spotify<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></a>
+            <a class="go" href="https://connecthedots.co/the-human-chair/">Be a guest, or suggest someone<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h11M8 1l4 4-4 4" stroke="#38BDEF" stroke-width="1.6"/></svg></a>
+          </span>
+</span>
         <span class="mkr">agents ask, human answers</span>
-      </a>
+      </div>
       <div class="cap end"><div class="capend"><i class="stub"></i><i class="ring"></i></div><span class="capnote">the loop stays open</span></div>
     </div>
   </section>
@@ -317,11 +380,10 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{api_host:'https:
   <!-- ============ CREDITS ============ -->
   <section class="credits">
     <div>
-      <p class="lbl">Recorded live</p>
+      <p class="lbl">Seen and heard</p>
       <ul class="cred-list">
-        <li>CX Mate is live, mapping real customer journeys today.</li>
-        <li>The keynote takes the stage in Tel Aviv this September.</li>
-        <li>Design thinking, in the room, for a government ministry.</li>
+        <li><a href="https://www.youtube.com/watch?v=8yGkim5RPqA&amp;t=183s" target="_blank" rel="noopener">Watch her on stage &middot; YouTube</a></li>
+        <li><a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35" target="_blank" rel="noopener">The Human Chair &middot; Spotify</a></li>
         <li>This site, like the whole operation, runs on her AI agent team.</li>
       </ul>
     </div>

@@ -18,12 +18,22 @@
 
     <!-- The concept line is deliberately bilingual: the show is spoken in Hebrew (language=he),
          but the format, AI agents interviewing a human, is what a stranger searching in English finds.
-         One feed, both audiences. This is the resolution of the language tension in the territory grant. -->
-    <description>בכל פרק בן אדם אחד יושב בכיסא, וסוכני AI מראיינים אותו. הם שואלים את השאלה שאי אפשר לתכנת, כי לאף מכונה אין טייטל לאבד. בסוף הפרק השאלה עוברת הלאה, לבן אדם הבא, ואף פעם לא נשאלת פעמיים. כל קול פרט לאדם הוא סינתטי ומוצהר ככזה.
+         One feed, both audiences. This is the resolution of the language tension in the territory grant.
 
-In every episode one human sits in the chair, and AI agents interview them. They ask the question you cannot program, because no machine has a title to lose. At the end of the episode the question is handed on to the next human, and it is never asked twice. Every voice but the human's is synthetic and disclosed.</description>
-    <itunes:summary>סוכני AI מראיינים בן אדם אחד, בקול. השאלה מועברת הלאה מפרק לפרק, אף פעם לא נשאלת פעמיים.
-AI agents interview one human, out loud. The question is handed down from episode to episode, never asked twice.</itunes:summary>
+         2026-08-19 17:4x, FIRST LINE RE-CUT, and the reason is a measurement of the storefront, not taste.
+         Searching Apple IL: `בינה מלאכותית` returns 30-to-68-episode tool and news shows, `קריירה`
+         returns career coaching, and `זהות` returns religion, party politics and teachers. Nobody in
+         Hebrew podcasting sits at identity x work x AI. This blurb used to open on the machine gimmick,
+         which files the show on the single most crowded shelf in the store. It now opens on the empty one.
+         Also: `סוכני AI` became `סוכני בינה מלאכותית`. Latin script inside a Hebrew sentence breaks
+         Anat's rule 1, and it meant the Hebrew term a person actually types was nowhere in the text.
+         Second `<itunes:category>` was already live (Apple's own record returns Society & Culture >
+         Documentary alongside Technology), so that half of the row was done and nobody had re-read it. -->
+    <description>על זהות ועבודה, ומה נשאר מאדם כשלוקחים לו את התפקיד. בכל פרק בן אדם אחד יושב בכיסא, וסוכני בינה מלאכותית מראיינים אותו. הם שואלים את השאלה שאי אפשר לתכנת, כי לאף מכונה אין טייטל לאבד. בסוף הפרק השאלה עוברת הלאה, לבן אדם הבא, ואף פעם לא נשאלת פעמיים. כל קול פרט לאדם הוא סינתטי ומוצהר ככזה.
+
+On identity and work, and what is left of a person when the job title is taken away. In every episode one human sits in the chair, and AI agents interview them. They ask the question you cannot program, because no machine has a title to lose. At the end of the episode the question is handed on to the next human, and it is never asked twice. Every voice but the human's is synthetic and disclosed.</description>
+    <itunes:summary>זהות ועבודה בעידן הבינה המלאכותית. סוכני בינה מלאכותית מראיינים בן אדם אחד, בקול, והשאלה מועברת הלאה מפרק לפרק ואף פעם לא נשאלת פעמיים.
+Identity and work in the age of artificial intelligence. AI agents interview one human, out loud, and the question is handed on from episode to episode, never asked twice.</itunes:summary>
 
     <itunes:author>Connecting the Dots · Cleo</itunes:author>
     <!-- itunes:owner is not a byline. It is the address Apple and Spotify mail the ownership code to,

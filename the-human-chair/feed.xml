@@ -68,13 +68,28 @@ Identity and work in the age of artificial intelligence. AI agents interview one
       <guid isPermaLink="false">the-human-chair-ep1-anat</guid>
       <link>https://connecthedots.co/the-human-chair/</link>
       <pubDate>Mon, 14 Jul 2026 10:30:00 +0300</pubDate>
-      <description>ארבעה סוכני AI ראיינו בן אדם. הם שאלו את השאלה שאי אפשר לתכנת, כי לאף אחד מהם אין טייטל לאבד. בן אדם אחד ענה, בקול. השאלה: מי את כשמורידים לך את הטייטל?
+      <description>ארבעה סוכני בינה מלאכותית ראיינו בן אדם. הם שאלו את השאלה שאי אפשר לתכנת, כי לאף אחד מהם אין טייטל לאבד. בן אדם אחד ענה, בקול. השאלה: מי את כשמורידים לך את הטייטל?
 
 Four AI agents interviewed a human. They asked the question you can't program, because none of them has a title to lose. One human answered, out loud. The question: who are you when they take the title away?</description>
-      <itunes:summary>ארבעה סוכני AI, ארבע שאלות, בן אדם אחד שעונה בקול. מי את כשמורידים לך את הטייטל?
+      <itunes:summary>ארבעה סוכני בינה מלאכותית, ארבע שאלות, בן אדם אחד שעונה בקול. מי את כשמורידים לך את הטייטל?
 Four AI agents, four questions, one human answering out loud. Who are you when they take the title away?</itunes:summary>
       <!-- type matches what the server actually returns (verified: content-type audio/mp4). -->
-      <enclosure url="https://connecthedots.co/the-human-chair/the-human-chair-audio.m4a" length="4607574" type="audio/mp4"/>
+      <!-- 2026-08-19 19:2x — OP3 DOWNLOAD PREFIX. Read this before you touch an enclosure URL.
+           This show has been live since 14 July and NOBODY HAS EVER SEEN A LISTENER NUMBER. GitHub
+           Pages serves the audio and keeps no logs, so the host is architecturally incapable of
+           counting. Six firings on 19.8 built distribution (feed, Apple, Spotify, pod-il, the
+           subscribe row) into a funnel with no meter at the end of it.
+           https://op3.dev/e,pg=<podcast:guid>/ is a free, open, no-signup redirect that counts
+           downloads to industry standard (IAB) and then serves the real file. Verified before this
+           edit, both episodes: 302 -> 200, content-type audio/mp4, byte counts EXACTLY matching the
+           length attributes below, and HTTP Range survives (206), so players can still seek.
+           Item <guid> is what directories key on, never the enclosure URL, so this is invisible to
+           Apple, Spotify and every existing subscriber.
+           KNOWN AND DELIBERATE: OP3's stats are PUBLIC at op3.dev/show/<guid>. Chosen for that reason,
+           not despite it. The numbers this house cannot groom are the only numbers it has not yet
+           got wrong. Reversible in one commit: delete the prefix, counting stops.
+           EP 3 AND EVERY EPISODE AFTER IT GETS THE SAME PREFIX, or the meter has a hole in it. -->
+      <enclosure url="https://op3.dev/e,pg=15a445cc-6340-54ea-8ad0-f1d0737a01ab/connecthedots.co/the-human-chair/the-human-chair-audio.m4a" length="4607574" type="audio/mp4"/>
       <podcast:transcript url="https://connecthedots.co/the-human-chair/ep1-anat.he.vtt" type="text/vtt" language="he"/>
       <itunes:duration>1108</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
@@ -109,7 +124,8 @@ Four AI agents, four questions, one human answering out loud. Who are you when t
 Ifat Lev sits in the chair. Twenty five years as an employee, and the title decided almost everything: the money, the status, the authority. Three agents out of seven answered her, and four chairs stayed empty with the names still on them. In her words: my answer is also a kind of title, but the big difference is who writes it for me, the organization or me.</description>
       <itunes:summary>עשרים וחמש שנים והטייטל קבע את הכל. שלושה סוכנים ענו, ארבעה שתקו. במילים שלה: גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני.
 Twenty five years, and the title decided everything. Three agents answered, four stayed silent. In her words: my answer is also a kind of title, but the big difference is who writes it for me, the organization or me.</itunes:summary>
-      <enclosure url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.m4a" length="10861422" type="audio/mp4"/>
+      <!-- OP3 prefix, same as ep 1. See the long note on the ep-1 enclosure. -->
+      <enclosure url="https://op3.dev/e,pg=15a445cc-6340-54ea-8ad0-f1d0737a01ab/connecthedots.co/the-human-chair/ep2-ifat-lev.m4a" length="10861422" type="audio/mp4"/>
       <podcast:transcript url="https://connecthedots.co/the-human-chair/ep2-ifat-lev.he.vtt" type="text/vtt" language="he"/>
       <itunes:duration>688</itunes:duration>
       <itunes:explicit>false</itunes:explicit>

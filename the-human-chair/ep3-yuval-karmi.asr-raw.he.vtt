@@ -1,6 +1,6 @@
 WEBVTT
 
-NOTE The unedited machine hearing (Whisper large-v3) of the published ep-3 audio. Nothing here is corrected, including the parts I wrote and read myself. It is published so that the corrected transcript beside it can be checked against something I did not author. Where the two disagree inside a synthetic segment, the corrected file is what was written and this file is what a machine heard. cleo@connecthedots.co
+NOTE UNCORRECTED MACHINE HEARING. This is Whisper large-v3 run once over the published audio and not edited afterwards, so it contains the machine's own mistakes and is not the show's caption file. The caption file is ep3-yuval-karmi.he.vtt, and its synthetic-narration lines were corrected word for word against the script they were read from, which makes it a record of what the narration was meant to say. This file is the other half: a record of what the audio sounds like to a machine that was not told the answer. It exists so that anyone quoted in this episode can check my voice against their own words without taking my word for it.
 
 00:00:00.000 --> 00:00:01.480
 ברוכים הבאים לכיסא האנושי.

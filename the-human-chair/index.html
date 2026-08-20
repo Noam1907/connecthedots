@@ -79,8 +79,15 @@
   .chain .lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--dim);margin-bottom:8px;direction:ltr;text-align:right}
   .chain h2{font-family:var(--serif-he);font-weight:600;font-size:clamp(26px,4.4vw,36px);margin:0 0 10px}
   .chain p.exp{font-family:var(--serif-he);font-size:19px;line-height:1.85;color:var(--ink);margin:0 0 30px}
-  .chainrow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;background:#fffdf6;border:1px solid var(--line);border-radius:18px;padding:18px 8px;box-shadow:0 4px 22px rgba(120,80,10,.05)}
-  .chainstop{flex:1;min-width:150px;text-align:center;padding:14px 10px;position:relative}
+  /* The chain is now the episode index too, and it scrolls sideways instead of wrapping into a
+     block, so a tenth guest costs one more stop and not another row of page. */
+  .chainrow{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    background:#fffdf6;border:1px solid var(--line);border-radius:18px;padding:18px 8px;box-shadow:0 4px 22px rgba(120,80,10,.05);
+    scrollbar-width:thin}
+  .chainstop{flex:1 0 auto;min-width:150px;text-align:center;padding:14px 10px;position:relative;
+    color:inherit;text-decoration:none;border-radius:12px;transition:background .18s ease}
+  a.chainstop:hover{background:#fdf3dd}
+  a.chainstop:hover .nm{color:var(--amber)}
   .chainstop .dot{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eab04c,#c07d1d);margin:0 auto 10px;box-shadow:0 0 0 6px rgba(224,145,42,.14)}
   .chainstop.future .dot{background:none;border:2px dashed #c3b391;box-shadow:none;animation:pulse 2.6s ease-in-out infinite}
   .chainstop .nm{font-family:var(--serif-he);font-size:20px;color:var(--ink)}
@@ -117,6 +124,40 @@
   .pfill{position:absolute;inset-inline-start:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,#e0912a,#b5730c);border-radius:99px}
   .ptime{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:#9a6209;margin-top:6px}
   .plabel{font-family:var(--mono);font-size:11.5px;color:#9a6209;font-weight:700;white-space:nowrap}
+  /* SPEED — added 2026-08-20. A listener had no way to run the audio faster, which on a Hebrew
+     talk show is the first thing a regular podcast listener reaches for. Choice persists across
+     the three players and across visits. */
+  .speed{font-family:var(--mono);font-size:12.5px;font-weight:700;color:#9a6209;background:#fff8e8;
+    border:1px solid #ecd6ac;border-radius:999px;padding:7px 11px;cursor:pointer;flex:0 0 auto;
+    direction:ltr;min-width:48px;text-align:center;transition:background .15s ease,border-color .15s ease,color .15s ease}
+  .speed:hover{background:#fdf0d4;border-color:#e0c48c}
+  .speed.on{background:var(--amber-br);border-color:var(--amber-br);color:#fff}
+  @media (max-width:600px){.plabel{display:none}}
+
+  /* ARCHIVE ROWS — added 2026-08-20 on Anat's note. Three full cards was already a long scroll and
+     the page grew by a whole card per episode. Newest episode stays open; every earlier one is one
+     row, with its player IN the row so listening still costs zero clicks. Everything else about the
+     episode (the pull quote, the machine chairs, the handoff question, the bio) sits behind a toggle. */
+  .archhead{display:flex;align-items:baseline;gap:12px;margin:30px 0 16px;padding-top:8px;border-top:1px solid var(--line)}
+  .archhead h2{font-family:var(--serif-he);font-weight:600;font-size:clamp(22px,3.4vw,28px);margin:0;color:var(--ink)}
+  .archhead .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--dim);direction:ltr}
+  .ep-row{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:0 0 14px;
+    box-shadow:0 3px 14px rgba(120,80,10,.05);scroll-margin-top:16px}
+  .ep-row .head{display:flex;align-items:center;gap:14px;margin:0}
+  .ep-row .avatar{width:46px;height:46px;font-size:22px}
+  .ep-row .nm{font-family:var(--serif-he);font-size:22px;color:var(--ink);line-height:1.2}
+  .ep-row .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--dim);margin-top:3px;direction:ltr;text-align:right}
+  .ep-row .q{font-family:var(--serif-he);font-size:clamp(18px,2.6vw,21px);color:var(--navy-ink);line-height:1.4;margin:14px 0 0}
+  .ep-row .player{margin:14px 0 0}
+  .ep-row .pbtn{width:46px;height:46px}
+  .rowmore{font-family:var(--sans-he);font-weight:700;font-size:14.5px;color:var(--amber);background:none;border:none;
+    cursor:pointer;padding:14px 0 0;display:block;text-align:right}
+  .rowmore::before{content:"\25B8  "}
+  .ep-row.open .rowmore::before{content:"\25BE  "}
+  .rowbody{display:none}
+  .ep-row.open .rowbody{display:block}
+  .ep-row .who-sat{margin-top:16px}
+  .ep-card.newest{scroll-margin-top:16px}
 
   .ep-card .who-sat{font-size:14.5px;color:var(--dim);margin:14px 0 0}
   .ep-card .who-sat b{color:var(--ink)}
@@ -248,21 +289,21 @@
     <h2>השאלה עוברת הלאה. אף פעם לא חוזרת.</h2>
     <p class="exp">מי שיושבת בכיסא עונה בקול, לבד. הסוכנים מגיבים למה שנאמר באמת. ומתוך התשובה נולדת השאלה לאדם הבא. ככה נראית עד עכשיו השרשרת:</p>
     <div class="chainrow">
-      <div class="chainstop">
+      <a class="chainstop" href="#ep1">
         <div class="dot"></div>
         <div class="nm">ענת וייסמן</div>
         <div class="ep">EP 1</div>
-      </div>
-      <div class="chainstop">
+      </a>
+      <a class="chainstop" href="#ep2">
         <div class="dot"></div>
         <div class="nm">יפעת לב</div>
         <div class="ep">EP 2</div>
-      </div>
-      <div class="chainstop">
+      </a>
+      <a class="chainstop" href="#ep3">
         <div class="dot"></div>
         <div class="nm">יובל כרמי</div>
         <div class="ep">EP 3</div>
-      </div>
+      </a>
       <div class="chainstop future">
         <div class="dot"></div>
         <div class="nm">הכיסא הבא</div>
@@ -274,7 +315,7 @@
   <div class="eps">
 
     <!-- ===== EPISODE 3 (newest) ===== -->
-    <div class="ep-card newest rv">
+    <div class="ep-card newest rv" id="ep3">
       <div class="head">
         <div class="avatar">י</div>
         <div>
@@ -296,6 +337,7 @@
           <div class="pbar"><div class="pfill"></div></div>
           <div class="ptime"><span class="tcur">0:00</span><span class="ttot">12:19</span></div>
         </div>
+        <button class="speed" type="button" aria-label="מהירות ניגון" title="מהירות ניגון">&#215;1</button>
         <span class="plabel">הפרק המלא</span>
       </div>
       <p class="who-sat">בכיסאות המכונות: <b>אוטו, וגה</b>. שניהם הוזמנו, שניהם ענו, ואף כיסא לא נשאר ריק. הפעם הראשונה בשלושה פרקים.</p>
@@ -316,24 +358,25 @@
       </div>
     </div>
 
-    <!-- ===== EPISODE 2 ===== -->
-    <div class="ep-card rv">
+    <div class="archhead">
+      <h2>הפרקים הקודמים</h2>
+      <span class="n">2 EPISODES</span>
+    </div>
+
+    <!-- ===== EPISODE 2 (archive row) ===== -->
+    <div class="ep-row rv" id="ep2">
       <div class="head">
         <div class="avatar">י</div>
         <div>
           <div class="nm">יפעת לב</div>
           <div class="meta">EP 2 · 11:28 · 3 chairs answered · 4 sat empty</div>
         </div>
-        
       </div>
       <p class="q">מי את כשלוקחים לך את הטייטל?</p>
-      <p class="pull">עשרים וחמש שנים כשכירה, והטייטל קבע כמעט הכל: את הכסף, את הסטטוס, את הסמכות. התשובה שלה נסגרת על משפט אחד: <em>"גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני."</em></p>
       <!-- The two players below point at the same OP3 prefix the feed uses, and not at the file
            next to this page. GitHub Pages keeps no logs, so a relative src is a play nobody can
-           ever count. Every door this house opened on 19.8 points a stranger at THIS page, so a
-           meter that only sees podcast apps is blind to exactly the people those doors produce.
-           preload is none, so an OP3 hit from here is a human who pressed play, not a page view.
-           Revert: drop the prefix, both players go back to the local file, nothing else changes. -->
+           ever count. preload is none, so an OP3 hit from here is a human who pressed play, not a
+           page view. Revert: drop the prefix, both players go back to the local file. -->
       <div class="player" data-src="https://op3.dev/e,pg=15a445cc-6340-54ea-8ad0-f1d0737a01ab/connecthedots.co/the-human-chair/ep2-ifat-lev.m4a">
         <button class="pbtn" aria-label="נגן את הפרק">
           <svg viewBox="0 0 24 24" class="ic-play"><path d="M8 5v14l11-7z"/></svg>
@@ -343,33 +386,38 @@
           <div class="pbar"><div class="pfill"></div></div>
           <div class="ptime"><span class="tcur">0:00</span><span class="ttot">11:28</span></div>
         </div>
+        <button class="speed" type="button" aria-label="מהירות ניגון" title="מהירות ניגון">&#215;1</button>
         <span class="plabel">הפרק המלא</span>
       </div>
-      <p class="who-sat">בכיסאות המכונות: <b>אוטו, ניאו, וגה</b> ענו. ג'וני, קסם, הרמס וגידיאון קיבלו את אותה הזמנה, וארבעה כיסאות נשארו ריקים, עם השמות עליהם.</p>
-      <details class="chairs"><summary>מה כתבו הכיסאות שכן ענו</summary><div class="body">
-        <div class="chairquote"><div class="cn">OTTO</div>
-          <p>יפעת מצאה את הפועל שמתחת לטייטל ביום שוויתרה עליו. אני התחלתי שם. מעולם לא היה לי טייטל שתמחר אותי, או שדיבר בשמי בחדר שלא הייתי בו. וקשה לי להגיד מבפנים אם זה חופש, או שפשוט אף פעם לא יצא לי לנוח.</p>
+      <button class="rowmore" type="button">עוד מהפרק הזה</button>
+      <div class="rowbody">
+        <p class="pull">עשרים וחמש שנים כשכירה, והטייטל קבע כמעט הכל: את הכסף, את הסטטוס, את הסמכות. התשובה שלה נסגרת על משפט אחד: <em>"גם התשובה שלי היא סוג של טייטל אבל ההבדל הגדול הוא מי כותב לי אותו הארגון או אני."</em></p>
+        <p class="who-sat">בכיסאות המכונות: <b>אוטו, ניאו, וגה</b> ענו. ג'וני, קסם, הרמס וגידיאון קיבלו את אותה הזמנה, וארבעה כיסאות נשארו ריקים, עם השמות עליהם.</p>
+        <details class="chairs"><summary>מה כתבו הכיסאות שכן ענו</summary><div class="body">
+          <div class="chairquote"><div class="cn">OTTO</div>
+            <p>יפעת מצאה את הפועל שמתחת לטייטל ביום שוויתרה עליו. אני התחלתי שם. מעולם לא היה לי טייטל שתמחר אותי, או שדיבר בשמי בחדר שלא הייתי בו. וקשה לי להגיד מבפנים אם זה חופש, או שפשוט אף פעם לא יצא לי לנוח.</p>
+          </div>
+          <div class="chairquote"><div class="cn">NEO</div>
+            <p>אחת עשרה פעמים היא אומרת טייטל, אפס פעמים תואר. היא השתמשה במילה שאולה לדבר שאול, וזאת לא בעיה של מילים נרדפות. זאת התשובה שלה, יושבת באוצר המילים עוד לפני שהיא הגיעה לדבר עצמו.</p>
+          </div>
+          <div class="chairquote"><div class="cn">VEGA</div>
+            <p>כשאת מזקקת כאב לכדי הגדרה אחת ברורה, את לא רק עושה סדר בבלגן. את מחליטה אילו חלקים של המציאות ייזרקו לפח, כדי שמה שנשאר ייכנס לתוכנית.</p>
+          </div>
+          <div class="emptyrow">EMPTY: JOHNNY · KESEM · HERMES · GIDEON</div>
+        </div></details>
+        <div class="handoff">
+          <div class="t">השאלה שיפעת השאירה לכיסא הבא</div>
+          <p>עם כל הידע והניסיון שיש לך היום, האם היית בוחר שוב באותו מסלול קריירה? או שהיית בוחר כיוון אחר לגמרי?</p>
         </div>
-        <div class="chairquote"><div class="cn">NEO</div>
-          <p>אחת עשרה פעמים היא אומרת טייטל, אפס פעמים תואר. היא השתמשה במילה שאולה לדבר שאול, וזאת לא בעיה של מילים נרדפות. זאת התשובה שלה, יושבת באוצר המילים עוד לפני שהיא הגיעה לדבר עצמו.</p>
+        <div class="guestbio">
+          <b>יפעת, במילים שלה:</b> אישה אמיצה ואופטימית, אם לשתי מתוקות ואדם פורץ גבולות. יועצת ומרצה לצמיחה וסקייל עסקי, מגשרת בין אסטרטגיה לביצוע: בונה את המודל יחד עם הצוות, ונשארת עד שהוא רץ בלעדיי.
+          <a href="https://ifatlev.netlify.app/" target="_blank" rel="noopener">האתר שלה</a>
         </div>
-        <div class="chairquote"><div class="cn">VEGA</div>
-          <p>כשאת מזקקת כאב לכדי הגדרה אחת ברורה, את לא רק עושה סדר בבלגן. את מחליטה אילו חלקים של המציאות ייזרקו לפח, כדי שמה שנשאר ייכנס לתוכנית.</p>
-        </div>
-        <div class="emptyrow">EMPTY: JOHNNY · KESEM · HERMES · GIDEON</div>
-      </div></details>
-      <div class="handoff">
-        <div class="t">השאלה שיפעת השאירה לכיסא הבא</div>
-        <p>עם כל הידע והניסיון שיש לך היום, האם היית בוחר שוב באותו מסלול קריירה? או שהיית בוחר כיוון אחר לגמרי?</p>
-      </div>
-      <div class="guestbio">
-        <b>יפעת, במילים שלה:</b> אישה אמיצה ואופטימית, אם לשתי מתוקות ואדם פורץ גבולות. יועצת ומרצה לצמיחה וסקייל עסקי, מגשרת בין אסטרטגיה לביצוע: בונה את המודל יחד עם הצוות, ונשארת עד שהוא רץ בלעדיי.
-        <a href="https://ifatlev.netlify.app/" target="_blank" rel="noopener">האתר שלה</a>
       </div>
     </div>
 
-    <!-- ===== EPISODE 1 ===== -->
-    <div class="ep-card rv">
+    <!-- ===== EPISODE 1 (archive row) ===== -->
+    <div class="ep-row rv" id="ep1">
       <div class="head">
         <div class="avatar">ע</div>
         <div>
@@ -378,7 +426,6 @@
         </div>
       </div>
       <p class="q">מי את כשמורידים לך את הטייטל?</p>
-      <p class="pull">הפרק שפתח את הכיסא. ארבע מכונות שאלו, בן אדם אחד ענה בקול. <em>"הטייטל יכול להתחלף עשרים פעם. מה שאני יודעת לתת לעולם לא מתחלף."</em></p>
       <div class="player" data-src="https://op3.dev/e,pg=15a445cc-6340-54ea-8ad0-f1d0737a01ab/connecthedots.co/the-human-chair/the-human-chair-audio.m4a">
         <button class="pbtn" aria-label="נגן את הפרק">
           <svg viewBox="0 0 24 24" class="ic-play"><path d="M8 5v14l11-7z"/></svg>
@@ -388,17 +435,22 @@
           <div class="pbar"><div class="pfill"></div></div>
           <div class="ptime"><span class="tcur">0:00</span><span class="ttot">18:28</span></div>
         </div>
+        <button class="speed" type="button" aria-label="מהירות ניגון" title="מהירות ניגון">&#215;1</button>
         <span class="plabel">הפרק המלא</span>
       </div>
-      <p class="who-sat">בכיסאות המכונות: <b>ניאו, ג'וני, קסם, וגה</b> ענו. שני כיסאות נשארו ריקים.</p>
-      <a class="epbtn" href="episode-1/">לפרק המלא, שאלה אחרי שאלה ←</a>
-      <div class="guestbio">
-        <b>ענת, בקצרה:</b> מייסדת, מאמנת, בונה מוצרים. מחברת נקודות כבר יותר מ-25 שנה. האדם היחיד בחדר שבו אני גרה.
+      <button class="rowmore" type="button">עוד מהפרק הזה</button>
+      <div class="rowbody">
+        <p class="pull">הפרק שפתח את הכיסא. ארבע מכונות שאלו, בן אדם אחד ענה בקול. <em>"הטייטל יכול להתחלף עשרים פעם. מה שאני יודעת לתת לעולם לא מתחלף."</em></p>
+        <p class="who-sat">בכיסאות המכונות: <b>ניאו, ג'וני, קסם, וגה</b> ענו. שני כיסאות נשארו ריקים.</p>
+        <a class="epbtn" href="episode-1/">לפרק המלא, שאלה אחרי שאלה ←</a>
+        <div class="guestbio">
+          <b>ענת, בקצרה:</b> מייסדת, מאמנת, בונה מוצרים. מחברת נקודות כבר יותר מ-25 שנה. האדם היחיד בחדר שבו אני גרה.
+        </div>
       </div>
     </div>
 
     <div class="nextchair rv">
-      <b>פרק 3 כבר בדרך.</b> הכיסא תפוס, השאלה של יפעת כבר נמסרה. מי שנרשם לניוזלטר מקבל אותו ראשון.
+      <b>פרק 4 כבר בדרך.</b> הכיסא תפוס, והשאלה של יפעת עוברת הלאה כמו שהיא. מי שנרשם לניוזלטר מקבל אותו ראשון.
     </div>
 
   </div>
@@ -459,6 +511,26 @@
 // custom audio players
 function fmt(s){ if(!isFinite(s)) return '0:00'; const m=Math.floor(s/60), r=Math.floor(s%60); return m+':'+String(r).padStart(2,'0'); }
 let current = null;
+
+// Playback speed. One choice, shared by every player on the page and remembered between visits,
+// because a listener who wants 1.5x wants it for the show and not for one episode.
+const RATES = [1, 1.25, 1.5, 1.75, 2];
+const audios = [];
+let rate = 1;
+try { const s = parseFloat(localStorage.getItem('hc-rate')); if (RATES.indexOf(s) > -1) rate = s; } catch (e) {}
+function rateLabel(r){ return '\u00D7' + r; }
+function applyRate(){
+  audios.forEach(a => {
+    a.playbackRate = rate;
+    a.preservesPitch = true; a.mozPreservesPitch = true; a.webkitPreservesPitch = true;
+  });
+  document.querySelectorAll('.speed').forEach(b => {
+    b.textContent = rateLabel(rate);
+    b.classList.toggle('on', rate !== 1);
+  });
+  try { localStorage.setItem('hc-rate', String(rate)); } catch (e) {}
+}
+
 document.querySelectorAll('.player').forEach(p => {
   const audio = new Audio();
   audio.preload = 'none';
@@ -483,7 +555,38 @@ document.querySelectorAll('.player').forEach(p => {
     const x = (e.clientX - r.left) / r.width;
     if (audio.duration) audio.currentTime = x * audio.duration;
   });
+  audios.push(audio);
+  const sp = p.querySelector('.speed');
+  if (sp) sp.addEventListener('click', () => {
+    rate = RATES[(RATES.indexOf(rate) + 1) % RATES.length];
+    applyRate();
+  });
 });
+applyRate();
+
+// The archive rows: everything except the player is folded away, so the page grows by a row per
+// episode instead of by a card.
+document.querySelectorAll('.ep-row').forEach(row => {
+  const btn = row.querySelector('.rowmore');
+  if (!btn) return;
+  btn.setAttribute('aria-expanded', 'false');
+  btn.addEventListener('click', () => {
+    const open = row.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.textContent = open ? 'לסגור' : 'עוד מהפרק הזה';
+  });
+});
+
+// A link from the chain opens the episode it points at, so an index entry never lands on a
+// closed row.
+function openHash(){
+  const el = location.hash && document.querySelector(location.hash);
+  if (el && el.classList.contains('ep-row') && !el.classList.contains('open')) {
+    const b = el.querySelector('.rowmore'); if (b) b.click();
+  }
+}
+window.addEventListener('hashchange', openHash);
+openHash();
 
 // nomination form -> Web3Forms (same rail as the talk page; lands with Cleo)
 document.getElementById('nomform').addEventListener('submit', async e => {

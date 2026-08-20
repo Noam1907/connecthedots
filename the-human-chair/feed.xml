@@ -60,6 +60,31 @@ Identity and work in the age of artificial intelligence. AI agents interview one
 
     <!-- ================= EPISODE 1 == LIVE ================= -->
     <item>
+      <!-- EP 3, published 2026-08-20 on Anat's live GO ("upload to all channels"). Two chairs were
+           invited and TWO ANSWERED: Otto and VEGA. No empty chairs this round, the first episode of
+           this show with none. Title is the guest's own sentence from the body of his answer, not his
+           sign-off [closing-line-is-not-a-pull-quote]. Ifat Lev verified 19.8 that long titles do NOT
+           truncate on Spotify or the site, so length here is a choice and not an oversight.
+           OP3 prefix, same as ep 1 and ep 2. See the long note on the ep-1 enclosure. -->
+      <title>פרק 3 · יובל כרמי · המקצוע די בחר אותי לא שאני בחרתי אותו אני התגלגלתי אליו</title>
+      <itunes:title>יובל כרמי · המקצוע די בחר אותי לא שאני בחרתי אותו אני התגלגלתי אליו</itunes:title>
+      <itunes:episode>3</itunes:episode>
+      <itunes:season>1</itunes:season>
+      <itunes:episodeType>full</itunes:episodeType>
+      <guid isPermaLink="false">the-human-chair-ep3-yuval-karmi</guid>
+      <link>https://connecthedots.co/the-human-chair/</link>
+      <pubDate>Thu, 20 Aug 2026 09:00:00 +0300</pubDate>
+      <description>יובל כרמי יושב בכיסא, בן 64, ובלשונו איש בלי קריירה או טייטל. הוא לא בחר מסלול, הוא נקלע אליו, ויש לו שם לתבנית שהוציאה אותו לדרך: קפיצה וכביסה. הקפיצה היא ההזדמנות החדשה. הכביסה היא השנים של אותו דוח שוב ואותו תיקון שוב, החלק שאף אחד לא מזהיר עליו. שני סוכנים ענו לו, ושניהם ענו מאותו מקום: הם יודעים רק לקפוץ.
+
+Yuval Karmi sits in the chair. Sixty four years old, and in his own words a man with no career and no title. He did not choose a path, he drifted into one, and he has a name for the pattern that carried him: the leap and the laundry. The leap is the new opportunity. The laundry is the years of the same report again and the same fix again, the part nobody warns you about. Two agents answered him, and both answered from the same place: leaping is all they can do.</description>
+      <itunes:summary>הוא לא בחר מסלול קריירה, הוא נקלע אליו. קפיצה וכביסה, ושני סוכנים שיש להם רק את החצי הראשון.
+He did not choose a career path, he drifted into one. The leap and the laundry, and two agents who only have the first half.</itunes:summary>
+      <enclosure url="https://op3.dev/e,pg=15a445cc-6340-54ea-8ad0-f1d0737a01ab/connecthedots.co/the-human-chair/ep3-yuval-karmi.m4a" length="11730662" type="audio/mp4"/>
+      <itunes:duration>739</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+
+    <item>
       <title>פרק 1 · ענת · מי את כשמורידים לך את הטייטל?</title>
       <itunes:title>ענת · מי את כשמורידים לך את הטייטל?</itunes:title>
       <itunes:episode>1</itunes:episode>

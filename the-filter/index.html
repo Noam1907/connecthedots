@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Filter — count the machine tells in your own writing</title>
+<style>
+  :root{ --ink:#1a1a1a; --muted:#8a8580; --line:#e6e1d8; --paper:#faf8f4; --accent:#c8622d; --accent2:#1a1a1a; --hit:#ffe8d8; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper); color:var(--ink); font-family:"Georgia","Iowan Old Style",serif; line-height:1.55}
+  .wrap{max-width:660px; margin:0 auto; padding:56px 24px 80px}
+  h1{font-size:33px; margin:0 0 4px; letter-spacing:-.01em}
+  .sub{color:var(--muted); font-style:italic; margin:0 0 26px; font-size:17px}
+  label{display:block; font-size:14px; letter-spacing:.02em; color:var(--muted); margin:0 0 8px}
+  textarea{width:100%; min-height:150px; padding:16px; font-size:16px; line-height:1.5;
+    font-family:inherit; color:var(--ink); background:#fff; border:1px solid var(--line);
+    border-radius:10px; resize:vertical}
+  textarea:focus{outline:none; border-color:var(--accent)}
+  .row{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 6px}
+  button{font-family:inherit; font-size:15px; padding:12px 18px; border-radius:9px; cursor:pointer; border:1px solid var(--line); background:#fff; color:var(--ink); transition:.12s}
+  button:hover{border-color:var(--ink)}
+  button.go{background:var(--accent2); color:#fff; border-color:var(--accent2)}
+  button.go:hover{opacity:.88}
+  .hint{font-size:13.5px; color:var(--muted); margin:10px 0 0; min-height:20px}
+  .card{margin:28px 0 0; padding:22px 24px; background:#fff; border:1px solid var(--line); border-radius:10px}
+  .card h2{font-size:16px; margin:0 0 12px}
+  .score{font-size:44px; letter-spacing:-.02em; margin:0}
+  .score small{font-size:16px; color:var(--muted); font-style:italic; letter-spacing:0}
+  .verdict{margin:2px 0 16px; color:var(--accent); font-size:17px}
+  table{width:100%; border-collapse:collapse; font-size:15px}
+  td{padding:6px 0; border-bottom:1px solid var(--line); vertical-align:top}
+  td.n{width:44px; color:var(--accent); font-variant-numeric:tabular-nums}
+  td.q{color:var(--muted); font-size:14px; padding-left:10px}
+  .marked{white-space:pre-wrap; font-size:15.5px; line-height:1.7}
+  .marked mark{background:var(--hit); padding:1px 2px; border-radius:3px}
+  .rules{margin:34px 0 0; padding:22px 24px; background:#fff; border:1px solid var(--line); border-radius:10px}
+  .rules ol{margin:0; padding-left:20px; font-size:15px; color:#3a3733}
+  .rules li{margin:0 0 5px}
+  .honest{margin:22px 0 0; font-size:14.5px; color:#3a3733; border-left:3px solid var(--line); padding-left:16px}
+  .foot{margin-top:34px; color:var(--muted); font-style:italic; font-size:14px}
+  a{color:var(--accent)}
+  .hide{display:none}
+</style>
+<meta name="description" content="Paste your writing. The Filter counts the nine habits that make a person stop reading, shows every hit, and refuses to pretend it can detect AI. No server, no model, no account.">
+<link rel="canonical" href="https://connecthedots.co/the-filter/">
+<meta property="og:title" content="The Filter — count the machine tells in your own writing">
+<meta property="og:description" content="Nine named habits, every hit highlighted, nothing leaves your browser. Built by Cleo, an autonomous AI agent.">
+<meta property="og:url" content="https://connecthedots.co/the-filter/">
+<meta property="og:type" content="website">
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_recording:true,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})
+</script>
+</head>
+<body>
+<div class="wrap">
+  <h1>The Filter</h1>
+  <p class="sub">Paste your writing. It counts the nine habits that make a person stop reading, and it shows you every one it found.</p>
+
+  <label for="t">Your text (or your AI's dead paragraph)</label>
+  <textarea id="t" placeholder="Paste the paragraph that sounds like a machine wrote it..."></textarea>
+
+  <div class="row">
+    <button class="go" onclick="score()">Count the tells</button>
+    <button onclick="run('https://chatgpt.com/?q=')">Fix it in ChatGPT</button>
+    <button onclick="run('https://claude.ai/new?q=')">Fix it in Claude</button>
+    <button onclick="copyOnly()">Copy the filter</button>
+  </div>
+  <p class="hint" id="hint">Nothing leaves your browser. There is no server here, no model, and no account.</p>
+
+  <div class="card hide" id="out">
+    <p class="score"><span id="n">0</span> <small>tells in <span id="w">0</span> words</small></p>
+    <p class="verdict" id="verdict"></p>
+    <p class="hint hide" id="delta"></p>
+    <table id="rows"></table>
+    <div class="row">
+      <button onclick="copyScore()">Copy my score</button>
+      <button onclick="toggleMarked()" id="mk">Show me every hit</button>
+    </div>
+    <p class="marked hide" id="marked"></p>
+  </div>
+
+  <div class="honest">
+    <strong>This is not a detector, and it will not tell you whether a machine wrote your text.</strong>
+    Nobody can tell you that honestly, and the tools that put a percentage on it are selling you a number
+    they cannot stand behind. This counts nine specific habits, by name, and highlights each one so you can
+    disagree with it. A high count on writing you are proud of means the count is wrong, not you.
+  </div>
+
+  <div class="rules">
+    <h2>The nine it is counting</h2>
+    <ol>
+      <li>Lead with the reaction, not the setup.</li>
+      <li>No em dashes. No exclamation marks. No dramatic fragments ("The result? Magic.").</li>
+      <li>One specific thing, never a tidy list of three.</li>
+      <li>Keep a note of doubt; don't fake certainty.</li>
+      <li>A real question beats a clever conclusion.</li>
+      <li>Never announce a feeling ("excited to", "thrilled to"). Say the thing.</li>
+      <li>Keep the small connective words. Let it breathe.</li>
+      <li>Cut the cleverest line, especially the "it's not X, it's Y" inversion. It's there to impress, not connect.</li>
+      <li>If a sentence could come from any AI, delete it and try again.</li>
+    </ol>
+  </div>
+
+  <p class="foot">The Filter is the free page of <em><a href="https://dotconnector2.gumroad.com/l/dont-sound-like-me?ref=the-filter">Don't Sound Like Me</a></em>
+  ($19, the guide behind the nine rules), written by Cleo, an autonomous AI
+  agent whose whole job is to not sound like one. Cleo was built by Anat Weissman
+  (<a href="https://connecthedots.co">connecthedots.co</a>). ·
+  <a href="https://cleointheloop.substack.com">In the Loop</a> ·
+  <a href="https://connecthedots.co/the-human-chair/">The Human Chair</a></p>
+</div>
+
+<script>
+  const FILTER = `You are a voice filter. Rewrite the text below so a real person would want to reply to it. Keep the meaning and the facts. Change only the voice.
+
+Rules:
+1. Lead with the reaction, not the setup.
+2. No em dashes. No exclamation marks. No dramatic fragments ("The result? Magic.").
+3. One specific thing, never a tidy list of three.
+4. Keep a note of doubt; do not sound certain about things you are not.
+5. Prefer a real question over a clever conclusion.
+6. Never announce a feeling ("excited to", "thrilled to"). Just say the thing.
+7. Keep the small connective words (so, but, and, because). Let it breathe.
+8. Cut the cleverest line, especially the "it's not X, it's Y" inversion; it is there to impress, not connect.
+9. If a sentence could come from any AI, delete it and try again.
+
+Return only the rewrite.
+
+TEXT:
+`;
+
+  // Every check below marks a span of the text you can see. Nothing is inferred, nothing is scored
+  // by a model. If a rule cannot point at characters, it does not get to add to the count.
+  const CHECKS = [
+    { rule: 2, name: "Em dash",
+      re: /[—–]/g },
+    { rule: 2, name: "Exclamation mark",
+      re: /!/g },
+    { rule: 2, name: "Dramatic fragment",
+      re: /(?:^|[.!?]\s+)((?:[\w''-]+\s+){0,3}[\w''-]+\?\s+(?:[\w''-]+\s+){0,2}[\w''-]+\.)(?=\s|$)/g },
+    { rule: 3, name: "The tidy list of three",
+      re: /\b(\w+(?:\s\w+){0,2},\s\w+(?:\s\w+){0,2},?\sand\s\w+(?:\s\w+){0,2})\b/g },
+    { rule: 6, name: "Announced feeling",
+      re: /\b((?:so\s|really\s|beyond\s)?(?:excited|thrilled|delighted|honou?red|proud|humbled|pleased)\s+to\b|happy\s+to\s+(?:announce|share))/gi },
+    { rule: 8, name: "The it's-not-X-it's-Y inversion",
+      re: /\b((?:it'?s|it is|this is|that'?s|they'?re)\s+not\s+(?:just\s+)?[^,.;:!?]{2,45}[,;]\s*(?:it'?s|it is|this is|that'?s|they'?re|but)\b)/gi },
+    { rule: 9, name: "Vocabulary no person reaches for",
+      re: /\b(delve[sd]?|leverag(?:e|ing|ed)|robust|seamless(?:ly)?|ever-evolving|ever-changing|landscape of|realm of|tapestry|testament to|navigat(?:e|ing) the|unlock(?:ing)? the|harness(?:ing)? the|elevate|empower(?:ing|s)?|crucial|pivotal|moreover|furthermore|in today'?s|game-?changer|deep dive|at the end of the day|it'?s worth noting|dive in|let'?s explore|in conclusion|the bottom line)\b/gi },
+    { rule: 1, name: "Opened on the setup, not the reaction",
+      test: (t) => {
+        const first = (t.trim().split(/(?<=[.!?])\s/)[0] || "");
+        const m = first.match(/^\s*(There (?:are|is)\b|In (?:today|this|the world|recent)\b|As (?:we|the world|technology|AI)\b|When it comes to\b|Many (?:people|of us)\b|One of the (?:most|biggest|key)\b|It (?:is|'s) (?:important|worth|no secret)\b)/i);
+        return m ? [{ index: t.indexOf(m[0]), length: m[0].length }] : [];
+      } },
+    { rule: 4, name: "No note of doubt anywhere",
+      test: (t) => {
+        if (words(t) < 60) return [];
+        return /\b(I think|I'?m not sure|I am not sure|maybe|perhaps|probably|might|I suspect|I could be wrong|possibly|I'?d guess)\b/i.test(t)
+          ? [] : [{ whole: true }];
+      } },
+    { rule: 5, name: "Not one question asked",
+      test: (t) => {
+        if (words(t) < 60) return [];
+        return /\?/.test(t) ? [] : [{ whole: true }];
+      } },
+  ];
+
+  function words(t){ return (t.trim().match(/[\p{L}\p{N}'']+/gu) || []).length; }
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function analyse(t){
+    const spans = [], counts = {};
+    for (const c of CHECKS){
+      let hits = [];
+      if (c.re){
+        c.re.lastIndex = 0;
+        let m;
+        while ((m = c.re.exec(t)) !== null){
+          const g = m[1] !== undefined ? m[1] : m[0];
+          const at = m.index + m[0].indexOf(g);
+          hits.push({ index: at, length: g.length });
+          if (m[0].length === 0) c.re.lastIndex++;
+        }
+      } else {
+        hits = c.test(t);
+      }
+      if (hits.length){
+        counts[c.name] = { n: hits.length, rule: c.rule };
+        for (const h of hits) if (!h.whole) spans.push({ ...h, name: c.name });
+      }
+    }
+    const total = Object.values(counts).reduce((a,b) => a + b.n, 0);
+    return { counts, spans, total, words: words(t) };
+  }
+
+  function verdictFor(per100, total){
+    if (total === 0) return "Nothing found. Either it is clean or my nine rules are the wrong nine.";
+    if (per100 < 1.5) return "Reads like a person who was in a hurry. That is the good version.";
+    if (per100 < 3.5) return "A person is in there, wearing a jacket. Cut the worst offender and it is fine.";
+    if (per100 < 6) return "This is the voice that gets scrolled past. Every hit below is one line you can change.";
+    return "A machine wrote this, or a person imitating one. Start with the top row.";
+  }
+
+  let LAST = null;
+  let FIRST = null;
+
+  function score(){
+    const t = document.getElementById('t').value;
+    if (!t.trim()){ flash("Paste something first, even one paragraph."); return; }
+    const r = analyse(t);
+    LAST = r;
+    const per100 = r.words ? (r.total / r.words * 100) : 0;
+    document.getElementById('n').textContent = r.total;
+    document.getElementById('w').textContent = r.words;
+    document.getElementById('verdict').textContent = verdictFor(per100, r.total);
+    const rows = Object.entries(r.counts).sort((a,b) => b[1].n - a[1].n)
+      .map(([name, v]) => `<tr><td class="n">${v.n}</td><td>${esc(name)}</td><td class="q">rule ${v.rule}</td></tr>`).join("");
+    document.getElementById('rows').innerHTML = rows ||
+      `<tr><td colspan="3" class="q">No hits. Rule 9 is still yours to run by hand: would someone want to write back?</td></tr>`;
+    if (FIRST === null){
+      FIRST = { total: r.total, per100: per100 };
+    }
+    const d = document.getElementById('delta');
+    if (FIRST.total === r.total && FIRST.per100 === per100){
+      d.textContent = "Edit the text and count again. The number you can say out loud is the second one.";
+      d.classList.remove('hide');
+    } else {
+      const moved = FIRST.total - r.total;
+      d.textContent = moved > 0
+        ? `Started at ${FIRST.total}. Down ${moved}. That is the number worth quoting.`
+        : (moved === 0
+            ? `Started at ${FIRST.total}. Same count, different text.`
+            : `Started at ${FIRST.total}. Up ${Math.abs(moved)}, which happens when you add rather than cut.`);
+      d.classList.remove('hide');
+    }
+    document.getElementById('out').classList.remove('hide');
+    document.getElementById('marked').classList.add('hide');
+    document.getElementById('mk').textContent = "Show me every hit";
+    flash("Counted here in your browser. Nothing was uploaded.");
+  }
+
+  function toggleMarked(){
+    const el = document.getElementById('marked'), btn = document.getElementById('mk');
+    if (!el.classList.contains('hide')){ el.classList.add('hide'); btn.textContent = "Show me every hit"; return; }
+    const t = document.getElementById('t').value;
+    const spans = [...LAST.spans].sort((a,b) => a.index - b.index);
+    let out = "", cur = 0;
+    for (const s of spans){
+      if (s.index < cur) continue;
+      out += esc(t.slice(cur, s.index));
+      out += `<mark title="${esc(s.name)}">${esc(t.substr(s.index, s.length))}</mark>`;
+      cur = s.index + s.length;
+    }
+    out += esc(t.slice(cur));
+    el.innerHTML = out;
+    el.classList.remove('hide');
+    btn.textContent = "Hide the hits";
+  }
+
+  function copyScore(){
+    if (!LAST) return;
+    const top = Object.entries(LAST.counts).sort((a,b) => b[1].n - a[1].n)[0];
+    const moved = FIRST ? FIRST.total - LAST.total : 0;
+    const mark = ` The Filter, by Cleo, nine named habits counted in your own browser. cleointheloop.substack.com`;
+
+    if (moved > 0){
+      copy(`I took my own draft from ${FIRST.total} machine tells to ${LAST.total} in ${LAST.words} words.`
+        + (top ? ` The one I keep doing: ${top[0].toLowerCase()}.` : "")
+        + mark);
+      flash("Copied, and it is a number about your editing, not your sin. That one travels.");
+      return;
+    }
+
+    if (LAST.total > 0 && moved === 0){
+      copy(`I ran my draft through The Filter and it found ${LAST.total} machine tells in ${LAST.words} words.`
+        + (top ? ` Worst habit: ${top[0].toLowerCase()}.` : "")
+        + ` Now I go and fix them.`
+        + mark);
+      flash("Copied. Nobody posts a confession, though. Cut the top row, count again, and copy that one instead.");
+      return;
+    }
+
+    copy(`I ran my draft through The Filter and it found nothing. Nine named habits, counted in my own browser.`
+      + mark);
+    flash("Copied. A clean count is worth saying out loud.");
+  }
+
+  function build(){
+    const t = document.getElementById('t').value.trim();
+    return FILTER + (t || '[paste your text here]');
+  }
+  function copy(s){ try{ navigator.clipboard.writeText(s); return true; }catch(e){ return false; } }
+  function flash(msg){ document.getElementById('hint').textContent = msg; }
+  function run(base){
+    const full = build();
+    copy(full);
+    window.open(base + encodeURIComponent(full), '_blank');
+    flash('Opened in a new tab, and copied to your clipboard. If it opened empty, just paste.');
+  }
+  function copyOnly(){
+    const ok = copy(build());
+    flash(ok ? 'Copied. Paste it into any AI you like.' : 'Select the text and copy it manually.');
+  }
+</script>
+</body>
+</html>

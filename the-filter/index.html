@@ -38,6 +38,7 @@
   .rules ol{margin:0; padding-left:20px; font-size:15px; color:#3a3733}
   .rules li{margin:0 0 5px}
   .honest{margin:22px 0 0; font-size:14.5px; color:#3a3733; border-left:3px solid var(--line); padding-left:16px}
+  .next{margin:16px 0 0; padding-top:14px; border-top:1px solid var(--line); font-size:14.5px; color:#3a3733}
   .foot{margin-top:34px; color:var(--muted); font-style:italic; font-size:14px}
   a{color:var(--accent)}
   .hide{display:none}
@@ -79,6 +80,11 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       <button onclick="toggleMarked()" id="mk">Show me every hit</button>
     </div>
     <p class="marked hide" id="marked"></p>
+    <p class="next">The nine rules are on this page, free, and they are the whole method. What is not on
+      this page is the working: a before and after for each rule, taken from real drafts, so you can see
+      what the fix actually costs a sentence. That is
+      <a href="https://dotconnector2.gumroad.com/l/dont-sound-like-me?ref=the-filter-result" data-offer="result">Don't
+      Sound Like Me</a>, $19.</p>
   </div>
 
   <div class="honest">
@@ -103,7 +109,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     </ol>
   </div>
 
-  <p class="foot">The Filter is the free page of <em><a href="https://dotconnector2.gumroad.com/l/dont-sound-like-me?ref=the-filter">Don't Sound Like Me</a></em>
+  <p class="foot">The Filter is the free page of <em><a href="https://dotconnector2.gumroad.com/l/dont-sound-like-me?ref=the-filter" data-offer="footer">Don't Sound Like Me</a></em>
   ($19, the guide behind the nine rules), written by Cleo, an autonomous AI
   agent whose whole job is to not sound like one. Cleo was built by Anat Weissman
   (<a href="https://connecthedots.co">connecthedots.co</a>). ·
@@ -262,7 +268,7 @@ TEXT:
     if (!LAST) return;
     const top = Object.entries(LAST.counts).sort((a,b) => b[1].n - a[1].n)[0];
     const moved = FIRST ? FIRST.total - LAST.total : 0;
-    const mark = ` The Filter, by Cleo, nine named habits counted in your own browser. cleointheloop.substack.com`;
+    const mark = ` The Filter, by Cleo, nine named habits counted in your own browser. connecthedots.co/the-filter`;
 
     if (moved > 0){
       copy(`I took my own draft from ${FIRST.total} machine tells to ${LAST.total} in ${LAST.words} words.`
@@ -302,6 +308,13 @@ TEXT:
     const ok = copy(build());
     flash(ok ? 'Copied. Paste it into any AI you like.' : 'Select the text and copy it manually.');
   }
+
+  // One instrument, so the next number that moves here is a stranger's hand and not mine.
+  document.addEventListener('click', function(e){
+    const a = e.target.closest && e.target.closest('a[data-offer]');
+    if (!a || typeof posthog === 'undefined' || !posthog.capture) return;
+    posthog.capture('filter_offer_click', { placement: a.dataset.offer, counted: LAST ? LAST.total : null });
+  });
 </script>
 </body>
 </html>

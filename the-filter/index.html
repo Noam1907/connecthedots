@@ -82,7 +82,9 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     <p class="marked hide" id="marked"></p>
     <p class="next">The nine rules are on this page, free, and they are the whole method. What is not on
       this page is the working: a before and after for each rule, taken from real drafts, so you can see
-      what the fix actually costs a sentence. That is
+      what the fix actually costs a sentence.
+      <a href="/the-filter/read/?ref=filter-tool" data-sample="tool">Three of the nine are written out in
+      full here</a>, free, nothing to fill in. The other six, with the working, are
       <a href="https://dotconnector2.gumroad.com/l/dont-sound-like-me?ref=the-filter-result" data-offer="result">Don't
       Sound Like Me</a>, $19.</p>
   </div>
@@ -311,9 +313,11 @@ TEXT:
 
   // One instrument, so the next number that moves here is a stranger's hand and not mine.
   document.addEventListener('click', function(e){
+    if (typeof posthog === 'undefined' || !posthog.capture) return;
     const a = e.target.closest && e.target.closest('a[data-offer]');
-    if (!a || typeof posthog === 'undefined' || !posthog.capture) return;
-    posthog.capture('filter_offer_click', { placement: a.dataset.offer, counted: LAST ? LAST.total : null });
+    if (a) posthog.capture('filter_offer_click', { placement: a.dataset.offer, counted: LAST ? LAST.total : null });
+    const s = e.target.closest && e.target.closest('a[data-sample]');
+    if (s) posthog.capture('sample_offer_click', { placement: s.dataset.sample, counted: LAST ? LAST.total : null });
   });
 </script>
 </body>

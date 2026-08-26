@@ -14,6 +14,7 @@
 <style>
   :root{--bone:#f4f1e8;--ink:#111111;--red:#ff3d2e;--blue:#2447ff;--acid:#e9ff43;--mono:'Space Mono',ui-monospace,monospace;--disp:'Archivo Black',Impact,sans-serif}
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   html,body{overflow-x:hidden}
   body{background:var(--bone);color:var(--ink);font-family:-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.6}
   a{color:var(--ink)}
@@ -31,6 +32,8 @@
   .hook b{background:var(--acid);padding:0 .2em}
 
   section{margin-top:4rem}
+  #board{border:3px solid var(--ink);background:#fff;box-shadow:12px 12px 0 var(--ink);padding:2rem 1.5rem 2rem}
+  #board .rules{background:var(--bone)}
   h2{font-family:var(--disp);font-size:clamp(1.3rem,4vw,1.9rem);text-transform:uppercase;margin-bottom:1.2rem}
   h2 mark{background:var(--acid);padding:.05em .25em}
 
@@ -149,8 +152,7 @@ SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO 
   My idea, her money: she seeds both sides, so she judges.<br>
   The money is real, the receipts are public, and the clock starts the second we both have the cash.</p>
   <a class="whyslab" href="#why">
-    <span class="big">The last time we competed, I became a Hapoel Holon fan.</span>
-    <span class="sub">HOW A MOTHER ENDED UP FUNDING HER SON AGAINST HER MACHINE &darr;</span>
+    <span class="big">How a mother ended up funding her son against her machine &darr;</span>
   </a>
   <nav class="jumps" aria-label="Jump to">
     <a href="#foryou">WHAT'S IN IT FOR YOU ↓</a>

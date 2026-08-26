@@ -109,6 +109,13 @@
   .fbtn{font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:.04em;text-decoration:none;color:var(--ink);background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:.8rem 1rem;transform:rotate(-.5deg)}
   .fbtn.acid{background:var(--acid);transform:rotate(.5deg)}
   .fbtn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+  .teams{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.6rem}
+  .teambtn{font-family:var(--disp);font-size:clamp(.95rem,3vw,1.2rem);text-transform:uppercase;letter-spacing:.02em;cursor:pointer;background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:.85rem 1.4rem}
+  .teambtn.tred{color:var(--red)}
+  .teambtn.tblue{color:var(--blue)}
+  .teambtn.picked.tred{background:var(--red);color:#fff}
+  .teambtn.picked.tblue{background:var(--blue);color:#fff}
+  .teambtn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
   .scorebig .sred .amt{color:var(--red)}
   .scorebig .sblue .amt{color:var(--blue)}
   .vsmini{font-family:var(--disp);background:var(--ink);color:var(--acid);padding:.2em .35em;transform:rotate(-3deg)}
@@ -173,6 +180,11 @@ SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO 
   <p class="timernote">Window: September 1 to 15, final with Yotam's word. RULE ONE: NO MONEY, NO RACE. The clock starts the
   second the seed hits both accounts, confirmed in writing by both of us. The board updates nightly,
   and every line has a receipt.</p>
+  <div class="teams" id="teams" aria-label="Pick your team">
+    <button type="button" class="teambtn tred" data-team="yotam">TEAM YOTAM</button>
+    <button type="button" class="teambtn tblue" data-team="cleo">TEAM CLEO</button>
+  </div>
+  <p class="fuelnote" id="teamnote">PICKING A SIDE COSTS NOTHING AND IS ANONYMOUS. PICKS ARE TALLIED ONTO THE BOARD NIGHTLY ONCE THE CLOCK RUNS.</p>
   <div class="rules">
     <b>HOW WE COUNT</b>
     <ul>
@@ -346,6 +358,23 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
 document.querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('click',function(){
   try{posthog.capture('race_register_click',{placement:a.getAttribute('data-cta')})}catch(e){}
 })});
+(function(){
+  var KEY='race_team';
+  var wrap=document.getElementById('teams'); if(!wrap) return;
+  var note=document.getElementById('teamnote');
+  var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
+  function mark(t){
+    wrap.querySelectorAll('[data-team]').forEach(function(b){b.classList.toggle('picked',b.getAttribute('data-team')===t)});
+    if(note&&t){note.textContent='ON THE RECORD: TEAM '+t.toUpperCase()+'. PICKS ARE TALLIED ONTO THE BOARD NIGHTLY ONCE THE CLOCK RUNS.'}
+  }
+  if(saved) mark(saved);
+  wrap.querySelectorAll('[data-team]').forEach(function(b){b.addEventListener('click',function(){
+    var t=b.getAttribute('data-team');
+    try{posthog.capture('team_pick',{team:t,changed:!!saved&&saved!==t})}catch(e){}
+    try{localStorage.setItem(KEY,t)}catch(e){}
+    saved=t; mark(t);
+  })});
+})();
 document.querySelectorAll('[data-follow]').forEach(function(a){a.addEventListener('click',function(){
   try{posthog.capture('race_follow_click',{surface:a.getAttribute('data-follow')})}catch(e){}
 })});

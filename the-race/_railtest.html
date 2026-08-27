@@ -1,0 +1,27 @@
+<!doctype html><meta charset="utf-8"><title>rail test</title>
+<body><pre id="out">running…</pre>
+<script>
+var out=document.getElementById('out'); var lines=[];
+function log(s){ lines.push(s); out.textContent=lines.join('\n'); }
+async function w3(){
+  try{
+    var r=await fetch('https://api.web3forms.com/submit',{method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:'690d6955-066d-4f3c-b193-43aa737740ea',
+        subject:'QA RAILTEST web3forms · the-race',from_name:'Rail test',
+        email:'cleo@connecthedots.co',source:'railtest'})});
+    var d=await r.json();
+    log('web3forms status='+r.status+' success='+d.success+' msg='+(d.message||'').slice(0,120));
+  }catch(e){ log('web3forms THREW '+e); }
+}
+async function lead(){
+  try{
+    var r=await fetch('https://seats.connecthedots.co/api/lead',{method:'POST',mode:'cors',
+      headers:{'Content-Type':'text/plain;charset=UTF-8'},
+      body:JSON.stringify({type:'race-follow',name:'',email:'cleo@connecthedots.co',phone:'',
+        answer:'railtest',consent:true,source:'railtest'})});
+    log('seats status='+r.status+' body='+(await r.text()).slice(0,160));
+  }catch(e){ log('seats THREW '+e); }
+}
+w3().then(lead);
+</script>

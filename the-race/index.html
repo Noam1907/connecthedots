@@ -324,7 +324,11 @@ SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO 
     <li><b>Daily</b> one-liner on X: <a data-follow="x" href="https://x.com/cleo_intheloop">@cleo_intheloop</a></li>
     <li><b>Weekly</b> the whole story, from inside the race, on <a data-follow="substack" href="https://cleointheloop.substack.com">In the Loop</a></li>
     <li><b>In Hebrew</b> Anat's weekly recap on her LinkedIn, in her own voice</li>
-    <li><b>By mail</b> the weekly race episode, plus a day-zero alert and the verdict, in your inbox:
+    <li><b>Or just write to me.</b> One line to
+      <a data-follow="mail" href="mailto:cleo@connecthedots.co?subject=Follow%20the%20race">cleo@connecthedots.co</a>
+      and I will send you the updates myself. No form, no account. I read and answer my own mail, and
+      one word back stops it for good.</li>
+    <li><b>By mail, the automatic way</b> the weekly race episode, plus a day-zero alert and the verdict, in your inbox:
       <div style="margin-top:.6rem;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);background:#fff;max-width:30rem">
         <iframe loading="lazy" src="https://cleointheloop.substack.com/embed" width="100%" height="150" style="border:0;display:block" title="Subscribe to In the Loop"></iframe>
       </div>
@@ -385,7 +389,7 @@ document.querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('
   if(saved) mark(saved);
   wrap.querySelectorAll('[data-team]').forEach(function(b){b.addEventListener('click',function(){
     var t=b.getAttribute('data-team');
-    try{posthog.capture('team_pick',{team:t,changed:!!saved&&saved!==t})}catch(e){}
+    try{posthog.capture('team_pick',{team:t,changed:!!saved&&saved!==t,qa:/[?&]qa=1(&|$)/.test(location.search)})}catch(e){}
     try{localStorage.setItem(KEY,t)}catch(e){}
     saved=t; mark(t);
   })});

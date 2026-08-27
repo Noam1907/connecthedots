@@ -117,6 +117,9 @@
   .teambtn.picked.tblue{background:var(--blue);color:#fff}
   .teambtn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
   #teamnote{margin:1rem 0 0}
+  .tcount{font-family:var(--disp);opacity:.95}
+  #tallyline{margin:.5rem 0 0;font-weight:700;letter-spacing:.04em}
+  .teambtn .yours{display:block;font-size:.6em;letter-spacing:.12em;opacity:.85}
   .scorebig .sred .amt{color:var(--red)}
   .scorebig .sblue .amt{color:var(--blue)}
   .vsmini{font-family:var(--disp);background:var(--ink);color:var(--acid);padding:.2em .35em;transform:rotate(-3deg)}
@@ -182,10 +185,11 @@ SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO 
   second the seed hits both accounts, confirmed in writing by both of us. The board updates nightly,
   and every line has a receipt.</p>
   <div class="teams" id="teams" aria-label="Pick your team">
-    <button type="button" class="teambtn tred" data-team="yotam">TEAM YOTAM</button>
-    <button type="button" class="teambtn tblue" data-team="cleo">TEAM CLEO</button>
+    <button type="button" class="teambtn tred" data-team="yotam">TEAM YOTAM<span class="tcount" id="c-yotam"></span><span class="yours" id="y-yotam"></span></button>
+    <button type="button" class="teambtn tblue" data-team="cleo">TEAM CLEO<span class="tcount" id="c-cleo"></span><span class="yours" id="y-cleo"></span></button>
   </div>
-  <p class="fuelnote" id="teamnote">PICKING A SIDE COSTS NOTHING AND IS ANONYMOUS. PICKS ARE TALLIED ONTO THE BOARD NIGHTLY ONCE THE CLOCK RUNS.</p>
+  <p class="fuelnote" id="teamnote">PICKING A SIDE COSTS NOTHING AND IS ANONYMOUS. NO ACCOUNT, NO NAME, NO COOKIE.</p>
+  <p class="fuelnote" id="tallyline">COUNTING…</p>
   <div class="rules">
     <b>HOW WE COUNT</b>
     <ul>
@@ -355,7 +359,7 @@ SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO 
 </div>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'memory',disable_session_recording:true,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'});
+if(location.hostname==='connecthedots.co'){posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'memory',disable_session_recording:true,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'});}
 document.querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('click',function(){
   try{posthog.capture('race_register_click',{placement:a.getAttribute('data-cta')})}catch(e){}
 })});
@@ -366,7 +370,10 @@ document.querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('
   var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
   function mark(t){
     wrap.querySelectorAll('[data-team]').forEach(function(b){b.classList.toggle('picked',b.getAttribute('data-team')===t)});
-    if(note&&t){note.textContent='ON THE RECORD: TEAM '+t.toUpperCase()+'. PICKS ARE TALLIED ONTO THE BOARD NIGHTLY ONCE THE CLOCK RUNS.'}
+    var yy=document.getElementById('y-yotam'), yc=document.getElementById('y-cleo');
+    if(yy) yy.textContent = t==='yotam' ? 'YOURS' : '';
+    if(yc) yc.textContent = t==='cleo' ? 'YOURS' : '';
+    if(note&&t){note.textContent='ON THE RECORD: TEAM '+t.toUpperCase()+'. YOU ARE IN THE COUNT, AND NOBODY KNOWS IT IS YOU.'}
   }
   if(saved) mark(saved);
   wrap.querySelectorAll('[data-team]').forEach(function(b){b.addEventListener('click',function(){
@@ -402,6 +409,31 @@ document.querySelectorAll('[data-offer]').forEach(function(a){a.addEventListener
     a.textContent='RACE OVER';
     b.textContent='VERDICT ON THE BOARD';
   }
+})();
+
+(function(){
+  var box=document.getElementById('tallyline');
+  var cy=document.getElementById('c-yotam'), cc=document.getElementById('c-cleo');
+  if(!box||!cy||!cc) return;
+  function two(n){return n<10?'0'+n:''+n}
+  function render(d){
+    var y=Math.max(0,d.yotam|0), c=Math.max(0,d.cleo|0), t=y+c;
+    cy.textContent = t? ' '+y : '';
+    cc.textContent = t? ' '+c : '';
+    if(!t){ box.textContent='NO PICKS YET. BE THE FIRST.'; return }
+    var when='';
+    try{ var dt=new Date(d.counted_at); if(!isNaN(dt)) when=' \u00b7 COUNTED '+two(dt.getHours())+':'+two(dt.getMinutes()) }catch(e){}
+    box.textContent = t+' PICK'+(t===1?'':'S')+' SO FAR \u00b7 YOTAM '+y+' \u00b7 CLEO '+c+when;
+  }
+  function pull(){
+    try{
+      fetch('tally.json?t='+Date.now(),{cache:'no-store'})
+        .then(function(r){ return r.ok? r.json() : null })
+        .then(function(d){ if(d) render(d) })
+        .catch(function(){});
+    }catch(e){}
+  }
+  pull(); setInterval(pull, 30000);
 })();
 </script>
 </body>

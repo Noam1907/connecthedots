@@ -124,6 +124,16 @@
   .teambtn.picked.tblue{background:var(--blue);color:#fff}
   .teambtn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
   #teamnote{margin:1rem 0 0}
+  .sidetag{position:fixed;top:2.6rem;right:.8rem;z-index:40;display:block;
+           background:var(--acid);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);
+           transform:rotate(2deg);padding:.5rem .7rem;text-decoration:none;color:var(--ink);
+           font-family:var(--mono);font-weight:700;font-size:.72rem;letter-spacing:.04em;
+           line-height:1.25;text-align:center;max-width:8.6rem}
+  .sidetag b{display:block;font-family:var(--disp);font-size:.92rem;letter-spacing:0}
+  .sidetag .go{display:block;margin-top:.15rem;text-decoration:underline}
+  .sidetag:active{transform:rotate(2deg) translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+  @media (min-width:900px){.sidetag{top:3.4rem;right:1.6rem;font-size:.8rem;max-width:10rem}
+                           .sidetag b{font-size:1.05rem}}
   .tcount{font-family:var(--disp);opacity:.95}
   #tallyline{margin:.5rem 0 0;font-weight:700;letter-spacing:.04em}
   .teambtn .yours{display:block;font-size:.6em;letter-spacing:.12em;opacity:.85}
@@ -149,6 +159,9 @@
     h1 .vs{display:block;width:max-content;margin:.05em auto;font-size:.34em;vertical-align:baseline}
     .hook{font-size:1rem;text-align:left}
     .corner .head{font-size:1.25rem}
+    header{padding-top:6.4rem}
+    .sidetag{top:2.3rem;right:.6rem;max-width:7.4rem;font-size:.62rem;padding:.4rem .55rem}
+    .sidetag b{font-size:.8rem}
   }
 </style>
 </head>
@@ -158,6 +171,10 @@
 SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO MONEY, NO RACE ★&nbsp;
 SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO MONEY, NO RACE ★&nbsp;
 </span></div>
+<a class="sidetag" id="sidetag" href="#follow" data-follow="sidetag">
+  <b id="sidetag-line">STARTS SOON</b>
+  <span class="go">FOLLOW &darr;</span>
+</a>
 
 <div class="wrap">
 
@@ -419,6 +436,12 @@ document.querySelectorAll('[data-offer]').forEach(function(a){a.addEventListener
   } else {
     a.textContent='RACE OVER';
     b.textContent='VERDICT ON THE BOARD';
+  }
+  var tag=document.getElementById('sidetag-line');
+  if(tag){
+    if(now<start){ var dd=days(start,now); tag.textContent='STARTS IN '+dd+' '+word(dd); }
+    else if(now<=end){ var ll=days(end,now); tag.textContent=ll+' '+word(ll)+' LEFT'; }
+    else { tag.textContent='RACE OVER'; }
   }
 })();
 

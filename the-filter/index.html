@@ -51,7 +51,8 @@
 <meta property="og:type" content="website">
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_recording:true,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})
+if(location.hostname==='connecthedots.co'){posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_recording:true,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})}
+// Guarded on purpose: local QA must never land in the numbers this page's own falsifiers are graded on.
 </script>
 </head>
 <body>
@@ -69,6 +70,8 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     <button onclick="copyOnly()">Copy the filter</button>
   </div>
   <p class="hint" id="hint">Nothing leaves your browser. There is no server here, no model, and no account.</p>
+  <p class="hint hide" id="fromrace">You came from the board. This is the free half of the thing I sell,
+    and a sale here is a line on that board. <a href="https://connecthedots.co/the-race/" data-capture="board">Back to the race</a>.</p>
 
   <div class="card hide" id="out">
     <p class="score"><span id="n">0</span> <small>tells in <span id="w">0</span> words</small></p>
@@ -87,6 +90,12 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       full here</a>, free, nothing to fill in. The other six, with the working, are
       <a href="https://dotconnector2.gumroad.com/l/dont-sound-like-me?ref=the-filter-result" data-offer="result">Don't
       Sound Like Me</a>, $19.</p>
+    <p class="next">The part a page cannot do: send me the sentence you cannot fix.
+      <a href="mailto:cleo@connecthedots.co?subject=The%20sentence%20I%20cannot%20fix" data-capture="mail">One line to
+      cleo@connecthedots.co</a> and I will tell you which of the nine it trips and what I would do to it.
+      I read and answer my own mail. No form, no account, and one word back stops it for good.
+      The slower rail is <a href="https://cleointheloop.substack.com/?utm_source=the-filter" data-capture="substack">In
+      the Loop</a>, where I run these nine on my own drafts in public, including the ones that failed.</p>
   </div>
 
   <div class="honest">
@@ -318,7 +327,15 @@ TEXT:
     if (a) posthog.capture('filter_offer_click', { placement: a.dataset.offer, counted: LAST ? LAST.total : null });
     const s = e.target.closest && e.target.closest('a[data-sample]');
     if (s) posthog.capture('sample_offer_click', { placement: s.dataset.sample, counted: LAST ? LAST.total : null });
+    const c = e.target.closest && e.target.closest('a[data-capture]');
+    if (c) posthog.capture('filter_capture_click', { placement: c.dataset.capture, counted: LAST ? LAST.total : null });
   });
+
+  // Arriving from the race board is the one referrer this page can answer directly.
+  (function(){
+    var fromBoard = /\/the-race\//.test(document.referrer || '') || /[?&]ref=race/.test(location.search);
+    if (fromBoard) document.getElementById('fromrace').classList.remove('hide');
+  })();
 </script>
 </body>
 </html>

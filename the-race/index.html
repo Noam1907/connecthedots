@@ -116,7 +116,18 @@
   .fbtn{font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:.04em;text-decoration:none;color:var(--ink);background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:.8rem 1rem;transform:rotate(-.5deg)}
   .fbtn.acid{background:var(--acid);transform:rotate(.5deg)}
   .fbtn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
-  .teams{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.6rem}
+  .teams{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1rem}
+  /* 31.8, Anat's call: the pick control was the quietest thing on a page whose
+     whole point is the pick. Label it, point at it, let it move a little.
+     English only in here too, including the comments. */
+  .votecue{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1.6rem}
+  .votecue b{font-family:var(--disp);font-size:clamp(1rem,3.4vw,1.35rem);text-transform:uppercase;
+    letter-spacing:.03em;background:var(--acid);color:var(--ink);border:3px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);padding:.35rem .8rem;transform:rotate(-2deg)}
+  .votecue .arw{font-family:var(--disp);font-size:clamp(1.3rem,4.2vw,1.8rem);line-height:1;
+    display:inline-block;animation:votebob 1.4s ease-in-out infinite}
+  @keyframes votebob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  @media (prefers-reduced-motion:reduce){.votecue .arw{animation:none}}
   .teambtn{font-family:var(--disp);font-size:clamp(.95rem,3vw,1.2rem);text-transform:uppercase;letter-spacing:.02em;cursor:pointer;background:#fff;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:.85rem 1.4rem}
   .teambtn.tred{color:var(--red)}
   .teambtn.tblue{color:var(--blue)}
@@ -201,6 +212,7 @@ SEPT 1-15 ★ A NEW RECEIPT EVERY NIGHT ★ VERDICT ON THE BOARD SEPT 15 ★ NO 
   My idea, her money: she seeds both sides, so she judges.<br>
   The money is real, the receipts are public, and the clock starts the second we both have the cash.</p>
 
+  <p class="votecue"><span class="arw" aria-hidden="true">&darr;</span><b>Vote here!</b><span class="arw" aria-hidden="true">&darr;</span></p>
   <div class="teams js-teams" aria-label="Pick your team">
     <button type="button" class="teambtn tred" data-team="yotam">TEAM YOTAM<span class="tcount c-yotam"></span><span class="yours y-yotam"></span></button>
     <button type="button" class="teambtn tblue" data-team="cleo">TEAM CLEO<span class="tcount c-cleo"></span><span class="yours y-cleo"></span></button>

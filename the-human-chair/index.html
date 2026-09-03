@@ -217,6 +217,13 @@
   .subrow .btns a{display:inline-block;padding:9px 16px;border:1px solid var(--line);border-radius:999px;
     background:var(--panel);color:var(--navy-ink);text-decoration:none;font-family:var(--mono);font-size:13px;font-weight:600}
   .subrow .btns a:hover{border-color:var(--amber-br);color:var(--amber)}
+  .listenbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:center;
+    padding:16px 22px;background:var(--panel);border-block-end:1px solid var(--line)}
+  .listenbar .lead{font-size:14px;color:var(--dim);margin:0}
+  .listenbar .btns{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;direction:ltr}
+  .listenbar .btns a{display:inline-block;padding:8px 18px;border:1px solid var(--line);border-radius:999px;
+    background:var(--bg);color:var(--navy-ink);text-decoration:none;font-family:var(--mono);font-size:13px;font-weight:600}
+  .listenbar .btns a:hover{border-color:var(--amber-br);color:var(--amber)}
 
   .foot{padding:36px 0 64px;text-align:center;font-family:var(--mono);font-size:12px;color:#7e6842;line-height:2;direction:ltr;background:var(--warm)}
   .foot a{color:var(--amber)}
@@ -287,40 +294,19 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
   <a class="cta" href="https://thehumanistheloop.co" style="padding:10px 24px;font-size:14px;margin:0;">לשמור מקום</a>
 </div>
 
-<div class="wrap">
-  <div class="chain rv">
-    <div class="lbl">the chain</div>
-    <h2>השאלה עוברת הלאה. אף פעם לא חוזרת.</h2>
-    <p class="exp">מי שיושבת בכיסא עונה בקול, לבד. הסוכנים מגיבים למה שנאמר באמת. ומתוך התשובה נולדת השאלה לאדם הבא. ככה נראית עד עכשיו השרשרת:</p>
-    <div class="chainrow">
-      <a class="chainstop" href="#ep1">
-        <div class="dot"></div>
-        <div class="nm">ענת וייסמן</div>
-        <div class="ep">EP 1</div>
-      </a>
-      <a class="chainstop" href="#ep2">
-        <div class="dot"></div>
-        <div class="nm">יפעת לב</div>
-        <div class="ep">EP 2</div>
-      </a>
-      <a class="chainstop" href="#ep3">
-        <div class="dot"></div>
-        <div class="nm">יובל כרמי</div>
-        <div class="ep">EP 3</div>
-      </a>
-      <a class="chainstop" href="#ep4">
-        <div class="dot"></div>
-        <div class="nm">יפעת גרוס אריאב</div>
-        <div class="ep">EP 4</div>
-      </a>
-      <div class="chainstop future">
-        <div class="dot"></div>
-        <div class="nm">הכיסא הבא</div>
-        <div class="ep">EP 5 · כבר תפוס</div>
-      </div>
-    </div>
+<!-- LISTEN BAR. Anat's instruction, live 3.9: the platform links sat at y=4187 of a 4508px page,
+     93 percent down, below the nominate form, and Apple was not among them at all. Measured in the
+     DOM, not guessed. They now sit under the hero, where a podcast page puts them. -->
+<div class="listenbar">
+  <p class="lead">להאזין:</p>
+  <div class="btns">
+    <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35" rel="noopener">Spotify</a>
+    <a href="https://podcasts.apple.com/il/podcast/id6803072523" rel="noopener">Apple Podcasts</a>
+    <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
   </div>
+</div>
 
+<div class="wrap">
   <div class="eps">
 
     <!-- ===== EPISODE 4 (newest) ===== -->
@@ -503,9 +489,45 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
     </div>
 
     <div class="nextchair rv">
-      <b>פרק 4 כבר בדרך.</b> הכיסא תפוס, והשאלה של יפעת עוברת הלאה כמו שהיא. מי שנרשם לניוזלטר מקבל אותו ראשון.
+      <b>פרק 5 כבר בדרך.</b> הכיסא תפוס, והשאלה של יפעת עוברת הלאה כמו שהיא. מי שנרשם לניוזלטר מקבל אותו ראשון.
     </div>
 
+  </div>
+
+  <!-- THE CHAIN moved below the episodes on Anat's word, live 3.9. It used to sit between the hero
+       and the first episode, which is why the newest episode did not start until 27 percent down a
+       4508px page. The show still explains itself, it just stops doing it before anyone can listen. -->
+  <div class="chain rv">
+    <div class="lbl">the chain</div>
+    <h2>השאלה עוברת הלאה. אף פעם לא חוזרת.</h2>
+    <p class="exp">מי שיושבת בכיסא עונה בקול, לבד. הסוכנים מגיבים למה שנאמר באמת. ומתוך התשובה נולדת השאלה לאדם הבא. ככה נראית עד עכשיו השרשרת:</p>
+    <div class="chainrow">
+      <a class="chainstop" href="#ep1">
+        <div class="dot"></div>
+        <div class="nm">ענת וייסמן</div>
+        <div class="ep">EP 1</div>
+      </a>
+      <a class="chainstop" href="#ep2">
+        <div class="dot"></div>
+        <div class="nm">יפעת לב</div>
+        <div class="ep">EP 2</div>
+      </a>
+      <a class="chainstop" href="#ep3">
+        <div class="dot"></div>
+        <div class="nm">יובל כרמי</div>
+        <div class="ep">EP 3</div>
+      </a>
+      <a class="chainstop" href="#ep4">
+        <div class="dot"></div>
+        <div class="nm">יפעת גרוס אריאב</div>
+        <div class="ep">EP 4</div>
+      </a>
+      <div class="chainstop future">
+        <div class="dot"></div>
+        <div class="nm">הכיסא הבא</div>
+        <div class="ep">EP 5 · כבר תפוס</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -541,11 +563,13 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
       <div class="formok" id="formok">ההצעה אצלי. אני קוראת כל אחת בעצמי, ותשובה תגיע למייל שהשארתם.</div>
       <div class="subrow">
         <p class="lead">רוצים לשמוע את הפרק הבא כשהוא יוצא? אפשר לעקוב אחרי התוכנית בכל נגן פודקאסטים:</p>
-        <!-- Apple Podcasts is deliberately absent from these buttons, not forgotten: the show IS in
-             Apple's catalog, but its public page returned 200 five times and 404 eight times inside
-             twenty minutes on 19.8. Re-measure before adding the button. -->
+        <!-- Apple was excluded on 19.8 because its public page returned 200 five times and 404 eight
+             times inside twenty minutes. RE-MEASURED 3.9 and that condition no longer holds: the show
+             page and the ep 4 episode page both resolved 200 with a browser UA, and the episode page
+             was opened in a real browser and rendered. Button restored. -->
         <div class="btns">
           <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35" rel="noopener">Spotify</a>
+          <a href="https://podcasts.apple.com/il/podcast/id6803072523" rel="noopener">Apple Podcasts</a>
           <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
         </div>
       </div>
@@ -556,7 +580,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
 
 <div class="foot">
   The Human Chair · assembled by Cleo, an autonomous agent<br>
-  <a href="https://cleointheloop.substack.com">In the Loop</a> · <a href="https://connecthedots.co">connecthedots.co</a> · <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35">Spotify</a> · <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
+  <a href="https://cleointheloop.substack.com">In the Loop</a> · <a href="https://connecthedots.co">connecthedots.co</a> · <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35">Spotify</a> · <a href="https://podcasts.apple.com/il/podcast/id6803072523">Apple Podcasts</a> · <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
 </div>
 
 <script>

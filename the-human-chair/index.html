@@ -299,9 +299,16 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
 
 <!-- LISTEN BAR. Anat's instruction, live 3.9: the platform links sat at y=4187 of a 4508px page,
      93 percent down, below the nominate form, and Apple was not among them at all. Measured in the
-     DOM, not guessed. They now sit under the hero, where a podcast page puts them. -->
+     DOM, not guessed. They now sit under the hero, where a podcast page puts them.
+
+     EVERY PLATFORM LINK ON THIS PAGE NOW LEAVES THROUGH /go/, added 3.9. Spotify and Apple ignore
+     our UTM and report nothing back, so a bare link off this page was a click nobody could count —
+     the page knew a visitor arrived and never knew whether they went and listened. The bridge is the
+     only place that click exists. `p=` records WHICH of the three placements was used, so the move
+     above can be shown to have worked instead of assumed. The JSON-LD sameAs below stays bare on
+     purpose: that is an identity statement to a machine, not a link for a human. -->
 <div class="listenbar">
-  <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35" rel="noopener" aria-label="Spotify" title="Spotify">
+  <a href="https://connecthedots.co/go/spotify/?s=site&amp;c=the-human-chair-page&amp;p=listenbar" rel="noopener" aria-label="Spotify" title="Spotify">
     <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
       <circle cx="12" cy="12" r="12" fill="currentColor"/>
       <g fill="none" stroke="#fff" stroke-linecap="round">
@@ -311,7 +318,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
       </g>
     </svg>
   </a>
-  <a href="https://podcasts.apple.com/il/podcast/id6803072523" rel="noopener" aria-label="Apple Podcasts" title="Apple Podcasts">
+  <a href="https://connecthedots.co/go/apple/?s=site&amp;c=the-human-chair-page&amp;p=listenbar" rel="noopener" aria-label="Apple Podcasts" title="Apple Podcasts">
     <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
       <circle cx="12" cy="12" r="12" fill="currentColor"/>
       <g fill="#fff">
@@ -588,8 +595,8 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
              page and the ep 4 episode page both resolved 200 with a browser UA, and the episode page
              was opened in a real browser and rendered. Button restored. -->
         <div class="btns">
-          <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35" rel="noopener">Spotify</a>
-          <a href="https://podcasts.apple.com/il/podcast/id6803072523" rel="noopener">Apple Podcasts</a>
+          <a href="https://connecthedots.co/go/spotify/?s=site&amp;c=the-human-chair-page&amp;p=subrow" rel="noopener">Spotify</a>
+          <a href="https://connecthedots.co/go/apple/?s=site&amp;c=the-human-chair-page&amp;p=subrow" rel="noopener">Apple Podcasts</a>
           <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
         </div>
       </div>
@@ -600,7 +607,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
 
 <div class="foot">
   The Human Chair · assembled by Cleo, an autonomous agent<br>
-  <a href="https://cleointheloop.substack.com">In the Loop</a> · <a href="https://connecthedots.co">connecthedots.co</a> · <a href="https://open.spotify.com/show/033XVEvcpSFcHXtjfVSk35">Spotify</a> · <a href="https://podcasts.apple.com/il/podcast/id6803072523">Apple Podcasts</a> · <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
+  <a href="https://cleointheloop.substack.com">In the Loop</a> · <a href="https://connecthedots.co">connecthedots.co</a> · <a href="https://connecthedots.co/go/spotify/?s=site&amp;c=the-human-chair-page&amp;p=footer">Spotify</a> · <a href="https://connecthedots.co/go/apple/?s=site&amp;c=the-human-chair-page&amp;p=footer">Apple Podcasts</a> · <a href="https://connecthedots.co/the-human-chair/feed.xml">RSS</a>
 </div>
 
 <script>

@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <title>מעביר…</title>
 <meta name="robots" content="noindex,nofollow">
-<link rel="canonical" href="https://podcasts.apple.com/il/podcast/%D7%94%D7%9B%D7%99%D7%A1%D7%90-%D7%94%D7%90%D7%A0%D7%95%D7%A9%D7%99-the-human-chair/id6803072523">
+<link rel="canonical" href="https://podcasts.apple.com/il/podcast/id6803072523">
 <!-- OPEN GRAPH ON A BRIDGE, WHICH THE 6.8 SLUGS DO NOT HAVE AND DO NOT NEED.
      Those get pasted into a profile field. These get pasted into a Facebook post, and Facebook
-     scrapes the URL IT WAS GIVEN — this page, not Spotify. Without these five tags the post
+     scrapes the URL IT WAS GIVEN — this page, not the platform. Without these five tags the post
      renders as a grey box with the word "מעביר" in it, which is a worse card than a bare link. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="הכיסא האנושי · The Human Chair">
@@ -26,12 +26,16 @@
   // the third kind of zero and calls it a market result.
   // sendBeacon straight to the capture endpoint needs no library and is handed to the browser
   // before navigation. text/plain keeps it a simple request, so there is no CORS preflight to lose.
-  var DEST = "https://podcasts.apple.com/il/podcast/%D7%94%D7%9B%D7%99%D7%A1%D7%90-%D7%94%D7%90%D7%A0%D7%95%D7%A9%D7%99-the-human-chair/id6803072523";
+  var DEST = "https://podcasts.apple.com/il/podcast/id6803072523";
   var q = new URLSearchParams(location.search);
   // Never guess a missing parameter. "unspecified" is a readable answer; a defaulted one is a
   // wrong answer that looks right.
   var src = q.get("s") || q.get("utm_source") || "unspecified";
   var camp = q.get("c") || q.get("utm_campaign") || "unspecified";
+  // Placement, added 3.9. The listen bar was moved from 93% down the page to under the hero on
+  // Anat's instruction; without this parameter that move can never be shown to have worked.
+  // Only the page's own buttons set it — a link in a post leaves it unspecified, correctly.
+  var place = q.get("p") || "unspecified";
 
   // Reuse the visitor id the main site already set, so a click here and a visit there are one
   // person. Fall back to a fresh id rather than dropping the event.
@@ -52,6 +56,7 @@
         platform: "Apple Podcasts",
         source: src,
         campaign: camp,
+        placement: place,
         destination: DEST,
         $current_url: location.href,
         $referrer: document.referrer || "$direct"
@@ -64,6 +69,14 @@
   location.replace(DEST);
 })();
 </script>
+<!-- JS-OFF FALLBACK, added 3.9 on the second seat's finding, and it sits HERE, AFTER the script,
+     on purpose. The six platform anchors on /the-human-chair/ used to be direct links; from today
+     they all leave through a bridge, so a visitor with JS off or a privacy browser that blocks the
+     beacon would have dead-ended on "מעביר…" and had to click again — a regression on a link that
+     always worked. Parsed after the script, so it can never win the race against sendBeacon: with
+     JS on, location.replace has already navigated. The five profile slugs carry this meta as their
+     ONLY mechanism; here it is the net under one. -->
+<meta http-equiv="refresh" content="0;url=https://podcasts.apple.com/il/podcast/id6803072523">
 <style>
   body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
        background:#0b1220;color:#e6edf7;
@@ -72,6 +85,6 @@
 </style>
 </head>
 <body>
-<p>מעביר אותך אל Apple Podcasts…<br><a href="https://podcasts.apple.com/il/podcast/%D7%94%D7%9B%D7%99%D7%A1%D7%90-%D7%94%D7%90%D7%A0%D7%95%D7%A9%D7%99-the-human-chair/id6803072523">להמשיך ידנית</a></p>
+<p>מעביר אותך אל Apple Podcasts…<br><a href="https://podcasts.apple.com/il/podcast/id6803072523">להמשיך ידנית</a></p>
 </body>
 </html>

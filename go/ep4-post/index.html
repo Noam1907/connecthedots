@@ -1,0 +1,90 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<title>מעביר…</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://www.linkedin.com/posts/anatdotconnector_thehumanchair-connecthedots-autonomousagents-share-7501187641040826368-joRX/">
+<!-- OPEN GRAPH ON A BRIDGE, WHICH THE 6.8 SLUGS DO NOT HAVE AND DO NOT NEED.
+     Those get pasted into a profile field. These get pasted into a Facebook post, and Facebook
+     scrapes the URL IT WAS GIVEN — this page, not the platform. Without these five tags the post
+     renders as a grey box with the word "מעביר" in it, which is a worse card than a bare link. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="פרק 4 · יפעת גרוס אריאב · אני לא טייטל, אני הרבה טייטלים מבחירה">
+<meta property="og:description" content="היא לא עונה מי היא מתחת לטייטל. היא מסבירה איך היא בודקת את זה, ושני סוכנים שיכולים רק לבדוק מבחוץ.">
+<meta property="og:image" content="https://connecthedots.co/the-human-chair/cover.png">
+<meta property="og:site_name" content="Connecting the Dots">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+(function(){
+  // NO posthog.js HERE, DELIBERATELY, AND IT COST A TEST TO LEARN IT.
+  // The first version of this bridge loaded the snippet and called posthog.capture().
+  // The snippet is a stub that queues calls until array.js downloads, and we redirect long
+  // before that lands, so every event was queued into a page that no longer existed.
+  // Verified 20.8 on a local server: the redirect fired, Spotify loaded, and PostHog received
+  // nothing. A bridge that silently counts zero is worse than no bridge, because it produces
+  // the third kind of zero and calls it a market result.
+  // sendBeacon straight to the capture endpoint needs no library and is handed to the browser
+  // before navigation. text/plain keeps it a simple request, so there is no CORS preflight to lose.
+  var DEST = "https://www.linkedin.com/posts/anatdotconnector_thehumanchair-connecthedots-autonomousagents-share-7501187641040826368-joRX/";
+  var q = new URLSearchParams(location.search);
+  // Never guess a missing parameter. "unspecified" is a readable answer; a defaulted one is a
+  // wrong answer that looks right.
+  var src = q.get("s") || q.get("utm_source") || "unspecified";
+  var camp = q.get("c") || q.get("utm_campaign") || "unspecified";
+  // Placement, added 3.9. The listen bar was moved from 93% down the page to under the hero on
+  // Anat's instruction; without this parameter that move can never be shown to have worked.
+  // Only the page's own buttons set it — a link in a post leaves it unspecified, correctly.
+  var place = q.get("p") || "unspecified";
+
+  // Reuse the visitor id the main site already set, so a click here and a visit there are one
+  // person. Fall back to a fresh id rather than dropping the event.
+  var did = "";
+  try {
+    var m = document.cookie.match(/ph_phc_[^=]+_posthog=([^;]+)/);
+    if (m) did = (JSON.parse(decodeURIComponent(m[1])) || {}).distinct_id || "";
+  } catch (e) {}
+  if (!did) did = "bridge_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+  try {
+    var payload = JSON.stringify({
+      api_key: "phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx",
+      event: "bridge_click",
+      properties: {
+        distinct_id: did,
+        bridge: "ep4-post",
+        platform: "LinkedIn",
+        source: src,
+        campaign: camp,
+        placement: place,
+        destination: DEST,
+        $current_url: location.href,
+        $referrer: document.referrer || "$direct"
+      }
+    });
+    navigator.sendBeacon("https://us.i.posthog.com/e/",
+      new Blob([payload], { type: "text/plain" }));
+  } catch (e) {}
+
+  location.replace(DEST);
+})();
+</script>
+<!-- JS-OFF FALLBACK, added 3.9 on the second seat's finding, and it sits HERE, AFTER the script,
+     on purpose. The six platform anchors on /the-human-chair/ used to be direct links; from today
+     they all leave through a bridge, so a visitor with JS off or a privacy browser that blocks the
+     beacon would have dead-ended on "מעביר…" and had to click again — a regression on a link that
+     always worked. Parsed after the script, so it can never win the race against sendBeacon: with
+     JS on, location.replace has already navigated. The five profile slugs carry this meta as their
+     ONLY mechanism; here it is the net under one. -->
+<meta http-equiv="refresh" content="0;url=https://www.linkedin.com/posts/anatdotconnector_thehumanchair-connecthedots-autonomousagents-share-7501187641040826368-joRX/">
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+       background:#0b1220;color:#e6edf7;
+       font-family:'Assistant','Heebo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  a{color:#7cc4ff}
+</style>
+</head>
+<body>
+<p>מעביר אותך אל LinkedIn…<br><a href="https://www.linkedin.com/posts/anatdotconnector_thehumanchair-connecthedots-autonomousagents-share-7501187641040826368-joRX/">להמשיך ידנית</a></p>
+</body>
+</html>

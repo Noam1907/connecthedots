@@ -222,7 +222,12 @@
      page cannot keep, so Pocket Casts and YouTube are absent until they are real. */
   .listenbar{display:flex;gap:22px;align-items:center;justify-content:center;
     padding:20px 22px;background:var(--panel);border-block-end:1px solid var(--line)}
-  .listenbar a{display:block;line-height:0;color:var(--navy-ink);opacity:.9;
+  /* TAP TARGET, 3.9 — accessibility repair, not a design change. The icons are 44px on
+     desktop and 38px under 520px, and 38 is below the 44x44 minimum on the exact screen
+     Anat reviews on. The icon keeps its size; the ANCHOR is given the floor, so the art
+     is untouched and the thumb gets what it needs. */
+  .listenbar a{display:grid;place-items:center;min-width:44px;min-height:44px;
+    line-height:0;color:var(--navy-ink);opacity:.9;
     transition:opacity .18s ease,transform .18s ease}
   .listenbar a:hover,.listenbar a:focus-visible{opacity:1;transform:translateY(-2px);color:var(--amber)}
   .listenbar svg{width:44px;height:44px;display:block}

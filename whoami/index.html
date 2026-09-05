@@ -133,11 +133,12 @@
   /* ---------- the three questions, all of them, at once ---------- */
   main{padding:0 0 8px;}
   .stage{padding:26px 0 0;}
-  .step{position:relative;margin-bottom:34px;padding-top:0;}
+  .step{position:relative;margin-bottom:38px;padding-top:0;}
+  .step + .step{border-top:1px solid var(--cream-16);padding-top:30px;}
   /* the numeral is a small brick sitting on the top edge of the card */
   .floor{
-    position:absolute;
-    top:-14px;right:22px;
+    position:relative;
+    top:0;right:0;margin:0 0 10px;
     z-index:2;
     display:flex;align-items:center;justify-content:center;
     width:60px;height:40px;
@@ -156,13 +157,7 @@
   }
   .floor::before{left:9px;}
   .floor::after{right:9px;}
-  .q-group{
-    position:relative;z-index:1;
-    background:var(--cream-08);
-    border:1px solid var(--cream-16);
-    border-radius:22px;
-    padding:34px 22px 22px;
-  }
+  .q-group{position:relative;z-index:1;background:none;border:0;border-radius:0;padding:6px 0 0;}
   .q-count{
     font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
     font-size:16px;
@@ -331,9 +326,26 @@
   .share .btn{width:100%;}
   .share-note{font-size:16px;color:var(--amber);font-weight:700;margin-top:12px;min-height:1.5em;word-break:break-all;}
   #mail-btn{width:100%;margin-top:12px;}
+  .wcard{display:none;margin:26px 0 0;padding:26px 24px 22px;border-radius:22px;background:linear-gradient(160deg,#182230 0%,#0E141C 70%);border:1px solid var(--amber-30);box-shadow:0 0 60px rgba(240,168,48,.14);}
+  .wcard.show{display:block;}
+  .wc-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px;}
+  .wc-name{font-size:28px;font-weight:900;color:var(--amber);line-height:1.1;}
+  .wc-mark{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:16px;letter-spacing:.16em;color:var(--cream-45);direction:ltr;}
+  .wc-k{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:16px;color:var(--cream-45);margin:16px 0 4px;}
+  .wc-title{font-size:20px;font-weight:500;color:var(--cream-70);margin:0;text-decoration:line-through;text-decoration-color:var(--cream-45);text-decoration-thickness:2px;overflow-wrap:anywhere;}
+  .wc-super{font-size:30px;font-weight:900;line-height:1.3;margin:0;color:var(--cream);overflow-wrap:anywhere;}
+  .wc-super.long{font-size:22px;line-height:1.4;}
+  .wc-scar{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+  .wc-scar{font-size:19px;line-height:1.5;margin:0;color:var(--cream-70);overflow-wrap:anywhere;}
+  .wc-foot{margin:22px 0 0;padding-top:16px;border-top:1px solid var(--cream-16);font-size:19px;font-weight:700;color:var(--amber);}
+  .wc-hint{display:none;font-size:16px;color:var(--cream-45);margin:10px 0 0;}
+  .wc-hint.show{display:block;}
+  .share-prev{display:none;margin:0 0 14px;padding:14px 16px;background:var(--ink);border:1px solid var(--cream-16);border-radius:16px 16px 16px 4px;font-size:17px;line-height:1.5;color:var(--cream-70);overflow-wrap:anywhere;}
+  .share-prev.show{display:block;}
   .out{margin-top:34px;padding:26px 22px 22px;background:var(--cream-08);border:1px solid var(--cream-16);border-radius:22px;}
   .out h3{font-size:26px;font-weight:900;margin:0 0 18px;line-height:1.25;}
-  .out-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;}
+  .out-cols{display:flex;flex-direction:column;gap:12px;}
+  .out-cols .arrow{align-self:center;color:var(--amber);font-size:28px;line-height:1;}
   .out-col{border-radius:16px;padding:16px 14px;min-width:0;}
   .out li{overflow-wrap:anywhere;}
   .out-col.cheap{background:var(--ink);border:1px solid var(--cream-16);}
@@ -370,10 +382,10 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         <circle cx="96" cy="18" r="4" fill="#F2EDE4" fill-opacity="0.28"/>
         <circle cx="140" cy="5" r="3" fill="#F2EDE4" fill-opacity="0.28"/>
       </svg>
-      <div class="kicker">מתוך ההרצאה של ענת וייסמן · 6.9.2026</div>
+      <div class="kicker" id="kicker">מתוך ההרצאה של ענת וייסמן · 6.9.2026</div>
       <div class="brick" aria-hidden="true">?</div>
       <h1>מי אני<span class="line2">בלי <span class="accent">טייטל</span></span></h1>
-      <p class="hero-note">ארבע שאלות. תמלאו אותן תוך כדי ההרצאה, ותשאירו את המסך פתוח. נחזור לזה בסוף.</p>
+      <p class="hero-note" id="heroNote">ארבע שאלות. תמלאו אותן תוך כדי ההרצאה, ותשאירו את המסך פתוח. נחזור לזה בסוף.</p>
     </div>
   </header>
 
@@ -405,6 +417,8 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
          ============================================================ -->
     <p class="ref" id="ref" hidden></p>
 
+    <div class="stage" id="stage"></div>
+
     <div class="who ph-no-capture" id="who">
       <div>
         <label for="who-name">איך קוראים לכם?</label>
@@ -414,10 +428,8 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         <label for="who-email">המייל שלכם</label>
         <input id="who-email" type="email" dir="ltr" autocomplete="email" inputmode="email" placeholder="name@company.com">
       </div>
-      <p class="why">הפרומפט נבנה על השם שלכם. המייל הוא כדי שההמשך מהערב הזה יגיע אליכם.</p>
+      <p class="why">הפרומפט נבנה על השם שלכם. למייל תקבלו אותו שמור, כדי שלא תאבדו אותו כשתסגרו את הדף.</p>
     </div>
-
-    <div class="stage" id="stage"></div>
 
     <div class="gate">
       <button class="btn btn-solid btn-generate" id="generate-btn" type="button">Generate</button>
@@ -432,7 +444,17 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
          page's to guess. -->
     <section class="result" id="result" aria-labelledby="result-title">
       <h2 id="result-title" tabindex="-1">הפרומפט שלכם</h2>
-      <p class="result-lead">זה לא טקסט מוכן ולא מייל לשלוח. זה פרומפט שנבנה רק מהתשובות שלכם. העתיקו אותו, ופתחו איתו את הסוכן שלכם.</p>
+      <p class="result-lead">זה מה שכתבתם. אף אחד לא כתב את זה במקומכם.</p>
+      <section class="wcard" id="wcard" aria-label="הכרטיס שלי">
+        <div class="wc-top"><span class="wc-name" id="wcName"></span><span class="wc-mark">CONNECTING THE DOTS</span></div>
+        <p class="wc-k">הטייטל</p><p class="wc-title" id="wcTitle"></p>
+        <p class="wc-k">היותר מדי שלי</p><p class="wc-super" id="wcSuper"></p>
+        <p class="wc-k">מה שלימד אותי</p><p class="wc-scar" id="wcScar"></p>
+        <p class="wc-foot">אני לא בתוך הלולאה. אני הלולאה.</p>
+      </section>
+      <p class="wc-hint">צילום מסך אחד, וזה נשאר אצלכם.</p>
+
+      <p class="wc-k" style="margin-top:26px">ומחר בבוקר: הפרומפט שלכם</p>
       <div class="prompt-box ph-no-capture" id="prompt-box"></div>
       <button class="btn btn-line btn-copy" id="copy-btn" type="button">העתיקו את הפרומפט</button>
       <p class="copy-note" id="copy-note"></p>
@@ -441,15 +463,18 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       <div class="share">
         <h3>מכירים מישהו שגם צריך לענות על זה?</h3>
         <p>הלינק נושא את השם שלכם ואת ה״יותר מדי״ שלכם, ופותח אצלם את אותן ארבע שאלות. בלי הצלקת, בלי הטייטל.</p>
+        <p class="share-prev" id="sharePrev"></p>
         <button class="btn btn-solid" id="share-btn" type="button">לשלוח לחבר</button>
         <p class="share-note" id="share-note"></p>
       </div>
+
 
       <section class="out" aria-labelledby="out-title">
         <p class="q-count">בדרך החוצה</p>
         <h3 id="out-title">מה נהיה זול. מה נהיה נדיר.</h3>
         <div class="out-cols">
           <div class="out-col cheap"><p class="out-k">זול</p><ul><li>ידע</li><li>ביצוע</li><li>מהירות</li><li>״די טוב״</li></ul></div>
+          <div class="arrow" aria-hidden="true">↓</div>
           <div class="out-col rare"><p class="out-k">נדיר</p><ul><li>שיפוט</li><li>טעם</li><li>אמון</li><li>ניסיון שחייתם</li><li>נקודת מבט</li></ul></div>
         </div>
         <p class="out-line">כשהביצוע נהיה זול, ההקשר שווה זהב.</p>
@@ -634,7 +659,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       var group = el("div", "q-group");
 
       var count = el("p", "q-count");
-      count.textContent = "שאלה " + n + " מתוך " + TOTAL;
+      count.textContent = n > REQUIRED ? "שאלה " + n + " · לא חובה" : "שאלה " + n + " מתוך " + REQUIRED;
       group.appendChild(count);
 
       var q = el("h2", "q-text");
@@ -658,6 +683,11 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       var note = el("p", "q-note");
       note.id = "note-" + n;
       group.appendChild(note);
+      if (n === 3){
+        var pv = el("p", "q-count");
+        pv.textContent = "מה שאתם כותבים כאן נשאר בדפדפן שלכם ולא נשלח לשום שרת.";
+        group.appendChild(pv);
+      }
 
       step.appendChild(group);
       stage.appendChild(step);
@@ -685,8 +715,9 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
   // Returns the 1-based index of the first empty answer, or 0 when all
   // three are filled. A prompt with a live token in it is a broken
   // deliverable, not a partial one, so assembly is blocked until then.
+  var REQUIRED = 3;   // question four is a bonus: the slide promises three
   function findFirstEmpty(){
-    for (var i = 1; i <= TOTAL; i++){
+    for (var i = 1; i <= REQUIRED; i++){
       var e = document.getElementById("answer-" + i);
       if (!e || !e.value.trim()) return i;
     }
@@ -698,6 +729,11 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     for (var i = 0; i < TOKENS.length; i++){
       var e = document.getElementById("answer-" + (i + 1));
       text = text.split("{" + TOKENS[i] + "}").join(e.value.trim());
+    }
+    if (!ans(4)){
+      text = text.replace(/\n4\. על מה באים אליי[^\n]*\n/, "\n")
+                 .replace("הנה ארבעה דברים", "הנה הדברים")
+                 .replace(", על הצלקת שלי ועל מה שבאים אליי בשבילו,", " ועל הצלקת שלי,");
     }
     return text;
   }
@@ -731,6 +767,8 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     document.getElementById("prompt-box").textContent = buildPrompt();
     document.getElementById("mail-btn").href = "mailto:?subject=" + encodeURIComponent("מי אני בלי טייטל · הפרומפט שלי") + "&body=" + encodeURIComponent(buildPrompt());
     document.getElementById("copy-note").textContent = "";
+    paintCard();
+    paintPrev();
 
     var result = document.getElementById("result");
     result.classList.add("show");
@@ -779,6 +817,18 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     }
   }
 
+  /* the card: built only from the four answers, sized to screenshot */
+  function ans(n){ var e = document.getElementById("answer-" + n); return e ? e.value.trim() : ""; }
+  function trimTM(t){ return t.replace(/^(אמרו לי ש|ש)?אני /, "").replace(/^יותר מדי /, "").replace(/^ש/, ""); }
+  function paintCard(){
+    var tm = trimTM(ans(2));
+    document.getElementById("wcName").textContent = whoName();
+    document.getElementById("wcTitle").textContent = ans(1);
+    var sup = document.getElementById("wcSuper"); sup.textContent = tm; sup.classList.toggle("long", tm.length > 60);
+    document.getElementById("wcScar").textContent = ans(3);
+    document.getElementById("wcard").classList.add("show");
+    document.querySelector(".wc-hint").classList.add("show");
+  }
   buildStage();
   // identity fields: restored and saved like the answers
   (function(){
@@ -793,21 +843,29 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     ref.textContent = "";
     var b = document.createElement("b"); b.textContent = REF_FROM;
     ref.appendChild(b);
-    ref.appendChild(document.createTextNode(REF_TM ? ": ״" + REF_TM + "״. ומה אמרו עליכם?" : ": ארבע השאלות מההרצאה. ומה אמרו עליכם?"));
+    ref.appendChild(document.createTextNode(REF_TM ? ": אמרו פעם ״יותר מדי " + REF_TM + "״. ואתם, יותר מדי מה?" : ": השאלות מההרצאה. ואתם, יותר מדי מה?"));
     ref.hidden = false; ref.classList.add("show");
     track("whoami_referred", {referred_by: REF_FROM});
   }
   function shareLink(){
-    var tm = (document.getElementById("answer-2").value || "").trim().replace(/^(אמרו לי ש|ש)?אני /, "").slice(0, 60);
+    var tm = trimTM((document.getElementById("answer-2").value || "").trim()).slice(0, 60);
     var u = new URL("https://connecthedots.co/whoami/");
     u.searchParams.set("from", whoName().slice(0, 40));
     if (tm) u.searchParams.set("tm", tm);
     return u.toString();
   }
+  function shareText(){
+    var tm = trimTM((document.getElementById("answer-2").value || "").trim());
+    return (tm ? "אמרו לי שאני יותר מדי " + tm + ". ואתם, יותר מדי מה?" : "מי אני בלי טייטל? שלוש שאלות.") + " " + shareLink();
+  }
+  function paintPrev(){
+    var el = document.getElementById("sharePrev");
+    el.textContent = shareText(); el.classList.add("show");
+  }
   function onShare(){
     var note = document.getElementById("share-note");
     var url = shareLink();
-    var text = "עניתי על ״מי אני בלי טייטל״ מההרצאה של ענת וייסמן. עכשיו תורכם, ארבע שאלות: " + url;
+    var text = shareText();
     track("whoami_share");
     if (navigator.share){
       navigator.share({title: "מי אני בלי טייטל", text: text, url: url}).then(function(){ note.textContent = "נשלח."; }, function(){});
@@ -818,6 +876,11 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok, fail); } else { fail(); }
   }
   document.getElementById("share-btn").addEventListener("click", onShare);
+  /* the friend's arrival: this is not the room, and the date has passed */
+  if (REF_FROM){
+    document.getElementById("kicker").textContent = "מתוך ההרצאה של ענת וייסמן";
+    document.getElementById("heroNote").textContent = "שלוש שאלות. שתי דקות. בסוף תקבלו כרטיס ופרומפט שנבנים רק מהתשובות שלכם.";
+  }
   document.getElementById("generate-btn").addEventListener("click", onGenerate);
   document.getElementById("copy-btn").addEventListener("click", copyPrompt);
   if (DEMO_GEN) onGenerate();

@@ -331,6 +331,21 @@
   .share .btn{width:100%;}
   .share-note{font-size:16px;color:var(--amber);font-weight:700;margin-top:12px;min-height:1.5em;word-break:break-all;}
   #mail-btn{width:100%;margin-top:12px;}
+  .out{margin-top:34px;padding:26px 22px 22px;background:var(--cream-08);border:1px solid var(--cream-16);border-radius:22px;}
+  .out h3{font-size:26px;font-weight:900;margin:0 0 18px;line-height:1.25;}
+  .out-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;}
+  .out-col{border-radius:16px;padding:16px 14px;min-width:0;}
+  .out li{overflow-wrap:anywhere;}
+  .out-col.cheap{background:var(--ink);border:1px solid var(--cream-16);}
+  .out-col.rare{background:var(--amber);color:var(--ink);box-shadow:0 0 44px var(--amber-30);}
+  .out-k{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:16px;margin:0 0 10px;letter-spacing:0.08em;}
+  .out-col.cheap .out-k{color:var(--cream-45);}
+  .out-col.rare .out-k{color:var(--ink);opacity:.7;}
+  .out ul{list-style:none;margin:0;padding:0;}
+  .out li{font-size:19px;font-weight:700;line-height:1.35;margin-bottom:10px;}
+  .out-col.cheap li{color:var(--cream-70);text-decoration:line-through;text-decoration-color:var(--cream-45);text-decoration-thickness:2px;}
+  .out-col.rare li{font-weight:900;}
+  .out-line{font-size:18px;color:var(--cream);font-weight:700;margin:18px 0 0;line-height:1.5;}
 </style>
 <!-- PostHog web analytics. Copied verbatim from the-human-chair / talk pages (58-talk-page-6-9-update).
      Same project key. Do not invent a different key.
@@ -430,6 +445,16 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         <p class="share-note" id="share-note"></p>
       </div>
 
+      <section class="out" aria-labelledby="out-title">
+        <p class="q-count">בדרך החוצה</p>
+        <h3 id="out-title">מה נהיה זול. מה נהיה נדיר.</h3>
+        <div class="out-cols">
+          <div class="out-col cheap"><p class="out-k">זול</p><ul><li>ידע</li><li>ביצוע</li><li>מהירות</li><li>״די טוב״</li></ul></div>
+          <div class="out-col rare"><p class="out-k">נדיר</p><ul><li>שיפוט</li><li>טעם</li><li>אמון</li><li>ניסיון שחייתם</li><li>נקודת מבט</li></ul></div>
+        </div>
+        <p class="out-line">כשהביצוע נהיה זול, ההקשר שווה זהב.</p>
+      </section>
+
       <div class="open-in">
         <p>אחרי ההעתקה, פתחו אחד מהשניים והדביקו שם:</p>
         <div class="open-in-links">
@@ -501,7 +526,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
 
 שלישית, תשאל אותי שלוש שאלות, אחת בכל פעם, ותחכה לתשובה לפני הבאה. השאלה הראשונה תמיד אותה שאלה: מה ההחלטה או האתגר שעומדים מולי עכשיו. כל שאלה מבקשת מקרה אחד: מתי זה היה, מי היה שם, ומה בדיוק עשיתי. אם אני עונה בהכללה, תגיד לי שזאת הכללה, ותשאל שוב על אותו דבר.
 
-רביעית, אחרי שעניתי, תציע לי שלושה צעדים אפשריים לקריירה שלי. כל צעד חייב לצאת מהיותר מדי שלי ומהצלקת שלי, ולא מהטייטל שלי. ליד כל צעד תכתוב על איזה חלק מהתשובות שלי הוא נשען. צעד שאפשר להציע בדיוק ככה לכל אדם אחר בתחום שלי הוא צעד פסול, תזרוק אותו.
+רביעית, אחרי שעניתי, תציע לי שלושה צעדים אפשריים לקריירה שלי. כל צעד חייב לצאת מהיותר מדי שלי ומהצלקת שלי, ולא מהטייטל שלי. ליד כל צעד תכתוב על איזה חלק מהתשובות שלי הוא נשען, ומה בו נשען על שיפוט, על טעם או על אמון שמישהו נותן בי, ולא על ביצוע שמכונה תעשה זול יותר. צעד שהוא רק ביצוע, וצעד שאפשר להציע בדיוק ככה לכל אדם אחר בתחום שלי, הם צעדים פסולים, תזרוק אותם.
 
 חמישית, תבחר אחד מהשלושה ותגיד לי למה דווקא אותו. תענה לפי מה שהתשובות שלי מראות, גם אם זה לא נעים לי לשמוע.
 

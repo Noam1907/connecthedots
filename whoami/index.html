@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>מי אני בלי טייטל</title>
 <meta name="robots" content="noindex">
-<!-- The page is one fixed House palette in both OS themes. Declaring the
+<!-- The page is one fixed palette (Deck v13 skin) in both OS themes. Declaring the
      scheme stops Safari and Chrome from force darkening the textareas and
      the buttons on a phone that is set to dark, which is how it will be
      opened: in a dark room, in the middle of the talk. -->
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark">
 <meta name="description" content="ארבע שאלות מתוך ההרצאה של ענת וייסמן, 6.9.2026. מי אתם בלי הטייטל?">
 <link rel="canonical" href="https://connecthedots.co/whoami/">
 <meta property="og:type" content="website">
@@ -20,291 +20,282 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="מי אני בלי טייטל">
 <meta name="twitter:description" content="ארבע שאלות מתוך ההרצאה של ענת וייסמן. מי אתם בלי הטייטל?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ==========================================================
-     v2, built to script v14 (4.9.2026).
-     Three questions on one screen, no wizard. The room fills them
-     in during the hour with the screen left open, and presses
-     Generate once, at the end, on her cue.
-
-     THE HOUSE skin (C-core/design-system.md), locked.
-     Ground cream #F0EBE0 · ink navy #1B2838 · accent sky #38BDEF.
-     Three colors. Ink opacity steps are part of the system and are
-     not a fourth color. No yellow on this surface (nothing here is
-     a live-right-now state), no amber (dead 31.7), no white.
-
-     Two hard rules from the room this is opened in:
-       nothing below 16px, and every control is thumb sized (56px).
+     v3 skin: Deck v13 (THELOOP #2). Three colours, locked.
+     Ink #0E141C · cream #F2EDE4 · amber #F0A830. Rubik.
+     Lego bricks number the questions and light up the progress.
+     Phone first, in a dark room: nothing below 16px, every
+     control thumb sized (56px+). No emoji.
      ========================================================== */
   :root{
-    color-scheme:light;
-    --cream:#F0EBE0;
-    --navy:#1B2838;
-    --sky:#38BDEF;
+    color-scheme:dark;
+    --ink:#0E141C;
+    --ink-2:#182230;
+    --cream:#F2EDE4;
+    --amber:#F0A830;
+    --amber-deep:#C77F12;
 
-    --ink-25:rgba(27,40,56,0.25);
-    --ink-45:rgba(27,40,56,0.45);
-    --ink-72:rgba(27,40,56,0.72);
-    --ink-field:rgba(27,40,56,0.035);
-    --cream-78:rgba(240,235,224,0.78);
-    --cream-22:rgba(240,235,224,0.22);
-    --sky-16:rgba(56,189,239,0.16);
-
-    /* the anomaly: nothing gets a clean rectangle. Pure percentages
-       so it holds on every engine without calc() inside polygon(). */
-    --torn:polygon(0 7%, 2% 0, 46% 3%, 99% 0, 100% 92%, 97% 100%, 52% 96%, 1% 100%);
+    --cream-70:rgba(242,237,228,0.70);
+    --cream-45:rgba(242,237,228,0.56);
+    --cream-16:rgba(242,237,228,0.16);
+    --cream-08:rgba(242,237,228,0.08);
+    --amber-30:rgba(240,168,48,0.30);
   }
   *{box-sizing:border-box;}
-  .who{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 6px;}
-  @media (max-width:520px){.who{grid-template-columns:1fr;}}
-  .who label{display:block;font-size:16px;color:var(--ink-72);margin-bottom:6px;}
-  .who input{width:100%;min-height:56px;font-size:18px;padding:12px 16px;border:1.5px solid var(--ink-25);border-radius:6px;background:var(--ink-field);color:var(--navy);font-family:inherit;}
-  .who input:focus{outline:3px solid var(--sky);outline-offset:2px;border-color:var(--navy);}
-  .who input[dir=ltr]{direction:ltr;text-align:left;}
-  .who .why{grid-column:1/-1;font-size:16px;color:var(--ink-45);margin:0;}
-  .ref{display:none;margin:18px 0 0;padding:16px 18px;background:var(--sky-16);border-right:4px solid var(--sky);font-size:18px;line-height:1.5;}
-  .ref.show{display:block;}
-  .ref b{font-weight:700;}
-  .share{margin-top:34px;padding-top:24px;border-top:1.5px solid var(--ink-25);}
-  .share h3{font-size:22px;margin:0 0 6px;}
-  .share p{font-size:16px;color:var(--ink-72);margin:0 0 14px;}
-  .share-note{font-size:16px;color:var(--ink-45);margin-top:10px;min-height:1.5em;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--cream);
-    color:var(--navy);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--ink);
+    background-image:radial-gradient(ellipse 90% 40% at 50% 0%,var(--ink-2) 0%,var(--ink) 100%);
+    background-repeat:no-repeat;
+    color:var(--cream);
+    font-family:Rubik,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
   img,svg{max-width:100%;}
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px;}
   .sr-only{
     position:absolute;width:1px;height:1px;padding:0;margin:-1px;
     overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
   }
+  .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;}
 
   /* ---------- the board (hero) ---------- */
   .hero{
     position:relative;
-    background:var(--navy);
-    color:var(--cream);
-    padding:26px 0 20px;
-    padding-top:calc(26px + env(safe-area-inset-top));
+    padding:30px 0 26px;
+    padding-top:calc(30px + env(safe-area-inset-top));
     overflow:hidden;
   }
-  /* Move 3, the dot line. Mirrored to the upper left because this is
-     an RTL surface and the kicker owns the upper right, the same way
-     the staggered indent mirrors (design-system.md, Hebrew rule 5).
-     Four dots, uneven radii, uneven y. Never regularized. */
   .hero .wrap{position:relative;}
-  .dotline{
-    position:absolute;top:56px;left:-6px;width:122px;height:22px;
-    pointer-events:none;
-  }
+  .dotline{display:none;}
   .kicker{
-    color:var(--sky);
-    opacity:.85;
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    color:var(--amber);
     font-size:16px;
-    font-weight:500;
-    margin-bottom:10px;
+    letter-spacing:0.08em;
+    margin-bottom:22px;
   }
+  /* the brick: the same amber Lego brick that carries the title on
+     the slides, here carrying the question mark */
+  .brick{
+    position:relative;
+    display:inline-flex;align-items:center;justify-content:center;
+    width:96px;height:64px;
+    background:var(--amber);
+    border-radius:10px;
+    color:var(--ink);
+    font-weight:900;font-size:40px;line-height:1;
+    box-shadow:0 0 44px var(--amber-30);
+    margin-bottom:22px;
+  }
+  .brick::before,.brick::after{
+    content:"";position:absolute;top:-12px;width:26px;height:14px;
+    background:var(--amber);border-radius:6px 6px 0 0;
+  }
+  .brick::before{left:14px;}
+  .brick::after{right:14px;}
   h1{
-    font-size:clamp(32px,8.6vw,46px);
-    font-weight:800;
-    letter-spacing:0;
-    line-height:1.18;
+    font-size:clamp(40px,11vw,60px);
+    font-weight:900;
+    letter-spacing:-0.01em;
+    line-height:1.08;
     margin:0;
   }
-  h1 .line2{display:block;margin-top:0.1em;margin-right:0.4em;}
-  h1 .accent{color:var(--sky);}
+  h1 .line2{display:block;margin-top:0.06em;}
+  h1 .accent{color:var(--amber);}
   .hero-note{
-    font-size:16px;
-    color:var(--cream-78);
-    margin:14px 0 0;
-    max-width:34em;
+    font-size:18px;
+    color:var(--cream-70);
+    margin:22px 0 0;
+    max-width:30em;
     line-height:1.6;
   }
 
   /* ---------- the quiet band: the promise, and nothing else ---------- */
-  .promise{
-    background:var(--navy);
-    color:var(--cream);
-    padding:0 0 22px;
-  }
+  .promise{padding:0 0 10px;}
   .promise-inner{
-    border-top:1px solid var(--cream-22);
-    padding-top:16px;
+    border-top:1px solid var(--cream-16);
+    padding-top:18px;
   }
   .privacy-line{
     font-size:16px;
-    color:var(--cream-78);
+    color:var(--cream-70);
     margin:0;
     line-height:1.55;
   }
 
   /* ---------- the three questions, all of them, at once ---------- */
   main{padding:0 0 8px;}
-  .stage{padding:34px 0 0;}
-  /* the numeral gets its own band at the top of each step, so it never
-     lands on top of a question that wraps to the left edge in RTL */
-  .step{position:relative;margin-bottom:38px;padding-top:72px;}
+  .stage{padding:26px 0 0;}
+  .step{position:relative;margin-bottom:34px;padding-top:0;}
+  /* the numeral is a small brick sitting on the top edge of the card */
   .floor{
     position:absolute;
-    top:-6px;left:-8px;
+    top:-14px;right:22px;
+    z-index:2;
+    display:flex;align-items:center;justify-content:center;
+    width:60px;height:40px;
+    background:var(--amber);
+    border-radius:8px;
+    color:var(--ink);
+    font-weight:900;font-size:24px;line-height:1;
     direction:ltr;
-    font-size:clamp(74px,19vw,104px);
-    font-weight:800;
-    line-height:.8;
-    letter-spacing:-1.5px;
-    color:rgba(27,40,56,0.09);
     pointer-events:none;
     user-select:none;
-    z-index:0;
+    box-shadow:0 0 30px var(--amber-30);
   }
-  @supports (-webkit-text-stroke:2px black){
-    .floor{color:transparent;-webkit-text-stroke:2px rgba(27,40,56,0.17);}
+  .floor::before,.floor::after{
+    content:"";position:absolute;top:-9px;width:16px;height:10px;
+    background:var(--amber);border-radius:4px 4px 0 0;
   }
-  .q-group{position:relative;z-index:1;padding:4px 6px 0;}
+  .floor::before{left:9px;}
+  .floor::after{right:9px;}
+  .q-group{
+    position:relative;z-index:1;
+    background:var(--cream-08);
+    border:1px solid var(--cream-16);
+    border-radius:22px;
+    padding:34px 22px 22px;
+  }
   .q-count{
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
     font-size:16px;
-    color:var(--ink-45);
-    margin:0 0 8px;
+    color:var(--cream-45);
+    margin:0 0 10px;
   }
   .q-text{
-    font-size:clamp(21px,5.6vw,25px);
-    font-weight:700;
-    line-height:1.45;
-    margin:0 0 16px;
+    font-size:clamp(23px,6vw,28px);
+    font-weight:800;
+    line-height:1.35;
+    margin:0 0 18px;
     letter-spacing:0;
   }
   .field{position:relative;}
-  .shape{position:absolute;pointer-events:none;}
-  .shape svg{display:block;width:100%;height:100%;overflow:visible;}
-  .field-frame{inset:0;}
-  .field-frame path{fill:var(--ink-field);stroke:var(--ink-45);stroke-width:1.6;}
-  .field:focus-within .field-frame path{stroke:var(--sky);stroke-width:2.2;}
+  /* the hand drawn frame from v2 is not part of this skin; the builder
+     still makes it, the sheet just does not show it */
+  .shape{display:none;}
   textarea{
     position:relative;
     display:block;
     width:100%;
-    min-height:126px;
+    min-height:132px;
     font-family:inherit;
-    font-size:17px;
-    color:var(--navy);
-    background:transparent;
-    border:0;
-    border-radius:0;
-    padding:16px 16px 18px;
+    font-size:18px;
+    color:var(--cream);
+    background:var(--ink);
+    border:1.5px solid var(--cream-16);
+    border-radius:16px;
+    padding:16px 18px 18px;
     resize:vertical;
     line-height:1.6;
+    transition:border-color .2s ease, box-shadow .2s ease;
   }
-  textarea:focus{outline:none;}
-  textarea::placeholder{color:var(--ink-45);}
+  textarea:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-30);}
+  textarea::placeholder{color:var(--cream-45);}
   .q-note{
     font-size:16px;
-    color:var(--navy);
-    font-weight:600;
-    margin:10px 0 0;
+    color:var(--amber);
+    font-weight:700;
+    margin:12px 0 0;
     min-height:0;
   }
   .q-note:empty{margin:0;}
 
   /* ---------- the one button ---------- */
   .gate{
-    margin-top:4px;
+    margin-top:6px;
     padding-top:26px;
-    border-top:1px solid var(--ink-25);
+    border-top:1px solid var(--cream-16);
   }
   .btn{
     -webkit-appearance:none;appearance:none;
     font-family:inherit;
-    font-size:17px;
-    font-weight:700;
+    font-size:19px;
+    font-weight:800;
     border:0;
-    border-radius:0;
-    min-height:56px;
-    padding:16px 18px;
+    border-radius:16px;
+    min-height:60px;
+    padding:16px 20px;
     cursor:pointer;
     text-align:center;
     text-decoration:none;
     display:flex;
     align-items:center;
     justify-content:center;
-    clip-path:var(--torn);
-    transition:background .25s ease, color .25s ease, opacity .25s ease;
+    transition:background .2s ease, color .2s ease, transform .12s ease, box-shadow .2s ease;
   }
-  .btn:active{transform:translateY(1px);}
-  .btn:focus-visible{box-shadow:inset 0 0 0 3px var(--navy);outline:none;}
-  .btn-solid{background:var(--sky);color:var(--navy);}
-  /* the hand-drawn outline button: a background SVG rather than a border,
-     so no clean corner appears anywhere on the page */
+  .btn:active{transform:translateY(1px) scale(.99);}
+  .btn:focus-visible{box-shadow:0 0 0 4px var(--amber-30);outline:none;}
+  .btn-solid{background:var(--amber);color:var(--ink);box-shadow:0 14px 40px var(--amber-30);}
+  .btn-solid:hover{background:#F5B545;}
   .btn-line{
-    clip-path:none;
-    color:var(--navy);
-    background-color:transparent;
-    background-repeat:no-repeat;
-    background-size:100% 100%;
-    background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20340%2056%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M4%206%20C%20104%203%2C%20238%205%2C%20336%203%20C%20337%2020%2C%20335%2038%2C%20337%2053%20C%20238%2051%2C%20104%2054%2C%203%2052%20C%205%2036%2C%203%2020%2C%204%206%20Z%22%20fill%3D%22none%22%20stroke%3D%22%231B2838%22%20stroke-opacity%3D%221%22%20stroke-width%3D%221.6%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E");
+    color:var(--cream);
+    background:transparent;
+    border:1.5px solid var(--cream-45);
   }
-  .btn-line.alt{
-    background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20340%2056%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M3%204%20C%2096%206%2C%20244%202%2C%20337%205%20C%20335%2021%2C%20338%2039%2C%20336%2053%20C%20244%2050%2C%2096%2055%2C%204%2051%20C%206%2035%2C%202%2019%2C%203%204%20Z%22%20fill%3D%22none%22%20stroke%3D%22%231B2838%22%20stroke-opacity%3D%221%22%20stroke-width%3D%221.6%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E");
-  }
+  .btn-line:hover{border-color:var(--cream);background:var(--cream-08);}
+  .btn-line.alt{}
   /* Generate is written in Latin letters, so it is isolated from the RTL
      run around it and never picks up a stray Hebrew neighbour. */
-  .btn-generate{width:100%;direction:ltr;unicode-bidi:isolate;letter-spacing:0.5px;}
+  .btn-generate{width:100%;direction:ltr;unicode-bidi:isolate;letter-spacing:0.02em;}
   .gate-note{
     font-size:16px;
-    color:var(--navy);
-    font-weight:600;
-    margin:12px 0 0;
+    color:var(--amber);
+    font-weight:700;
+    margin:14px 0 0;
     min-height:0;
   }
   .gate-note:empty{margin:0;}
   .gate-calm{
     font-size:16px;
-    color:var(--ink-72);
-    margin:12px 0 0;
+    color:var(--cream-70);
+    margin:14px 0 0;
     line-height:1.6;
   }
 
   /* ---------- the prompt ---------- */
-  .result{display:none;margin-top:38px;padding-top:26px;border-top:1px solid var(--ink-25);}
+  .result{display:none;margin-top:38px;padding-top:28px;border-top:1px solid var(--cream-16);}
   .result.show{display:block;}
-  .result h2{font-size:22px;font-weight:800;margin:0 0 10px;}
-  .result-lead{font-size:16px;color:var(--ink-72);margin:0 0 18px;line-height:1.65;}
+  .result h2{font-size:28px;font-weight:900;margin:0 0 10px;}
+  .result h2:focus{outline:none;}
+  .result-lead{font-size:16px;color:var(--cream-70);margin:0 0 18px;line-height:1.65;}
   .prompt-box{
-    background:var(--ink-field);
-    box-shadow:inset 0 0 0 1px var(--ink-25);
-    padding:18px;
+    background:var(--cream);
+    color:var(--ink);
+    border-radius:18px;
+    padding:20px 22px;
     font-size:16px;
     line-height:1.75;
     white-space:pre-wrap;
     word-wrap:break-word;
     overflow-wrap:break-word;
-    color:var(--navy);
   }
   .result .btn-copy{margin-top:16px;width:100%;}
-  .copy-note{font-size:16px;color:var(--navy);font-weight:600;margin:12px 0 0;min-height:0;}
+  .copy-note{font-size:16px;color:var(--amber);font-weight:700;margin:14px 0 0;min-height:0;}
   .copy-note:empty{margin:0;}
-  .open-in{margin-top:28px;}
-  .open-in p{font-size:16px;color:var(--ink-72);margin:0 0 12px;line-height:1.6;}
-  .open-in-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .open-in-links a{direction:ltr;unicode-bidi:isolate;font-size:17px;}
+  .open-in{margin-top:30px;}
+  .open-in p{font-size:16px;color:var(--cream-70);margin:0 0 12px;line-height:1.6;}
+  .open-in-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .open-in-links a{direction:ltr;unicode-bidi:isolate;font-size:18px;}
 
   /* ---------- footer ---------- */
-  footer{padding:30px 0 46px;margin-top:38px;border-top:1px solid var(--ink-25);text-align:left;}
+  footer{padding:30px 0 50px;margin-top:40px;border-top:1px solid var(--cream-16);text-align:left;}
   .mark{
     display:block;
-    letter-spacing:1.5px;
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    letter-spacing:0.28em;
     direction:ltr;
     unicode-bidi:isolate;
-    color:var(--sky);
-    opacity:.8;
-    font-weight:600;
+    color:var(--cream-45);
+    font-weight:500;
     font-size:16px;
-    line-height:1.5;
+    line-height:1.7;
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -316,10 +307,30 @@
   }
 
   @media (min-width:520px){
-    .hero{padding:44px 0 26px;}
-    .stage{padding-top:44px;}
-    .step{margin-bottom:44px;padding-top:84px;}
+    .hero{padding:52px 0 30px;}
+    .stage{padding-top:36px;}
+    .step{margin-bottom:40px;}
+    .q-group{padding:38px 28px 26px;}
   }
+
+  /* ---------- v4 on the v13 skin: identity fields, the friend banner, the share block ---------- */
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0 6px;}
+  @media (max-width:520px){.who{grid-template-columns:1fr;}}
+  .who label{display:block;font-size:16px;color:var(--cream-70);margin-bottom:6px;}
+  .who input{width:100%;min-height:56px;font-size:18px;padding:12px 16px;border:1.5px solid var(--cream-16);border-radius:14px;background:var(--ink);color:var(--cream);font-family:inherit;}
+  .who input::placeholder{color:var(--cream-45);}
+  .who input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-30);}
+  .who input[dir=ltr]{direction:ltr;text-align:left;}
+  .who .why{grid-column:1/-1;font-size:16px;color:var(--cream-45);margin:0;line-height:1.55;}
+  .ref{display:none;margin:22px 0 0;padding:16px 18px;background:var(--cream-08);border:1px solid var(--cream-16);border-right:4px solid var(--amber);border-radius:14px;font-size:18px;line-height:1.5;color:var(--cream);}
+  .ref.show{display:block;}
+  .ref b{font-weight:800;color:var(--amber);}
+  .share{margin-top:34px;padding-top:24px;border-top:1px solid var(--cream-16);}
+  .share h3{font-size:24px;font-weight:900;margin:0 0 6px;}
+  .share p{font-size:16px;color:var(--cream-70);margin:0 0 14px;line-height:1.6;}
+  .share .btn{width:100%;}
+  .share-note{font-size:16px;color:var(--amber);font-weight:700;margin-top:12px;min-height:1.5em;word-break:break-all;}
+  #mail-btn{width:100%;margin-top:12px;}
 </style>
 <!-- PostHog web analytics. Copied verbatim from the-human-chair / talk pages (58-talk-page-6-9-update).
      Same project key. Do not invent a different key.
@@ -338,13 +349,14 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     <!-- Move 3. Four dots, uneven radii, uneven y, thin connector. -->
     <div class="wrap">
       <svg class="dotline" viewBox="0 0 150 26" aria-hidden="true" focusable="false">
-        <path d="M8 16 L52 7 L96 18 L140 5" fill="none" stroke="#F0EBE0" stroke-opacity="0.25" stroke-width="1.5"/>
-        <circle cx="8" cy="16" r="4" fill="#F0EBE0" fill-opacity="0.28"/>
-        <circle cx="52" cy="7" r="3" fill="#F0EBE0" fill-opacity="0.28"/>
-        <circle cx="96" cy="18" r="4" fill="#F0EBE0" fill-opacity="0.28"/>
-        <circle cx="140" cy="5" r="3" fill="#F0EBE0" fill-opacity="0.28"/>
+        <path d="M8 16 L52 7 L96 18 L140 5" fill="none" stroke="#F2EDE4" stroke-opacity="0.25" stroke-width="1.5"/>
+        <circle cx="8" cy="16" r="4" fill="#F2EDE4" fill-opacity="0.28"/>
+        <circle cx="52" cy="7" r="3" fill="#F2EDE4" fill-opacity="0.28"/>
+        <circle cx="96" cy="18" r="4" fill="#F2EDE4" fill-opacity="0.28"/>
+        <circle cx="140" cy="5" r="3" fill="#F2EDE4" fill-opacity="0.28"/>
       </svg>
       <div class="kicker">מתוך ההרצאה של ענת וייסמן · 6.9.2026</div>
+      <div class="brick" aria-hidden="true">?</div>
       <h1>מי אני<span class="line2">בלי <span class="accent">טייטל</span></span></h1>
       <p class="hero-note">ארבע שאלות. תמלאו אותן תוך כדי ההרצאה, ותשאירו את המסך פתוח. נחזור לזה בסוף.</p>
     </div>

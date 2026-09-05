@@ -1,0 +1,146 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Human IS the Loop · הרצאה לארגונים · ענת וייסמן</title>
+<meta name="color-scheme" content="light">
+<meta name="description" content="הרצאה לארגונים בתוך שינוי הבינה המלאכותית. הביצוע נהיה זול, ההקשר שווה זהב. מי אנחנו בלי הטייטל, ומה עושים עם זה מחר בבוקר.">
+<link rel="canonical" href="https://connecthedots.co/keynote/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://connecthedots.co/keynote/">
+<meta property="og:title" content="The Human IS the Loop · הרצאה לארגונים">
+<meta property="og:description" content="הביצוע נהיה זול. ההקשר שווה זהב. הרצאה של ענת וייסמן לצוותי הנהלה, משאבי אנוש, מוצר ותפעול.">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<style>
+  /* THE HOUSE skin (C-core/design-system.md), locked. Cream ground, navy ink, sky the one accent. */
+  :root{color-scheme:light;--cream:#F0EBE0;--navy:#1B2838;--sky:#38BDEF;
+    --ink-25:rgba(27,40,56,.25);--ink-28:rgba(27,40,56,.28);--ink-55:rgba(27,40,56,.55);--ink-72:rgba(27,40,56,.72);--ink-85:rgba(27,40,56,.85);--ink-field:rgba(27,40,56,.045)}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--cream);color:var(--navy);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+  .hero{background:var(--navy);color:var(--cream);padding:40px 0 44px;position:relative;overflow:hidden}
+  .dotline{position:absolute;top:18px;left:18px;width:150px;height:26px}
+  .logo{display:block;width:150px;height:auto;margin:0 0 28px}
+  .en{font-family:"Space Grotesk",Helvetica,Arial,sans-serif;font-weight:700;letter-spacing:-1.5px;direction:ltr;text-align:right}
+  .hero .en{font-size:42px;line-height:1.05;margin:0}
+  .hero .en .accent{color:var(--sky)}
+  .hero .kicker{font-size:14px;letter-spacing:0;opacity:.85;margin:0 0 12px}
+  h1{font-size:34px;line-height:1.15;font-weight:800;margin:22px 0 0}
+  .hero p.lead{font-size:19px;line-height:1.55;opacity:.92;margin:16px 0 0;max-width:40ch}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:17px;border:1.5px solid transparent}
+  .btn-solid{background:var(--sky);color:var(--navy)}
+  .btn-line{border-color:rgba(240,235,224,.6);color:var(--cream)}
+  main{padding:8px 0 20px}
+  section{padding:30px 0 6px;border-bottom:1px solid var(--ink-25)}
+  section:last-of-type{border-bottom:0}
+  h2{font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink-55);font-weight:700;margin:0 0 12px}
+  .big{font-size:26px;line-height:1.3;font-weight:800;margin:0 0 14px}
+  .big .accent{color:var(--sky)}
+  p{font-size:18px;line-height:1.6;margin:0 0 12px;color:var(--ink-85)}
+  .beats{display:flex;flex-direction:column;gap:14px;margin:6px 0 10px}
+  .beat{border:1.5px solid var(--ink-28);border-radius:22px;padding:16px 18px}
+  .beat b{display:block;font-size:19px;margin-bottom:4px}
+  .beat span{font-size:16px;color:var(--ink-72);line-height:1.5}
+  .rows{margin:0;padding:0;list-style:none}
+  .rows li{padding:10px 0;border-top:1px solid var(--ink-25);font-size:18px;display:flex;gap:14px}
+  .rows li:first-child{border-top:0}
+  .rows .n{font-family:"IBM Plex Mono",Menlo,monospace;color:var(--sky);font-size:15px;min-width:28px;padding-top:3px;direction:ltr}
+  .quiet{font-size:15px;color:var(--ink-72)}
+  .close{background:var(--navy);color:var(--cream);padding:34px 0 40px;margin-top:20px}
+  .close .big{color:var(--cream)}
+  .close p{color:rgba(240,235,224,.85)}
+  .close .mono{font-family:"IBM Plex Mono",Menlo,monospace;direction:ltr;text-align:right;font-size:15px;color:var(--cream);margin-top:14px}
+  .close .mono a{color:var(--cream);text-decoration:none;border-bottom:1.5px solid var(--sky)}
+  footer{padding:20px 0 34px;text-align:center}
+  footer .markline{font-family:"Space Grotesk",Helvetica,Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--sky);opacity:.8;direction:ltr}
+  @media (min-width:700px){.hero .en{font-size:56px} h1{font-size:40px} .hero{padding:52px 0 56px}}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <svg class="dotline" viewBox="0 0 150 26" aria-hidden="true" focusable="false">
+        <path d="M8 16 L52 7 L96 18 L140 5" fill="none" stroke="#F0EBE0" stroke-opacity="0.25" stroke-width="1.5"/>
+        <circle cx="8" cy="16" r="4" fill="#F0EBE0" fill-opacity="0.28"/><circle cx="52" cy="7" r="3" fill="#F0EBE0" fill-opacity="0.28"/>
+        <circle cx="96" cy="18" r="4" fill="#F0EBE0" fill-opacity="0.28"/><circle cx="140" cy="5" r="3" fill="#F0EBE0" fill-opacity="0.28"/>
+      </svg>
+      <img class="logo" src="ctd-logo-cream.png" alt="Connecting the Dots">
+      <div class="kicker">הרצאה לארגונים · ענת וייסמן</div>
+      <p class="en">The Human <span class="accent">IS</span> the Loop</p>
+      <h1>מי אנחנו בלי הטייטל?</h1>
+      <p class="lead">הביצוע נהיה זול. ההקשר שווה זהב. הרצאה לארגונים שנמצאים בתוך שינוי הבינה המלאכותית, על מה שנשאר נדיר כשהמכונה עושה את השאר.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" data-door="book" href="https://connecthedots.co/book/?utm_source=keynote&amp;utm_medium=content&amp;utm_campaign=keynote-page">לקבוע שיחה</a>
+        <a class="btn btn-line" data-door="mail" href="mailto:anat@connecthedots.co?subject=%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%D7%9C%D7%90%D7%A8%D7%92%D7%95%D7%9F">לכתוב לענת</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <h2>מה קורה בחדר</h2>
+      <p class="big">שעה אחת. שלושה דברים שהחדר לא שוכח.</p>
+      <div class="beats">
+        <div class="beat"><b>ארבע החומות</b><span>גוגל הפיל את חומת הידע. הענן את התשתית. הרשתות את ההפצה. ובכל פעם אמרנו, זהו, המקצוע מת. עכשיו נפלה החומה הרביעית, הביצוע. ומה זה עושה לתפקיד, לטייטל, ולמי שמחזיק אותם.</span></div>
+        <div class="beat"><b>המשקולות הקפואות</b><span>למכונה יש משקולות קפואות. כשהמודל יוצא לעולם, הוא לא מתעדכן. לנו יש משקולות אחרות: השנים, הצלקות, הלקוח הכועס. כשהביצוע נהיה זול, ההקשר שווה זהב.</span></div>
+        <div class="beat"><b>מבחן הכיסא</b><span>מחר מישהו אחר יושב בכיסא שלכם, עם אותו טייטל. האדם שחשבתם עליו, הוא יפנה למחליף? או שהוא יחכה לכם? זה המקום שבו אדם לא ניתן להחלפה. ומנהלים עושים את המבחן הזה על כל אחד מהאנשים שלהם.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>למי</h2>
+      <p class="big">לארגון שכבר הכניס בינה מלאכותית, ועכשיו צריך להחליט מה עושים עם <span class="accent">האנשים</span>.</p>
+      <ul class="rows">
+        <li><span class="n">01</span><span>צוותי הנהלה שמגדירים מחדש תפקידים, ולא רק כלים.</span></li>
+        <li><span class="n">02</span><span>משאבי אנוש ופיתוח ארגוני, אחרי סבב קיצוצים או לפניו.</span></li>
+        <li><span class="n">03</span><span>מוצר, תפעול ושירות, במקומות שבהם הביצוע כבר עבר למכונה.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>מה יוצאים איתו</h2>
+      <p class="big">לא השראה. ארבע פעולות למחר בבוקר, ופרומפט אישי לכל אחד בחדר.</p>
+      <p>כל משתתף עונה תוך כדי ההרצאה על ארבע שאלות בטלפון. בסוף הוא לוחץ על כפתור אחד ומקבל פרומפט שנבנה רק מהתשובות שלו, לוקח אותו לסוכן הבינה שלו למחרת, ומתכנן איתו את הצעד הבא. הסוכן לא ממציא אותו. הוא מגביר אותו.</p>
+      <p class="quiet">ההרצאה מותאמת לארגון: השאלות, הדוגמאות והפעולות נכתבות מול הצוות שיושב בחדר.</p>
+    </section>
+
+    <section>
+      <h2>פורמט</h2>
+      <ul class="rows">
+        <li><span class="n">45–60</span><span>דקות הרצאה, עם שלושה רגעים שהחדר עובד בהם בעצמו.</span></li>
+        <li><span class="n">+</span><span>גרסת סדנה לצוותי הנהלה: אותה שאלה, מיושמת על התפקידים בארגון.</span></li>
+        <li><span class="n">HE·EN</span><span>עברית או אנגלית.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>על הבמה</h2>
+      <p>עלתה לראשונה במלואה בתל אביב, 6.9.2026, מול חדר של מנהלים, אנשי משאבי אנוש, מוצר ותפעול. מצולמת. הסרטון יעלה כאן.</p>
+      <p class="quiet">ענת וייסמן. מחברת נקודות. מייצרת תנועה עסקית לכיוון תוצאות, של מהלכים ושל אנשים, עם כלים שהיא בונה, עד שזה נראה בשורת הרווח. עשרים וחמש שנים בניהול, מוצר וחוויית לקוח. מאמנת.</p>
+    </section>
+  </main>
+
+  <div class="close">
+    <div class="wrap">
+      <p class="big">להביא את ההרצאה לארגון שלכם.</p>
+      <p>שיחה של עשרים דקות. מה קורה אצלכם, ומה החדר צריך לצאת איתו.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" data-door="book-2" href="https://connecthedots.co/book/?utm_source=keynote&amp;utm_medium=content&amp;utm_campaign=keynote-page">לקבוע שיחה</a>
+      </div>
+      <p class="mono"><a href="mailto:anat@connecthedots.co">anat@connecthedots.co</a></p>
+      <p class="mono"><a href="https://connecthedots.co/">connecthedots.co</a></p>
+    </div>
+  </div>
+
+  <footer><div class="wrap"><div class="markline">Connecting the dots · Creating motion</div></div></footer>
+
+  <script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_recording:true,autocapture:false,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'});
+  document.querySelectorAll('[data-door]').forEach(function(a){a.addEventListener('click',function(){try{posthog.capture('keynote_door_click',{door:a.getAttribute('data-door')})}catch(e){}})});
+  </script>
+</body>
+</html>

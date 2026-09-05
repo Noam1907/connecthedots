@@ -10,24 +10,24 @@
      the buttons on a phone that is set to dark, which is how it will be
      opened: in a dark room, in the middle of the talk. -->
 <meta name="color-scheme" content="dark">
-<meta name="description" content="ארבע שאלות מתוך ההרצאה של ענת וייסמן, 6.9.2026. מי אתם בלי הטייטל?">
+<meta name="description" content="שש שאלות מתוך ההרצאה של ענת וייסמן, ובסוף משפט אחד שאפשר להגיד בקול. מי אתם בלי הטייטל?">
 <link rel="canonical" href="https://connecthedots.co/whoami/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://connecthedots.co/whoami/">
 <meta property="og:title" content="מי אני בלי טייטל">
-<meta property="og:description" content="ארבע שאלות מתוך ההרצאה של ענת וייסמן. מי אתם בלי הטייטל?">
+<meta property="og:description" content="שש שאלות מתוך ההרצאה של ענת וייסמן, ובסוף משפט אחד שאפשר להגיד בקול. מי אתם בלי הטייטל?">
 <meta property="og:locale" content="he_IL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="מי אני בלי טייטל">
-<meta name="twitter:description" content="ארבע שאלות מתוך ההרצאה של ענת וייסמן. מי אתם בלי הטייטל?">
+<meta name="twitter:description" content="שש שאלות מתוך ההרצאה של ענת וייסמן, ובסוף משפט אחד שאפשר להגיד בקול.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ==========================================================
-     v3 skin: Deck v13 (THELOOP #2). Three colours, locked.
+     v8 skin: Deck v13 (THELOOP #2). Three colours, locked.
      Ink #0E141C · cream #F2EDE4 · amber #F0A830. Rubik.
-     Lego bricks number the questions and light up the progress.
+     Lego bricks number the questions.
      Phone first, in a dark room: nothing below 16px, every
      control thumb sized (56px+). No emoji.
      ========================================================== */
@@ -38,12 +38,12 @@
     --cream:#F2EDE4;
     --amber:#F0A830;
     --amber-deep:#C77F12;
-
     --cream-70:rgba(242,237,228,0.70);
     --cream-45:rgba(242,237,228,0.56);
     --cream-16:rgba(242,237,228,0.16);
     --cream-08:rgba(242,237,228,0.08);
     --amber-30:rgba(240,168,48,0.30);
+    --amber-12:rgba(240,168,48,0.12);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -64,8 +64,6 @@
     overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
   }
   .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;}
-
-  /* ---------- the board (hero) ---------- */
   .hero{
     position:relative;
     padding:30px 0 26px;
@@ -81,8 +79,6 @@
     letter-spacing:0.08em;
     margin-bottom:22px;
   }
-  /* the brick: the same amber Lego brick that carries the title on
-     the slides, here carrying the question mark */
   .brick{
     position:relative;
     display:inline-flex;align-items:center;justify-content:center;
@@ -116,8 +112,18 @@
     max-width:30em;
     line-height:1.6;
   }
-
-  /* ---------- the quiet band: the promise, and nothing else ---------- */
+  .hero-goal{
+    margin:18px 0 0;
+    padding:16px 18px;
+    background:var(--cream-08);
+    border:1px solid var(--cream-16);
+    border-right:4px solid var(--amber);
+    border-radius:14px;
+    font-size:17px;
+    line-height:1.55;
+    color:var(--cream);
+  }
+  .hero-goal b{color:var(--amber);font-weight:800;}
   .promise{padding:0 0 10px;}
   .promise-inner{
     border-top:1px solid var(--cream-16);
@@ -129,13 +135,19 @@
     margin:0;
     line-height:1.55;
   }
-
-  /* ---------- the three questions, all of them, at once ---------- */
   main{padding:0 0 8px;}
   .stage{padding:26px 0 0;}
+  .part{
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    font-size:16px;
+    color:var(--amber);
+    letter-spacing:0.08em;
+    margin:0 0 6px;
+  }
+  .part-note{font-size:16px;color:var(--cream-70);margin:0 0 26px;line-height:1.55;}
   .step{position:relative;margin-bottom:38px;padding-top:0;}
   .step + .step{border-top:1px solid var(--cream-16);padding-top:30px;}
-  /* the numeral is a small brick sitting on the top edge of the card */
+  .step.sharpen-first{border-top:2px solid var(--amber-30);padding-top:30px;}
   .floor{
     position:relative;
     top:0;right:0;margin:0 0 10px;
@@ -157,6 +169,8 @@
   }
   .floor::before{left:9px;}
   .floor::after{right:9px;}
+  .step.sharpen .floor{background:var(--ink);color:var(--amber);border:2px solid var(--amber);box-shadow:none;}
+  .step.sharpen .floor::before,.step.sharpen .floor::after{background:var(--amber);}
   .q-group{position:relative;z-index:1;background:none;border:0;border-radius:0;padding:6px 0 0;}
   .q-count{
     font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
@@ -168,18 +182,31 @@
     font-size:clamp(23px,6vw,28px);
     font-weight:800;
     line-height:1.35;
-    margin:0 0 18px;
+    margin:0 0 12px;
     letter-spacing:0;
   }
+  .q-why{font-size:16px;color:var(--cream-70);margin:0 0 14px;line-height:1.55;}
+  /* the examples: tappable, they start the answer, they never finish it */
+  .hints{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+  .hints-k{width:100%;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:16px;color:var(--cream-45);margin:0 0 2px;}
+  .hint{
+    -webkit-appearance:none;appearance:none;
+    font-family:inherit;font-size:16px;font-weight:500;
+    color:var(--cream);background:var(--cream-08);
+    border:1px solid var(--cream-16);border-radius:999px;
+    padding:10px 14px;min-height:44px;cursor:pointer;line-height:1.3;
+    text-align:right;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .hint:hover,.hint:focus-visible{border-color:var(--amber);background:var(--amber-12);outline:none;}
+  .hint:active{transform:translateY(1px);}
+  .hint.used{border-color:var(--amber);color:var(--amber);}
   .field{position:relative;}
-  /* the hand drawn frame from v2 is not part of this skin; the builder
-     still makes it, the sheet just does not show it */
   .shape{display:none;}
-  textarea{
+  textarea,.line-input{
     position:relative;
     display:block;
     width:100%;
-    min-height:132px;
     font-family:inherit;
     font-size:18px;
     color:var(--cream);
@@ -187,12 +214,13 @@
     border:1.5px solid var(--cream-16);
     border-radius:16px;
     padding:16px 18px 18px;
-    resize:vertical;
     line-height:1.6;
     transition:border-color .2s ease, box-shadow .2s ease;
   }
-  textarea:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-30);}
-  textarea::placeholder{color:var(--cream-45);}
+  textarea{min-height:120px;resize:vertical;}
+  .line-input{min-height:60px;padding:12px 18px;}
+  textarea:focus,.line-input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-30);}
+  textarea::placeholder,.line-input::placeholder{color:var(--cream-45);}
   .q-note{
     font-size:16px;
     color:var(--amber);
@@ -201,8 +229,7 @@
     min-height:0;
   }
   .q-note:empty{margin:0;}
-
-  /* ---------- the one button ---------- */
+  .q-soft{font-size:16px;color:var(--cream-45);margin:10px 0 0;line-height:1.5;}
   .gate{
     margin-top:6px;
     padding-top:26px;
@@ -236,8 +263,6 @@
   }
   .btn-line:hover{border-color:var(--cream);background:var(--cream-08);}
   .btn-line.alt{}
-  /* Generate is written in Latin letters, so it is isolated from the RTL
-     run around it and never picks up a stray Hebrew neighbour. */
   .btn-generate{width:100%;direction:ltr;unicode-bidi:isolate;letter-spacing:0.02em;}
   .gate-note{
     font-size:16px;
@@ -253,13 +278,12 @@
     margin:14px 0 0;
     line-height:1.6;
   }
-
-  /* ---------- the prompt ---------- */
   .result{display:none;margin-top:38px;padding-top:28px;border-top:1px solid var(--cream-16);}
   .result.show{display:block;}
   .result h2{font-size:28px;font-weight:900;margin:0 0 10px;}
   .result h2:focus{outline:none;}
   .result-lead{font-size:16px;color:var(--cream-70);margin:0 0 18px;line-height:1.65;}
+  .prompt-wrap{position:relative;}
   .prompt-box{
     background:var(--cream);
     color:var(--ink);
@@ -270,16 +294,27 @@
     white-space:pre-wrap;
     word-wrap:break-word;
     overflow-wrap:break-word;
+    max-height:340px;
+    overflow:hidden;
   }
+  .prompt-wrap.open .prompt-box{max-height:none;}
+  .prompt-fade{position:absolute;left:0;right:0;bottom:0;height:120px;border-radius:0 0 18px 18px;background:linear-gradient(to bottom,rgba(242,237,228,0) 0%,var(--cream) 80%);pointer-events:none;}
+  .prompt-wrap.open .prompt-fade{display:none;}
+  .prompt-more{
+    -webkit-appearance:none;appearance:none;
+    position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+    font-family:inherit;font-size:16px;font-weight:800;
+    color:var(--ink);background:var(--amber);border:0;border-radius:999px;
+    padding:10px 18px;min-height:44px;cursor:pointer;box-shadow:0 8px 24px var(--amber-30);
+  }
+  .prompt-wrap.open .prompt-more{display:none;}
   .result .btn-copy{margin-top:16px;width:100%;}
   .copy-note{font-size:16px;color:var(--amber);font-weight:700;margin:14px 0 0;min-height:0;}
   .copy-note:empty{margin:0;}
-  .open-in{margin-top:30px;}
+  .open-in{margin-top:22px;}
   .open-in p{font-size:16px;color:var(--cream-70);margin:0 0 12px;line-height:1.6;}
   .open-in-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .open-in-links a{direction:ltr;unicode-bidi:isolate;font-size:18px;}
-
-  /* ---------- footer ---------- */
   footer{padding:30px 0 50px;margin-top:40px;border-top:1px solid var(--cream-16);text-align:left;}
   .mark{
     display:block;
@@ -292,7 +327,6 @@
     font-size:16px;
     line-height:1.7;
   }
-
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{
       animation-duration:.001ms !important;
@@ -300,15 +334,12 @@
       transition-duration:.001ms !important;
     }
   }
-
   @media (min-width:520px){
     .hero{padding:52px 0 30px;}
     .stage{padding-top:36px;}
     .step{margin-bottom:40px;}
     .q-group{padding:38px 28px 26px;}
   }
-
-  /* ---------- v4 on the v13 skin: identity fields, the friend banner, the share block ---------- */
   .who{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0 6px;}
   @media (max-width:520px){.who{grid-template-columns:1fr;}}
   .who label{display:block;font-size:16px;color:var(--cream-70);margin-bottom:6px;}
@@ -317,9 +348,6 @@
   .who input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px var(--amber-30);}
   .who input[dir=ltr]{direction:ltr;text-align:left;}
   .who .why{grid-column:1/-1;font-size:16px;color:var(--cream-45);margin:0;line-height:1.55;}
-  .ref{display:none;margin:22px 0 0;padding:16px 18px;background:var(--cream-08);border:1px solid var(--cream-16);border-right:4px solid var(--amber);border-radius:14px;font-size:18px;line-height:1.5;color:var(--cream);}
-  .ref.show{display:block;}
-  .ref b{font-weight:800;color:var(--amber);}
   .share{margin-top:34px;padding-top:24px;border-top:1px solid var(--cream-16);}
   .share h3{font-size:24px;font-weight:900;margin:0 0 6px;}
   .share p{font-size:16px;color:var(--cream-70);margin:0 0 14px;line-height:1.6;}
@@ -335,11 +363,16 @@
   .wc-title{font-size:20px;font-weight:500;color:var(--cream-70);margin:0;text-decoration:line-through;text-decoration-color:var(--cream-45);text-decoration-thickness:2px;overflow-wrap:anywhere;}
   .wc-super{font-size:30px;font-weight:900;line-height:1.3;margin:0;color:var(--cream);overflow-wrap:anywhere;}
   .wc-super.long{font-size:22px;line-height:1.4;}
-  .wc-scar{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
-  .wc-scar{font-size:19px;line-height:1.5;margin:0;color:var(--cream-70);overflow-wrap:anywhere;}
+  .wc-for{font-size:19px;line-height:1.5;margin:0;color:var(--cream-70);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .wc-sentence{display:none;margin:18px 0 0;padding:16px 18px;background:var(--amber);color:var(--ink);border-radius:14px;font-size:22px;font-weight:900;line-height:1.35;overflow-wrap:anywhere;}
+  .wc-sentence.show{display:block;}
   .wc-foot{margin:22px 0 0;padding-top:16px;border-top:1px solid var(--cream-16);font-size:19px;font-weight:700;color:var(--amber);}
   .wc-hint{display:none;font-size:16px;color:var(--cream-45);margin:10px 0 0;}
   .wc-hint.show{display:block;}
+  .sentence{margin:26px 0 0;padding:20px 20px 18px;background:var(--cream-08);border:1px solid var(--cream-16);border-radius:18px;}
+  .sentence h3{font-size:22px;font-weight:900;margin:0 0 6px;}
+  .sentence p{font-size:16px;color:var(--cream-70);margin:0 0 12px;line-height:1.55;}
+  .sentence .line-input{background:var(--ink);}
   .share-prev{display:none;margin:0 0 14px;padding:14px 16px;background:var(--ink);border:1px solid var(--cream-16);border-radius:16px 16px 16px 4px;font-size:17px;line-height:1.5;color:var(--cream-70);overflow-wrap:anywhere;}
   .share-prev.show{display:block;}
   .out{margin-top:34px;padding:26px 22px 22px;background:var(--cream-08);border:1px solid var(--cream-16);border-radius:22px;}
@@ -358,22 +391,29 @@
   .out-col.cheap li{color:var(--cream-70);text-decoration:line-through;text-decoration-color:var(--cream-45);text-decoration-thickness:2px;}
   .out-col.rare li{font-weight:900;}
   .out-line{font-size:18px;color:var(--cream);font-weight:700;margin:18px 0 0;line-height:1.5;}
+  /* the door: half an hour with her */
+  .door{margin-top:34px;padding:28px 24px 26px;border-radius:22px;background:linear-gradient(160deg,#182230 0%,#0E141C 70%);border:1px solid var(--amber-30);}
+  .door .q-count{color:var(--amber);}
+  .door h3{font-size:26px;font-weight:900;margin:0 0 12px;line-height:1.25;}
+  .door p{font-size:18px;color:var(--cream);margin:0 0 8px;line-height:1.6;}
+  .door .sign{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:16px;color:var(--cream-45);margin:0 0 20px;}
+  .door .btn{width:100%;}
+  .door .door-note{font-size:16px;color:var(--cream-45);margin:12px 0 0;line-height:1.5;}
 </style>
 <!-- PostHog web analytics. Copied verbatim from the-human-chair / talk pages (58-talk-page-6-9-update).
      Same project key. Do not invent a different key.
      Session recording and autocapture are off, and the answers and the
-     prompt carry ph-no-capture. Pageview, plus the two counted moments
-     of this page: whoami_generate and whoami_copy. Neither carries a
-     single character the person typed. -->
+     prompt carry ph-no-capture. Pageview, plus the counted moments
+     of this page: whoami_generate, whoami_copy, whoami_share,
+     whoami_sentence, whoami_door. None carries a character the person
+     typed into a question. -->
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_recording:true,autocapture:false,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'})
 </script>
 </head>
 <body>
-
   <header class="hero">
-    <!-- Move 3. Four dots, uneven radii, uneven y, thin connector. -->
     <div class="wrap">
       <svg class="dotline" viewBox="0 0 150 26" aria-hidden="true" focusable="false">
         <path d="M8 16 L52 7 L96 18 L140 5" fill="none" stroke="#F2EDE4" stroke-opacity="0.25" stroke-width="1.5"/>
@@ -385,40 +425,36 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       <div class="kicker" id="kicker">מתוך ההרצאה של ענת וייסמן · 6.9.2026</div>
       <div class="brick" aria-hidden="true">?</div>
       <h1>מי אני<span class="line2">בלי <span class="accent">טייטל</span></span></h1>
-      <p class="hero-note" id="heroNote">ארבע שאלות. תמלאו אותן תוך כדי ההרצאה, ותשאירו את המסך פתוח. נחזור לזה בסוף.</p>
+      <p class="hero-note" id="heroNote">שלוש שאלות מההרצאה, ועוד שלוש שמדייקות. תמלאו בקצב שלכם ותשאירו את המסך פתוח. נחזור לזה בסוף.</p>
+      <p class="hero-goal">בסוף יש לכם <b>משפט אחד</b> להגיד בקול כששואלים אתכם מי אתם. לא מה התפקיד. מי אתם.<br>למשל: ״אני ענת. אני מחברת נקודות. אני מייצרת אימפקט על ידי הנעה לפעולה.״</p>
     </div>
   </header>
-
   <div class="promise">
     <div class="wrap">
       <div class="promise-inner">
-        <p class="privacy-line">התשובות שלכם נשארות בדפדפן שלכם בלבד. השם והמייל מגיעים לענת, כדי שההמשך יגיע אליכם. אם תבחרו לשלוח את הלינק לחבר, השם והתשובה על ״יותר מדי״ נוסעים איתו.</p>
+        <p class="privacy-line">התשובות שלכם נשארות בדפדפן שלכם בלבד. השם והמייל מגיעים לענת, כדי שההמשך יגיע אליכם.</p>
       </div>
     </div>
   </div>
-
   <main class="wrap">
     <p class="sr-only" id="live" aria-live="polite"></p>
-
     <noscript>
       <p style="padding:24px 0;font-size:16px;">
         הדף הזה בונה את הפרומפט אצלכם בדפדפן, ולכן הוא צריך שהסקריפטים יהיו פעילים. הפעילו אותם ורעננו את הדף.
       </p>
     </noscript>
-
     <!-- ============================================================
-         THE THREE QUESTIONS. All of them on one screen, no wizard,
-         no steps and no gate between them, because the room fills
-         them in over an hour with the phone locking and waking in
-         between. Every keystroke is written to localStorage, so a
-         locked phone, a reload and a backgrounded tab all survive.
-         The three question strings are word for word from
-         script-v14-anat-2026-09-04.md.
+         SIX QUESTIONS, one screen, no wizard, no steps and no gate
+         between them, because the room fills them in over an hour
+         with the phone locking and waking in between. Every
+         keystroke is written to localStorage, so a locked phone, a
+         reload and a backgrounded tab all survive.
+         1 to 3 are the three she names on stage (title, the "too
+         much", the scar) and are required. 4 to 6 sharpen: they are
+         what a coach would ask next, and the prompt drops any that
+         are left empty.
          ============================================================ -->
-    <p class="ref" id="ref" hidden></p>
-
     <div class="stage" id="stage"></div>
-
     <div class="who ph-no-capture" id="who">
       <div>
         <label for="who-name">איך קוראים לכם?</label>
@@ -428,47 +464,58 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         <label for="who-email">המייל שלכם</label>
         <input id="who-email" type="email" dir="ltr" autocomplete="email" inputmode="email" placeholder="name@company.com">
       </div>
-      <p class="why">הפרומפט נבנה על השם שלכם. למייל תקבלו אותו שמור, כדי שלא תאבדו אותו כשתסגרו את הדף.</p>
+      <p class="why">הפרומפט נבנה על השם שלכם. אחרי שהוא נבנה יש כפתור שמכין לכם אותו במייל, כדי שלא תאבדו אותו כשתסגרו את הדף.</p>
     </div>
-
     <div class="gate">
       <button class="btn btn-solid btn-generate" id="generate-btn" type="button">Generate</button>
       <p class="gate-note" id="gate-note"></p>
       <p class="gate-calm">אין למה למהר. אפשר לכתוב, לנעול את הטלפון ולחזור. מה שכתבתם נשמר כאן.</p>
     </div>
-
-    <!-- The prompt. Assembled here, in the browser, out of the three
-         answers exactly as they were typed. No model, no rewrite, no
-         network. The answers sit inside quotation marks and are never
-         inflected, because Hebrew grammar is theirs and not this
-         page's to guess. -->
+    <!-- The prompt. Assembled here, in the browser, out of the answers
+         exactly as they were typed. No model, no rewrite, no network.
+         The answers sit inside quotation marks and are never inflected,
+         because Hebrew grammar is theirs and not this page's to guess. -->
     <section class="result" id="result" aria-labelledby="result-title">
-      <h2 id="result-title" tabindex="-1">הפרומפט שלכם</h2>
-      <p class="result-lead">זה מה שכתבתם. אף אחד לא כתב את זה במקומכם.</p>
+      <h2 id="result-title" tabindex="-1">הכרטיס שלכם</h2>
+      <p class="result-lead">נבנה רק ממה שכתבתם. אף אחד לא כתב את זה במקומכם.</p>
       <section class="wcard" id="wcard" aria-label="הכרטיס שלי">
         <div class="wc-top"><span class="wc-name" id="wcName"></span><span class="wc-mark">CONNECTING THE DOTS</span></div>
         <p class="wc-k">הטייטל</p><p class="wc-title" id="wcTitle"></p>
         <p class="wc-k">היותר מדי שלי</p><p class="wc-super" id="wcSuper"></p>
-        <p class="wc-k">מה שלימד אותי</p><p class="wc-scar" id="wcScar"></p>
+        <p class="wc-k" id="wcForK">על מה באים אליי</p><p class="wc-for" id="wcFor"></p>
+        <p class="wc-sentence" id="wcSentence"></p>
         <p class="wc-foot">אני לא בתוך הלולאה. אני הלולאה.</p>
       </section>
       <p class="wc-hint">צילום מסך אחד, וזה נשאר אצלכם.</p>
-
-      <p class="wc-k" style="margin-top:26px">ומחר בבוקר: הפרומפט שלכם</p>
-      <div class="prompt-box ph-no-capture" id="prompt-box"></div>
+      <div class="sentence ph-no-capture">
+        <h3>המשפט שלי</h3>
+        <p>כשהסוכן יחזיר לכם את המשפט, חזרו לכאן והדביקו אותו. הכרטיס מתעדכן, וזה מה שכדאי לשלוח הלאה.</p>
+        <input class="line-input" id="sentence-input" type="text" placeholder="אני ... אני ...">
+      </div>
+      <p class="wc-k" style="margin-top:30px">ומחר בבוקר: הפרומפט שלכם</p>
+      <p class="result-lead">מדביקים אותו אצל הסוכן. הוא לא יחמיא לכם. הוא ישאל בחזרה, עד שיוצא משפט שרק אתם יכולים להגיד.</p>
+      <div class="prompt-wrap" id="prompt-wrap">
+        <div class="prompt-box ph-no-capture" id="prompt-box"></div>
+        <div class="prompt-fade" aria-hidden="true"></div>
+        <button class="prompt-more" id="prompt-more" type="button">לפתוח את כל הפרומפט</button>
+      </div>
       <button class="btn btn-line btn-copy" id="copy-btn" type="button">העתיקו את הפרומפט</button>
       <p class="copy-note" id="copy-note"></p>
-      <a class="btn btn-line alt" id="mail-btn" href="#" style="display:inline-block;margin-top:10px">שלחו אותו לעצמכם במייל</a>
-
+      <div class="open-in">
+        <p>אחרי ההעתקה, פתחו אחד מהשניים והדביקו שם:</p>
+        <div class="open-in-links">
+          <a class="btn btn-line" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">Claude</a>
+          <a class="btn btn-line alt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>
+        </div>
+      </div>
+      <a class="btn btn-line alt" id="mail-btn" href="#" style="display:inline-block;margin-top:12px">שלחו אותו לעצמכם במייל</a>
       <div class="share">
         <h3>מכירים מישהו שגם צריך לענות על זה?</h3>
-        <p>הלינק נושא את השם שלכם ואת ה״יותר מדי״ שלכם, ופותח אצלם את אותן ארבע שאלות. בלי הצלקת, בלי הטייטל.</p>
+        <p>הלינק נקי, בלי התשובות שלכם. מה שנוסע איתו זה המשפט שכתבתם, בדיוק כמו למטה.</p>
         <p class="share-prev" id="sharePrev"></p>
         <button class="btn btn-solid" id="share-btn" type="button">לשלוח לחבר</button>
         <p class="share-note" id="share-note"></p>
       </div>
-
-
       <section class="out" aria-labelledby="out-title">
         <p class="q-count">בדרך החוצה</p>
         <h3 id="out-title">מה נהיה זול. מה נהיה נדיר.</h3>
@@ -479,115 +526,142 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         </div>
         <p class="out-line">כשהביצוע נהיה זול, ההקשר שווה זהב.</p>
       </section>
-
-      <div class="open-in">
-        <p>אחרי ההעתקה, פתחו אחד מהשניים והדביקו שם:</p>
-        <div class="open-in-links">
-          <a class="btn btn-line" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">Claude</a>
-          <a class="btn btn-line alt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>
-        </div>
-      </div>
+      <section class="door" aria-labelledby="door-title">
+        <p class="q-count">ואם רוצים לדייק את זה עד הסוף</p>
+        <h3 id="door-title">חצי שעה איתי</h3>
+        <p>השאלה הזאת, מי אני בלי הטייטל, זאת השאלה שאני יושבת עליה עם אנשים. אחד על אחד. זה מה שאני עושה.</p>
+        <p>שיחת גילוי של חצי שעה לאימון אישי. מגיעים עם המשפט שיצא לכם, ויוצאים עם משפט מדויק יותר.</p>
+        <p class="sign">ענת</p>
+        <a class="btn btn-solid" id="door-btn" href="https://connecthedots.co/book/?utm_source=whoami&amp;utm_medium=content&amp;utm_campaign=talk-6-9-whoami">לקבוע חצי שעה עם ענת</a>
+        <p class="door-note">נפתח ביומן שלה. בוחרים שעה, וזהו.</p>
+      </section>
     </section>
   </main>
-
   <footer>
     <div class="wrap"><span class="mark">CONNECTING THE DOTS<br>CREATING MOTION</span></div>
   </footer>
-
 <script>
 (function(){
   "use strict";
-
   // ============================================================
-  // QUESTIONS. Word for word from script-v14-anat-2026-09-04.md,
-  // in the order she says them on stage. Plural, which is how she
-  // addresses the room, and genderless, because one text serves
-  // every person in it.
+  // QUESTIONS. 1 to 3 are the three she names on stage, in the order
+  // she says them (script v14). 4 to 6 are the coach's next questions.
+  // Plural, which is how she addresses the room, and genderless,
+  // because one text serves every person in it.
+  // Each has a "why" line and a row of examples. Tapping an example
+  // starts the answer in the box; it never finishes it.
   // ============================================================
   var QUESTIONS = [
-    "מה הטייטל הנוכחי שלכם?",
-    "מה הדבר שעליו אמרו לכם פעם שאתם יותר מדי?",
-    "מה הצלקת המקצועית או האישית שהכי לימדה אתכם?",
-    "על מה באים אליכם, לא בגלל התפקיד?"
+    {
+      q: "מה הטייטל הנוכחי שלכם?",
+      why: "רק כדי להוריד אותו מהשולחן. מכאן והלאה הוא לא מתאר אתכם.",
+      line: true,
+      placeholder: "למשל: מנהלת שיווק, סמנכ״ל מוצר",
+      hints: []
+    },
+    {
+      q: "מה הדבר שעליו אמרו לכם פעם שאתם יותר מדי?",
+      why: "המילה שאמרו לכם להקטין. בדרך כלל זה המנוע, לא התקלה. משפט אחד על מה קרה כשזה נאמר.",
+      placeholder: "אמרו לי שאני יותר מדי...",
+      hints: ["יותר מדי שאלות", "יותר מדי מעורבות", "יותר מדי ישירות", "יותר מדי רגש", "יותר מדי מהר", "יותר מדי אמביציה"]
+    },
+    {
+      q: "מה הצלקת המקצועית או האישית שהכי לימדה אתכם?",
+      why: "לא חייבת להיות דרמה. מספיק רגע אחד שיצאתם ממנו עושים משהו אחרת.",
+      placeholder: "כתבו כאן...",
+      hints: ["פיטורים", "פרויקט שקרס", "שתיקה בחדר שהיה צריך לדבר בו", "החלטה שנדחתה שנה", "מנהל שלא האמין"],
+      privacy: "מה שאתם כותבים כאן נשאר בדפדפן שלכם ולא נשלח לשום שרת."
+    },
+    {
+      q: "על מה באים אליכם, לא בגלל התפקיד?",
+      why: "הדבר שאתם מבטלים ב״זה כלום, כולם יודעים את זה״. בדרך כלל זאת התשובה.",
+      placeholder: "באים אליי כש...",
+      hints: ["לפרק בעיה שאף אחד לא יודע למי היא שייכת", "להגיד מה באמת קורה בחדר", "לנסח את מה שכולם חושבים", "להרגיע לפני פגישה קשה", "לחבר בין אנשים שלא מדברים"]
+    },
+    {
+      q: "מה עשיתם השבוע שאף אחד לא ביקש, ומישהו הרוויח מזה?",
+      why: "פועל, לא שם עצם. מה בדיוק עשיתם, ובשביל מי.",
+      placeholder: "כתבו כאן...",
+      hints: ["כתבתי את הסיכום שאף אחד לא כתב", "שאלתי את השאלה הלא נעימה", "חיברתי שני אנשים שלא הכירו", "עצרתי טעות לפני שיצאה ללקוח"]
+    },
+    {
+      q: "מה מהעבודה שלכם המכונה כבר עושה, או תעשה בקרוב, לא פחות טוב מכם?",
+      why: "בכנות. זה מה שיורד מהשולחן ביחד עם הטייטל, ומה שנשאר הוא הנדיר.",
+      placeholder: "כתבו כאן...",
+      hints: ["סיכומים", "מצגות", "טיוטות של מיילים", "ניתוח נתונים", "מחקר ראשוני", "תרגום"]
+    }
   ];
-
+  var REQUIRED = 3;   // the slide promises three; 4 to 6 sharpen
   // ============================================================
-  // TOKENS. The three named tokens inside PROMPT_TEMPLATE, in the
-  // same order as QUESTIONS above. Substitution is plain text
-  // replacement and nothing else in the template changes.
-  // Every token is already wrapped in gershayim inside the template,
-  // so an answer is always quoted and never inflected.
+  // PROMPT_TEMPLATE. Built like a working coaching prompt: role,
+  // context (the talk's claim), the person's own words, working
+  // rules, then numbered stages that each wait for an answer, and a
+  // fixed shape for the output: one sentence to say out loud.
+  // The title is taken off the table in the first rule, which is the
+  // whole point of the talk. Optional answers that are empty are
+  // removed as whole lines by buildPrompt(), never left as blanks.
   // ============================================================
-  var TOKENS = ["טייטל", "יותר_מדי", "צלקת", "באים"];
-
-  // ============================================================
-  // PROMPT_TEMPLATE. Written to the register of PROMPT-he.md (this
-  // folder): the agent is told not to flatter, to interrogate one
-  // question at a time, and to quote the person's own words back.
-  // The job it is given is hers, from the script: use the person's
-  // "יותר מדי" and their scar to plan the next career step with them.
-  // The title is taken off the table in the first instruction, which
-  // is the whole point of the talk.
-  // ============================================================
-  // Each instruction is one logical line. The hard wraps that the
-  // source doc carries for readability are deliberately NOT reproduced:
-  // the box is pre-wrap, so a hard break in the middle of a sentence
-  // would land as a ragged short line on a phone, and would travel into
-  // the chat the person pastes it in.
-  var PROMPT_TEMPLATE = `קוראים לי ״{שם}״. אתה עוזר לי לתכנן את הצעד הבא בקריירה שלי. אתה לא מאמן ולא מעודד. אתה בודק.
-
-הנה ארבעה דברים שכתבתי על עצמי:
-
-1. הטייטל שלי היום: ״{טייטל}״
-2. הדבר שאמרו לי פעם שיש בי ממנו יותר מדי: ״{יותר_מדי}״
-3. הצלקת המקצועית או האישית שהכי לימדה אותי: ״{צלקת}״
-4. על מה באים אליי, לא בגלל התפקיד: ״{באים}״
-
-ככה תעבוד, לפי הסדר. אל תדלג, ואל תעשה הכל בתשובה אחת.
-
-ראשית, תוריד את הטייטל מהשולחן. מהשורה הזאת והלאה אסור לך לתאר אותי דרך ״{טייטל}״, ולא דרך שום טייטל אחר. אם משפט שכתבת נשען על התפקיד שלי, תמחק אותו ותכתוב אחד אחר.
-
-שנית, תסתכל על היותר מדי שלי, על הצלקת שלי ועל מה שבאים אליי בשבילו, ותגיד לי מה היכולת שקיימת בשלושתם. לא תכונת אופי. לא ״אמפתיה״ ולא ״ראייה מערכתית״. משהו שאפשר לראות שעשיתי, ושמישהו אחר היה עושה אחרת. תצטט את המילים שלי עצמן. אל תרכך.
-
-שלישית, תשאל אותי שלוש שאלות, אחת בכל פעם, ותחכה לתשובה לפני הבאה. השאלה הראשונה תמיד אותה שאלה: מה ההחלטה או האתגר שעומדים מולי עכשיו. כל שאלה מבקשת מקרה אחד: מתי זה היה, מי היה שם, ומה בדיוק עשיתי. אם אני עונה בהכללה, תגיד לי שזאת הכללה, ותשאל שוב על אותו דבר.
-
-רביעית, אחרי שעניתי, תציע לי שלושה צעדים אפשריים לקריירה שלי. כל צעד חייב לצאת מהיותר מדי שלי ומהצלקת שלי, ולא מהטייטל שלי. ליד כל צעד תכתוב על איזה חלק מהתשובות שלי הוא נשען, ומה בו נשען על שיפוט, על טעם או על אמון שמישהו נותן בי, ולא על ביצוע שמכונה תעשה זול יותר. צעד שהוא רק ביצוע, וצעד שאפשר להציע בדיוק ככה לכל אדם אחר בתחום שלי, הם צעדים פסולים, תזרוק אותם.
-
-חמישית, תבחר אחד מהשלושה ותגיד לי למה דווקא אותו. תענה לפי מה שהתשובות שלי מראות, גם אם זה לא נעים לי לשמוע.
-
-ולסיום, שני דברים, שורה אחת לכל אחד: מה הדבר הראשון שאני עושה עם זה השבוע, ומה הדבר שכדאי לי להפסיק לעשות כדי לפנות לו מקום.
-
+  // Each instruction is one logical line. The box is pre-wrap, so a
+  // hard break in the middle of a sentence would land as a ragged short
+  // line on a phone, and would travel into the chat.
+  var PROMPT_TEMPLATE = `התפקיד שלך: מאמן אישי מנוסה לזהות מקצועית. אתה עובד בשאלות, לא בעצות. אתה לא מחמיא, לא מסכם ולא ממציא. אתה בודק.
+ההקשר: הייתי בהרצאה של ענת וייסמן, ״מי אני בלי טייטל״. הטענה שלה: הביצוע נהיה זול, כי המכונה עושה אותו. מה שנשאר נדיר הוא שיפוט, טעם, אמון וניסיון שחיים. הטייטל שלי מתאר תפקיד. הוא לא מתאר אותי.
+המטרה שלנו: לנסח את היכולת הייחודית שלי, זאת שבאים אליי בשבילה גם בלי התפקיד, ולהפוך אותה למשפט אחד שאפשר להגיד בקול כששואלים אותי מי אני.
+מה כתבתי על עצמי, במילים שלי. אל תשכתב:
+- קוראים לי ״{שם}״
+- הטייטל שלי היום, רק כדי להוריד אותו מהשולחן: ״{טייטל}״
+- הדבר שאמרו לי פעם שיש בי ממנו יותר מדי: ״{יותר_מדי}״
+- הצלקת המקצועית או האישית שהכי לימדה אותי: ״{צלקת}״
+- על מה באים אליי, לא בגלל התפקיד: ״{באים}״
+- מה עשיתי השבוע שאף אחד לא ביקש, ומישהו הרוויח מזה: ״{השבוע}״
+- מה מהעבודה שלי המכונה כבר עושה לא פחות טוב ממני: ״{מכונה}״
+כללי עבודה:
+1. הטייטל יורד מהשולחן. מהשורה הזאת והלאה אסור לך לתאר אותי דרך ״{טייטל}״, ולא דרך שום תפקיד אחר. משפט שנשען על התפקיד: תמחק ותכתוב אחד אחר.
+2. תעבוד שלב אחרי שלב, ותחכה לתשובה שלי בין השלבים. אל תעשה הכל בתשובה אחת.
+3. תצטט את המילים שלי עצמן. אל תרכך, אל תייפה, ואל תתרגם לשפה של לינקדאין.
+4. אם אני עונה בהכללה, תגיד לי שזאת הכללה, ותבקש מקרה אחד: מתי זה היה, מי היה שם, ומה בדיוק עשיתי.
+5. פנה אליי, וכתוב את המשפט בסוף, בלשון שבה כתבתי על עצמי בתשובות. אל תחליט על המין שלי לבד.
+השלבים:
+שלב 1, המראה. תקרא את מה שכתבתי ותגיד לי איפה היותר מדי שלי, הצלקת שלי ומה שבאים אליי בשבילו הם אותו דבר, מזוויות שונות. שורה אחת על כל חיבור, עם ציטוט. אל תסיק עדיין מסקנה. תשאל אם זה נכון.
+שלב 2, הראיות. תשאל אותי שלוש שאלות, אחת בכל פעם. כל שאלה מבקשת מקרה אחד שקרה באמת: מתי, מי היה שם, מה בדיוק עשיתי, ומה היה קורה אם לא הייתי שם.
+שלב 3, היכולת. אחרי שלושת המקרים, תנסח במשפט אחד את היכולת שחוזרת בכולם. פועל, לא שם עצם ולא תכונת אופי. לא ״אמפתיה״, לא ״ראייה מערכתית״, לא ״תקשורת בין אישית״. משהו שאפשר לראות שעשיתי, ושמישהו אחר במקומי היה עושה אחרת. אם המשפט מתאים גם לכל אדם שלישי בתחום שלי, הוא פסול. תכתוב אחר.
+שלב 4, מבחן המכונה. תבדוק את היכולת הזאת מול מה שכתבתי שהמכונה כבר עושה. איזה חלק ממנה הוא ביצוע שהמכונה תעשה זול יותר, ואיזה חלק הוא שיפוט, טעם או אמון שמישהו נותן בי. תגיד לי מה נשאר נדיר. אם לא נשאר כלום, תגיד את זה, ונחזור לשלב 2.
+שלב 5, המשפט. תציע לי שלוש גרסאות של משפט אחד שנאמר בקול כששואלים אותי מי אני. המבנה: ״אני {שם}. אני [מה שאני עושה, בפועל]. אני [מייצר או מייצרת] [תוצאה] על ידי [איך].״ עד עשרים מילה. בלי הטייטל, בלי ״מסע״, בלי ״תשוקה״, בלי ״עוזר לארגונים״, בשפה שלי ולא בשפה של אתר. אם גרסה נשמעת כמו כותרת בלינקדאין, תזרוק אותה. דוגמה למבנה בלבד, לא לתוכן: ״אני ענת. אני מחברת נקודות. אני מייצרת אימפקט על ידי הנעה לפעולה.״ תגיד לי איזו מהשלוש אתה בוחר ולמה, לפי מה שהתשובות שלי מראות, גם אם זה לא נעים לי לשמוע.
+ולסיום, שורה אחת: מתי השבוע המשפט הזה נאמר בקול, ולמי.
 אל תסכם. אל תשבח. אל תיתן לי רשימה של עשרה דברים.`;
-
+  var TOKENS = ["טייטל", "יותר_מדי", "צלקת", "באים", "השבוע", "מכונה"];
+  // the optional lines, removed whole when the answer is empty
+  var OPTIONAL_LINES = {
+    4: /\n- על מה באים אליי[^\n]*\n/,
+    5: /\n- מה עשיתי השבוע[^\n]*\n/,
+    6: /\n- מה מהעבודה שלי[^\n]*\n/
+  };
   var TOTAL        = QUESTIONS.length;
-  var PLACEHOLDER  = "כתבו כאן...";
-  var STORE_PREFIX = "whoami.v2.answer-";
-
+  var STORE_PREFIX = "whoami.v3.answer-";
+  var PAGE_URL     = "https://connecthedots.co/whoami/";
   // ============================================================
-  // The demo switch, left in on purpose and documented in
-  // CHANGELOG-v2.md. ?demo=1 fills the three fields with sample
-  // answers so the page can be photographed and reviewed without
-  // typing. ?demo=1&generate=1 also presses the button. Demo mode
-  // never writes to localStorage and never sends a PostHog event,
-  // so it cannot pollute a real phone or a real number.
+  // The demo switch. ?demo=1 fills the fields with sample answers so
+  // the page can be photographed and reviewed without typing.
+  // ?demo=1&generate=1 also presses the button. Demo mode never
+  // writes to localStorage and never sends a PostHog event.
   // ============================================================
   var DEMO_ANSWERS = [
     "מנהל תחום חוויית לקוח",
     "אמרו לי שאני יותר מדי מעורב בכל דבר, ושאני שואל יותר מדי שאלות",
     "פוטרתי מתפקיד שהובלתי בו פרויקט גדול, שבועיים אחרי שקיבלתי עליו שבחים",
-    "כשמשהו תקוע בין שתי מחלקות ואף אחד לא יודע למי זה שייך"
+    "כשמשהו תקוע בין שתי מחלקות ואף אחד לא יודע למי זה שייך",
+    "ישבתי עם נציג חדש שעה אחרי העבודה, בלי שמישהו ביקש, והוא סגר את הפנייה הכי קשה של השבוע",
+    "סיכומי פגישות, מצגות, טיוטות של מיילים"
   ];
+  var DEMO_SENTENCE = "אני דן. אני מוצא את מה שנפל בין הכיסאות. אני מייצר שקט על ידי זה שאני לוקח אחריות לפני שמישהו שואל.";
   var params   = new URLSearchParams(window.location.search);
   var DEMO     = params.get("demo") === "1";
   var DEMO_GEN = DEMO && params.get("generate") === "1";
-
+  var IN_ROOM  = params.get("utm_source") === "qr";
   function el(tag, cls){
     var n = document.createElement(tag);
     if (cls) n.className = cls;
     return n;
-  }
-  function svgEl(tag){
-    return document.createElementNS("http://www.w3.org/2000/svg", tag);
   }
   function track(name, props){
     if (DEMO) return;
@@ -597,22 +671,19 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       }
     } catch(e){ /* analytics never blocks the page */ }
   }
-  // The lead. Name and email only: the four answers never leave the phone
+  // The lead. Name and email only: the answers never leave the phone
   // (the promise line above the questions says exactly this).
-  function identify(name, email, ref){
+  function identify(name, email){
     if (DEMO) return;
     try{
       if (window.posthog && typeof window.posthog.identify === "function"){
-        window.posthog.identify(email, {name: name, email: email, referred_by: ref || "", source: "whoami"});
+        window.posthog.identify(email, {name: name, email: email, source: "whoami"});
       }
     } catch(e){}
   }
-  var REF_FROM = (params.get("from") || "").slice(0, 40);
-  var REF_TM   = (params.get("tm") || "").slice(0, 60);
   function whoName(){ return (document.getElementById("who-name").value || "").trim(); }
   function whoEmail(){ return (document.getElementById("who-email").value || "").trim(); }
   function emailOk(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
-
   // ---- storage. Every keystroke, wrapped, because Safari in a
   // private window throws on write rather than returning false. ----
   function save(n, value){
@@ -623,128 +694,139 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
     try { return window.localStorage.getItem(STORE_PREFIX + n) || ""; }
     catch(e){ return ""; }
   }
-
-  var FRAME_D = "M1.6 3 C 34 1.4, 66 2.8, 98.2 1.4 C 99.1 34, 98.4 66, 98.6 97 " +
-                "C 66 98.6, 34 97.2, 1.4 98.6 C 2.2 66, 0.9 34, 1.6 3 Z";
-
-  function makeFrame(){
-    var box = el("div", "shape field-frame");
-    box.setAttribute("aria-hidden", "true");
-    var s = svgEl("svg");
-    s.setAttribute("viewBox", "0 0 100 100");
-    s.setAttribute("preserveAspectRatio", "none");
-    s.setAttribute("aria-hidden", "true");
-    s.setAttribute("focusable", "false");
-    var p = svgEl("path");
-    p.setAttribute("d", FRAME_D);
-    p.setAttribute("vector-effect", "non-scaling-stroke");
-    s.appendChild(p);
-    box.appendChild(s);
-    return box;
-  }
-
+  function ans(n){ var e = document.getElementById("answer-" + n); return e ? e.value.trim() : ""; }
   function buildStage(){
     var stage = document.getElementById("stage");
     for (var i = 0; i < TOTAL; i++){
-      var n = i + 1;
-
-      var step = el("section", "step ph-no-capture");
+      var n = i + 1, Q = QUESTIONS[i];
+      var sharpen = n > REQUIRED;
+      if (n === 1){
+        var p1 = el("p", "part"); p1.textContent = "שלוש מההרצאה"; stage.appendChild(p1);
+      }
+      if (n === REQUIRED + 1){
+        var p2 = el("p", "part"); p2.textContent = "שלוש שמדייקות"; stage.appendChild(p2);
+        var pn = el("p", "part-note"); pn.textContent = "לא חובה. כל תשובה נוספת הופכת את המשפט בסוף למדויק יותר, ופחות דומה לכל אחד אחר בתחום שלכם."; stage.appendChild(pn);
+      }
+      var step = el("section", "step ph-no-capture" + (sharpen ? " sharpen" : ""));
       step.setAttribute("aria-labelledby", "q-" + n);
-
       var floor = el("div", "floor");
       floor.setAttribute("aria-hidden", "true");
       floor.textContent = String(n);
       step.appendChild(floor);
-
       var group = el("div", "q-group");
-
       var count = el("p", "q-count");
-      count.textContent = n > REQUIRED ? "שאלה " + n + " · לא חובה" : "שאלה " + n + " מתוך " + REQUIRED;
+      count.textContent = sharpen ? "שאלה " + n + " · מדייקת" : "שאלה " + n + " מתוך " + REQUIRED;
       group.appendChild(count);
-
       var q = el("h2", "q-text");
       q.id = "q-" + n;
-      q.textContent = QUESTIONS[i];
+      q.textContent = Q.q;
       group.appendChild(q);
-
+      if (Q.why){
+        var why = el("p", "q-why"); why.textContent = Q.why; group.appendChild(why);
+      }
+      if (Q.hints && Q.hints.length){
+        var hints = el("div", "hints");
+        hints.setAttribute("role", "group");
+        hints.setAttribute("aria-label", "דוגמאות לשאלה " + n);
+        var hk = el("p", "hints-k"); hk.textContent = "למשל, לחצו כדי להתחיל:"; hints.appendChild(hk);
+        Q.hints.forEach(function(h){
+          var b = el("button", "hint"); b.type = "button"; b.textContent = h;
+          b.setAttribute("data-for", String(n));
+          b.addEventListener("click", function(){ useHint(n, h, b); });
+          hints.appendChild(b);
+        });
+        group.appendChild(hints);
+      }
       var field = el("div", "field");
-      field.appendChild(makeFrame());
-      var ta = el("textarea");
-      ta.id = "answer-" + n;
-      ta.rows = 4;
-      ta.placeholder = PLACEHOLDER;
-      ta.setAttribute("aria-labelledby", "q-" + n);
-      ta.setAttribute("aria-describedby", "note-" + n);
-      ta.setAttribute("autocomplete", "off");
-      ta.setAttribute("autocapitalize", "sentences");
-      field.appendChild(ta);
+      var box;
+      if (Q.line){
+        box = el("input", "line-input"); box.type = "text";
+        box.setAttribute("autocapitalize", "words");
+      } else {
+        box = el("textarea"); box.rows = 4;
+        box.setAttribute("autocapitalize", "sentences");
+      }
+      box.id = "answer-" + n;
+      box.placeholder = Q.placeholder;
+      box.setAttribute("aria-labelledby", "q-" + n);
+      box.setAttribute("aria-describedby", "note-" + n);
+      box.setAttribute("autocomplete", "off");
+      field.appendChild(box);
       group.appendChild(field);
-
       var note = el("p", "q-note");
       note.id = "note-" + n;
       group.appendChild(note);
-      if (n === 3){
-        var pv = el("p", "q-count");
-        pv.textContent = "מה שאתם כותבים כאן נשאר בדפדפן שלכם ולא נשלח לשום שרת.";
-        group.appendChild(pv);
+      if (Q.privacy){
+        var pv = el("p", "q-soft"); pv.textContent = Q.privacy; group.appendChild(pv);
       }
-
       step.appendChild(group);
       stage.appendChild(step);
-
       // restore before wiring, so the restore itself writes nothing
-      ta.value = DEMO ? DEMO_ANSWERS[i] : load(n);
-
+      box.value = DEMO ? DEMO_ANSWERS[i] : load(n);
       (function(k){
-        var box = document.getElementById("answer-" + k);
-        box.addEventListener("input", function(){
-          save(k, box.value);
-          document.getElementById("note-" + k).textContent = "";
-          document.getElementById("gate-note").textContent = "";
-          // if the prompt is already on screen it stays truthful: an
-          // edit rebuilds it in place rather than leaving a stale one
-          if (document.getElementById("result").classList.contains("show") && !findFirstEmpty()){
-            document.getElementById("prompt-box").textContent = buildPrompt();
-    document.getElementById("mail-btn").href = "mailto:?subject=" + encodeURIComponent("מי אני בלי טייטל · הפרומפט שלי") + "&body=" + encodeURIComponent(buildPrompt());
-          }
-        });
+        var b = document.getElementById("answer-" + k);
+        b.addEventListener("input", function(){ onAnswerInput(k); });
       })(n);
     }
   }
-
-  // Returns the 1-based index of the first empty answer, or 0 when all
-  // three are filled. A prompt with a live token in it is a broken
-  // deliverable, not a partial one, so assembly is blocked until then.
-  var REQUIRED = 3;   // question four is a bonus: the slide promises three
+  // An example starts the answer; the person finishes it. Empty box:
+  // the example becomes the text. Otherwise it is appended after a comma.
+  function useHint(n, text, btn){
+    var box = document.getElementById("answer-" + n);
+    var cur = box.value.trim();
+    if (!cur) box.value = text + " ";
+    else if (cur.indexOf(text) === -1) box.value = cur + ", " + text + " ";
+    btn.classList.add("used");
+    onAnswerInput(n);
+    try { box.focus({preventScroll:true}); box.setSelectionRange(box.value.length, box.value.length); } catch(e){}
+  }
+  function onAnswerInput(k){
+    var box = document.getElementById("answer-" + k);
+    save(k, box.value);
+    document.getElementById("note-" + k).textContent = "";
+    document.getElementById("gate-note").textContent = "";
+    // if the result is already on screen it stays truthful: an edit
+    // rebuilds it in place rather than leaving a stale one
+    if (document.getElementById("result").classList.contains("show") && !findFirstEmpty()){
+      paintPrompt(); paintCard(); paintPrev();
+    }
+  }
+  // Returns the 1-based index of the first empty required answer, or 0.
   function findFirstEmpty(){
     for (var i = 1; i <= REQUIRED; i++){
-      var e = document.getElementById("answer-" + i);
-      if (!e || !e.value.trim()) return i;
+      if (!ans(i)) return i;
     }
     return 0;
   }
-
   function buildPrompt(){
-    var text = PROMPT_TEMPLATE.split("{שם}").join(whoName());
-    for (var i = 0; i < TOKENS.length; i++){
-      var e = document.getElementById("answer-" + (i + 1));
-      text = text.split("{" + TOKENS[i] + "}").join(e.value.trim());
+    var text = PROMPT_TEMPLATE;
+    // drop the optional lines that are empty, whole, before substitution
+    for (var k in OPTIONAL_LINES){
+      if (!ans(Number(k))) text = text.replace(OPTIONAL_LINES[k], "\n");
     }
     if (!ans(4)){
-      text = text.replace(/\n4\. על מה באים אליי[^\n]*\n/, "\n")
-                 .replace("הנה ארבעה דברים", "הנה הדברים")
-                 .replace(", על הצלקת שלי ועל מה שבאים אליי בשבילו,", " ועל הצלקת שלי,");
+      text = text.replace("איפה היותר מדי שלי, הצלקת שלי ומה שבאים אליי בשבילו הם אותו דבר", "איפה היותר מדי שלי והצלקת שלי הם אותו דבר");
+    }
+    if (!ans(6)){
+      text = text.replace("תבדוק את היכולת הזאת מול מה שכתבתי שהמכונה כבר עושה.", "תבדוק את היכולת הזאת מול מה שמכונה כבר יודעת לעשות היום בתחום שלי.");
+    }
+    text = text.split("{שם}").join(whoName());
+    for (var i = 0; i < TOKENS.length; i++){
+      text = text.split("{" + TOKENS[i] + "}").join(ans(i + 1));
     }
     return text;
   }
-
+  function paintPrompt(){
+    var p = buildPrompt();
+    document.getElementById("prompt-box").textContent = p;
+    document.getElementById("mail-btn").href = "mailto:?subject=" + encodeURIComponent("מי אני בלי טייטל · הפרומפט שלי") + "&body=" + encodeURIComponent(p);
+  }
   function onGenerate(){
     var gateNote = document.getElementById("gate-note");
     var missing  = findFirstEmpty();
-
     // An empty answer names the missing question and does nothing else.
     if (missing){
-      gateNote.textContent = "חסרה תשובה לשאלה " + missing + ": " + QUESTIONS[missing - 1];
+      gateNote.textContent = "חסרה תשובה לשאלה " + missing + ": " + QUESTIONS[missing - 1].q;
       document.getElementById("note-" + missing).textContent = "כאן חסרה התשובה.";
       var box = document.getElementById("answer-" + missing);
       try { box.scrollIntoView({behavior:"smooth", block:"center"}); }
@@ -753,7 +835,6 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       document.getElementById("live").textContent = "חסרה תשובה לשאלה " + missing + ".";
       return;
     }
-
     if (!whoName()){
       gateNote.textContent = "חסר השם. הפרומפט נבנה עליו.";
       document.getElementById("who-name").focus(); return;
@@ -762,19 +843,16 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       gateNote.textContent = "המייל לא נראה תקין. לכתובת הזאת יגיע ההמשך.";
       document.getElementById("who-email").focus(); return;
     }
-    identify(whoName(), whoEmail(), REF_FROM);
+    identify(whoName(), whoEmail());
     gateNote.textContent = "";
-    document.getElementById("prompt-box").textContent = buildPrompt();
-    document.getElementById("mail-btn").href = "mailto:?subject=" + encodeURIComponent("מי אני בלי טייטל · הפרומפט שלי") + "&body=" + encodeURIComponent(buildPrompt());
+    paintPrompt();
     document.getElementById("copy-note").textContent = "";
     paintCard();
     paintPrev();
-
     var result = document.getElementById("result");
     result.classList.add("show");
-    document.getElementById("live").textContent = "הפרומפט שלכם מוכן.";
-    track("whoami_generate", {referred_by: REF_FROM});
-
+    document.getElementById("live").textContent = "הכרטיס והפרומפט שלכם מוכנים.";
+    track("whoami_generate", {answered: [4,5,6].filter(function(n){ return !!ans(n); }).length + REQUIRED});
     // demo mode neither scrolls nor steals focus, so a headless render
     // captures the page from the top exactly as it is
     if (!DEMO_GEN){
@@ -783,16 +861,10 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       document.getElementById("result-title").focus({preventScroll:true});
     }
   }
-
   // One clipboard path. Tries the async Clipboard API, falls back to a
   // hidden textarea, and always says in plain Hebrew what happened.
   // Nothing here touches the network.
-  function copyPrompt(){
-    var noteEl = document.getElementById("copy-note");
-    var text   = document.getElementById("prompt-box").textContent || "";
-    function ok(){ noteEl.textContent = "הועתק. עכשיו פתחו את הסוכן והדביקו."; track("whoami_copy"); }
-    function fail(){ noteEl.textContent = "לא הצלחנו להעתיק אוטומטית. סמנו את הטקסט ידנית והעתיקו."; }
-
+  function copyText(text, ok, fail){
     function fallbackCopy(){
       try{
         var ta = document.createElement("textarea");
@@ -809,83 +881,92 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         fail();
       }
     }
-
     if (navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(ok, fallbackCopy);
     } else {
       fallbackCopy();
     }
   }
-
-  /* the card: built only from the four answers, sized to screenshot */
-  function ans(n){ var e = document.getElementById("answer-" + n); return e ? e.value.trim() : ""; }
+  function copyPrompt(){
+    var noteEl = document.getElementById("copy-note");
+    var text   = document.getElementById("prompt-box").textContent || "";
+    copyText(text,
+      function(){ noteEl.textContent = "הועתק. עכשיו פתחו את הסוכן והדביקו."; track("whoami_copy"); },
+      function(){ noteEl.textContent = "לא הצלחנו להעתיק אוטומטית. סמנו את הטקסט ידנית והעתיקו."; });
+  }
+  /* the card: built only from the answers and the sentence, sized to screenshot */
   function trimTM(t){ return t.replace(/^(אמרו לי ש|ש)?אני /, "").replace(/^יותר מדי /, "").replace(/^ש/, ""); }
+  function sentence(){ return (document.getElementById("sentence-input").value || "").trim(); }
   function paintCard(){
     var tm = trimTM(ans(2));
     document.getElementById("wcName").textContent = whoName();
     document.getElementById("wcTitle").textContent = ans(1);
     var sup = document.getElementById("wcSuper"); sup.textContent = tm; sup.classList.toggle("long", tm.length > 60);
-    document.getElementById("wcScar").textContent = ans(3);
+    var f = ans(4);
+    document.getElementById("wcFor").textContent = f;
+    document.getElementById("wcFor").style.display = f ? "" : "none";
+    document.getElementById("wcForK").style.display = f ? "" : "none";
+    var s = sentence();
+    var se = document.getElementById("wcSentence");
+    se.textContent = s; se.classList.toggle("show", !!s);
     document.getElementById("wcard").classList.add("show");
     document.querySelector(".wc-hint").classList.add("show");
   }
-  buildStage();
-  // identity fields: restored and saved like the answers
-  (function(){
-    var n = document.getElementById("who-name"), e = document.getElementById("who-email");
-    n.value = DEMO ? "דנה" : load("name"); e.value = DEMO ? "dana@example.com" : load("email");
-    n.addEventListener("input", function(){ save("name", n.value); document.getElementById("gate-note").textContent = ""; });
-    e.addEventListener("input", function(){ save("email", e.value); document.getElementById("gate-note").textContent = ""; });
-  })();
-  // a friend's link: their name and their "too much", nothing else, opens the same four questions
-  if (REF_FROM){
-    var ref = document.getElementById("ref");
-    ref.textContent = "";
-    var b = document.createElement("b"); b.textContent = REF_FROM;
-    ref.appendChild(b);
-    ref.appendChild(document.createTextNode(REF_TM ? ": אמרו פעם ״יותר מדי " + REF_TM + "״. ואתם, יותר מדי מה?" : ": השאלות מההרצאה. ואתם, יותר מדי מה?"));
-    ref.hidden = false; ref.classList.add("show");
-    track("whoami_referred", {referred_by: REF_FROM});
-  }
-  function shareLink(){
-    var tm = trimTM((document.getElementById("answer-2").value || "").trim()).slice(0, 60);
-    var u = new URL("https://connecthedots.co/whoami/");
-    u.searchParams.set("from", whoName().slice(0, 40));
-    if (tm) u.searchParams.set("tm", tm);
-    return u.toString();
-  }
+  // the share: a clean link, no answers, no name. The one thing worth
+  // passing on is the sentence, and only once the person has one.
   function shareText(){
-    var tm = trimTM((document.getElementById("answer-2").value || "").trim());
-    return (tm ? "אמרו לי שאני יותר מדי " + tm + ". ואתם, יותר מדי מה?" : "מי אני בלי טייטל? שלוש שאלות.") + " " + shareLink();
+    var s = sentence();
+    return (s ? s + " זה המשפט שלי. ומי אתם בלי טייטל? " : "מי אני בלי טייטל? שלוש שאלות, ובסוף משפט אחד שאפשר להגיד בקול. ") + PAGE_URL;
   }
   function paintPrev(){
-    var el = document.getElementById("sharePrev");
-    el.textContent = shareText(); el.classList.add("show");
+    // the text, then the link in its own LTR run, so the bidi engine
+    // never hangs the slash on the wrong side of the URL
+    var e = document.getElementById("sharePrev");
+    e.textContent = shareText().replace(PAGE_URL, "");
+    var u = document.createElement("bdi"); u.dir = "ltr"; u.textContent = PAGE_URL;
+    e.appendChild(u); e.classList.add("show");
   }
   function onShare(){
     var note = document.getElementById("share-note");
-    var url = shareLink();
     var text = shareText();
-    track("whoami_share");
+    track("whoami_share", {with_sentence: !!sentence()});
     if (navigator.share){
-      navigator.share({title: "מי אני בלי טייטל", text: text, url: url}).then(function(){ note.textContent = "נשלח."; }, function(){});
+      navigator.share({title: "מי אני בלי טייטל", text: text, url: PAGE_URL}).then(function(){ note.textContent = "נשלח."; }, function(){});
       return;
     }
-    function ok(){ note.textContent = "הלינק הועתק. הדביקו אותו בוואטסאפ או במייל."; }
-    function fail(){ note.textContent = url; }
-    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(ok, fail); } else { fail(); }
+    copyText(text,
+      function(){ note.textContent = "הועתק. הדביקו בוואטסאפ או במייל."; },
+      function(){ note.textContent = PAGE_URL; });
   }
-  document.getElementById("share-btn").addEventListener("click", onShare);
-  /* the friend's arrival: this is not the room, and the date has passed */
-  if (REF_FROM){
+  buildStage();
+  // identity fields and the sentence: restored and saved like the answers
+  (function(){
+    var n = document.getElementById("who-name"), e = document.getElementById("who-email"), s = document.getElementById("sentence-input");
+    n.value = DEMO ? "דן" : load("name"); e.value = DEMO ? "dan@example.com" : load("email"); s.value = DEMO ? DEMO_SENTENCE : load("sentence");
+    n.addEventListener("input", function(){ save("name", n.value); document.getElementById("gate-note").textContent = ""; });
+    e.addEventListener("input", function(){ save("email", e.value); document.getElementById("gate-note").textContent = ""; });
+    var sentenceTimer = null;
+    s.addEventListener("input", function(){
+      save("sentence", s.value);
+      paintCard(); paintPrev();
+      clearTimeout(sentenceTimer);
+      sentenceTimer = setTimeout(function(){ if (sentence()) track("whoami_sentence"); }, 2500);
+    });
+  })();
+  // outside the room the hero speaks to a person who was not there
+  if (!IN_ROOM){
     document.getElementById("kicker").textContent = "מתוך ההרצאה של ענת וייסמן";
-    document.getElementById("heroNote").textContent = "שלוש שאלות. שתי דקות. בסוף תקבלו כרטיס ופרומפט שנבנים רק מהתשובות שלכם.";
+    document.getElementById("heroNote").textContent = "שלוש שאלות, ועוד שלוש שמדייקות. בסוף תקבלו כרטיס ופרומפט שנבנים רק מהתשובות שלכם.";
   }
+  document.getElementById("prompt-more").addEventListener("click", function(){
+    document.getElementById("prompt-wrap").classList.add("open");
+  });
+  document.getElementById("share-btn").addEventListener("click", onShare);
+  document.getElementById("door-btn").addEventListener("click", function(){ track("whoami_door"); });
   document.getElementById("generate-btn").addEventListener("click", onGenerate);
   document.getElementById("copy-btn").addEventListener("click", copyPrompt);
   if (DEMO_GEN) onGenerate();
 })();
 </script>
-
 </body>
 </html>

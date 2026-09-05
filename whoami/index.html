@@ -97,13 +97,22 @@
   .brick::before{left:14px;}
   .brick::after{right:14px;}
   h1{
-    font-size:clamp(40px,11vw,60px);
+    font-size:clamp(34px,9.4vw,56px);
     font-weight:900;
     letter-spacing:-0.01em;
-    line-height:1.08;
+    line-height:1.12;
     margin:0;
+    white-space:nowrap;
   }
-  h1 .line2{display:block;margin-top:0.06em;}
+  .hero .logo{display:block;width:150px;height:auto;margin:0 0 18px;}
+  .talk-name{
+    font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    color:var(--cream-45);
+    font-size:16px;
+    letter-spacing:0.22em;
+    direction:ltr;unicode-bidi:isolate;text-align:right;
+    margin:-14px 0 18px;
+  }
   h1 .accent{color:var(--amber);}
   .hero-note{
     font-size:18px;
@@ -399,6 +408,10 @@
   .door .sign{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:16px;color:var(--cream-45);margin:0 0 20px;}
   .door .btn{width:100%;}
   .door .door-note{font-size:16px;color:var(--cream-45);margin:12px 0 0;line-height:1.5;}
+  .contact{margin-top:22px;padding-top:18px;border-top:1px solid var(--cream-16);}
+  .contact .q-count{margin-bottom:8px;}
+  .contact-line{display:block;direction:ltr;text-align:right;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:18px;color:var(--cream);text-decoration:none;padding:10px 0;min-height:44px;border-bottom:1px dashed var(--cream-16);}
+  .contact-line:hover{color:var(--amber);}
 </style>
 <!-- PostHog web analytics. Copied verbatim from the-human-chair / talk pages (58-talk-page-6-9-update).
      Same project key. Do not invent a different key.
@@ -422,9 +435,10 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         <circle cx="96" cy="18" r="4" fill="#F2EDE4" fill-opacity="0.28"/>
         <circle cx="140" cy="5" r="3" fill="#F2EDE4" fill-opacity="0.28"/>
       </svg>
+      <img class="logo" src="ctd-logo-cream.png" alt="Connecting the Dots" width="1661" height="843">
       <div class="kicker" id="kicker">מתוך ההרצאה של ענת וייסמן · 6.9.2026</div>
-      <div class="brick" aria-hidden="true">?</div>
-      <h1>מי אני<span class="line2">בלי <span class="accent">טייטל</span></span></h1>
+      <div class="talk-name">THE HUMAN IS THE LOOP</div>
+      <h1>מי אני בלי <span class="accent">טייטל</span>?</h1>
       <p class="hero-note" id="heroNote">שלוש שאלות מההרצאה, ועוד שלוש שמדייקות. תמלאו בקצב שלכם ותשאירו את המסך פתוח. נחזור לזה בסוף.</p>
       <p class="hero-goal">בסוף יש לכם <b>משפט אחד</b> להגיד בקול כששואלים אתכם מי אתם. לא מה התפקיד. מי אתם.<br>למשל: ״אני ענת. אני מחברת נקודות. אני מייצרת אימפקט על ידי הנעה לפעולה.״</p>
     </div>
@@ -534,6 +548,11 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
         <p class="sign">ענת</p>
         <a class="btn btn-solid" id="door-btn" href="https://connecthedots.co/book/?utm_source=whoami&amp;utm_medium=content&amp;utm_campaign=talk-6-9-whoami">לקבוע חצי שעה עם ענת</a>
         <p class="door-note">נפתח ביומן שלה. בוחרים שעה, וזהו.</p>
+        <div class="contact">
+          <p class="q-count">או ישירות</p>
+          <a class="contact-line" id="mail-anat" href="mailto:anat@connecthedots.co?subject=%D7%9E%D7%99%20%D7%90%D7%A0%D7%99%20%D7%91%D7%9C%D7%99%20%D7%98%D7%99%D7%99%D7%98%D7%9C">anat@connecthedots.co</a>
+          <a class="contact-line" id="tel-anat" href="tel:" hidden></a>
+        </div>
       </section>
     </section>
   </main>
@@ -639,6 +658,7 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
   var TOTAL        = QUESTIONS.length;
   var STORE_PREFIX = "whoami.v3.answer-";
   var PAGE_URL     = "https://connecthedots.co/whoami/";
+  var PHONE        = "054-4850294";   // her mobile, display form (e.g. "054-000-0000"); the line stays hidden while empty
   // ============================================================
   // The demo switch. ?demo=1 fills the fields with sample answers so
   // the page can be photographed and reviewed without typing.
@@ -697,9 +717,11 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
   function ans(n){ var e = document.getElementById("answer-" + n); return e ? e.value.trim() : ""; }
   function buildStage(){
     var stage = document.getElementById("stage");
-    for (var i = 0; i < TOTAL; i++){
-      var n = i + 1, Q = QUESTIONS[i];
-      var sharpen = n > REQUIRED;
+    for (let i = 0; i < TOTAL; i++){
+      // let, not var: the example chips close over n, and a var would
+      // leave every chip pointing at the last question
+      const n = i + 1, Q = QUESTIONS[i];
+      const sharpen = n > REQUIRED;
       if (n === 1){
         var p1 = el("p", "part"); p1.textContent = "שלוש מההרצאה"; stage.appendChild(p1);
       }
@@ -895,7 +917,9 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
       function(){ noteEl.textContent = "לא הצלחנו להעתיק אוטומטית. סמנו את הטקסט ידנית והעתיקו."; });
   }
   /* the card: built only from the answers and the sentence, sized to screenshot */
-  function trimTM(t){ return t.replace(/^(אמרו לי ש|ש)?אני /, "").replace(/^יותר מדי /, "").replace(/^ש/, ""); }
+  // strips only a leading "אמרו לי שאני / שאני / אני / יותר מדי"; never a bare letter,
+  // because "שאלות" starts with the same ש as "שאני"
+  function trimTM(t){ return t.replace(/^(אמרו לי ש|ש)?אני /, "").replace(/^יותר מדי /, ""); }
   function sentence(){ return (document.getElementById("sentence-input").value || "").trim(); }
   function paintCard(){
     var tm = trimTM(ans(2));
@@ -963,6 +987,13 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{disable_session_
   });
   document.getElementById("share-btn").addEventListener("click", onShare);
   document.getElementById("door-btn").addEventListener("click", function(){ track("whoami_door"); });
+  document.getElementById("mail-anat").addEventListener("click", function(){ track("whoami_mail"); });
+  if (PHONE){
+    var t = document.getElementById("tel-anat");
+    t.href = "tel:+972" + PHONE.replace(/\D/g, "").replace(/^0/, "");
+    t.textContent = PHONE; t.hidden = false;
+    t.addEventListener("click", function(){ track("whoami_call"); });
+  }
   document.getElementById("generate-btn").addEventListener("click", onGenerate);
   document.getElementById("copy-btn").addEventListener("click", copyPrompt);
   if (DEMO_GEN) onGenerate();

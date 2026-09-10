@@ -13,6 +13,15 @@
 <meta property="og:title" content="הכיסא האנושי · The Human Chair">
 <meta property="og:description" content="בכל פרק בן אדם אחד יושב בכיסא, וסוכני בינה מלאכותית מראיינים אותו. השאלה עוברת הלאה מפרק לפרק, ואף פעם לא נשאלת פעמיים.">
 <meta property="og:image" content="https://connecthedots.co/the-human-chair/cover.png">
+<!-- WIDTH AND HEIGHT ARE NOT OPTIONAL, and this cost a card. Facebook renders a link with no
+     declared image size as a small thumbnail on its first scrape, or as no image at all, because
+     it will not block on fetching the file to measure it. The square show cover made it worse:
+     Facebook lays out 1.91:1, so a 1500x1500 gets cropped to a strip or demoted to a thumbnail.
+     A per-episode 1200x630 with its size declared is what actually renders. -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="הכיסא האנושי · The Human Chair">
+<meta property="og:url" content="https://connecthedots.co/go/spotify/">
 <meta property="og:site_name" content="Connecting the Dots">
 <meta name="twitter:card" content="summary_large_image">
 <script>

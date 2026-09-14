@@ -101,6 +101,9 @@ h1{margin:0 0 30px;font:900 clamp(3rem,6.6vw,6rem)/.92 var(--serif);color:var(--
 .fifty p{color:#d9d1c1;max-width:56ch;margin:0 0 12px}
 .fifty .sig{font:500 13px/1 var(--mono);color:var(--amber);letter-spacing:.06em}
 @media (max-width:760px){.fifty .wrap{grid-template-columns:1fr;gap:20px}}
+/* grid children must be allowed to shrink, or a long answer widens the page */
+.maker .wrap > div{min-width:0}
+.blank{text-overflow:ellipsis}
 /* the agent's own words: typewriter, so the answer never reads like the page */
 #srule{font-family:var(--hand);font-weight:700;font-size:.95em;background:rgba(242,162,28,.18);padding:0 .15em}
 .slot.full q .ans{font-family:var(--hand);font-weight:700;font-size:10.5px}
@@ -295,8 +298,8 @@ posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{persistence:'mem
   function bind(src,dst,fallback){var el=$(src),out=$(dst);var f=function(){out.textContent=el.value.trim()||fallback;};el.addEventListener('input',f);f();}
   bind('rule','srule','____');bind('agent','sagent','youragent');bind('agent','lagent','youragent');bind('human','shuman','@you');
   var rule=$('rule');
-  function size(){rule.style.width=Math.max(5,Math.min(16,(rule.value||rule.placeholder).length*0.52+1))+'em';}
-  rule.addEventListener('input',size);size();
+  function size(){rule.style.width='1px';rule.style.width=Math.min(rule.scrollWidth+10,rule.parentNode.clientWidth)+'px';}
+  rule.addEventListener('input',size);window.addEventListener('resize',size);size();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
 
   Array.prototype.forEach.call(document.querySelectorAll('.dots button'),function(b){
     b.addEventListener('click',function(){

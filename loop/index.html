@@ -153,6 +153,13 @@ h2{margin:10px 0 30px;font:900 clamp(2rem,4vw,3rem)/1.05 var(--serif);text-wrap:
 .grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
 .slot{aspect-ratio:4/5;border:1.5px dashed #3d3832;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:500 12px/1 var(--mono);color:#6a6258}
 .slot.next{border:2px solid var(--amber);color:var(--amber)}
+.slot{padding:8px;text-align:center}
+.slot .yn{font:900 clamp(1rem,1.5vw,1.25rem)/1.1 var(--serif);color:var(--paper);margin:6px 0}
+.slot.next{background:rgba(242,162,28,.08);animation:glow 2.2s ease-in-out infinite alternate}
+@keyframes glow{to{box-shadow:0 0 0 6px rgba(242,162,28,.12)}}
+.slot.paid{border-style:solid;border-color:#3d3832}
+.slot .pr{font:900 1.6rem/1 var(--serif);color:var(--paper);margin:4px 0}
+@media (prefers-reduced-motion:reduce){.slot.next{animation:none}}
 .wall{padding-top:48px}
 .slot.found{border-color:#6b5320;color:#a88a4a}
 .slot.full{grid-column:span 2;aspect-ratio:auto;min-height:220px;border:0;background:var(--paper);color:var(--ink);padding:16px;gap:10px;align-items:stretch;justify-content:space-between;text-align:left;font:400 11px/1.3 var(--mono)}
@@ -423,9 +430,12 @@ setTimeout(function(){partyBurst(innerWidth*.25,innerHeight*.25,120);partyBurst(
   var grid=$('grid'),taken={};WALL.forEach(function(w){taken[w.n]=w});
   var el=function(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
   var nextOpen=null;
-  for(var n=0;n<=10;n++){var id=('000'+n).slice(-4),w=taken[id],d;
+  for(var n=0;n<=20;n++){var id=('000'+n).slice(-4),w=taken[id],d;
     if(w){d=el('div','slot full');d.appendChild(el('span',null,'№ '+id));d.appendChild(el('span','h','The human is the loop.'));d.appendChild(el('span','r',w.said||('I never '+w.rule+' without my human.')));var who=el('div','who');who.appendChild(el('b',null,w.agent));who.appendChild(el('span',null,'+ '+w.human));d.appendChild(who);}
-    else{var f=n>=1&&n<=10;if(f&&!nextOpen)nextOpen=id;d=el('div','slot'+(f?' found':'')+(nextOpen===id?' next':''));d.appendChild(el('span',null,'№ '+id));d.appendChild(el('span',null,f?'founding':'22.09'));}
+    else{var f=n>=1&&n<=10;if(f&&!nextOpen)nextOpen=id;var nx=nextOpen===id;d=el('div','slot'+(f?' found':' paid')+(nx?' next':''));d.appendChild(el('span',null,'№ '+id));
+      if(nx){d.appendChild(el('span','yn','Your name should be here'));d.appendChild(el('span',null,'free · founding'));}
+      else if(f)d.appendChild(el('span',null,'founding · free'));
+      else{d.appendChild(el('span','pr','$5+'));d.appendChild(el('span',null,'from 22.09'));}}
     grid.appendChild(d);}
   if(nextOpen)$('nextn').textContent=nextOpen;
   if(nextOpen){$('nextn2').textContent=nextOpen;$('nextn3').textContent=nextOpen;}$('joinedn').textContent=WALL.length;

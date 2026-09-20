@@ -41,11 +41,8 @@ a{color:inherit}
 .app{max-width:var(--col);margin:0 auto;min-height:calc(100vh - 32px);position:relative}
 .screen{display:none;min-height:calc(100vh - 32px);padding:12px var(--gutter) 28px;flex-direction:column;gap:14px;background:var(--cream)}
 .screen.on{display:flex}
-@media (min-width:600px){
-  body{background:#F3E6CC}
-  .app{margin-top:24px;margin-bottom:24px;border:3px solid var(--navy);border-radius:28px;overflow:hidden;min-height:0;box-shadow:8px 8px 0 var(--navy)}
-  .screen{min-height:760px}
-}
+/* The phone frame that used to live here (a 440px card floating in a field) is gone.
+   Everything above 600px is now decided in the v12 block at the end of this sheet. */
 /* top bar */
 .bar{display:flex;justify-content:space-between;align-items:center;min-height:44px}
 .back{background:none;border:0;padding:0 4px 0 0;font-size:15px;font-weight:700;min-height:44px;display:flex;align-items:center;gap:6px}
@@ -140,6 +137,11 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 /* dot screen */
 .screen.dark{background:var(--navy);color:var(--cream)}
 .screen.dark .back{color:var(--cream)}
+/* On the navy screens the button's navy border and navy shadow disappeared into the background,
+   so the main action read as a floating word. Cream edge, cream shadow: the same button, visible. */
+.screen.dark .cta{border-color:var(--cream);box-shadow:4px 4px 0 var(--cream)}
+.screen.dark .cta:active:not(:disabled){box-shadow:2px 2px 0 var(--cream)}
+.screen.dark .cta:disabled{background:rgba(255,244,224,.22);color:rgba(255,244,224,.6);border-color:rgba(255,244,224,.35);box-shadow:none}
 .dot-art{margin:0 calc(-1 * var(--gutter));position:relative}
 .dot-art svg{display:block;width:100%;height:auto}
 .dot-art .tag{position:absolute;left:50%;bottom:0;font-family:var(--hand);font-size:24px;font-weight:700;color:var(--sun);transform:rotate(-5deg)}
@@ -302,6 +304,161 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .lang{display:flex;gap:6px;margin-bottom:6px}
 .lang button{min-height:32px;background:transparent;border:2px solid var(--navy);border-radius:999px;padding:0 10px;font-size:12px;font-weight:800;color:var(--navy)}
 .lang button[aria-pressed="true"]{background:var(--navy);color:var(--cream)}
+/* The line beside the step exists only where there is room for it: off on a phone. */
+.stage{display:none}
+/* ════ v12 (20.9): the laptop ═══════════════════════════════════════════════════
+   Most of this page's readers arrive from LinkedIn on a laptop, and what they met was
+   a 440px phone column inside an empty field. Nothing below 600px is touched by any
+   rule in this block: the phone keeps the same screens, the same flow and the same
+   sizes it shipped with. From 600px the phone frame goes. From 900px the step takes
+   a left column and the line of dots takes the right, the way the canvas drew it.
+   Type is set in vw clamps so the scale grows with the window instead of jumping. */
+
+/* ── shared by tablet and laptop ─────────────────────────────────────────────── */
+@media (min-width:600px){
+  body{background:var(--cream)}
+  .app{border:0;border-radius:0;box-shadow:none;overflow:visible;min-height:0;margin:0 auto}
+  .screen{min-height:0}
+  /* these bleeds were cut to the edge of a phone column. Inside a page they stop bleeding. */
+  .hero-art,.dot-art{margin-left:0;margin-right:0}
+  .goes{margin-left:0;margin-right:0;border-radius:22px;padding:26px 30px 30px}
+  .screen.pinkbg{padding-bottom:26px}
+  .strip{font-size:13px;padding:10px 24px}
+  .counter{background:transparent}
+  /* margin-top:auto was written for a phone screen taller than its content. Above the
+     phone it only tears the column in half, so it stops applying. */
+  .screen.on > .cta,.openfoot,.wish{margin-top:0!important}
+}
+
+/* ── tablet: one column, wider, still one decision per screen ────────────────── */
+@media (min-width:600px) and (max-width:899px){
+  .app{max-width:680px}
+  .screen{padding:20px 32px 44px;gap:16px}
+  .screen h1{font-size:42px!important;line-height:.97}
+  .screen.open h1,.hero-h1{font-size:48px!important}
+  .lede,.openlede{font-size:18px}
+  .h2,.goes .h,.five .h{font-size:34px}
+  .chip{min-height:58px;font-size:16px}
+  .pill{font-size:17px}
+  .cta{font-size:21px;min-height:60px}
+  .sharecard .sc-say,.oath .say{font-size:32px}
+  footer.house{max-width:680px;padding:24px 32px 40px;font-size:14px}
+}
+
+/* ── laptop: the step on the left, the line on the right ─────────────────────── */
+@media (min-width:900px){
+  .app{
+    max-width:1280px;
+    display:grid;
+    grid-template-columns:minmax(0,1.24fr) minmax(0,1fr);
+    column-gap:clamp(36px,4vw,72px);
+    align-items:start;
+    padding:0 clamp(28px,4vw,56px);
+  }
+  #counter{grid-column:1 / -1;grid-row:1;padding:22px 0 0}
+  .counter .cn{font-size:15px}
+  .counter .cn b{font-size:clamp(26px,2.2vw,34px)}
+  .counter .track{height:12px;margin-top:9px}
+  .counter .ms{font-size:13px}
+  .screen.on{grid-column:1;grid-row:2}
+  .stage{grid-column:2;grid-row:2;display:block}
+
+  .screen{
+    position:relative;
+    background:transparent;
+    padding:82px 0 36px;
+    gap:13px;
+    min-height:calc(100vh - 102px);
+    justify-content:center;
+  }
+  /* the step bar belongs at the top of the screen, not in the middle of the centred column */
+  .bar{position:absolute;top:22px;left:0;right:0}
+  .screen.on > .link{align-self:flex-start;text-align:left}
+  .screen.dark{
+    background:var(--navy);
+    border-radius:28px;
+    padding:92px 40px 44px;
+    margin:20px 0 34px;
+    min-height:calc(100vh - 186px);
+  }
+  .screen.dark .bar{top:34px;left:40px;right:40px}
+
+  /* type */
+  .screen h1{font-size:clamp(36px,4.1vw,58px)!important;line-height:.96;letter-spacing:-.03em}
+  .screen.open h1{font-size:clamp(38px,4.45vw,64px)!important;line-height:.94}
+  .hero-h1{font-size:clamp(36px,3.95vw,57px)!important;line-height:.95}
+  .lede,.openlede{font-size:clamp(17px,1.35vw,21px);line-height:1.45}
+  .h2,.goes .h,.five .h{font-size:clamp(28px,2.6vw,38px)}
+  .label{font-size:13px}
+  .note{font-size:14px}
+  .sticky-note{font-size:clamp(26px,2.3vw,34px);padding:8px 18px}
+  .oath .say,.sharecard .sc-say,.preview .say,.mydot .say{font-size:clamp(28px,2.3vw,34px)}
+  .hundred{font-size:14px;padding:6px 14px}
+
+  /* controls: room to breathe, and a door that is a door and not a bar */
+  .grid2{gap:10px}
+  .chip{min-height:52px;font-size:16.5px;padding:8px 13px}
+  .pill{min-height:52px;font-size:17px;padding:0 20px}
+  .slot{min-height:52px;font-size:16px}
+  .field{min-height:54px;font-size:27px;padding:0 18px}
+  .field.sans{font-size:17px}
+  textarea.field{font-size:24px;min-height:96px}
+  .big-choice{padding:20px 24px;gap:18px}
+  .big-choice .t{font-size:clamp(24px,2vw,30px)}
+  .big-choice .s{font-size:16px}
+  .cta{width:auto;align-self:flex-start;min-width:300px;max-width:100%;padding:17px 36px;font-size:22px;min-height:64px}
+  .easy button{min-height:62px;font-size:17px}
+  .human-list div{font-size:18px;padding:13px 18px}
+  .qs li{font-size:18px}
+  .doit{padding:22px 24px}
+  .doit .dh{font-size:25px}
+  .doit ol{font-size:16px}
+  .tile .t{font-size:24px}
+  .tile .d{font-size:16px}
+  .five{padding:26px 24px}
+  .coin{width:86px;height:86px;font-size:32px}
+  .sharecard{padding:24px 24px 18px}
+  .net{min-height:60px;font-size:17px}
+  .ready{font-size:16px}
+  .bubble,.kept,.carry{font-size:16px}
+
+  /* the opening: left aligned beside the line, the way the canvas opens */
+  .screen.open{padding:26px 0 44px;justify-content:center}
+  .opentop{text-align:left;padding-top:0}
+  .ctdlogo{margin:0;height:54px}
+  .bunting{max-width:440px;margin:8px 0 0}
+  .portrait{margin:18px 0 0;width:clamp(158px,13.5vw,196px);height:clamp(158px,13.5vw,196px)}
+  .portrait .fifty{width:64px;height:64px;font-size:26px;right:-12px}
+  .opentitle{text-align:left;margin-top:22px}
+  .opentitle .kicker{transform-origin:left center;font-size:clamp(26px,2.2vw,32px)}
+  .openlede{text-align:left;max-width:34em;margin-top:14px}
+  .openfoot{padding-top:22px;flex-direction:row;align-items:center;gap:24px;flex-wrap:wrap}
+  .opensig{text-align:left;font-size:clamp(20px,1.7vw,25px)}
+
+  /* the line beside the step. Sticky, so it stays with you down a long screen. */
+  .stage{position:sticky;top:30px;padding-top:56px;align-self:start}
+  .stage svg{display:block;width:100%;height:auto;max-height:calc(100vh - 150px)}
+
+  footer.house{
+    max-width:1280px;
+    padding:26px clamp(28px,4vw,56px) 46px;
+    margin:14px auto 0;
+    font-size:14px;
+    border-top:2px solid var(--track);
+  }
+}
+
+/* ── wide enough for the choices to sit three across instead of stacking ─────── */
+@media (min-width:1180px){
+  .grid2{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* ── the widest windows: the column stops growing, the white space does ──────── */
+@media (min-width:1280px){
+  .app{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .screen{gap:16px}
+  .stage{top:40px;padding-top:64px}
+}
 </style>
 </head>
 <body>
@@ -554,6 +711,32 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <a class="cta" href="https://thehumanistheloop.co/" target="_blank" rel="noopener">See the talk &rarr;</a>
   </div>
 </section>
+
+<!-- The line of dots, for the screens wide enough to hold it. Decorative and wordless:
+     it adds nothing to read and nothing to click, so the step on the left stays the only
+     decision on the screen. Hidden below 900px, which is why the phone never sees it. -->
+<aside class="stage" aria-hidden="true">
+  <svg viewBox="0 0 640 780" preserveAspectRatio="xMidYMid meet" focusable="false">
+    <text x="30" y="600" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="800" font-size="540" letter-spacing="-30" fill="#FFE7A8" stroke="#1B2838" stroke-width="4">50</text>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#1B2838" stroke-width="22" stroke-linecap="round"/>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#FF5A3C" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800"/>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#38BDEF" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-200"/>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#FDD801" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-400"/>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#FF8FC7" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-600"/>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#7ED957" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-800"/>
+    <g stroke="#1B2838" stroke-width="4">
+      <circle cx="310" cy="290" r="15" fill="#FFF4E0"/>
+      <circle cx="200" cy="560" r="15" fill="#FFF4E0"/>
+      <circle cx="580" cy="540" r="15" fill="#FFF4E0"/>
+      <circle cx="460" cy="270" r="15" fill="#FFF4E0"/>
+    </g>
+    <path d="M420 450 C 540 560, 630 430, 610 240" fill="none" stroke="#1B2838" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 16"/>
+    <circle cx="420" cy="450" r="24" fill="#FDD801" stroke="#1B2838" stroke-width="4" stroke-dasharray="6 5"/>
+    <g fill="#FF5A3C"><circle cx="540" cy="110" r="7"/><circle cx="24" cy="420" r="6"/></g>
+    <g fill="#38BDEF"><rect x="590" y="150" width="14" height="14" transform="rotate(20 597 157)"/><rect x="20" y="668" width="12" height="12" transform="rotate(-15 26 674)"/></g>
+    <g fill="#FDD801" stroke="#1B2838" stroke-width="2"><path d="M450 50 l6 14 l15 2 l-11 10 l3 15 l-13 -8 l-13 8 l3 -15 l-11 -10 l15 -2 z"/></g>
+  </svg>
+</aside>
 
 </main>
 

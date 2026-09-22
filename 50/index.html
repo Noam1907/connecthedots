@@ -362,11 +362,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .mdstats .s{display:flex;gap:8px;align-items:baseline;background:var(--white);border:2.5px solid var(--navy);border-radius:12px;padding:8px 11px}
 .mdstats .s b{font-size:19px;font-weight:800}
 .mdlink{font-family:var(--hand);font-size:22px;border:2.5px dashed var(--navy);border-radius:14px;padding:10px 14px;word-break:break-all}
-.rungs{display:flex;gap:8px}
-.rungs button{flex:1;min-height:54px;background:var(--white);border:2.5px solid var(--navy);border-radius:14px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:4px 2px;line-height:1.1}
-.rungs button b{font-size:19px}
-.rungs button span{font-size:10.5px;font-weight:700;opacity:.75;text-align:center}
-.rungs button[aria-pressed="true"]{background:var(--sun);box-shadow:3px 3px 0 var(--navy)}
+.commit{font-size:16px;line-height:1.3;font-weight:800;border-left:5px solid var(--navy);padding-left:11px}
+.rungs{display:flex;gap:8px;align-items:stretch}
+.rungs.one{display:block}
+.rung{flex:1;min-height:66px;background:var(--navy);color:var(--cream);border:0;border-radius:16px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 4px;line-height:1.1;box-shadow:3px 3px 0 var(--tomato)}
+.rungs.one .rung{width:100%;min-height:58px;flex-direction:row;gap:8px}
+.rung b{font-size:22px}
+.rung span{font-size:11px;font-weight:700;opacity:.9;text-align:center}
+.rung.mid{background:var(--tomato);box-shadow:4px 4px 0 var(--navy);transform:scale(1.04)}
+.rung.mid b{font-size:25px}
 .gets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .gets li{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;line-height:1.3;font-weight:700}
 .gets li b{font-weight:800;flex-shrink:0}
@@ -969,29 +973,22 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <section class="screen dark" data-s="five" aria-label="The 50,000">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">The 50,000</span></div>
   <div class="five">
-    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">Every hand-over the campaign made. At day 100.</h1></div>
-    <div id="fiveVow" style="font-size:15.5px;line-height:1.35;font-weight:600">Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line.</div>
+    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">The list is being written right now, by the people on the line.</h1></div>
+    <div id="fiveVow" style="font-size:15.5px;line-height:1.35;font-weight:600">Every entry will be a real hand-over from a real person in the campaign: initials, dated, verified.</div>
 
-    <!-- The live proof that the list is being written now. "Day X of 100" counts itself off
-         the birthday, so nobody has to remember to advance it. -->
     <div class="hands" id="handsList"></div>
 
-    <!-- Anat, 22.9: three lines with a tick, not a paragraph. -->
+    <!-- Anat's final version, 22.9. This line is the whole argument of the screen and it sits
+         above the buttons on purpose: the money is not buying a document, it is buying the
+         thing this page has been about since the first screen. -->
+    <div class="commit">The payment is not for the list. It is for you. People who pay, show up, for their own fifty minutes.</div>
+
     <ul class="gets" id="listIs"></ul>
 
-    <!-- THE ONE THING ON THIS SCREEN THAT SELLS. Her spec: navy pill, the widest and
-         boldest thing here, sitting between the three things and the charity line, with the
-         price inside it rather than fighting a coin for attention. -->
     <div class="rungs" id="rungs"></div>
-    <button class="pay" type="button" id="payBtn">Get the receipts &middot; $5</button>
-    <!-- Anat's ruling, 22.9: one button, one price, VAT inside it. "זה באמת לא בשביל הכסף."
-         So an Israeli buyer is never shown a price that grows at the last step, and she
-         absorbs the 18% rather than route two rails for it. Saying so is the whole point:
-         a price that quietly becomes another price is the thing this line prevents. -->
-    <div id="paySub">One time, not a subscription. VAT included wherever you are. Your receipt lands now.</div>
 
-    <!-- The address the receipts go to. Required, because a payment with no address is a
-         person we cannot deliver to, and PayPal never tells this page who paid. -->
+    <div id="paySub">Same receipts, every tier. The extra is you, paying it forward. One time, not a subscription. Your receipt lands now.</div>
+
     <div class="sub" id="payMail" hidden>
       <label class="subl" for="fiftyEm">Where should the receipts go?</label>
       <div class="inline">
@@ -1005,10 +1002,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <div class="toast" id="notePay">Nothing is charged yet. Your free dot is claimed either way.</div>
     <div id="talkPerk" style="font-size:12.5px;line-height:1.35;opacity:.85">Coming to Tel Aviv? Every buyer gets a discount code for Anat's talk in the confirmation mail. <a href="https://thehumanistheloop.co/?utm_source=fifty50&amp;utm_medium=content&amp;utm_campaign=the-49-screen" target="_blank" rel="noopener" style="font-weight:800">The Human is the Loop</a></div>
 
-    <!-- Small, at the bottom, after the button. Her order. -->
     <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
 
-    <button class="link" data-go="human" id="skipPay">Not now. Carry on.</button>
+    <button class="link" data-go="human" id="skipPay">Not now. My free dot stays claimed.</button>
   </div>
 </section>
 
@@ -1234,9 +1230,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // appears one rung at a time as the links exist, and nothing on screen is ever a price
   // that cannot be paid.
   var TIERS = [
-    { usd: 5,  url: "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6", say: "I am in" },
-    { usd: 10, url: "", say: "Hold me to it" },
-    { usd: 20, url: "", say: "Really hold me to it" }
+    { usd: 5,  url: "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6", say: "The receipts" },
+    { usd: 10, url: "", say: "The receipts, plus one" },
+    { usd: 20, url: "", say: "The receipts, plus three" }
   ];
   var tier = 0;
   var PAY_URL = TIERS[0].url;
@@ -1643,21 +1639,29 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#promptText").textContent = promptFor();
     $("#calLink").href = calUrl();
     $("#joinCta").innerHTML = (st.stored ? "Help get to 50,000 minutes" : "Join the 50,000 human minutes") + " &rarr;";
-    // The gate is the list itself, not a flag somebody has to remember to flip: the seventh
-    // row with a date and a result turns the money on, and nothing else does.
-    var payOpen  = HANDOVERS.length >= PAY_OPENS_AT;  // can money be taken
-    var listLive = HANDOVERS.length > 0;              // is there a list to speak of yet
-    $("#payBtn").hidden = !payOpen;
-    // Past tense on an empty list is the same defect her ruling is about, one line higher up.
-    $("#fiveHead").textContent = listLive
-      ? "Every hand-over the campaign made. At day 100."
-      : "The list is being written right now, by the people on the line.";
-    $("#fiveVow").textContent = listLive
-      ? "Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line."
-      : "Every entry will be a real hand-over from a real person in the campaign: initials, dated, counted on the line.";
-    var ps = $("#paySub"); if(ps) ps.hidden = !payOpen;
+    // Her final version, 22.9: the tiers ARE the buttons, the middle one is the one she
+    // wants pressed, and a tier with nowhere to go does not render at all. So the row grows
+    // as the links exist and nothing on screen is ever a price that cannot be paid.
+    var live = TIERS.filter(function(t){ return t.url; });
+    var rb = $("#rungs");
+    if(rb){
+      rb.hidden = !live.length;
+      rb.className = "rungs" + (live.length === 1 ? " one" : "");
+      if(rb.childElementCount !== live.length){
+        rb.innerHTML = live.map(function(t, ix){
+          var mid = live.length === 3 && ix === 1;
+          return '<button class="rung' + (mid ? " mid" : "") + '" type="button" data-rung="' + ix + '">'
+               + '<b>$' + t.usd + '</b><span>' + t.say + '</span></button>';
+        }).join("");
+      }
+    }
+    // The head and the vow are hers and they no longer move with the state: the list IS
+    // being written right now, which is true on day 1 and true on day 99.
+    $("#fiveHead").textContent = "The list is being written right now, by the people on the line.";
+    $("#fiveVow").textContent = "Every entry will be a real hand-over from a real person in the campaign: initials, dated, verified.";
+    var ps = $("#paySub"); if(ps) ps.hidden = !live.length;
     // And a buyer perk with no buyer and no code is a promise to nobody.
-    var perk = $("#talkPerk"); if(perk) perk.hidden = !(payOpen && TALK_CODE_LIVE);
+    var perk = $("#talkPerk"); if(perk) perk.hidden = !(live.length && TALK_CODE_LIVE);
     // Its three siblings were gated and this one was not, so it promised a receipt nobody
     // could generate, in the present tense, under a head saying the list is still being written.
     var li = $("#listIs");
@@ -1671,23 +1675,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }
     // This line is why the HTML label never rendered once. A product change updated three
     // strings and missed the fourth, and the fourth is the one that takes the money.
-    // The rungs, and the button that follows them. Only rungs with somewhere to go exist.
-    var live = TIERS.filter(function(t){ return t.url; });
-    var rb = $("#rungs");
-    if(rb){
-      rb.hidden = live.length < 2;
-      if(live.length > 1 && rb.childElementCount !== live.length){
-        rb.innerHTML = live.map(function(t,i){
-          return '<button type="button" data-rung="'+i+'" aria-pressed="'+(i===tier?"true":"false")+'">'
-               + '<b>$'+t.usd+'</b><span>'+t.say+'</span></button>';
-        }).join("");
-      }
-      $$('#rungs button').forEach(function(b){ b.setAttribute("aria-pressed", Number(b.dataset.rung)===tier ? "true":"false"); });
-    }
-    PAY_URL = (live[tier] || live[0] || {}).url || "";
-    $("#payBtn").innerHTML = st.paid ? "Paid \u2713"
-      : (PAY_URL ? "Get the receipts &middot; $" + (live[tier] || live[0]).usd : "Opens soon &middot; $5");
-    $("#payBtn").disabled = !!st.paid;
     // Their own address, already typed once, put back in front of them.
     var mine = st.email.trim(), sub = $("#subEm");
     if(mine && !sub.disabled && !sub.value) sub.value = mine;
@@ -1860,7 +1847,18 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       st.thing = el.dataset.v; st.cat = null; st.own=""; $("#own").value="";
       render(); show("time"); return;
     }
-    if(el.dataset.rung !== undefined){ tier = Number(el.dataset.rung); render(); return; }
+    // Pressing a tier IS the checkout. One press, not pick then press.
+    if(el.dataset.rung !== undefined){
+      tier = Number(el.dataset.rung);
+      var liveT = TIERS.filter(function(t){ return t.url; });
+      PAY_URL = (liveT[tier] || {}).url || "";
+      if(!PAY_URL){ $("#notePay").classList.add("on"); return; }
+      var box = $("#fiftyEm");
+      if(box && !box.value && st.email.trim()) box.value = st.email.trim();
+      $("#payMail").hidden = false; $("#rungs").hidden = true; $("#paySub").hidden = true;
+      if(box) box.focus();
+      return;
+    }
     if(g==="lang"){ st.lang = el.dataset.v; render(); return; }
     if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; render(); return; }
     if(g==="thing"){
@@ -1890,16 +1888,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // Her 22.9 flow: the button opens a checkout with a REQUIRED email, and the thank-you
   // names their dot. The email is not a nicety: PayPal takes the money in a tab this page
   // never hears from, so without it a payment arrives with nobody to deliver to.
-  $("#payBtn").addEventListener("click", function(){
-    if(!PAY_URL){ $("#notePay").classList.add("on"); return; }
-    var box = $("#fiftyEm");
-    if(box && !box.value && st.email.trim()) box.value = st.email.trim();
-    $("#payMail").hidden = false;
-    $("#payBtn").hidden = true;
-    $("#paySub").hidden = true;
-    if(box) box.focus();
-  });
-
   $("#fiftyBtn").addEventListener("click", function(){
     var box = $("#fiftyEm"), v = box.value.trim(), btn = this, err = $("#payErr");
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){

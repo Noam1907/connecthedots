@@ -86,7 +86,11 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .chip[aria-pressed="true"]{background:var(--sun);font-weight:800;box-shadow:3px 3px 0 var(--navy);transform:rotate(-1.5deg)}
 .pills{display:flex;flex-wrap:wrap;gap:9px}
 .pill{min-height:48px;background:var(--white);border:2.5px solid var(--navy);border-radius:999px;padding:0 16px;font-size:16px;font-weight:700}
-.pill.own{border-style:dashed}
+/* The open field is not a seventeenth preset. Sky ground, navy ink: the accent this house
+   uses for a door, at a contrast that carries text, which sky on cream does not. */
+.pill.own{border-style:dashed;background:var(--sky)}
+.pill.own[aria-pressed="true"]{background:var(--sun)}
+.ownask{color:var(--navy);opacity:1}
 .pill[aria-pressed="true"]{background:var(--sun);font-weight:800;box-shadow:3px 3px 0 var(--navy);transform:rotate(-2deg)}
 .row{display:flex;gap:7px}
 .slot{flex:1;min-width:0;min-height:48px;background:var(--white);border:2.5px solid var(--navy);border-radius:12px;font-size:15px;font-weight:700;padding:0}
@@ -733,14 +737,17 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <button class="pill" type="button" aria-pressed="false" data-v="bill">My phone bill</button>
     <button class="pill" type="button" aria-pressed="false" data-v="forms">Forms in bureaucrat-speak</button>
   </div>
-  <div class="label" id="w4" style="margin-top:4px">What I never have time for</div>
-  <div class="pills" role="group" aria-labelledby="w4" data-group="thing" data-cat="What I never have time for">
+  <div class="label" id="w4" style="margin-top:4px">Too small to plan, too fun to skip</div>
+  <div class="pills" role="group" aria-labelledby="w4" data-group="thing" data-cat="Too small to plan, too fun to skip">
     <button class="pill" type="button" aria-pressed="false" data-v="story">A bedtime story starring my kid</button>
     <button class="pill" type="button" aria-pressed="false" data-v="trip">Planning the trip</button>
     <button class="pill" type="button" aria-pressed="false" data-v="dinner">Tonight's dinner from a fridge photo</button>
     <button class="pill" type="button" aria-pressed="false" data-v="water">Water stops on my hike</button>
   </div>
-  <div class="pills" role="group" aria-label="Something only I know I need" data-group="thing" data-cat="Something only I know I need" style="margin-top:8px">
+  <!-- Her ask, 22.9: the open field should not look like the sixteen presets, and it should
+       say why she wants it. The best tasks on this page will come from strangers. -->
+  <div class="label ownask" style="margin-top:10px">Have a better task to give AI? I want great ideas.</div>
+  <div class="pills" role="group" aria-label="Something only I know I need" data-group="thing" data-cat="Something only I know I need">
     <button class="pill own" type="button" aria-pressed="false" data-v="__own">Something only I know I need</button>
   </div>
   <input id="own" class="field hidden" type="text" maxlength="60" placeholder="the thing on my page" autocomplete="off" aria-label="Something only I know I need">
@@ -772,7 +779,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <div class="kept" id="keptLine">You keep it. On purpose.</div>
   <div class="label" style="margin-top:4px">Your 50 minutes are still out there. What is one thing you <b>will</b> hand over?</div>
   <div class="easy" id="easyList" data-group="easy"></div>
-  <button class="link" data-go="nodot" style="margin-top:6px">Nothing right now</button>
+  <button class="link" data-go="nodot" id="nothingNow" style="margin-top:6px">Nothing right now</button>
 </section>
 
 <!-- 3c THE DIGNIFIED EXIT: no dot, no +50, and the want is still theirs -->
@@ -821,7 +828,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <input id="city" class="field solid" type="text" maxlength="40" placeholder="City, country (optional)" autocomplete="address-level2" aria-label="City, country">
   <input id="em" class="field solid sans" type="email" maxlength="80" placeholder="Email" autocomplete="email" required aria-label="Email">
   <div class="err hidden" id="emErr"></div>
-  <div class="note">Your first initial, your city and what you handed over join the line for others to see. Your name and email never do.</div>
+  <div class="note">Your first initial, your city and what you would do with the 50 minutes join the line for others to see. Your name, your email and the task you hand over never do.</div>
   <div class="note"><b>Free.</b> <span id="mailPromise">Your prompt comes back on the next screen.</span> One line to <a href="mailto:anat@connecthedots.co">anat@connecthedots.co</a> takes you off.</div>
   <button class="cta" id="addDot" data-go="hand" disabled style="margin-top:auto"><svg width="18" height="18" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="#FDD801" stroke="#1B2838" stroke-width="3"/></svg>I promise. Add my dot</button>
 </section>
@@ -913,7 +920,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <section class="screen dark" data-s="pass" aria-label="Help get to 50,000 minutes">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">Get to 50,000</span></div>
   <h1 style="font-size:32px;line-height:1;letter-spacing:-.03em">Help get to 50,000 minutes before December 31st.</h1>
-  <p class="lede" style="margin-top:-6px">You got your 50. Give one person the chance to get theirs.</p>
+  <p class="lede" style="margin-top:-6px">You got your 50. Now pass the chance on, to as many people as you like.</p>
   <div class="nets" data-group="net">
     <button class="net" type="button" aria-pressed="true" data-v="wa" style="background:var(--wa-btn)">WhatsApp</button>
     <button class="net" type="button" aria-pressed="false" data-v="li" style="background:var(--sky)">LinkedIn</button>
@@ -921,7 +928,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <button class="net" type="button" aria-pressed="false" data-v="link" style="background:var(--cream)">Copy link</button>
   </div>
   <div class="ready hidden" id="readyBox" aria-live="polite">
-    <span class="rl" id="readyLabel">Ready for WhatsApp, to one person</span>
+    <span class="rl" id="readyLabel">Ready for WhatsApp, one chat at a time</span>
     <span class="lang" id="langRow" data-group="lang"><button type="button" data-v="en" aria-pressed="true">English</button><button type="button" data-v="he" aria-pressed="false">עברית</button></span>
     <span id="readyText"></span>
   </div>
@@ -951,7 +958,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
     <!-- Three things, and two of them arrive the day they pay. That is the answer to "what
          does a buyer get on day 1", and it is Anat's, 22.9. -->
-    <div class="listis">Three things. The weekly progress note starts this week: the counter, the new entries, the best stories. The talk discount arrives with your receipt. The full list lands at day 100.</div>
+    <div class="listis" id="listIs">Three things. The weekly progress note starts this week: the counter, the new entries, the best stories. The talk discount arrives with your receipt. The full list lands at day 100.</div>
 
     <div style="font-size:14px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px">20% of every $5 goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
 
@@ -1159,7 +1166,8 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   var LINE_API_FALLBACK = "https://fifty-line.pages.dev/api";
   var apiBase = LINE_API, apiSettled = false;
   var API_TIMEOUT_MS = 6000;
-  var SHARE_BASE = "https://connecthedots.co/50";
+  // With no slash this 301s, and this is the string that is COPIED and handed to Facebook.
+  var SHARE_BASE = "https://connecthedots.co/50/";
   // Her short film for the opening screen. Empty means there is no video block on the page
   // at all, which is the 20.9 ruling: a play button that plays nothing came off this page
   // once already. Put a URL here (and a still in VIDEO_POSTER) and the block appears.
@@ -1457,6 +1465,8 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // forced by the house dash ban: "project - reclaiming" became "project, reclaiming", and
   // "the loop - we just" became two sentences.
   function shareText(){
+    // "Copy link" copies a URL, so the box above it must show a URL and not a paragraph.
+    if(st.net==="link") return myLabel();
     if(keptEverything()){
       var body = (st.lang==="he" && st.net==="wa") ? KEPT_SHARE_HE : KEPT_SHARE;
       return body + "\n\n" + myLabel();
@@ -1473,7 +1483,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       + "\n\nThis is part of the 50,000 Minutes project, reclaiming time for the things that make us human. If you let AI buy you 50 minutes back, what would you do with them? " + myLabel();
     return myLabel();
   }
-  var NETLABEL = {wa:"Ready for WhatsApp, to one person", li:"Ready as a LinkedIn post", fb:"Ready for Facebook", link:"Your link, copied"};
+  // WhatsApp still says "to one person" because that is literally what wa.me does: it opens
+  // one chat. The screen above no longer caps the whole thing at one.
+  var NETLABEL = {wa:"Ready for WhatsApp, one chat at a time", li:"Ready as a LinkedIn post", fb:"Ready for Facebook", link:"Your link, copied"};
 
   function render(){
     var t = thing(), want = pick();
@@ -1545,7 +1557,16 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     var ps = $("#paySub"); if(ps) ps.hidden = !listLive;
     // And a buyer perk with no buyer and no code is a promise to nobody.
     var perk = $("#talkPerk"); if(perk) perk.hidden = !listLive;
-    $("#payBtn").innerHTML = st.paid ? "Paid \u2713" : (PAY_URL ? "Get the 49 &middot; $5" : "Opens soon &middot; $5");
+    // Its three siblings were gated and this one was not, so it promised a receipt nobody
+    // could generate, in the present tense, under a head saying the list is still being written.
+    var li = $("#listIs");
+    if(li) li.textContent = listLive
+      ? "Three things. The weekly progress note starts this week: the counter, the new entries, the best stories. The talk discount arrives with your receipt. The full list lands at day 100."
+      : "Three things, when it opens. A weekly progress note, a discount for the talk, and the full list at day 100.";
+    // This line is why the HTML label never rendered once. A product change updated three
+    // strings and missed the fourth, and the fourth is the one that takes the money.
+    $("#payBtn").innerHTML = st.paid ? "Paid \u2713"
+      : (PAY_URL ? "Get the 50,000. Every hand-over, at day 100. $5" : "Opens soon &middot; $5");
     $("#payBtn").disabled = !!st.paid;
     // Their own address, already typed once, put back in front of them.
     var mine = st.email.trim(), sub = $("#subEm");
@@ -1704,6 +1725,10 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       // "Done. AI has it now" is the main door off the handover screen, so it marks the
       // dot started and moves on in one press instead of asking for two.
       if(el.id === "startedBtn"){ st.started = true; }
+      // Taking an alternative off the router sets st.handed. Walking out of the router
+      // without one has to clear it again, or the share writes a promise for somebody who
+      // pressed "Nothing right now" and read "No dot today" on the very next screen.
+      if(el.id === "nothingNow"){ st.handed = false; }
       show(el.dataset.go); return;
     }
     var g = el.parentElement && el.parentElement.dataset.group;
@@ -1779,7 +1804,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     api("/subscribe", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ email: v, source: "the-49" })
+      body: JSON.stringify({ email: v, source: "the-list" })
     }).then(function(r){
       if(!r || !r.stored) throw new Error("not stored");
       btn.textContent = "Done \u2713"; box.disabled = true;

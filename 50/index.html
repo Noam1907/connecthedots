@@ -730,7 +730,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <div class="label" id="w3" style="margin-top:4px">What I keep nodding along to</div>
   <div class="pills" role="group" aria-labelledby="w3" data-group="thing" data-cat="What I keep nodding along to">
     <button class="pill" type="button" aria-pressed="false" data-v="doctor">What my doctor actually said</button>
-    <button class="pill" type="button" aria-pressed="false" data-v="iep">My kid's IEP</button>
     <button class="pill" type="button" aria-pressed="false" data-v="bill">My phone bill</button>
     <button class="pill" type="button" aria-pressed="false" data-v="forms">Forms in bureaucrat-speak</button>
   </div>
@@ -1082,7 +1081,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     insurance:{label:"fighting the insurance company", yes:"AI fights the insurance company", keep:"AI could fight the insurance company", why:["Getting angry is the point","I know the whole story","I'm the only one who'll push"]},
     unfinished:{label:"the project I never finished", yes:"AI restarts the project I never finished", keep:"AI could restart the project I never finished", why:["It's mine to finish","Starting again is the work","I'm not ready yet"]},
     doctor:{label:"what my doctor actually said", yes:"AI explains what my doctor actually said", keep:"AI could explain what my doctor actually said", why:["I want it from a person","It's my body","I'd rather ask again"]},
-    iep:{label:"my kid's IEP", yes:"AI reads my kid's IEP", keep:"AI could read my kid's IEP", why:["Nobody knows my kid like I do","I need to hear every word","This one's mine"]},
     forms:{label:"forms in bureaucrat-speak", yes:"AI reads the forms in bureaucrat-speak", keep:"AI could read the forms in bureaucrat-speak", why:["I don't hand this to a machine","It's my signature","I want to read it myself"]},
     trip:{label:"planning the trip", yes:"AI plans the trip", keep:"AI could plan the trip", why:["I've already taken it in my head","I'm the one who knows what we can't miss","Booking it makes it real"]},
     water:{label:"water stops on my hike", yes:"AI finds the water stops on my hike", keep:"AI could find the water stops on my hike", why:["Reading the map is half the hike","I trust my own eyes","It's how I learn the land"]},
@@ -1112,7 +1110,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     insurance:"Fight my insurance claim. I'll paste their letter, you find what they owe. Ask me what they refused.",
     unfinished:"Restart something I abandoned. Give me the next three steps, small enough for tonight. Ask me why I stopped.",
     doctor:"Explain what my doctor said, in plain words. Then the three questions I'm asking next time. Ask what I missed.",
-    iep:"Read my kid's IEP with me. What's agreed, what's missing, what I should ask for. Ask me their age.",
     forms:"Turn this form into plain language. What it's really asking, what I'm agreeing to. Ask me what it's for.",
     trip:"Plan my trip. Day by day, with what to book now. Ask me where, how long, and who's coming.",
     water:"Plan my hikes. Water stops, how much to carry, where turning back is smart. Ask for the trail.",
@@ -1237,15 +1234,20 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#cnTail").textContent = past ? "minutes lived" : "/ " + nf(goal) + " minutes lived";
     // The lived bar is allowed to be genuinely empty. Only a bar with lived minutes in it
     // gets the 2% floor that keeps a real number visible.
-    $("#cntBar").style.width = (n <= prev ? 0 : Math.max(2, Math.min(100, (n - prev) / span * 100))) + "%";
+    // Anat, 22.9, looking at 50 of 50,000: "too painted". She was right, and the bar was not
+    // lying so much as unlabelled. It measures the distance to the NEXT STOP, which is what
+    // makes it move at all on day 1, but it sits directly under "50 / 50,000 minutes lived"
+    // and the eye pairs the two. The caption below now names the bar's own scale, and the
+    // floor drops from 2% to 0.8% so a tiny number looks tiny instead of looking started.
+    $("#cntBar").style.width = (n <= prev ? 0 : Math.max(0.8, Math.min(100, (n - prev) / span * 100))) + "%";
     var g = $("#cntGhost");
-    if(g) g.style.width = (prom > 0 ? Math.max(2, Math.min(100, (gross - prev) / span * 100)) : 0) + "%";
+    if(g) g.style.width = (prom > 0 ? Math.max(0.8, Math.min(100, (gross - prev) / span * 100)) : 0) + "%";
     var promLine = prom > 0 ? nf(prom) + " more are promised. " : "";
     $("#msLine").textContent = past
       ? promLine + "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
       : (n === 0 && prom > 0
           ? nf(prom) + " minutes are promised so far. A minute joins this counter once it has actually been lived."
-          : promLine + "Next stop: " + nf(next) + " minutes");
+          : promLine + nf(n - prev) + " of the next " + nf(span) + " minutes");
     el.classList.toggle("past", past);
     el.hidden = false;
     showTotal(n);
@@ -1414,7 +1416,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   var HE_DAY = {Sunday:"יום ראשון",Monday:"יום שני",Tuesday:"יום שלישי",Wednesday:"יום רביעי",Thursday:"יום חמישי",Friday:"יום שישי",Saturday:"שבת"};
   var HE_TIME = {morning:"בבוקר",afternoon:"אחרי הצהריים",evening:"בערב"};
   var HE_GO = {"Call someone I miss":"להתקשר למישהו שחסר לי","Call my mom":"להתקשר לאמא שלי","Make something":"להכין משהו","Go for a walk":"לצאת להליכה","Read":"לקרוא","Nothing. Absolutely nothing.":"לא לעשות כלום","Be with my kids":"להיות עם הילדים שלי"};
-  var HE_THING = {summaries:"סיכומי הפגישות",report:"הדוח השבועי",emails:"המיילים השגרתיים",draft:"הטיוטה הראשונה",water:"איתור נקודות המים במסלול",dinner:"ארוחת הערב לפי תמונה של המקרר",album:"האלבום מהטיול",bill:"הקרב על חשבון הטלפון",story:"הסיפור לפני השינה",packing:"רשימת הציוד לטיול",scaryemail:"המייל שמפחיד אותי לשלוח",insurance:"הקרב מול חברת הביטוח",unfinished:"הפרויקט שלא סיימתי",doctor:"מה הרופא באמת אמר",iep:"התוכנית החינוכית של הילד שלי",forms:"הטפסים בשפה של פקידים",trip:"תכנון הטיול"};
+  var HE_THING = {summaries:"סיכומי הפגישות",report:"הדוח השבועי",emails:"המיילים השגרתיים",draft:"הטיוטה הראשונה",water:"איתור נקודות המים במסלול",dinner:"ארוחת הערב לפי תמונה של המקרר",album:"האלבום מהטיול",bill:"הקרב על חשבון הטלפון",story:"הסיפור לפני השינה",packing:"רשימת הציוד לטיול",scaryemail:"המייל שמפחיד אותי לשלוח",insurance:"הקרב מול חברת הביטוח",unfinished:"הפרויקט שלא סיימתי",doctor:"מה הרופא באמת אמר",forms:"הטפסים בשפה של פקידים",trip:"תכנון הטיול"};
   function heOath(){
     var w = st.to==="__own" ? st.toOwn.trim() : (HE_GO[st.to] || "");
     var th = st.own.trim() ? st.own.trim() : (HE_THING[st.thing] || "");

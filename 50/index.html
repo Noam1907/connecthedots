@@ -981,32 +981,34 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <section class="screen dark" data-s="five" aria-label="The 50,000">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">The 50,000</span></div>
   <div class="five">
-    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">The list is being written right now, by the people on the line.</h1></div>
-    <div id="fiveVow" style="font-size:15.5px;line-height:1.35;font-weight:600">Every entry will be a real hand-over from a real person in the campaign: initials, dated, verified.</div>
-
-    <div class="hands" id="handsList"></div>
-
-    <!-- Anat's final version, 22.9. This line is the whole argument of the screen and it sits
-         above the buttons on purpose: the money is not buying a document, it is buying the
-         thing this page has been about since the first screen. -->
-    <div class="commit">The payment is not for the list. <b>It is for you.</b> People who pay, show up, for their own fifty minutes.</div>
+    <!-- Anat, 22.9: the commitment line IS the title, and the price has to be seen. The
+         argument comes first and everything under it is what else they get. -->
+    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">People who pay, show up. For their own fifty minutes.</h1><div class="coin" id="fiveCoin">$5</div></div>
 
     <ul class="gets" id="listIs"></ul>
 
+    <div id="fiveVow" style="font-size:15px;line-height:1.35;font-weight:600">The list is being written right now, by the people on the line. Every entry is a real hand-over from a real person in the campaign: initials, dated, verified.</div>
+
+    <div class="hands" id="handsList"></div>
+
     <div class="rungs" id="rungs"></div>
 
-    <div id="paySub">Same receipts, every tier. The extra is you, paying it forward. One time, not a subscription. Your receipt lands now.</div>
+    <div id="paySub">Same list, every tier. The extra is you, paying it forward. One time, not a subscription, and your invoice arrives straight away.</div>
 
     <div class="sub" id="payMail" hidden>
-      <label class="subl" for="fiftyEm">Where should the receipts go?</label>
+      <label class="subl" for="fiftyEm">Where should it go?</label>
       <div class="inline">
-        <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the receipts">
+        <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the weekly note and the list">
         <button type="button" id="fiftyBtn">Continue</button>
       </div>
       <div class="err hidden" id="payErr"></div>
     </div>
 
-    <div class="toast" id="paidBack">Thank you. Your receipt is on its way and the first weekly note follows.</div>
+    <div class="toast" id="paidBack">Thank you. Your invoice is on its way and the first weekly note follows.</div>
+    <!-- PayPal opens in its own tab and never sends anybody back here, so this tab was a dead
+         end the moment the button was pressed. This is the way on, and it appears only after
+         the hand-off, so nobody is offered it before there is anything to carry on from. -->
+    <button class="cta" type="button" id="payDone" data-go="human" hidden style="margin-top:6px">Done. Carry on &rarr;</button>
     <div class="toast" id="notePay">Nothing is charged yet. Your free dot is claimed either way.</div>
     
     <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
@@ -1244,9 +1246,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // appears one rung at a time as the links exist, and nothing on screen is ever a price
   // that cannot be paid.
   var TIERS = [
-    { usd: 5,  url: "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6", say: "The receipts" },
-    { usd: 10, url: "", say: "The receipts, plus one" },
-    { usd: 20, url: "", say: "The receipts, plus three" }
+    { usd: 5,  url: "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6", say: "Hold me to it" },
+    { usd: 10, url: "", say: "Hold me to it, and one more" },
+    { usd: 20, url: "", say: "Hold me to it, and three more" }
   ];
   var tier = 0;
   var PAY_URL = TIERS[0].url;
@@ -1674,12 +1676,13 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }
     // The head and the vow are hers and they no longer move with the state: the list IS
     // being written right now, which is true on day 1 and true on day 99.
-    $("#fiveHead").textContent = "The list is being written right now, by the people on the line.";
-    $("#fiveVow").textContent = "Every entry will be a real hand-over from a real person in the campaign: initials, dated, verified.";
+    $("#fiveHead").textContent = "People who pay, show up. For their own fifty minutes.";
+    $("#fiveVow").textContent = "The list is being written right now, by the people on the line. Every entry is a real hand-over from a real person in the campaign: initials, dated, verified.";
+    // The coin follows whichever tier is chosen, because the price has to be seen and it
+    // has to be the price they are about to pay.
+    var coin = $("#fiveCoin");
+    if(coin && live.length) coin.textContent = "$" + (live[Math.min(tier, live.length-1)] || live[0]).usd;
     var ps = $("#paySub"); if(ps) ps.hidden = !live.length;
-    // And a buyer perk with no buyer and no code is a promise to nobody.
-    // Its three siblings were gated and this one was not, so it promised a receipt nobody
-    // could generate, in the present tense, under a head saying the list is still being written.
     var li = $("#listIs");
     // Three lines with a tick, her 22.9 spec, not a paragraph. The talk line only exists
     // when there is a code behind it, so the list never promises what the mail omits.
@@ -1921,8 +1924,10 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#payMail").hidden = true;
     var n = st.dotNumber;
     $("#paidBack").textContent = (n ? "You're dot #" + nf(n) + ". " : "")
-      + "PayPal has your receipt. The first weekly note lands " + nextSunday() + ".";
+      + "PayPal has your payment. The first weekly note lands " + nextSunday() + ".";
     $("#paidBack").classList.add("on");
+    $("#payDone").hidden = false;
+    $("#skipPay").hidden = true;
   });
 
   $("#subBtn").addEventListener("click", function(){

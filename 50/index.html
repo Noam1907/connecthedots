@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="index,follow">
+<!-- FORM-FLOW store=https://fifty.connecthedots.co/api/flow owner=Adam followup=48h -->
+<!-- The page takes a name, a city, an email and free text from strangers and posts them to
+     the fifty-line rail. There is no form element anywhere in it and it is still a form:
+     Anat's rule is "anything a stranger can submit". form-gate.sh fetches the store above
+     LIVE, so this page cannot publish with a rail that is written and not deployed, or
+     with a sender that nobody has armed. -->
 <title>50,000 minutes back</title>
 <meta name="description" content="On December 31st Anat Weissman turns 50. Her wish: 50,000 minutes back to what only humans can do. Start with what you would do with 50 minutes back, then find the one thing AI can take off your page, then put your dot on the line. Two minutes, free.">
 <meta property="og:type" content="website">
@@ -81,10 +87,10 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .pills{display:flex;flex-wrap:wrap;gap:9px}
 .pill{min-height:48px;background:var(--white);border:2.5px solid var(--navy);border-radius:999px;padding:0 16px;font-size:16px;font-weight:700}
 .pill.own{border-style:dashed}
-.pill[aria-pressed="true"]{background:var(--pink);font-weight:800;box-shadow:3px 3px 0 var(--navy);transform:rotate(-2deg)}
+.pill[aria-pressed="true"]{background:var(--sun);font-weight:800;box-shadow:3px 3px 0 var(--navy);transform:rotate(-2deg)}
 .row{display:flex;gap:7px}
 .slot{flex:1;min-width:0;min-height:48px;background:var(--white);border:2.5px solid var(--navy);border-radius:12px;font-size:15px;font-weight:700;padding:0}
-.slot[aria-pressed="true"]{background:var(--sky);font-weight:800}
+.slot[aria-pressed="true"]{background:var(--sky);font-weight:800;box-shadow:3px 3px 0 var(--navy)}
 .field{min-height:48px;width:100%;border:2.5px dashed var(--navy);border-radius:14px;padding:0 14px;font-family:var(--hand);font-size:24px;background:transparent;color:var(--navy)}
 .field.solid{border-style:solid;background:var(--white)}
 .field::placeholder{color:#8a8173}
@@ -105,7 +111,7 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .big-choice .t{display:block;font-size:26px;font-weight:800;line-height:1}
 .big-choice .s{display:block;font-size:15px;font-weight:600;line-height:1.3;margin-top:4px}
 .yes{background:var(--sky);transform:rotate(-1.2deg)}
-.keep{background:var(--pink);transform:rotate(1deg)}
+.keep{background:var(--cream);border-color:var(--navy);transform:rotate(1deg)}
 .both{margin-top:auto;background:var(--navy);color:var(--cream);border-radius:18px;padding:14px 18px;display:flex;gap:12px;align-items:center;font-family:var(--hand);font-size:23px;line-height:1.05}
 .both em{font-style:normal;color:var(--sun)}
 /* preview card */
@@ -126,11 +132,6 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .opentitle h1{font-size:34px;margin-top:4px}
 .openlede{font-size:16px;line-height:1.45;text-align:center;margin:12px 0 0}
 .openlede b{font-weight:800}
-.vslot{margin:16px 0 0;border:3px dashed var(--navy);border-radius:18px;background:var(--white);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:10px}
-.vslot .play{width:54px;height:54px;border-radius:50%;background:var(--tomato);border:3px solid var(--navy);display:flex;align-items:center;justify-content:center;box-shadow:3px 3px 0 var(--navy)}
-.vslot .play::after{content:"";border-left:16px solid var(--cream);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:5px}
-.vslot .vl{font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
-.vslot .vn{font-size:12.5px;line-height:1.35;opacity:.75;max-width:30ch}
 .openfoot{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:10px}
 .opensig{font-family:var(--hand);font-size:23px;text-align:center;line-height:1.1}
 .counter .people{font-weight:800}
@@ -144,7 +145,7 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .screen.dark .cta:disabled{background:rgba(255,244,224,.22);color:rgba(255,244,224,.6);border-color:rgba(255,244,224,.35);box-shadow:none}
 .dot-art{margin:0 calc(-1 * var(--gutter));position:relative}
 .dot-art svg{display:block;width:100%;height:auto}
-.dot-art .tag{position:absolute;left:50%;bottom:0;font-family:var(--hand);font-size:24px;font-weight:700;color:var(--sun);transform:rotate(-5deg)}
+.dot-art .tag{position:absolute;left:8%;bottom:-2px;font-family:var(--hand);font-size:22px;font-weight:700;color:var(--sun);transform:rotate(-5deg)}
 .card-cream{background:var(--cream);color:var(--navy);border-radius:16px;padding:12px 16px}
 .mydot{transform:rotate(-1.2deg);box-shadow:4px 4px 0 var(--tomato)}
 .mydot .say{font-family:var(--hand);font-size:25px;line-height:1.05}
@@ -166,7 +167,7 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .shares{display:flex;gap:7px}
 .share{flex:1;min-width:0;min-height:72px;color:var(--navy);border:3px solid var(--navy);border-radius:16px;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 2px}
 /* human */
-.screen.pinkbg{background:var(--pink);padding-bottom:0}
+.screen.pinkbg{background:var(--cream);padding-bottom:0}
 .hl-sun::before{background:var(--sun)}
 .human-list{display:flex;flex-direction:column;gap:9px}
 .human-list div{background:var(--cream);border:2.5px solid var(--navy);border-radius:16px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:17px;font-weight:700}
@@ -188,7 +189,12 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 /* footer */
 footer.house{max-width:var(--col);margin:0 auto;padding:18px var(--gutter) 28px;font-size:13px;line-height:1.5;color:var(--navy)}
 footer.house .b{font-weight:800}
-footer.house a{text-decoration:underline;text-decoration-color:var(--sky);text-underline-offset:3px;text-decoration-thickness:2px}
+footer.house a{text-decoration:underline;text-decoration-color:var(--sky);text-underline-offset:3px;text-decoration-thickness:2px;display:inline-flex;align-items:center;min-height:44px}
+.follow{margin-top:14px;padding-top:12px;border-top:2px dashed var(--navy);text-align:center}
+.followl{font-size:14px;font-weight:800;margin-bottom:8px}
+.followi{display:flex;gap:10px;justify-content:center}
+.followi a{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;border:2.5px solid var(--navy);border-radius:999px;background:var(--white);color:var(--navy);text-decoration:none}
+.followi a:hover{box-shadow:3px 3px 0 var(--navy)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 /* v11 (20.9): the rail, the state past the wish, and the 320px repairs */
 [hidden]{display:none!important}
@@ -219,7 +225,11 @@ h1,.h2,.goes .h,.five .h,.big-choice .t{overflow-wrap:break-word}
 .counter .cn{font-size:13px;font-weight:700;line-height:1.3}
 .counter .cn b{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-right:2px}
 .counter .track{margin-top:6px;height:10px;border:2px solid var(--navy);border-radius:999px;background:var(--white);overflow:hidden}
-.counter .track i{display:block;height:100%;width:.1%;min-width:6px;background:linear-gradient(90deg,var(--tomato),var(--sun),var(--sky),var(--pink),var(--green));transition:width .9s ease}
+.counter .track{position:relative}
+.counter .track i{display:block;height:100%;width:.1%;min-width:6px;background:linear-gradient(90deg,var(--navy),var(--sun),var(--sky),var(--green));transition:width .9s ease}
+/* Promised minutes sit behind the lived ones as a hatch, never as a filled bar: a promise
+   is visible and it is plainly not the same thing as a minute that was lived. */
+.counter .track i.ghost{position:absolute;inset:0;width:0;min-width:0;background:repeating-linear-gradient(135deg,rgba(27,40,56,.30) 0 5px,transparent 5px 10px)}
 .counter.bump .cn b{color:var(--tomato)}
 .hundred{align-self:flex-start;background:var(--sun);border:2.5px solid var(--navy);border-radius:12px;padding:5px 12px;font-size:14px;font-weight:800;line-height:1.2;transform:rotate(-1.5deg);box-shadow:3px 3px 0 var(--navy)}
 .wish{margin-top:auto;background:var(--navy);color:var(--cream);border-radius:20px;padding:14px 16px;display:flex;gap:12px;align-items:center}
@@ -257,7 +267,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .sharecard{transform:none;box-shadow:3px 3px 0 var(--tomato)}
 .human-list div:nth-child(odd),.human-list div:nth-child(even){transform:none}
 .tile{transform:none!important}
-.tile.bday{background:var(--pink);gap:8px}
+.tile.bday{background:var(--sun);gap:8px}
 .tile.bday .pay{font-size:18px;min-height:50px}
 .cta{box-shadow:3px 3px 0 var(--navy)}
 .kicker{transform:none}
@@ -287,6 +297,81 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .goes .cta{border-color:var(--cream);box-shadow:3px 3px 0 var(--sun)}
 .oath{box-shadow:3px 3px 0 var(--sun)}
 .net.fb{background:var(--navy);color:var(--cream)}
+/* The dot arrives. Anat, 21.9: "that's your dot, should be visually festive". One pop, on
+   the one screen where somebody just did something, and it plays once. Anything that keeps
+   moving turns a celebration into a loading spinner. */
+@keyframes dotPop{0%{transform:scale(.2);opacity:0}55%{transform:scale(1.18);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes burstOut{0%{transform:scale(.45);opacity:0}45%{opacity:1}100%{transform:scale(1);opacity:.95}}
+@keyframes haloRing{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes confDrift{0%{transform:translateY(-10px) rotate(-8deg);opacity:0}100%{transform:translateY(0) rotate(0);opacity:1}}
+.dot-art svg .mine,.dot-art svg .burst,.dot-art svg .halo1,.dot-art svg .halo2,.dot-art svg .conf{transform-box:fill-box;transform-origin:center}
+.dot-art svg .mine{animation:dotPop .55s cubic-bezier(.3,1.5,.5,1) both}
+/* The initials ride the same pop as the dot they sit in. Their own transform-origin is the
+   dot's centre in user units, because a text element's fill-box is the ink, not the circle. */
+.dot-art svg .mineTxt{transform-box:view-box;transform-origin:300px 90px;animation:dotPop .55s cubic-bezier(.3,1.5,.5,1) both;letter-spacing:.02em}
+.dot-art svg .burst{transform-origin:300px 90px;animation:burstOut .5s ease-out .18s both}
+.dot-art svg .halo1{transform-origin:300px 90px;animation:haloRing .6s ease-out .28s both}
+.dot-art svg .halo2{transform-origin:300px 90px;animation:haloRing .7s ease-out .38s both}
+.dot-art svg .conf{animation:confDrift .7s ease-out .1s both}
+.dot-art .tag{animation:confDrift .5s ease-out .5s both}
+@media (prefers-reduced-motion:reduce){.dot-art svg .mine,.dot-art svg .burst,.dot-art svg .halo1,.dot-art svg .halo2,.dot-art svg .conf,.dot-art .tag{animation:none}}
+
+/* Cleo, on the dot screen. A handwritten aside, not a banner: she is evidence that the
+   thing the visitor just did is the thing this house actually runs on. */
+.cleoline{font-family:var(--hand);font-size:23px;line-height:1.1;color:var(--sun);border-left:3px solid var(--sun);padding-left:11px}
+
+/* The film on the opening screen. No frame, no dashed placeholder: either there is a video
+   here or there is nothing here. */
+.vid{margin:14px 0 0;display:flex;flex-direction:column;gap:6px}
+.vidthumb{position:relative;display:block;width:100%;padding:0;border:3px solid var(--navy);border-radius:18px;overflow:hidden;background:var(--navy);box-shadow:4px 4px 0 var(--sun);aspect-ratio:16/9}
+.vidthumb img{display:block;width:100%;height:100%;object-fit:cover}
+.vidthumb .playdot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62px;height:62px;border-radius:50%;background:var(--sun);border:3px solid var(--navy);display:flex;align-items:center;justify-content:center}
+.vidthumb .playdot::after{content:"";border-left:20px solid var(--navy);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
+.vidcap{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+/* The lightbox. It plays over the page and gives it back on close: nobody is navigated away
+   from a page they have not started yet. */
+.lightbox{position:fixed;inset:0;z-index:60;background:rgba(27,40,56,.92);display:none;align-items:center;justify-content:center;padding:16px}
+.lightbox.on{display:flex}
+.lightbox .inner{width:100%;max-width:880px;position:relative}
+.lightbox video{display:block;width:100%;height:auto;border-radius:14px;background:#000}
+.lightbox .x{position:absolute;top:-52px;right:0;min-height:44px;background:var(--cream);color:var(--navy);border:3px solid var(--navy);border-radius:999px;padding:0 16px;font-size:15px;font-weight:800}
+@media (min-width:900px){ .vid{max-width:34em} }
+
+/* The 49. Her real hand-overs, in one fixed shape: day, what went, minutes that came back. */
+.hands{display:flex;flex-direction:column;gap:7px}
+.hands .hrow{display:flex;gap:9px;align-items:baseline;background:var(--cream);border:2px solid var(--navy);border-radius:12px;padding:8px 11px;font-size:14.5px;line-height:1.3}
+.hands .hd{flex-shrink:0;font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase;background:var(--navy);color:var(--sun);border-radius:6px;padding:2px 7px}
+.hands .hm{font-weight:800;white-space:nowrap}
+.hands .soonrow{border-style:dashed;font-weight:700}
+.vouch{font-size:14px;line-height:1.35;font-weight:800;border-left:4px solid var(--navy);padding-left:10px}
+.listis{font-size:13.5px;line-height:1.35;font-weight:700;opacity:.9}
+
+/* "Only humans can: 1/ 2/ 3/". The dots became numbers because the line is now a list with
+   a stem, and a bullet cannot finish a sentence the heading started. */
+.onlyh{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-top:2px}
+.human-list div .num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--sun);border:2.5px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+
+/* The ending. Anat, 21.9: one call, and it is the most prominent thing on the screen. */
+.goes .agentline{font-size:16px;line-height:1.35;font-weight:700;color:var(--cream);background:none;border:0;padding:0}
+.cta.join{background:var(--sun);color:var(--navy);border-color:var(--cream);box-shadow:5px 5px 0 var(--tomato);font-size:21px;padding:18px 20px;min-height:64px}
+.sub{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.sub .subl{font-size:14px;line-height:1.35;font-weight:700}
+.sub .inline input{background:var(--cream)}
+.sub .inline button{background:var(--cream);color:var(--navy);font-weight:800;border:2.5px solid var(--cream)}
+.goes .talkline{font-size:13px;line-height:1.4;opacity:.8;margin-top:6px}
+.goes .talkline a{font-weight:800;color:var(--sun)}
+.goes .quiet{align-self:flex-start;text-decoration:none;font-size:14px;font-weight:800;padding:8px 14px;min-height:44px;display:flex;align-items:center;border:2px solid var(--cream);border-radius:999px;opacity:.75}
+
+/* the others on the line. Anat, 21.9: a line you cannot see anybody else on is a counter. */
+.others{border:2.5px dashed var(--navy);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.screen.dark .others{border-color:var(--cream)}
+.others .oh{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.others ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.others li{display:flex;align-items:center;gap:6px;background:var(--cream);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:3px 10px 3px 4px;font-size:13px;font-weight:700;line-height:1.2}
+.others li .av{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--sun);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.others li.lived .av{background:var(--green)}
+.others li .wn{opacity:.7;font-weight:600}
+
 /* the router, after a No */
 .easy{display:flex;flex-direction:column;gap:9px}
 .easy button{min-height:56px;text-align:left;background:var(--white);border:2.5px solid var(--navy);border-radius:14px;padding:8px 14px;font-size:16px;font-weight:700}
@@ -508,6 +593,52 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .screen.open h1{font-size:clamp(36px,3.55vw,50px)!important;line-height:.95}
   .spine{font-size:clamp(24px,1.95vw,29px);max-width:26em;margin-top:10px;padding-top:8px;padding-bottom:8px}
 }
+/* v13 (22.9): THE SAME REQUIREMENT, MEASURED AGAIN WITH THE COUNTER ON.
+   The block above was written against a 900px laptop and moved Start from 957 to 792. It
+   was measured before the counter existed, and the counter is 102px tall. On 1366x768,
+   which is the commonest laptop screen there is, Start ended at 836: sixty-eight pixels
+   under the fold, on the one page that may not put its door there. Verified in the pane,
+   not estimated.
+   So the rule gets a height, not just a width. Under 820px tall the opening screen gives
+   up what it can spare and nothing else: the portrait, the gaps, and one step of the
+   headline. Nothing below 900px wide is touched, so the phone is untouched. */
+@media (min-width:900px) and (max-height:820px){
+  .screen.open h1{font-size:clamp(32px,3vw,42px)!important;line-height:.95}
+  .spine{font-size:clamp(20px,1.6vw,24px);margin-top:6px;padding-top:6px;padding-bottom:6px}
+  .portrait{width:clamp(88px,7vw,104px);height:clamp(88px,7vw,104px);margin:4px 0 0}
+  .portrait .fifty{width:40px;height:40px;font-size:17px;right:-6px}
+  .opentitle{margin-top:6px}
+  .openlede{margin-top:6px}
+  .openfoot{padding-top:4px}
+  .hundred{margin-bottom:4px}
+  .bunting{margin:2px 0}
+}
+/* And the same requirement on the short phone, which the width-gated rule above cannot
+   reach. A 375x667 handset (iPhone SE and 8, still a real share of traffic) put Start 145px
+   under the fold: measured, not guessed. Nothing here fires on a 812px-tall phone, so the
+   screen this page was designed on is untouched. */
+@media (max-width:899px) and (max-height:740px){
+  .screen.open h1{font-size:clamp(30px,8.6vw,38px);line-height:.98}
+  .portrait{width:86px;height:86px;margin:2px 0 0}
+  .portrait .fifty{width:36px;height:36px;font-size:15px;right:-6px}
+  .opentitle{margin-top:6px;font-size:17px}
+  .openlede{margin-top:6px;font-size:14px}
+  .spine{font-size:17px;margin-top:6px;padding-top:6px;padding-bottom:6px}
+  .openfoot{padding-top:4px}
+  .hundred{margin-bottom:3px}
+  .bunting{margin:1px 0;height:22px}
+}
+/* One more step for the 568px phone (iPhone SE first generation and the 5s). Small share,
+   but the rule this file wrote for itself does not have a traffic threshold in it. */
+@media (max-width:899px) and (max-height:600px){
+  .screen.open h1{font-size:26px;line-height:1}
+  .portrait{width:66px;height:66px}
+  .portrait .fifty{width:30px;height:30px;font-size:13px;right:-5px}
+  .opentitle{font-size:15px;margin-top:4px}
+  .openlede{font-size:13px;margin-top:4px}
+  .spine{font-size:15px;margin-top:4px;padding-top:4px;padding-bottom:4px}
+  .bunting{display:none}
+}
 </style>
 </head>
 <body>
@@ -518,7 +649,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
      on screen, and the zero is the one that makes a real line look abandoned. -->
 <div class="counter" id="counter" aria-live="polite" hidden>
   <div class="cn"><b id="ppl"></b><span class="people"> in the line</span> &middot; <b id="cnt"></b> <span id="cnTail"></span></div>
-  <div class="track" aria-hidden="true"><i id="cntBar"></i></div>
+  <div class="track" aria-hidden="true"><i class="ghost" id="cntGhost"></i><i id="cntBar"></i></div>
   <div class="ms" id="msLine"></div>
 </div>
 
@@ -542,6 +673,13 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <!-- The spine. The page used to open on what AI can do, and that made the whole thing a
        productivity exercise. This line is the reason the first question is about your life
        and the machine only turns up on screen two. Anat, 20.9.2026. -->
+  <div class="vid hidden" id="vidBox">
+    <button class="vidthumb" type="button" id="vidOpen" aria-label="Play the 90 second film">
+      <img id="vidPoster" alt="">
+      <span class="playdot" aria-hidden="true"></span>
+    </button>
+    <div class="vidcap">90 seconds. Then decide.</div>
+  </div>
   <div class="spine">Don't start by asking AI what it can do for you. Start by asking yourself what you want your time back for.<b>Anat</b></div>
 
   <p class="openlede">Not because AI makes me. <b>Because AI lets me.</b><br>
@@ -573,26 +711,40 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="steps" aria-hidden="true"><i style="background:var(--sun)"></i><i style="background:var(--sky)"></i><i></i><i></i></span><span class="count">2 of 4</span></div>
   <div class="label">You said</div>
   <div class="sticky-note" id="wantNote">read</div>
-  <h1 class="hero-h1">Okay. Let's find your 50.</h1>
-  <p class="note" style="margin-top:-6px;opacity:.85">Look at your page. What is one thing on it that AI could take off your hands? If you can write it down, AI can probably do it.</p>
-  <div class="label">The obvious ones</div>
-  <div class="grid2" data-group="thing">
-    <button class="chip" aria-pressed="false" data-v="summaries">Meeting summaries</button>
-    <button class="chip" aria-pressed="false" data-v="report">The weekly report</button>
-    <button class="chip" aria-pressed="false" data-v="emails">Routine emails</button>
-    <button class="chip" aria-pressed="false" data-v="draft">The first draft of anything</button>
+  <h1 class="hero-h1">Where is your 50 hiding?</h1>
+  <p class="note" style="margin-top:-6px;opacity:.85">Pick the weight, then the task.</p>
+  <div class="label" id="w1" style="margin-top:4px">What I've been putting off for months</div>
+  <div class="pills" role="group" aria-labelledby="w1" data-group="thing" data-cat="What I've been putting off for months">
+    <button class="pill" type="button" aria-pressed="false" data-v="album">The trip album</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="scaryemail">The email I'm scared to send</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="insurance">Fighting the insurance company</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="unfinished">The project I never finished</button>
   </div>
-  <div class="label" style="margin-top:4px">The everyday ones</div>
-  <div class="grid2" data-group="thing">
-    <button class="chip" aria-pressed="false" data-v="water">Finding water stops on my hike</button>
-    <button class="chip" aria-pressed="false" data-v="dinner">Tonight's dinner from a fridge photo</button>
-    <button class="chip" aria-pressed="false" data-v="album">The album from that trip, finally</button>
-    <button class="chip" aria-pressed="false" data-v="bill">Fighting my phone bill down</button>
-    <button class="chip" aria-pressed="false" data-v="story">A bedtime story starring my kid</button>
-    <button class="chip" aria-pressed="false" data-v="packing">The packing list for a trip</button>
+  <div class="label" id="w2" style="margin-top:4px">What repeats every week</div>
+  <div class="pills" role="group" aria-labelledby="w2" data-group="thing" data-cat="What repeats every week">
+    <button class="pill" type="button" aria-pressed="false" data-v="report">The weekly report</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="summaries">Meeting summaries</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="emails">Routine emails</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="draft">The first draft of anything</button>
   </div>
-  <label for="own" class="label" style="margin-top:4px">Or write your own</label>
-  <input id="own" class="field" type="text" maxlength="60" placeholder="the thing on my page" autocomplete="off">
+  <div class="label" id="w3" style="margin-top:4px">What I keep nodding along to</div>
+  <div class="pills" role="group" aria-labelledby="w3" data-group="thing" data-cat="What I keep nodding along to">
+    <button class="pill" type="button" aria-pressed="false" data-v="doctor">What my doctor actually said</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="iep">My kid's IEP</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="bill">My phone bill</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="forms">Forms in bureaucrat-speak</button>
+  </div>
+  <div class="label" id="w4" style="margin-top:4px">What I never have time for</div>
+  <div class="pills" role="group" aria-labelledby="w4" data-group="thing" data-cat="What I never have time for">
+    <button class="pill" type="button" aria-pressed="false" data-v="story">A bedtime story starring my kid</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="trip">Planning the trip</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="dinner">Tonight's dinner from a fridge photo</button>
+    <button class="pill" type="button" aria-pressed="false" data-v="water">Water stops on my hike</button>
+  </div>
+  <div class="pills" role="group" aria-label="Something only I know I need" data-group="thing" data-cat="Something only I know I need" style="margin-top:8px">
+    <button class="pill own" type="button" aria-pressed="false" data-v="__own">Something only I know I need</button>
+  </div>
+  <input id="own" class="field hidden" type="text" maxlength="60" placeholder="the thing on my page" autocomplete="off" aria-label="Something only I know I need">
   <div class="note">Fun fact: over 70% of what we ask ChatGPT isn't even about work anymore. <a href="https://www.nber.org/papers/w34255" target="_blank" rel="noopener" style="font-weight:700">Source: OpenAI &amp; Harvard, NBER, September 2025</a></div>
   <button class="cta" id="next1" data-go="choice" disabled style="margin-top:auto">Next</button>
 </section>
@@ -602,7 +754,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="steps" aria-hidden="true"><i style="background:var(--sun)"></i><i style="background:var(--sky)"></i><i style="background:var(--green)"></i><i></i></span><span class="count">3 of 4</span></div>
   <div class="sticky-note" id="thingNote">fighting my phone bill down</div>
   <h1 style="font-size:36px">AI can do this. <span style="color:var(--navy)">Will you let it?</span></h1>
-  <p class="note" style="margin-top:-6px">Let it go and the 50 minutes come back to you, for this: <b id="choiceWant">Go for a walk</b>.</p>
+  <p class="note" style="margin-top:-6px">Let it go and the 50 minutes come back, for this: <b id="choiceWant">Go for a walk</b>.</p>
   <button class="big-choice yes" data-branch="yes">
     <svg width="54" height="54" viewBox="0 0 54 54" aria-hidden="true" style="flex-shrink:0"><circle cx="27" cy="27" r="25" fill="#FFF4E0" stroke="#1B2838" stroke-width="3"/><path d="M15 28 L24 36 L40 18" fill="none" stroke="#1B2838" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span><span class="t">Yes. AI takes it.</span><span class="s">I get my 50 minutes, and I know what they are for.</span></span>
@@ -617,7 +769,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <section class="screen" data-s="router" aria-label="One you will hand over">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="count">3 of 4</span></div>
   <h1 style="font-size:34px">Good. <span class="hl hl-sun"><span>That one stays human.</span></span></h1>
-  <p class="lede">You said what you want your time for before you ever looked at the task, so keeping it is an answer and not a miss. Some of what is on your page is the reason you wanted the time.</p>
+  <p class="lede">Some of what is on your page is the reason you wanted the time.</p>
   <div class="kept" id="keptLine">You keep it. On purpose.</div>
   <div class="label" style="margin-top:4px">Your 50 minutes are still out there. What is one thing you <b>will</b> hand over?</div>
   <div class="easy" id="easyList" data-group="easy"></div>
@@ -628,7 +780,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <section class="screen" data-s="nodot" aria-label="No dot today">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label">No dot today</span></div>
   <h1 style="font-size:34px">No dot today. <span class="hl hl-sun"><span>The line will be here when you are.</span></span></h1>
-  <p class="lede">You still named what you want the time for: <b id="nodotWant">Go for a walk</b>. That was the real question, and nothing here says a machine has to be the one that answers it.</p>
+  <p class="lede">You still named what the time is for: <b id="nodotWant">Go for a walk</b>. That was the real question.</p>
   <div class="card-cream" style="border:2.5px solid var(--navy);display:flex;flex-direction:column;gap:6px">
     <div style="font-size:15px;font-weight:800">Tell Anat what you kept.</div>
     <div style="font-size:15px;line-height:1.4">If you feel like it, write one line about the thing you are keeping and why. She reads that inbox herself.<br><a href="mailto:anat@connecthedots.co?subject=The%20one%20I%20keep" style="font-weight:800">anat@connecthedots.co</a></div>
@@ -666,11 +818,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <div class="say" id="oathText"></div>
     <div class="oath-sig">Signed: <span id="oathSig">you</span></div>
   </div>
-  <input id="nm" class="field solid" type="text" maxlength="30" placeholder="First name" autocomplete="off" aria-label="First name">
-  <input id="city" class="field solid" type="text" maxlength="40" placeholder="City, country (optional)" autocomplete="off" aria-label="City, country">
-  <input id="em" class="field solid sans" type="email" maxlength="80" placeholder="Email (optional)" autocomplete="off" aria-label="Email">
+  <input id="nm" class="field solid" type="text" maxlength="30" placeholder="First name" autocomplete="given-name" required aria-label="First name">
+  <input id="city" class="field solid" type="text" maxlength="40" placeholder="City, country (optional)" autocomplete="address-level2" aria-label="City, country">
+  <input id="em" class="field solid sans" type="email" maxlength="80" placeholder="Email" autocomplete="email" required aria-label="Email">
   <div class="err hidden" id="emErr"></div>
-  <div class="note"><b>Free.</b> The email is optional. If the line records your dot, it is how Anat can write to you about this line and about nothing else. It stays with her, it is never passed on, and one word to <a href="mailto:anat@connecthedots.co">anat@connecthedots.co</a> takes you off it. Leave it out and there is no way to reach you. If the line is not answering, nothing on this screen is kept at all, and the next screens say so.</div>
+  <div class="note">Your first initial, your city and what you handed over join the line for others to see. Your name and email never do.</div>
+  <div class="note"><b>Free.</b> <span id="mailPromise">Your prompt comes back on the next screen.</span> One line to <a href="mailto:anat@connecthedots.co">anat@connecthedots.co</a> takes you off.</div>
   <button class="cta" id="addDot" data-go="hand" disabled style="margin-top:auto"><svg width="18" height="18" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="#FDD801" stroke="#1B2838" stroke-width="3"/></svg>I promise. Add my dot</button>
 </section>
 
@@ -689,34 +842,63 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       <a href="https://chatgpt.com/" target="_blank" rel="noopener" class="ghost">Open ChatGPT</a>
     </div>
   </div>
-  <div class="toast" id="notePrompt">Copied. Paste it into Claude, ChatGPT, or whichever one you use.</div>
+  <div class="toast" id="notePrompt">Copied. Paste it into your AI.</div>
   <button class="cta" id="startedBtn" data-go="yours" style="margin-top:auto">Done. AI has it now</button>
-  <button class="link" data-go="yours">I will do it later. My dot stays</button>
+  <button class="link" data-go="yours" id="laterBtn">I will do it later. My dot stays</button>
 </section>
 
 <!-- 4 THE PAYOFF: the minutes land, and they land on the thing they named first -->
 <section class="screen dark" data-s="yours" aria-label="Your 50 minutes">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">Your 50</span></div>
+  <div class="label" id="offYou" hidden style="opacity:.75;margin-top:2px"></div>
+  <button class="link" data-restart style="margin-top:6px">Start again</button>
   <div class="dot-art">
     <svg viewBox="0 0 390 150" aria-hidden="true">
-      <g fill="#FDD801"><rect x="40" y="16" width="9" height="9" transform="rotate(25 44 20)"/><rect x="320" y="10" width="11" height="11" transform="rotate(-20 325 15)"/></g>
-      <g fill="#FDD801"><circle cx="360" cy="60" r="5"/><circle cx="150" cy="10" r="4"/></g>
+      <!-- The line they just joined, arriving from the left and carrying on past them. -->
       <path d="M-10 110 C 60 60, 110 150, 170 100 S 260 50, 300 90" fill="none" stroke="#7ED957" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 24"/>
       <path d="M-10 110 C 60 60, 110 150, 170 100" fill="none" stroke="#38BDEF" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 48" stroke-dashoffset="-12"/>
       <path d="M300 90 C 330 120, 370 100, 400 70" fill="none" stroke="#FFF4E0" stroke-opacity="0.35" stroke-width="3" stroke-dasharray="2 9"/>
-      <circle cx="300" cy="90" r="20" fill="#FDD801" stroke="#FFF4E0" stroke-width="4"/>
-      <circle cx="300" cy="90" r="32" fill="none" stroke="#FDD801" stroke-width="3" stroke-opacity="0.5"/>
+
+      <!-- The burst. Twelve rays out of their dot, drawn short and thick so it reads as a
+           pop at 375px and not as a sun. It is the only celebratory thing on the page and
+           it lands on the one screen where somebody just did something. -->
+      <g class="burst" stroke-linecap="round" stroke-width="4">
+        <g stroke="#FDD801"><line x1="300" y1="48" x2="300" y2="34"/><line x1="342" y1="90" x2="356" y2="90"/><line x1="300" y1="132" x2="300" y2="146"/><line x1="258" y1="90" x2="244" y2="90"/></g>
+        <g stroke="#38BDEF"><line x1="330" y1="60" x2="340" y2="50"/><line x1="330" y1="120" x2="340" y2="130"/><line x1="270" y1="120" x2="260" y2="130"/><line x1="270" y1="60" x2="260" y2="50"/></g>
+        <g stroke="#7ED957"><line x1="316" y1="52" x2="322" y2="40"/><line x1="338" y1="104" x2="350" y2="110"/><line x1="284" y1="128" x2="278" y2="140"/><line x1="262" y1="76" x2="250" y2="70"/></g>
+      </g>
+
+      <!-- Confetti, thrown wide of the dot so nothing lands on the word underneath. -->
+      <g class="conf">
+        <rect x="40" y="16" width="9" height="9" fill="#FDD801" transform="rotate(25 44 20)"/>
+        <rect x="320" y="10" width="11" height="11" fill="#38BDEF" transform="rotate(-20 325 15)"/>
+        <rect x="96" y="30" width="8" height="8" fill="#7ED957" transform="rotate(40 100 34)"/>
+        <rect x="358" y="126" width="9" height="9" fill="#FDD801" transform="rotate(-15 362 130)"/>
+        <rect x="18" y="62" width="7" height="7" fill="#38BDEF" transform="rotate(12 21 65)"/>
+        <circle cx="360" cy="60" r="5" fill="#FDD801"/>
+        <circle cx="150" cy="10" r="4" fill="#7ED957"/>
+        <circle cx="228" cy="26" r="4" fill="#FDD801"/>
+        <circle cx="66" cy="132" r="4.5" fill="#38BDEF"/>
+        <path d="M196 132 l6 -11 6 11" fill="none" stroke="#FDD801" stroke-width="3" stroke-linecap="round"/>
+        <path d="M382 34 l6 -11 6 11" fill="none" stroke="#7ED957" stroke-width="3" stroke-linecap="round"/>
+      </g>
+
+      <!-- Their dot. Two haloes instead of one, so it is plainly the brightest thing here. -->
+      <circle class="halo2" cx="300" cy="90" r="42" fill="none" stroke="#FDD801" stroke-width="2" stroke-opacity="0.28"/>
+      <circle class="halo1" cx="300" cy="90" r="32" fill="none" stroke="#FDD801" stroke-width="3" stroke-opacity="0.55"/>
+      <circle class="mine" cx="300" cy="90" r="20" fill="#FDD801" stroke="#FFF4E0" stroke-width="4"/>
+      <text class="mineTxt" id="dotInitials" x="300" y="90" text-anchor="middle" dominant-baseline="central" fill="#1B2838" font-size="19" font-weight="800" font-family="'Bricolage Grotesque',system-ui,sans-serif"></text>
     </svg>
     <div class="tag">that's your dot</div>
   </div>
-  <h1 style="font-size:36px;line-height:.96;letter-spacing:-.03em">You just got your 50 minutes. <span style="color:var(--sun)">They're yours.</span></h1>
-  <p class="lede" style="margin-top:-6px"><span id="dotLede">That's 50 minutes back.</span><span id="cnt2Wrap" class="hidden"> It's at <b id="cnt2" style="color:var(--sun)"></b> minutes back now.</span></p>
-  <div class="err hidden" id="railDown">The counter is not answering, so nothing you typed was kept: not the dot, not your name, not your email. The 50 minutes are still yours to take, and the line will count you when it is back.</div>
-  <div class="doit">
-    <div class="dh">And you already said what they are for.</div>
-    <div style="font-size:17px;line-height:1.3;font-weight:700"><span id="yoursWhen">Friday evening</span>. Fifty minutes, for this: <span id="yoursWhat">Go for a walk</span>.</div>
-    <div style="font-size:15px;line-height:1.35">Put it in the calendar and it survives the week. Same day, every week.</div>
-    <div class="mini"><a id="calLink" href="#" target="_blank" rel="noopener">Add to my calendar</a></div>
+  <h1 style="font-size:clamp(26px,7.6vw,34px);line-height:1;letter-spacing:-.03em"><span style="display:block;color:var(--sun);font-size:.78em">Congratulations!!!</span>You just got your 50 minutes. <span style="color:var(--sun)">They're yours.</span></h1>
+  <p class="lede" style="margin-top:-6px"><span id="dotLede">That's 50 minutes back.</span><span id="cnt2Wrap" class="hidden"> <b id="cnt2" style="color:var(--sun)"></b> minutes on this line have been lived so far.</span></p>
+  <div class="err hidden" id="railDown">Something went wrong and your dot did not save. The 50 minutes are still yours.</div>
+  <div class="cleoline">The agent who took it? That's Cleo. She runs this whole operation. I just get the minutes back.</div>
+  <button class="link hidden" id="filmEnd" type="button" style="align-self:flex-start">Watch the 15 second close &rarr;</button>
+  <div class="others hidden" id="others">
+    <div class="oh" id="othersHead">Others on the line</div>
+    <ul id="othersList"></ul>
   </div>
   <div class="sharecard" id="card">
     <div class="sc-say" id="sayDot"></div>
@@ -724,14 +906,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <div class="sc-meta" id="scMeta"><span class="claimed">Claimed</span> today</div>
     <div class="sc-foot" id="scFoot">One dot on the line · 100 days to 50 · 50,000 minutes back · connecthedots.co/50</div>
   </div>
-  <button class="cta" data-go="pass" style="margin-top:6px">Pass it on &rarr;</button>
+  <div class="mini" style="margin-top:0"><a id="calLink" href="#" target="_blank" rel="noopener">Add to my calendar</a></div>
+  <button class="cta" data-go="pass" style="margin-top:6px;font-size:18px">Help get to 50,000 &rarr;</button>
 </section>
 
 <!-- 5 PASS IT ON -->
-<section class="screen dark" data-s="pass" aria-label="Pass it on">
-  <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">Pass it on</span></div>
-  <h1 style="font-size:38px;line-height:.98;letter-spacing:-.03em">Pass it on.</h1>
-  <p class="lede" style="margin-top:-6px">You got your 50. Give one person the chance to get theirs, and start them where you started: what would they do with 50 minutes back?</p>
+<section class="screen dark" data-s="pass" aria-label="Help get to 50,000 minutes">
+  <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">Get to 50,000</span></div>
+  <h1 style="font-size:32px;line-height:1;letter-spacing:-.03em">Help get to 50,000 minutes before December 31st.</h1>
+  <p class="lede" style="margin-top:-6px">You got your 50. Give one person the chance to get theirs.</p>
   <div class="nets" data-group="net">
     <button class="net" type="button" aria-pressed="true" data-v="wa" style="background:var(--wa-btn)">WhatsApp</button>
     <button class="net" type="button" aria-pressed="false" data-v="li" style="background:var(--sky)">LinkedIn</button>
@@ -743,50 +926,106 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <span class="lang" id="langRow" data-group="lang"><button type="button" data-v="en" aria-pressed="true">English</button><button type="button" data-v="he" aria-pressed="false">עברית</button></span>
     <span id="readyText"></span>
   </div>
-  <div class="mini"><button type="button" id="sendShare">Open WhatsApp</button><button type="button" class="ghost" id="copyShare">Copy the text</button></div>
-  <div class="toast" id="noteShare">Copied. Paste it wherever you like.</div>
+  <div class="mini"><button type="button" id="sendShare">Take me to WhatsApp</button></div>
+  <div class="toast" id="noteShare">Copied. If it does not arrive already written, paste it.</div>
   <div class="carry"><span id="carryText">Your dot tracks every minute it inspires.</span><b class="mylink hidden" id="myLink"></b></div>
   <button class="cta" data-go="five" style="margin-top:6px">Next</button>
 </section>
 
 <!-- 6 THE $5: Anat holds you to it -->
-<section class="screen dark" data-s="five" aria-label="Held to it">
-  <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">Held to it</span></div>
+<section class="screen dark" data-s="five" aria-label="The 50,000">
+  <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">The 50,000</span></div>
   <div class="five">
-    <div class="head"><div class="h">Want Anat to<br>hold you to it?</div><div class="coin">$5</div></div>
-    <div style="font-size:15.5px;line-height:1.35;font-weight:600">Five dollars, once:</div>
-    <div class="gets">
-      <div><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#1B2838"/><path d="M6 11 L10 15 L16 7" fill="none" stroke="#FDD801" stroke-width="2.5" stroke-linecap="round"/></svg><span><b>A personal check-in from Anat on your day.</b> <span id="nudgeWhen">your day</span>: did you take it back? Her, writing to you herself.</span></div>
-      <div><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#1B2838"/><path d="M6 11 L10 15 L16 7" fill="none" stroke="#FDD801" stroke-width="2.5" stroke-linecap="round"/></svg><span><b>Your name and city beside your dot.</b> You typed them a screen ago. On a free dot they stay in Anat's own list; the $5 is what puts them on the line itself.</span></div>
+    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">Every hand-over the campaign made. At day 100.</h1><div class="coin">$5</div></div>
+    <!-- Anat's final product call, 22.9: the list is not hers, it is the campaign's. Hundreds
+         of real hand-overs by real people beats one person's list of 49, and the credibility
+         moves from her to the room. Her line, with her connecting dash turned into a colon
+         because the house bans the dash and nothing else changed. -->
+    <div id="fiveVow" style="font-size:15.5px;line-height:1.35;font-weight:600">Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line.</div>
+
+    <!-- The live examples. Filled from HANDOVERS, which is the campaign's own record: day,
+         what was handed over, minutes that came back. Empty on day 1 and the block says so,
+         because a dated claim about a day that has not happened is not a claim she can vouch
+         for, and the line under it says she vouches for every one. -->
+    <div class="hands" id="handsList"></div>
+
+
+    <!-- Three things, and two of them arrive the day they pay. That is the answer to "what
+         does a buyer get on day 1", and it is Anat's, 22.9. -->
+    <div class="listis">Three things. The weekly progress note starts this week: the counter, the new entries, the best stories. The talk discount arrives with your receipt. The full list lands at day 100.</div>
+
+    <div style="font-size:14px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px">20% of every $5 goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
+
+    <button class="pay" type="button" id="payBtn">Get the 50,000. Every hand-over, at day 100. $5</button>
+    <div id="paySub" style="font-size:13px;line-height:1.35;font-weight:700;margin-top:-2px">Plus a weekly progress note and a discount for the live talk.</div>
+    <!-- Anat, 22.9: the button does not take money until the list has SEVEN real rows with
+         a date and a result, "אחרת מכרנו בדיוק את הדבר שבגללו אפשר לקנות את זה בכל בלוג".
+         Until then this takes the launch-day traffic instead of burning it. Her copy. -->
+    <div class="sub" id="waitList" hidden>
+      <label class="subl" for="fiftyEm">The list grows every day of the 100. Leave your email, get it when it closes.</label>
+      <div class="inline">
+        <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the list when it closes">
+        <button type="button" id="fiftyBtn">Send it to me</button>
+      </div>
+      <div class="toast" id="fiftyOk">You are on it. The list lands when the 100 days close, and the weekly note comes meanwhile.</div>
+      <div class="toast" id="fiftyFail">That did not send. Try again in a moment.</div>
     </div>
-    <div style="font-size:14px;line-height:1.4">And a small thank-you: $5 off a seat at Anat's talk, The Human is the Loop, Tel Aviv, November 2nd. <a href="https://thehumanistheloop.co/" target="_blank" rel="noopener" style="font-weight:800">About the talk</a></div>
-    <div style="font-size:14px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px">20% of every $5 goes to a youth charity. Anat is choosing the organisation now, and it will be named here before the first $5 is taken.</div>
-    <button class="pay" type="button" data-note="notePay">Opens soon · $5</button>
-    <div class="toast" id="notePay">Nothing is charged here yet. The $5 opens as soon as Anat's payment link is live, and it will open on this button. Your free dot is claimed either way.</div>
-    <button class="link" data-go="human" id="skipPay">Not now.</button>
+    <div class="toast" id="paidBack">Thank you. Your first weekly note and your talk code are on their way, and the full list lands when the 100 days close.</div>
+    <div class="toast" id="notePay">Nothing is charged yet. Your free dot is claimed either way.</div>
+    <div id="talkPerk" style="font-size:12.5px;line-height:1.35;opacity:.85">Coming to Tel Aviv? Every buyer gets a discount code for Anat's talk in the confirmation mail. <a href="https://thehumanistheloop.co/?utm_source=fifty50&amp;utm_medium=content&amp;utm_campaign=the-49-screen" target="_blank" rel="noopener" style="font-weight:800">The Human is the Loop</a></div>
+    <button class="link" data-go="human" id="skipPay">Not now. Carry on.</button>
   </div>
 </section>
 
 <!-- 7 FINALE: what stays ours, and her birthday -->
 <section class="screen pinkbg" data-s="human" aria-label="What stays ours">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label">What stays ours</span></div>
-  <h1 style="font-size:clamp(30px,10.2vw,38px);line-height:.98;letter-spacing:-.03em">AI has read every story. <span class="hl hl-sun"><span>It was never in one.</span></span></h1>
+  <h1 style="font-size:clamp(30px,10.2vw,38px);line-height:.98;letter-spacing:-.03em">The human is the loop. <span class="hl hl-sun"><span>You are the loop.</span></span></h1>
+  <div class="onlyh">Only humans can:</div>
   <div class="human-list">
-    <div><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex-shrink:0"><circle cx="11" cy="11" r="9" fill="#1B2838" stroke="#1B2838" stroke-width="2.5"/></svg>The taste of coffee someone made you exactly right.</div>
-    <div><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex-shrink:0"><circle cx="11" cy="11" r="9" fill="#38BDEF" stroke="#1B2838" stroke-width="2.5"/></svg>Knowing from the silence in a room that something is wrong.</div>
-    <div><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex-shrink:0"><circle cx="11" cy="11" r="9" fill="#FDD801" stroke="#1B2838" stroke-width="2.5"/></svg>Cringing at a story you're telling for the fifth time.</div>
+    <div><span class="num">1</span>Taste the coffee someone made you exactly right.</div>
+    <div><span class="num">2</span>Know from the silence in a room that something is wrong.</div>
+    <div><span class="num">3</span>Cringe at a story you're telling for the fifth time.</div>
   </div>
   <div style="font-family:var(--hand);font-size:28px;line-height:1.05;margin-top:2px">That's what <span id="finWhen">Friday evening</span> is for.</div>
   <div class="goes">
-    <div class="tile bday">
-      <span class="k">One more thing. It's her birthday.</span>
-      <span class="t">Want to wish Anat a happy 50th?</span>
-      <textarea id="wish" class="field solid" rows="3" maxlength="280" placeholder="Happy 50th, Anat..." aria-label="Your birthday wish for Anat"></textarea>
-      <button class="pay" type="button" id="sendWish" style="box-shadow:none">Send my wish</button>
-      <div class="toast" id="noteWish">This opens your mail app with the wish ready, addressed to anat@connecthedots.co. She reads that inbox herself.</div>
+    <!-- 3. Anat, 21.9. The one line that says what the whole walk was about. -->
+    <div class="agentline" id="agentLine">The agent got the tasks. We kept the judgment, the taste, and the guts.</div>
+
+    <!-- 4. One call, and it is the loudest thing on the screen. -->
+    <button class="cta join" id="joinCta" data-go="pass">Join the 50,000 human minutes &rarr;</button>
+
+    <!-- 5. One field. Nothing else asked for. FORM-FLOW covers it: stored, confirmed,
+         and Anat's own inbox, same as every other form on this rail. -->
+    <div class="sub">
+      <label class="subl" id="subLabel" for="subEm">Want to watch the dots close? Leave your email. One update a week, nothing more.</label>
+      <div class="inline">
+        <input id="subEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the weekly update">
+        <button type="button" id="subBtn">Keep me posted</button>
+      </div>
+      <div class="toast" id="subOk">You are on the list. One a week, and one line to anat@connecthedots.co takes you off.</div>
+      <div class="toast" id="subFail">That did not send. Try again in a moment.</div>
     </div>
-    <div style="font-size:15px;line-height:1.4">Want more of this? Anat's talk, <a href="https://thehumanistheloop.co/" target="_blank" rel="noopener" style="font-weight:800;color:var(--sun)">The Human is the Loop</a>. Tel Aviv, November 2nd.</div>
-    <a class="cta" href="https://thehumanistheloop.co/" target="_blank" rel="noopener">See the talk &rarr;</a>
+
+    <!-- 6 + 7. The talk, secondary in size and in colour, and with no date locked into it:
+         the page it points at is the one that carries the dates, including the online ones. -->
+    <div class="talkline">100 days in public, then the full story live. <a href="https://thehumanistheloop.co/" target="_blank" rel="noopener">The Human is the Loop, dates and tickets here</a>. Come see what the agent couldn't do.</div>
+    <a class="quiet" href="https://thehumanistheloop.co/" target="_blank" rel="noopener">See the talk &rarr;</a>
+
+    <!-- Anat, 22.9: "for anyone not connected to me yet, this is the moment". Last thing on
+         the last screen, after the ask and after the talk, because a follow is what somebody
+         does when they have already decided they liked this.
+         Each icon renders ONLY when SOCIAL has a URL for it, the same rule as the film and
+         the pay button: a live-looking icon that leads nowhere costs more than a missing one.
+         LinkedIn is the only handle written down anywhere in this house. -->
+    <div class="follow" id="followRow" hidden>
+      <div class="followl">Not connected yet? This is the moment.</div>
+      <div class="followi">
+        <a id="soLi" href="#" target="_blank" rel="noopener" aria-label="Anat on LinkedIn" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.07-1.9-3.07-1.9 0-2.2 1.46-2.2 2.97V21h-4V9Z"/></svg></a>
+        <a id="soFb" href="#" target="_blank" rel="noopener" aria-label="Anat on Facebook" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.62A22 22 0 0 0 14.3 3.5c-2.4 0-4.05 1.47-4.05 4.17V9.9H7.5V13h2.75v8h3.25Z"/></svg></a>
+        <a id="soIg" href="#" target="_blank" rel="noopener" aria-label="Anat on Instagram" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 1.8c-3.14 0-3.5.01-4.74.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71C3.42 8.5 3.4 8.86 3.4 12s.02 3.5.08 4.74c.04.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.6.08 4.74.08s3.5-.02 4.74-.08c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.08-1.6.08-4.74s-.02-3.5-.08-4.74c-.04-.9-.19-1.39-.32-1.71a2.9 2.9 0 0 0-.69-1.06 2.9 2.9 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32C15.5 4.01 15.14 4 12 4Zm0 3.03a4.97 4.97 0 1 1 0 9.94 4.97 4.97 0 0 1 0-9.94Zm0 8.2a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46Zm6.34-8.4a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0Z"/></svg></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -800,7 +1039,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#FF5A3C" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800"/>
     <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#38BDEF" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-200"/>
     <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#FDD801" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-400"/>
-    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#FF8FC7" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-600"/>
+    <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#7ED957" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-600"/>
     <path d="M110 150 C 240 60, 360 190, 310 290 S 90 450, 200 560 S 500 690, 580 540 S 600 300, 460 270 S 310 360, 420 450" fill="none" stroke="#7ED957" stroke-width="13" stroke-linecap="round" pathLength="1000" stroke-dasharray="200 800" stroke-dashoffset="-800"/>
     <g stroke="#1B2838" stroke-width="4">
       <circle cx="310" cy="290" r="15" fill="#FFF4E0"/>
@@ -815,6 +1054,13 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <g fill="#FDD801" stroke="#1B2838" stroke-width="2"><path d="M450 50 l6 14 l15 2 l-11 10 l3 15 l-13 -8 l-13 8 l3 -15 l-11 -10 l15 -2 z"/></g>
   </svg>
 </aside>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="The film">
+  <div class="inner">
+    <button class="x" type="button" id="vidClose">Close</button>
+    <video id="vidEl" controls playsinline preload="none"></video>
+  </div>
+</div>
 
 </main>
 
@@ -832,25 +1078,51 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     report:{label:"the weekly report", yes:"AI writes the weekly report", keep:"AI could write the weekly report", why:["It's how I see my week","I write it better","I like the story it tells"]},
     emails:{label:"routine emails", yes:"AI answers my routine emails", keep:"AI could answer my routine emails", why:["People know it's really me","Some of them are friends","It's how I stay close"]},
     draft:{label:"the first draft of anything", yes:"AI writes the first draft", keep:"AI could write the first draft", why:["The first draft is where I think","It's the fun part","My voice starts there"]},
-    water:{label:"finding water stops on my hike", yes:"AI finds the water stops on my hike", keep:"AI could find the water stops on my hike", why:["Reading the map is half the hike","I trust my own eyes","It's how I learn the land"]},
+    scaryemail:{label:"the email I'm scared to send", yes:"AI drafts the email I'm scared to send", keep:"AI could draft the email I'm scared to send", why:["The fear's part of the message","It has to be in my words","I'm the one who has to send it"]},
+    insurance:{label:"fighting the insurance company", yes:"AI fights the insurance company", keep:"AI could fight the insurance company", why:["Getting angry is the point","I know the whole story","I'm the only one who'll push"]},
+    unfinished:{label:"the project I never finished", yes:"AI restarts the project I never finished", keep:"AI could restart the project I never finished", why:["It's mine to finish","Starting again is the work","I'm not ready yet"]},
+    doctor:{label:"what my doctor actually said", yes:"AI explains what my doctor actually said", keep:"AI could explain what my doctor actually said", why:["I want it from a person","It's my body","I'd rather ask again"]},
+    iep:{label:"my kid's IEP", yes:"AI reads my kid's IEP", keep:"AI could read my kid's IEP", why:["Nobody knows my kid like I do","I need to hear every word","This one's mine"]},
+    forms:{label:"forms in bureaucrat-speak", yes:"AI reads the forms in bureaucrat-speak", keep:"AI could read the forms in bureaucrat-speak", why:["I don't hand this to a machine","It's my signature","I want to read it myself"]},
+    trip:{label:"planning the trip", yes:"AI plans the trip", keep:"AI could plan the trip", why:["I've already taken it in my head","I'm the one who knows what we can't miss","Booking it makes it real"]},
+    water:{label:"water stops on my hike", yes:"AI finds the water stops on my hike", keep:"AI could find the water stops on my hike", why:["Reading the map is half the hike","I trust my own eyes","It's how I learn the land"]},
     dinner:{label:"tonight's dinner from a fridge photo", yes:"AI plans tonight's dinner from a fridge photo", keep:"AI could plan tonight's dinner", why:["Cooking is how I unwind","I love improvising","It's how I feed my people"]},
-    album:{label:"the album from that trip", yes:"AI builds the album from my trip photos", keep:"AI could build the album from my trip photos", why:["Choosing the photos is half the memory","I like living the trip twice","It's how I tell the story"]},
-    bill:{label:"fighting my phone bill down", yes:"AI fights the phone company", keep:"AI could fight my phone company", why:["I enjoy the fight","I like winning","It's my small sport"]},
+    album:{label:"the trip album", yes:"AI builds the album from my trip photos", keep:"AI could build the album from my trip photos", why:["Choosing the photos is half the memory","I like living the trip twice","It's how I tell the story"]},
+    bill:{label:"my phone bill", yes:"AI fights the phone company", keep:"AI could fight my phone company", why:["I enjoy the fight","I like winning","It's my small sport"]},
     story:{label:"a bedtime story starring my kid", yes:"AI writes the bedtime story", keep:"AI could write the bedtime story", why:["It's our time together","My kid wants mine","I love inventing them"]},
     packing:{label:"the packing list for a trip", yes:"AI writes my packing list", keep:"AI could write my packing list", why:["Packing is where the trip starts","I like the ritual","I'll forget something anyway"]}
   };
+  // Anat, 21.9: "too many words". These are pasted into Claude by somebody standing in a
+  // kitchen, not read. Every one was 32 to 43 words of the same shape: a role, a list of
+  // what goes in, a list of what comes out, and a request. The job and the ask-back are
+  // the only two parts that do anything. The ask-back stays in all of them, because it is
+  // what turns a one-off request into the standing arrangement the whole screen is about.
+  // THE 49, and the one rule that governs this block: nothing goes in here that did not
+  // happen. Anat vouches for every line on the paid screen ("if one didn't, tell me and the
+  // $5 is back"), so a dated entry for a day the campaign has not reached yet would be a
+  // refund waiting to happen and a claim she cannot stand behind. Day 1 is 22.9.
+  //   { d: <day of the 100>, what: <what she handed over>, min: <minutes back> }
+  var HANDOVERS = [];
   var PROMPTS = {
-    summaries:"From now on you're my meeting-notes assistant. After each meeting I'll paste my raw notes and you'll return: decisions, owners, deadlines, and a 5-line summary I can forward. Reply with what you need from me.",
-    report:"From now on you write my weekly report. I'll paste the week's raw material and you return the report in my usual structure, no invented numbers, and a one-line headline. Ask me what the structure is.",
-    emails:"You're my inbox draft-writer. I'll paste an email, you write a short reply in my voice, direct and warm, never more than six lines. Ask me for three examples of how I write first.",
-    draft:"You write my first drafts from now on. I'll give you the topic, the audience and the length, you give me a draft I can cut into. Ask me what I'm working on this week.",
-    water:"You're my hike planner. I'll give you the trail and the season and you return: water stops with distances between them, how much to carry, and the two points where turning back is smart. Ask me for the trail.",
-    dinner:"You're my dinner planner. I'll send you a photo of the fridge and you return one thing we can eat tonight with what's there, in under 30 minutes. Ask me who's eating.",
-    album:"You're my photo-album editor. I'll drop the trip photos and the dates, you return the running order, the chapters, a one-line caption for each and the ten that should never make it in. Ask me where the trip was and who was there.",
-    bill:"You fight my phone bill. I'll paste the last bill and you return: what I'm actually paying for, what's not used, and the exact sentences to say on the call. Ask me for the bill.",
-    story:"You write the bedtime story tonight. I'll tell you my kid's name, age and what they love, and you write 300 words where they're the hero. Ask me for those three things.",
-    packing:"You write my packing list. I'll tell you where, how long and what the weather is, you return a list I can tick off, with what I always forget. Ask me for the trip."
+    summaries:"Take my meeting notes. I paste raw, you return decisions, owners, deadlines. Ask what you need.",
+    report:"Write my weekly report. I paste the week, you write it. Ask me for my structure.",
+    emails:"Draft my email replies. Short, in my voice. Ask for three examples of how I write.",
+    draft:"Write my first drafts. I give you topic, audience, length. Ask what I'm working on.",
+    scaryemail:"Help me write an email I've been avoiding. Three versions, plain and kind. Ask me what I'm afraid of.",
+    insurance:"Fight my insurance claim. I'll paste their letter, you find what they owe. Ask me what they refused.",
+    unfinished:"Restart something I abandoned. Give me the next three steps, small enough for tonight. Ask me why I stopped.",
+    doctor:"Explain what my doctor said, in plain words. Then the three questions I'm asking next time. Ask what I missed.",
+    iep:"Read my kid's IEP with me. What's agreed, what's missing, what I should ask for. Ask me their age.",
+    forms:"Turn this form into plain language. What it's really asking, what I'm agreeing to. Ask me what it's for.",
+    trip:"Plan my trip. Day by day, with what to book now. Ask me where, how long, and who's coming.",
+    water:"Plan my hikes. Water stops, how much to carry, where turning back is smart. Ask for the trail.",
+    dinner:"Plan dinner from a photo of my fridge. One meal, 30 minutes. Ask who's eating.",
+    album:"Edit my trip photos. Running order, chapters, one caption each, and the ten to cut. Ask where and who.",
+    bill:"Fight my phone bill. I paste it, you find what I don't use and the words to say. Ask for it.",
+    story:"Write tonight's bedtime story, 300 words, my kid the hero. Ask their name, age and what they love.",
+    packing:"Write my packing list. Ask where, how long, and what the weather is."
   };
+
   var EASY = [
     {v:"summaries", t:"Meeting summaries"},
     {v:"emails", t:"Routine emails"},
@@ -862,7 +1134,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // Screen one. Her order: the want before the machine, so this list is the first thing
   // anyone reads and it is about a life, not about a workload. "Something else" is the
   // ninth option and it opens the free field.
-  var GO_TO = ["Call someone I miss","Make something","Go for a walk","Read","Sit and do nothing","Be with my kids","Think","Create"];
+  var GO_TO = ["Call someone I miss","Call my mom","Make something","Go for a walk","Read","Nothing. Absolutely nothing.","Be with my kids"];
+  // Every button on screen one is read back after the word "to" ("...back to go for a walk").
+  // Anat's final list has one answer that is deliberately NOT a verb phrase, because the
+  // button is the better line exactly as she wrote it. So the button keeps her words and the
+  // sentence gets its own. Anything absent here falls through to lowercasing, as before.
+  var GO_SAY = {"Nothing. Absolutely nothing.":"do absolutely nothing"};
   var OWN_WHY = ["I love doing it","It's time with someone I love","It's how I think"];
   // ── the rail ─────────────────────────────────────────────────────────────────────
   // ONE base for every call. The page and the rail are same origin at
@@ -870,11 +1147,44 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // another host (fifty-line.pages.dev, or a CNAME of it) changes THIS LINE and nothing
   // else, and adds this page's origin to ALLOWED_ORIGINS on the rail first, or every
   // POST comes back forbidden_origin.
-  var LINE_API = "/api";
+  // NOT same-origin, and it cannot be: connecthedots.co is GitHub Pages, so the apex host
+  // serves files and nothing else. The rail is its own Cloudflare Pages project on its own
+  // house hostname, the same shape as seats.connecthedots.co. This page's origin is in the
+  // rail's ALLOWED_ORIGINS, or every POST comes back forbidden_origin.
+  // The rail answers on the house hostname. Until the Pages custom domain for it is added
+  // that name has DNS and no routing, so every call fails and the page looks broken while
+  // the rail underneath is perfectly healthy - which is exactly what Anat's QA hit.
+  // So: try the house name, and if the FIRST call cannot reach it, fall back to the
+  // project's own origin for the rest of the session. The house name is still what ships
+  // and still what every day-7 link is built from; this only stops a missing DNS click
+  // from looking like a broken page.
+  var LINE_API = "https://fifty.connecthedots.co/api";
+  var LINE_API_FALLBACK = "https://fifty-line.pages.dev/api";
+  var apiBase = LINE_API, apiSettled = false;
   var API_TIMEOUT_MS = 6000;
   var SHARE_BASE = "https://connecthedots.co/50";
+  // Her short film for the opening screen. Empty means there is no video block on the page
+  // at all, which is the 20.9 ruling: a play button that plays nothing came off this page
+  // once already. Put a URL here (and a still in VIDEO_POSTER) and the block appears.
+  var VIDEO_SRC = "";      // her 90 seconds, on the opening screen
+  var VIDEO_POSTER = "";   // a still of her face, not a graphic
+  var VIDEO_END_SRC = "";  // the 15 second close, after the dot lands
+  // The checkout. Anat's ruling, 14.9 and again 20.9: Morning plus PayPal, not Gumroad.
+  // ONE LINE turns the button on. Empty, the button says "Opens soon" and takes nothing,
+  // because a live-looking button that leads nowhere costs more than a date does.
+  var PAY_URL = "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6";
+  // Anat's ruling, 22.9. Seven real hand-overs, each with its date and what happened next,
+  // before a single dollar is taken. Below it the screen asks for an email instead.
+  // Her doors. An empty string means that icon does not exist on the page at all. LinkedIn
+  // is the only one this house has written down; Facebook and Instagram need her handles.
+  var SOCIAL = {
+    li: "https://www.linkedin.com/in/anatdotconnector",
+    fb: "",
+    ig: ""
+  };
+  var PAY_OPENS_AT = 7;
   var GOAL = 50000; // the wish. A fallback only: the live goal comes from the rail.
-  function fresh(){ return {thing:null, own:"", to:null, toOwn:"", day:"Friday", time:"evening", name:"", city:"", email:"", net:"wa", touchedNet:false, lang:"en", kept:null, started:false, failed:false, code:null, dotNumber:null, stored:false, pickedWhen:false}; }
+  function fresh(){ return {thing:null, cat:null, handed:false, own:"", to:null, toOwn:"", day:"Friday", time:"evening", name:"", city:"", email:"", net:"wa", touchedNet:false, lang:"en", kept:null, started:false, failed:false, paid:false, code:null, dotNumber:null, stored:false, pickedWhen:false}; }
   var st = fresh();
   var hist = ["open"], posted = false;
   var $ = function(s,r){return (r||document).querySelector(s)};
@@ -900,21 +1210,42 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // reached. If the rail is unreachable, slow, or answers with nulls, the counter stays
   // hidden: a zero and a rail that is down look identical on screen, and the zero is the
   // one that makes a real line look abandoned. (fifty-line README, decision 6.)
+  // TWO numbers, because Anat ruled on 20.9 that a promise is not a minute: the big one is
+  // what was LIVED (the day-7 question was answered yes), and the promised minutes are named
+  // in the line under it and hatched behind the bar. Launch week is the case this is written
+  // for - lived 0, promised large - and the honest reading of it is "nothing lived yet", not
+  // a bar sitting on zero and not a number that counts promises as minutes.
+  // The visitor is never told about "day 7" here: the sender that asks that question is
+  // built but not armed, and a page that names it is promising a letter nobody can send.
   function drawLine(d, flash){
     var el = $("#counter");
     if(!d || typeof d.totalMinutes !== "number" || typeof d.dots !== "number"){ el.hidden = true; return; }
     var n = d.totalMinutes, goal = Number(d.goal) || GOAL;
+    // minutesPromised is the GROSS number on the rail - every dot ever signed, the lived
+    // ones included - so the minutes still WAITING to be lived are the difference. Reading
+    // it as "extra" double counts every dot that already came back, and on the rail's own
+    // half-and-half case it would have printed 50,000 promised on top of 25,000 lived.
+    var gross = (typeof d.minutesPromised === "number") ? d.minutesPromised : 0;
+    var prom = Math.max(0, gross - n);
     var next = Number(d.milestone) || nextStop(n, goal);
     var prev = prevStop(n, goal);
     var past = d.beyondGoal === true || n > goal;
     var over = Number(d.overGoal) || Math.max(0, n - goal);
+    var span = (next - prev) || 1;
     $("#ppl").textContent = nf(d.dots);
     $("#cnt").textContent = nf(n);
-    $("#cnTail").textContent = past ? "minutes back" : "/ " + nf(goal) + " minutes back";
-    $("#cntBar").style.width = Math.max(2, Math.min(100, (n - prev) / ((next - prev) || 1) * 100)) + "%";
+    $("#cnTail").textContent = past ? "minutes lived" : "/ " + nf(goal) + " minutes lived";
+    // The lived bar is allowed to be genuinely empty. Only a bar with lived minutes in it
+    // gets the 2% floor that keeps a real number visible.
+    $("#cntBar").style.width = (n <= prev ? 0 : Math.max(2, Math.min(100, (n - prev) / span * 100))) + "%";
+    var g = $("#cntGhost");
+    if(g) g.style.width = (prom > 0 ? Math.max(2, Math.min(100, (gross - prev) / span * 100)) : 0) + "%";
+    var promLine = prom > 0 ? nf(prom) + " more are promised. " : "";
     $("#msLine").textContent = past
-      ? "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
-      : "Next stop: " + nf(next) + " minutes";
+      ? promLine + "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
+      : (n === 0 && prom > 0
+          ? nf(prom) + " minutes are promised so far. A minute joins this counter once it has actually been lived."
+          : promLine + "Next stop: " + nf(next) + " minutes");
     el.classList.toggle("past", past);
     el.hidden = false;
     showTotal(n);
@@ -923,17 +1254,26 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // The dot screen's own sentence about the total, hidden until there is a real one.
   function showTotal(n){
     var w = $("#cnt2Wrap"); if(!w) return;
-    if(typeof n === "number"){ $("#cnt2").textContent = nf(n); w.classList.remove("hidden"); }
+    if(typeof n === "number" && n > 0){ $("#cnt2").textContent = nf(n); w.classList.remove("hidden"); }
     else w.classList.add("hidden");
   }
 
   // Every call is on a timer and every failure is silent. The visitor never waits on us.
   function api(path, opts){
     if(!window.fetch) return Promise.reject(new Error("no fetch"));
+    return call(apiBase, path, opts).then(function(r){ apiSettled = true; return r; }, function(e){
+      // One retry, once, and only when the house name has never answered. A rail that
+      // answered and then failed is a real failure and is reported as one.
+      if(apiSettled || apiBase !== LINE_API) throw e;
+      apiBase = LINE_API_FALLBACK;
+      return call(apiBase, path, opts).then(function(r){ apiSettled = true; return r; });
+    });
+  }
+  function call(base, path, opts){
     var o = opts || {}, ctl = null;
     try{ ctl = new AbortController(); o.signal = ctl.signal; }catch(e){}
     var timer = setTimeout(function(){ try{ if(ctl) ctl.abort(); }catch(e){} }, API_TIMEOUT_MS);
-    return fetch(LINE_API + path, o).then(function(r){
+    return fetch(base + path, o).then(function(r){
       clearTimeout(timer);
       if(!r.ok) throw new Error("http " + r.status);
       return r.json();
@@ -960,7 +1300,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     return m ? m[1].toUpperCase() : "";
   })();
   function myUrl(){ return SHARE_BASE + (st.code ? "?from=" + st.code : ""); }
-  function myLabel(){ return "connecthedots.co/50" + (st.code ? "?from=" + st.code : ""); }
+  // connecthedots.co/50 is a Pages directory and 301s to /50/, so the un-slashed form cost
+  // every shared link a redirect hop. The slash is the address.
+  function myLabel(){ return "connecthedots.co/50/" + (st.code ? "?from=" + st.code : ""); }
 
   // The dot. Fired the moment the button is pressed and never waited on: the screen is
   // already theirs. If it answers, the code, the number and the new total arrive a moment
@@ -976,12 +1318,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
         thing: t ? t.label : "",
         connectsTo: pick(),
         when: when(),
+        day: st.pickedWhen ? st.day : "",
+        time: st.pickedWhen ? st.time : "",
         name: st.name.trim(),
         city: st.city.trim(),
         email: st.email.trim(),
         from: FROM,
         rid: rid(),
-        sentence: oath()
+        sentence: oath(),
+        prompt: promptFor()
       })
     }).then(function(r){
       if(r && r.stored && r.code){
@@ -1004,10 +1349,21 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     window.scrollTo(0,0);
     var h = $(".screen.on h1"); if(h){h.setAttribute("tabindex","-1"); h.focus({preventScroll:true});}
   }
+  // ONE history, not two. This used to pop its own array and replaceState, while the
+  // browser's stack kept growing: after an in-page Back the address bar named the screen you
+  // had just left, and the next browser Back appeared to do nothing at all. Now the in-page
+  // button asks the browser to go back and popstate is the only thing that moves a screen,
+  // so the two can no longer disagree.
   function back(){
-    if(hist.length>1){ hist.pop(); var id=hist[hist.length-1]; try{history.replaceState({s:id},"","#"+id)}catch(e){} show(id,false); }
+    if(hist.length>1) history.back();
   }
-  window.addEventListener("popstate", function(){ if(hist.length>1){hist.pop(); show(hist[hist.length-1], false);} });
+  window.addEventListener("popstate", function(e){
+    var id = (e.state && e.state.s) || (location.hash || "#open").slice(1) || "open";
+    if(!$('.screen[data-s="'+id+'"]')) id = "open";
+    var at = hist.lastIndexOf(id);
+    if(at > -1) hist.length = at+1; else hist.push(id);
+    show(id, false);
+  });
 
   function lc(s){ return s.charAt(0).toLowerCase()+s.slice(1); }
   function thing(){
@@ -1018,9 +1374,23 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // Every preset is a verb phrase ("go for a walk"), so everything downstream reads it
   // after the word "to". A typed answer that already starts with "I" keeps its capital
   // and becomes its own sentence instead.
-  function pick(){ var t = st.to==="__own" ? st.toOwn.trim() : st.to; return t ? (/^I\b/.test(t) ? t : lc(t)) : ""; }
+  function pick(){
+    var t = st.to==="__own" ? st.toOwn.trim() : st.to;
+    if(!t) return "";
+    // Own-property only. A plain object answers to "constructor" and "toString", and a
+    // visitor typing one of those printed native code into her page and into the row.
+    if(Object.prototype.hasOwnProperty.call(GO_SAY, t)) return GO_SAY[t];
+    return /^I\b/.test(t) ? t : lc(t);
+  }
   function wantLabel(){ var t = st.to==="__own" ? st.toOwn.trim() : st.to; return t || "…"; }
   function when(){ return st.day+" "+st.time; }
+  // The exact prompt this visitor was handed. The rail stores it verbatim because the
+  // day-7 letter quotes it back, so the screen and the row read from this one function.
+  function promptFor(){
+    return st.own.trim()
+      ? "Take this off my page: "+st.own.trim()+". Ask what you need, then do it every time."
+      : (PROMPTS[st.thing] || "");
+  }
 
   // the oath: the sentence the visitor signs and shares
   // The want comes first in the sentence too, because it came first on the page. The
@@ -1031,14 +1401,20 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     return head+" "+t.yes+".";
   }
   function signer(){ return [st.name.trim(), st.city.trim()].filter(Boolean).join(", "); }
+  // The letters inside their dot. One from the first name, two only if they typed two
+  // words. Anything longer stops being initials and starts being a name on a circle.
+  function initials(){
+    var parts = st.name.trim().split(/\s+/).filter(Boolean).slice(0, 2);
+    return parts.map(function(w){ return [...w][0].toUpperCase(); }).join("");
+  }
 
   // The Hebrew share used to be a fixed template: it announced a dot on the line and said
   // nothing about the want or the task, while every English share carried both. These four
   // maps are what a Hebrew oath needs, and every phrase in them is gender neutral.
   var HE_DAY = {Sunday:"יום ראשון",Monday:"יום שני",Tuesday:"יום שלישי",Wednesday:"יום רביעי",Thursday:"יום חמישי",Friday:"יום שישי",Saturday:"שבת"};
   var HE_TIME = {morning:"בבוקר",afternoon:"אחרי הצהריים",evening:"בערב"};
-  var HE_GO = {"Call someone I miss":"להתקשר למישהו שחסר לי","Make something":"להכין משהו","Go for a walk":"לצאת להליכה","Read":"לקרוא","Sit and do nothing":"לשבת בלי לעשות כלום","Be with my kids":"להיות עם הילדים שלי","Think":"לחשוב","Create":"ליצור"};
-  var HE_THING = {summaries:"סיכומי הפגישות",report:"הדוח השבועי",emails:"המיילים השגרתיים",draft:"הטיוטה הראשונה",water:"איתור נקודות המים במסלול",dinner:"ארוחת הערב לפי תמונה של המקרר",album:"האלבום מהטיול",bill:"הקרב על חשבון הטלפון",story:"הסיפור לפני השינה",packing:"רשימת הציוד לטיול"};
+  var HE_GO = {"Call someone I miss":"להתקשר למישהו שחסר לי","Call my mom":"להתקשר לאמא שלי","Make something":"להכין משהו","Go for a walk":"לצאת להליכה","Read":"לקרוא","Nothing. Absolutely nothing.":"לא לעשות כלום","Be with my kids":"להיות עם הילדים שלי"};
+  var HE_THING = {summaries:"סיכומי הפגישות",report:"הדוח השבועי",emails:"המיילים השגרתיים",draft:"הטיוטה הראשונה",water:"איתור נקודות המים במסלול",dinner:"ארוחת הערב לפי תמונה של המקרר",album:"האלבום מהטיול",bill:"הקרב על חשבון הטלפון",story:"הסיפור לפני השינה",packing:"רשימת הציוד לטיול",scaryemail:"המייל שמפחיד אותי לשלוח",insurance:"הקרב מול חברת הביטוח",unfinished:"הפרויקט שלא סיימתי",doctor:"מה הרופא באמת אמר",iep:"התוכנית החינוכית של הילד שלי",forms:"הטפסים בשפה של פקידים",trip:"תכנון הטיול"};
   function heOath(){
     var w = st.to==="__own" ? st.toOwn.trim() : (HE_GO[st.to] || "");
     var th = st.own.trim() ? st.own.trim() : (HE_THING[st.thing] || "");
@@ -1052,12 +1428,47 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       + (st.stored ? "\n\nהנקודה שלי כבר על הקו של ענת." : "")
       + "\n\nשתי דקות, ושאלה אחת: מה היית עושה עם חמישים דקות שחוזרות אליך?\n" + myLabel();
   }
+  // The quote each share carries. Anat's own form, 21.9: the task first, then the time it
+  // buys back. The screen's oath still leads with the want, which was her 20.9 ruling; a
+  // share is read by a stranger who needs the mechanism before the meaning.
+  // A promise is a thing somebody MADE. Handing nothing over and picking no hour is a road
+  // this page offers on purpose, and until 22.9 the share still wrote "AI writes my meeting
+  // summaries, so I can take Friday evening back" for the visitor who had just refused
+  // meeting summaries by name and never seen the day screen. Friday evening was the default.
+  // Words published under a stranger's name have to be words the stranger said.
+  function handedOver(){ return !!st.handed; }
+  // Anat, 22.9: the No road still gets a share card, "אחרת איבדנו את האנשים הכי מצחיקים
+  // בקמפיין". Her words, used as she wrote them. Nothing about it is an apology, and their
+  // minutes are not counted on the line, because the line counts minutes a handover gave
+  // back. They still join the weekly list, on the screen before this one.
+  var KEPT_SHARE = "I kept everything human. 0 minutes to AI, all 50 to myself. What's one thing you'll let AI do?";
+  var KEPT_SHARE_HE = "שמרתי הכול אנושי. אפס דקות לבינה המלאכותית, כל החמישים בחזרה אליי.\n\nמה הדבר האחד שכדאי למסור לה?";
+  function keptEverything(){ return !st.handed && !!st.kept; }
+  function whenSaid(){ return st.pickedWhen ? when() : "an hour I pick"; }
+  function shareLine(){
+    var t = thing(), p = pick();
+    if(!handedOver() || !t || !p) return "";
+    return t.yes + ", so I can take " + whenSaid() + " back to " + p + ".";
+  }
+
+  // The three texts are Anat's, written 21.9 and used as she wrote them. Two changes, both
+  // forced by the house dash ban: "project - reclaiming" became "project, reclaiming", and
+  // "the loop - we just" became two sentences.
   function shareText(){
+    if(keptEverything()){
+      var body = (st.lang==="he" && st.net==="wa") ? KEPT_SHARE_HE : KEPT_SHARE;
+      return body + "\n\n" + myLabel();
+    }
     if(st.lang==="he" && st.net==="wa") return heShare();
-    var s = oath();
-    if(st.net==="wa") return "I just made this promise and thought of you.\n\n\""+s+"\"\n\nIf you got 50 minutes back, what would you do with them? Two minutes to answer.\n" + myLabel();
-    if(st.net==="li") return "I was asked what I would do with 50 minutes back. I answered first, and only then went looking for the thing AI could take.\n\n\""+s+"\"\n\nIt is Anat Weissman's 50th birthday project: 50,000 minutes back to what only humans can do.\n\nWhat would you do with yours? " + myLabel();
-    if(st.net==="fb") return (st.stored ? "My dot is on the line: " : "Here is what I just promised: ") + "\""+s+"\"\n\n100 days, 50,000 minutes back to what only humans can do.\n\nIf you got 50 minutes back, what would you do with them? " + myLabel();
+    var q = shareLine();
+    if(st.net==="wa") return "I just did this and thought of you. The idea is simple: let AI do the busywork so you can focus on what only you can do."
+      + (q ? "\n\nMy promise: \""+q+"\"" : "")
+      + "\n\nIf AI could buy you 50 minutes back, what would you do with them? " + myLabel();
+    if(st.net==="li") return "We spend so much time talking about what AI can do, we forget to ask what it frees us to do."
+      + (q ? "\n\nI just joined Anat Weissman's 50th birthday project with this promise: \""+q+"\"" : "\n\nI just walked Anat Weissman's 50th birthday project and kept mine human.")
+      + "\n\nWhen we let AI handle the routine, we get to focus on what only humans can do. The human is still the loop. We just get to choose where we spend our energy.\n\nHow would you use 50 reclaimed minutes? Join the 50,000 Minutes project: " + myLabel();
+    if(st.net==="fb") return (q ? "I just made a promise: I'm giving AI the tasks it can do, so I can focus on what only I can do.\n\n\""+q+"\"" : "I just asked myself what I would do with 50 minutes back, and what I would never hand over.")
+      + "\n\nThis is part of the 50,000 Minutes project, reclaiming time for the things that make us human. If you let AI buy you 50 minutes back, what would you do with them? " + myLabel();
     return myLabel();
   }
   var NETLABEL = {wa:"Ready for WhatsApp, to one person", li:"Ready as a LinkedIn post", fb:"Ready for Facebook", link:"Your link, copied"};
@@ -1071,34 +1482,78 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     // The want said on screen one is repeated on every screen that asks something of it,
     // so nobody is ever choosing a task without their own answer in front of them.
     var w = want || "…";
-    $("#wantNote").textContent = w;
+    // Under the words "You said" goes HER answer, not the form the sentence needs. The
+    // substitution belongs in the oath and nowhere a person is quoted back to themselves.
+    $("#wantNote").textContent = wantLabel();
     $("#choiceWant").textContent = wantLabel();
     $("#timeWant").textContent = w;
     $("#nodotWant").textContent = wantLabel();
-    $("#yoursWhat").textContent = wantLabel();
-    $("#yoursWhen").textContent = when();
     $("#handThing").textContent = t ? lc(t.label) : "this one";
-    var ready = !!(t && want);
+    // Three lines above this, #handDot correctly prints nothing when the rail has not
+    // confirmed. This link was promising the same dot unconditionally.
+    var later = $("#laterBtn");
+    if(later) later.textContent = st.stored ? "I will do it later. My dot stays" : "I will do it later";
+    // The finale's one line assumed a handover. On the road where somebody kept everything,
+    // the sentence is still true about the project and false about them.
+    var al = $("#agentLine");
+    if(al) al.textContent = st.handed
+      ? "The agent got the tasks. We kept the judgment, the taste, and the guts."
+      : "You kept it. The judgment, the taste and the guts were never the machine's anyway.";
+    // Her spec for the last screen: it reflects BOTH sides, what they will do with the
+    // 50, and what came off their shoulders. The oath carries the first. This is the second.
+    var off = $("#offYou");
+    if(off){
+      off.textContent = (t && st.cat) ? st.cat + " \u00b7 " + lc(t.label) : "";
+      off.hidden = !(t && st.cat);
+    }
     var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(st.email.trim());
+    var okName = st.name.trim().length > 0;
+    var ready = !!(t && want && okName && okMail);
     var s = oath();
     $("#oathText").textContent = s;
     $("#oathSig").textContent = signer() || "you";
     // A mistyped address says what is wrong instead of disabling the button in silence.
     var typed = st.email.trim(), badMail = typed !== "" && !okMail;
-    $("#emErr").textContent = badMail
-      ? "That is not an email yet. It needs an @ and a dot after it, like anat@connecthedots.co. Fix it, or clear the field and carry on without one."
-      : "";
+    $("#emErr").textContent = badMail ? "That address needs an @ and a dot after it." : "";
     $("#emErr").classList.toggle("hidden", !badMail);
-    $("#addDot").disabled = !ready || badMail;
+    $("#addDot").disabled = !ready;
     $("#sayDot").textContent = s;
     $("#sigDot").textContent = signer() || "You";
+    var ini = initials();
+    $("#dotInitials").textContent = ini;
+    $("#dotInitials").setAttribute("font-size", ini.length > 1 ? "15" : "19");
     // Nobody is told they picked a day they never picked: the no-dot road never sees
     // the day and time screen at all.
-    $("#nudgeWhen").textContent = st.pickedWhen ? when() : "your day";
     $("#finWhen").textContent = st.pickedWhen ? when() : "an hour you pick";
-    $("#promptText").textContent = st.own.trim() ? "From now on you take this off my page: "+st.own.trim()+". Ask me what you need from me to do it well, then do it every time I ask." : (PROMPTS[st.thing] || "");
+    $("#promptText").textContent = promptFor();
     $("#calLink").href = calUrl();
-    $("#sendShare").textContent = st.net==="wa" ? "Open WhatsApp" : (st.net==="li" ? "Open LinkedIn" : (st.net==="fb" ? "Open Facebook" : "Copy the link"));
+    $("#joinCta").innerHTML = (st.stored ? "Help get to 50,000 minutes" : "Join the 50,000 human minutes") + " &rarr;";
+    // The gate is the list itself, not a flag somebody has to remember to flip: the seventh
+    // row with a date and a result turns the money on, and nothing else does.
+    var listLive = HANDOVERS.length >= PAY_OPENS_AT;
+    $("#payBtn").hidden = !listLive;
+    $("#waitList").hidden = listLive;
+    // Past tense on an empty list is the same defect her ruling is about, one line higher up.
+    $("#fiveHead").textContent = listLive
+      ? "Every hand-over the campaign made. At day 100."
+      : "The list is being written right now, by the people on the line.";
+    $("#fiveVow").textContent = listLive
+      ? "Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line."
+      : "Every entry will be a real hand-over from a real person in the campaign: initials, dated, counted on the line.";
+    var ps = $("#paySub"); if(ps) ps.hidden = !listLive;
+    // And a buyer perk with no buyer and no code is a promise to nobody.
+    var perk = $("#talkPerk"); if(perk) perk.hidden = !listLive;
+    $("#payBtn").innerHTML = st.paid ? "Paid \u2713" : (PAY_URL ? "Get the 49 &middot; $5" : "Opens soon &middot; $5");
+    $("#payBtn").disabled = !!st.paid;
+    // Their own address, already typed once, put back in front of them.
+    var mine = st.email.trim(), sub = $("#subEm");
+    if(mine && !sub.disabled && !sub.value) sub.value = mine;
+    $("#subLabel").textContent = mine
+      ? "Want the weekly update at " + mine + " too? One a week, nothing more."
+      : "Want to watch the dots close? Leave your email. One update a week, nothing more.";
+    $("#subBtn").textContent = sub.disabled ? "Done \u2713" : (mine ? "Yes, keep me posted" : "Keep me posted");
+    $("#sendShare").textContent = st.net==="link" ? "Copy my link"
+      : (st.net==="wa" ? "Take me to WhatsApp" : (st.net==="li" ? "Take me to LinkedIn" : "Take me to Facebook"));
     $("#langRow").style.display = st.net==="wa" ? "flex" : "none";
     $$('[data-group="lang"] button').forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.v===st.lang ? "true":"false"); });
     // The card carries the number the rail gave this dot, and no promise of a day-7
@@ -1115,9 +1570,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#skipPay").textContent = $("#notePay").classList.contains("on")
       ? "Continue"
       : (st.stored ? "Not now. My free dot stays claimed." : "Not now. Carry on.");
+    // No code means no personal link, so nothing on screen mentions one. The old line
+    // explained our plumbing to a stranger.
     $("#carryText").textContent = st.code
-      ? "This link is yours. Your dot carries your 50, plus 50 more for everyone who joins through it. No prizes, no draws."
-      : "Every dot on the line is 50 minutes. The link that credits the people you bring is made by the counter, and the counter is not answering right now.";
+      ? "This link is yours. Your dot carries your 50, plus 50 more for everyone who joins through it."
+      : "Every dot on the line is 50 minutes.";
     $("#myLink").textContent = st.code ? myLabel() : "";
     $("#myLink").classList.toggle("hidden", !st.code);
     $("#readyLabel").textContent = NETLABEL[st.net];
@@ -1137,10 +1594,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     d.setDate(now.getDate()+delta); d.setHours(hours[st.time]||19, 0, 0, 0);
     var end = new Date(d.getTime()+50*60000);
     function fmt(x){ return x.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,""); }
-    var title = "50 minutes: "+(pick() || "mine");
+    // Anat, 21.9: "the meeting name should be: Give AI, get back your time". It is the
+    // whole idea in five words, and it is what they read at a glance every week once this
+    // page is long forgotten. The want rides in the details, where there is room for it.
+    var title = "Give AI, get back your time";
     return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(title)
       +"&dates="+fmt(d)+"/"+fmt(end)
-      +"&recur="+encodeURIComponent("RRULE:FREQ=WEEKLY")
+      // One event, because the label says "Add to my calendar" and the oath is singular.
+      // It was RRULE:FREQ=WEEKLY with no COUNT and no UNTIL: every week, forever, unasked.
       +"&details="+encodeURIComponent(oath()+"\n\n"+myLabel());
   }
 
@@ -1153,12 +1614,38 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     var a=document.createElement("textarea"); a.value=text; a.setAttribute("readonly",""); a.style.position="fixed"; a.style.opacity="0";
     document.body.appendChild(a); a.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(a);
   }
+  // One press: the text goes to the clipboard and the app opens. WhatsApp takes the words
+  // in the link itself and arrives written; LinkedIn and Facebook only take the URL and
+  // build their own card from it, so the words have to be pasted, which is why they are
+  // already copied by the time the tab opens.
   function openShare(){
     var t = shareText(), url = myUrl();
-    if(st.net==="wa") window.open("https://wa.me/?text="+encodeURIComponent(t), "_blank", "noopener");
-    else if(st.net==="li") { copy(t,"noteShare"); window.open("https://www.linkedin.com/feed/?shareActive=true&text="+encodeURIComponent(t), "_blank", "noopener"); }
-    else if(st.net==="fb") { copy(t,"noteShare"); window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url), "_blank", "noopener"); }
-    else copy(url, "noteShare");
+    if(st.net==="link"){ copy(url, "noteShare"); return; }
+    copy(t, "noteShare");
+    var to = st.net==="wa" ? "https://wa.me/?text="+encodeURIComponent(t)
+      : st.net==="li" ? "https://www.linkedin.com/feed/?shareActive=true&text="+encodeURIComponent(t)
+      : "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url);
+    window.open(to, "_blank", "noopener");
+  }
+
+  // Three live examples, or, until there are three, the truth about why there are not.
+  function buildHands(){
+    var box = $("#handsList"); if(!box) return;
+    box.innerHTML = "";
+    HANDOVERS.slice(-3).forEach(function(h){
+      var r = document.createElement("div"); r.className = "hrow";
+      var d = document.createElement("span"); d.className = "hd"; d.textContent = "Day " + h.d;
+      var w = document.createElement("span"); w.textContent = h.what;
+      var m = document.createElement("span"); m.className = "hm"; m.textContent = h.min + " min back";
+      r.appendChild(d); r.appendChild(w); r.appendChild(m); box.appendChild(r);
+    });
+    if(HANDOVERS.length < 3){
+      var r2 = document.createElement("div"); r2.className = "hrow soonrow";
+      r2.textContent = HANDOVERS.length === 0
+        ? "Day 1 of 100. The list starts today and you will watch it fill."
+        : "The rest arrive one day at a time, in public.";
+      box.appendChild(r2);
+    }
   }
 
   function buildEasy(){
@@ -1176,7 +1663,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       var b=document.createElement("button"); b.className="pill"; b.type="button"; b.textContent=v; b.dataset.v=v;
       b.setAttribute("aria-pressed", st.to===v ? "true":"false"); box.appendChild(b);
     });
-    var o=document.createElement("button"); o.className="pill own"; o.type="button"; o.textContent="Something else"; o.dataset.v="__own";
+    var o=document.createElement("button"); o.className="pill own"; o.type="button"; o.textContent="Something only I know I need"; o.dataset.v="__own";
     o.setAttribute("aria-pressed", st.to==="__own"?"true":"false"); box.appendChild(o);
     $("#toOwn").classList.toggle("hidden", st.to!=="__own");
   }
@@ -1186,12 +1673,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     if(el.hasAttribute("data-back")){ back(); return; }
     if(el.hasAttribute("data-restart")){
       st = fresh(); posted = false; $("#dotLede").textContent = "That's 50 minutes back."; showTotal(null);
-      ["#own","#nm","#city","#em","#toOwn","#wish"].forEach(function(id){ if($(id)) $(id).value=""; });
+      ["#own","#nm","#city","#em","#toOwn"].forEach(function(id){ if($(id)) $(id).value=""; });
       $("#startedBtn").disabled = false;
-      $$('[data-group="thing"] .chip').forEach(function(c){c.setAttribute("aria-pressed","false")});
+      $$('[data-group="thing"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
+      $("#own").classList.add("hidden");
       $$('[data-group="day"] .slot').forEach(function(c){c.setAttribute("aria-pressed", c.dataset.v==="Friday"?"true":"false")});
       $$('[data-group="time"] .slot').forEach(function(c){c.setAttribute("aria-pressed", c.dataset.v==="evening"?"true":"false")});
-      hist=["open"]; buildTo(); show("open", false); return;
+      hist=["open"]; try{history.replaceState({s:"open"},"","#open")}catch(e){}
+      buildTo(); render(); show("open", false); return;
     }
     if(el.dataset.note){
       document.getElementById(el.dataset.note).classList.add("on");
@@ -1199,7 +1688,8 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       return;
     }
     if(el.dataset.branch){
-      if(el.dataset.branch==="keep"){
+      if(el.dataset.branch==="yes"){ st.handed = true; }
+      if(el.dataset.branch==="keep"){ st.handed = false;
         var k = thing();
         st.kept = k ? k.label : null;
         buildEasy(); render(); show("router"); return;
@@ -1216,16 +1706,31 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }
     var g = el.parentElement && el.parentElement.dataset.group;
     if(g==="easy"){
-      st.thing = el.dataset.v; st.own=""; $("#own").value="";
+      // Taking one of these IS handing something over, so the share may speak again.
+      st.handed = true;
+      // This road changes the task without going back through screen two, so the weight
+      // that screen two recorded no longer describes it. Clearing beats carrying a lie.
+      st.thing = el.dataset.v; st.cat = null; st.own=""; $("#own").value="";
       render(); show("time"); return;
     }
     if(g==="lang"){ st.lang = el.dataset.v; render(); return; }
     if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; render(); return; }
     if(g==="thing"){
-      $$('[data-group="thing"] .chip').forEach(function(c){c.setAttribute("aria-pressed","false")});
-      el.setAttribute("aria-pressed","true"); st.thing=el.dataset.v; st.own=""; $("#own").value=""; render(); return;
+      $$('[data-group="thing"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
+      el.setAttribute("aria-pressed","true");
+      // Both halves are kept, because the summary screen shows the weight AND the task.
+      st.cat = el.parentElement.dataset.cat || null;
+      if(el.dataset.v==="__own"){
+        st.thing=null; $("#own").classList.remove("hidden"); $("#own").focus();
+      } else {
+        st.thing=el.dataset.v; st.own=""; $("#own").value=""; $("#own").classList.add("hidden");
+      }
+      render(); return;
     }
     if(g==="to"){
+      // Switching to a preset clears the typed one, the same way picking a task clears it
+      // on screen two. Otherwise it reappears the moment the own pill is pressed again.
+      if(el.dataset.v!=="__own"){ st.toOwn=""; if($("#toOwn")) $("#toOwn").value=""; }
       st.to = el.dataset.v; buildTo(); render();
       if(st.to==="__own") $("#toOwn").focus();
       return;
@@ -1236,15 +1741,58 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }
   });
   $("#copyPrompt").addEventListener("click", function(){ copy($("#promptText").textContent, "notePrompt"); });
-  $("#copyShare").addEventListener("click", function(){ copy(shareText(), "noteShare"); });
   $("#sendShare").addEventListener("click", openShare);
-  $("#sendWish").addEventListener("click", function(){
-    var w = $("#wish").value.trim() || "Happy 50th, Anat.";
-    $("#noteWish").classList.add("on");
-    window.location.href = "mailto:anat@connecthedots.co?subject="+encodeURIComponent("A wish for your 50th")+"&body="+encodeURIComponent(w);
+  // 5. The weekly list. One field, stored on the rail, and the person hears back the same
+  // minute. Nothing is claimed on screen that the rail did not confirm.
+  // 7. The button is live the moment there is somewhere for it to go, and never before.
+  $("#payBtn").addEventListener("click", function(){
+    if(!PAY_URL){ $("#notePay").classList.add("on"); return; }
+    window.open(PAY_URL, "_blank", "noopener");
   });
+
+  $("#subBtn").addEventListener("click", function(){
+    var box = $("#subEm"), v = box.value.trim(), btn = this;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ box.focus(); return; }
+    btn.disabled = true; btn.textContent = "\u2026";
+    $("#subFail").classList.remove("on");
+    api("/subscribe", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ email: v, source: "main" })
+    }).then(function(r){
+      if(!r || !r.stored) throw new Error("not stored");
+      btn.textContent = "Done \u2713"; box.disabled = true;
+      $("#subOk").classList.add("on");
+    }, function(){
+      btn.disabled = false; btn.textContent = "Keep me posted";
+      $("#subFail").classList.add("on");
+    });
+  });
+
+  $("#fiftyBtn").addEventListener("click", function(){
+    var box = $("#fiftyEm"), v = box.value.trim(), btn = this;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ box.focus(); return; }
+    btn.disabled = true; btn.textContent = "\u2026";
+    $("#fiftyFail").classList.remove("on");
+    api("/subscribe", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ email: v, source: "the-49" })
+    }).then(function(r){
+      if(!r || !r.stored) throw new Error("not stored");
+      btn.textContent = "Done \u2713"; box.disabled = true;
+      $("#fiftyOk").classList.add("on");
+    }, function(){
+      btn.disabled = false; btn.textContent = "Send it to me";
+      $("#fiftyFail").classList.add("on");
+    });
+  });
+
   $("#own").addEventListener("input", function(){
-    st.own=this.value; if(st.own.trim()){ st.thing=null; $$('[data-group="thing"] .chip').forEach(function(c){c.setAttribute("aria-pressed","false")}); }
+    st.own=this.value;
+    // The field is only reachable through its own pill, which is already the pressed one,
+    // so typing must not clear the pressed state the way it did when the field was loose.
+    if(st.own.trim()) st.thing=null;
     render();
   });
   $("#toOwn").addEventListener("input", function(){ st.toOwn=this.value; render(); });
@@ -1253,10 +1801,94 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   $("#em").addEventListener("input", function(){ st.email=this.value; render(); });
   $$("input").forEach(function(i){ i.addEventListener("keydown", function(e){ if(e.key==="Enter"){ e.preventDefault(); if(i.id==="own" && !$("#next1").disabled) show("choice"); if(i.id==="toOwn" && !$("#nextWant").disabled) show("page"); } }); });
 
-  buildTo(); render();
+  // Back from a successful payment. The processor returns them to /50?paid=1, so the page
+  // opens on the 49 screen and thanks them instead of dropping them at the start of a walk
+  // they already finished. It claims nothing about mail that the sender cannot send: the
+  // wording is the same promise the paid confirmation carries.
+  if(/[?&]paid=1\b/.test(location.search)){
+    try{
+      show("five");
+      var pb = $("#paidBack"); if(pb) pb.classList.add("on");
+      st.paid = true;
+    }catch(e){}
+  }
+
+  // The film. It exists only when there is a file, it never autoplays, and it never gates
+  // anything: Start works whether or not anybody watches. The lightbox plays over the page
+  // and hands it back, so a visitor who has not begun is never navigated away from the door.
+  function openFilm(src){
+    var v = $("#vidEl");
+    if(v.getAttribute("src") !== src){ v.setAttribute("src", src); }
+    $("#lightbox").classList.add("on");
+    try{ v.play(); }catch(e){}
+  }
+  function closeFilm(){
+    var v = $("#vidEl");
+    try{ v.pause(); }catch(e){}
+    $("#lightbox").classList.remove("on");
+  }
+  $("#vidClose").addEventListener("click", closeFilm);
+  $("#lightbox").addEventListener("click", function(e){ if(e.target === this) closeFilm(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeFilm(); });
+
+  if(VIDEO_SRC){
+    if(VIDEO_POSTER) $("#vidPoster").src = VIDEO_POSTER;
+    $("#vidOpen").addEventListener("click", function(){ openFilm(VIDEO_SRC); });
+    $("#vidBox").classList.remove("hidden");
+  }
+  // The fifteen second close, on the dot screen. Not a second pitch: by then she is not
+  // selling, she is signing off.
+  if(VIDEO_END_SRC){
+    var e2 = $("#filmEnd");
+    if(e2){ e2.classList.remove("hidden"); e2.addEventListener("click", function(){ openFilm(VIDEO_END_SRC); }); }
+  }
+  buildTo(); buildHands(); render();
+  // Who else is on the line. Initials and cities only, and never a name, an email or the
+  // task somebody handed over. Same rule as the counter: if it does not answer, the block
+  // is simply not there, because an empty "others on the line" reads as nobody.
+  function drawOthers(d){
+    var box = $("#others"); if(!box) return;
+    var rows = (d && d.rows) || [];
+    if(!rows.length){ box.classList.add("hidden"); return; }
+    var ul = $("#othersList"); ul.innerHTML = "";
+    rows.slice(0, 18).forEach(function(r){
+      var li = document.createElement("li");
+      if(r.lived) li.className = "lived";
+      var av = document.createElement("span"); av.className = "av"; av.textContent = r.i || "\u00b7";
+      li.appendChild(av);
+      var who = document.createElement("span");
+      who.textContent = r.city || "somewhere";
+      li.appendChild(who);
+      if(r.want){ var w = document.createElement("span"); w.className = "wn"; w.textContent = r.want; li.appendChild(w); }
+      ul.appendChild(li);
+    });
+    $("#othersHead").textContent = rows.length > 18
+      ? "Others on the line \u00b7 " + nf(rows.length) + " most recent"
+      : "Others on the line";
+    box.classList.remove("hidden");
+  }
+
   // One read, one shared number. Until it answers there is no counter on this page, and
   // if it never answers there never is: every screen still works without it.
   api("/line").then(function(d){ drawLine(d, false); }, function(){ $("#counter").hidden = true; });
+  // The last line read before somebody hands over their address must be true when they read
+  // it. A comment further down this file already states the rule: never name day 7 while the
+  // sender is not armed. So ask the rail rather than hardcode either answer. Silence keeps
+  // the modest sentence, which is true in both worlds.
+  (function(){
+    var any = false;
+    [["soLi","li"],["soFb","fb"],["soIg","ig"]].forEach(function(pair){
+      var el = $("#"+pair[0]), url = SOCIAL[pair[1]];
+      if(!el) return;
+      if(url){ el.href = url; el.hidden = false; any = true; }
+    });
+    $("#followRow").hidden = !any;
+  })();
+
+  api("/flow").then(function(f){
+    if(f && f.confirm) $("#mailPromise").textContent = "Your prompt and your day-7 question come by email.";
+  }, function(){});
+  api("/recent").then(drawOthers, function(){});
   try{history.replaceState({s:"open"},"","#open")}catch(e){}
 })();
 </script>

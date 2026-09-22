@@ -86,10 +86,11 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .chip[aria-pressed="true"]{background:var(--sun);font-weight:800;box-shadow:3px 3px 0 var(--navy);transform:rotate(-1.5deg)}
 .pills{display:flex;flex-wrap:wrap;gap:9px}
 .pill{min-height:48px;background:var(--white);border:2.5px solid var(--navy);border-radius:999px;padding:0 16px;font-size:16px;font-weight:700}
-/* The open field is not a seventeenth preset. Sky ground, navy ink: the accent this house
-   uses for a door, at a contrast that carries text, which sky on cream does not. */
-.pill.own{border-style:dashed;background:var(--sky)}
-.pill.own[aria-pressed="true"]{background:var(--sun)}
+/* The open field is not a preset and it is not hidden behind one. It sits there, tinted,
+   so it reads as an invitation rather than as a control somebody has to find. */
+.field.own{background:rgba(253,216,1,.35)}
+.field.own::placeholder{color:var(--navy);opacity:.55}
+.field.own:focus{background:var(--sun);outline:3px solid var(--sky);outline-offset:2px}
 .ownask{color:var(--navy);opacity:1}
 .pill[aria-pressed="true"]{background:var(--sun);font-weight:800;box-shadow:3px 3px 0 var(--navy);transform:rotate(-2deg)}
 .row{display:flex;gap:7px}
@@ -709,7 +710,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <h1 class="hero-h1">If I gave you 50 minutes back, what would you do with them?</h1>
   <p class="note" style="margin-top:-6px;opacity:.85">Not what you would get done. What you would do.</p>
   <div class="pills" id="toPills" data-group="to"></div>
-  <input id="toOwn" class="field hidden" type="text" maxlength="50" placeholder="what you would do with them" autocomplete="off" aria-label="Something else">
+  <input id="toOwn" class="field own" type="text" maxlength="50" placeholder="Something only I know I need" autocomplete="off" aria-label="Something only I know I need">
   <button class="cta" id="nextWant" data-go="page" disabled style="margin-top:auto">Next</button>
   <div style="text-align:center;font-size:14px;font-weight:600">Two minutes. Free.</div>
 </section>
@@ -720,7 +721,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <div class="label">You said</div>
   <div class="sticky-note" id="wantNote">read</div>
   <h1 class="hero-h1">Where is your 50 hiding?</h1>
-  <p class="note" style="margin-top:-6px;opacity:.85">Pick the weight, then the task.</p>
   <div class="label" id="w1" style="margin-top:4px">What I've been putting off for months</div>
   <div class="pills" role="group" aria-labelledby="w1" data-group="thing" data-cat="What I've been putting off for months">
     <button class="pill" type="button" aria-pressed="false" data-v="album">The trip album</button>
@@ -751,10 +751,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <!-- Her ask, 22.9: the open field should not look like the sixteen presets, and it should
        say why she wants it. The best tasks on this page will come from strangers. -->
   <div class="label ownask" style="margin-top:10px">Have a better task to give AI? I want great ideas.</div>
-  <div class="pills" role="group" aria-label="Something only I know I need" data-group="thing" data-cat="Something only I know I need">
-    <button class="pill own" type="button" aria-pressed="false" data-v="__own">Something only I know I need</button>
-  </div>
-  <input id="own" class="field hidden" type="text" maxlength="60" placeholder="the thing on my page" autocomplete="off" aria-label="Something only I know I need">
+  <input id="own" class="field own" type="text" maxlength="60" placeholder="Something only I know I need" autocomplete="off" aria-label="Something only I know I need">
   <div class="note">Fun fact: over 70% of what we ask ChatGPT isn't even about work anymore. <a href="https://www.nber.org/papers/w34255" target="_blank" rel="noopener" style="font-weight:700">Source: OpenAI &amp; Harvard, NBER, September 2025</a></div>
   <button class="cta" id="next1" data-go="choice" disabled style="margin-top:auto">Next</button>
 </section>
@@ -1723,9 +1720,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       var b=document.createElement("button"); b.className="pill"; b.type="button"; b.textContent=v; b.dataset.v=v;
       b.setAttribute("aria-pressed", st.to===v ? "true":"false"); box.appendChild(b);
     });
-    var o=document.createElement("button"); o.className="pill own"; o.type="button"; o.textContent="Something only I know I need"; o.dataset.v="__own";
-    o.setAttribute("aria-pressed", st.to==="__own"?"true":"false"); box.appendChild(o);
-    $("#toOwn").classList.toggle("hidden", st.to!=="__own");
+    // Her call, 22.9: the field is simply there, tinted, and nobody has to press a pill to
+    // find it. A door you have to open first is a door most people walk past.
+    $("#toOwn").classList.remove("hidden");
   }
 
   document.addEventListener("click", function(e){
@@ -1784,19 +1781,13 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       el.setAttribute("aria-pressed","true");
       // Both halves are kept, because the summary screen shows the weight AND the task.
       st.cat = el.parentElement.dataset.cat || null;
-      if(el.dataset.v==="__own"){
-        st.thing=null; $("#own").classList.remove("hidden"); $("#own").focus();
-      } else {
-        st.thing=el.dataset.v; st.own=""; $("#own").value=""; $("#own").classList.add("hidden");
-      }
+      st.thing=el.dataset.v; st.own=""; $("#own").value="";
       render(); return;
     }
     if(g==="to"){
-      // Switching to a preset clears the typed one, the same way picking a task clears it
-      // on screen two. Otherwise it reappears the moment the own pill is pressed again.
-      if(el.dataset.v!=="__own"){ st.toOwn=""; if($("#toOwn")) $("#toOwn").value=""; }
+      // Picking a preset clears anything typed, so the two can never both be answers.
+      st.toOwn=""; if($("#toOwn")) $("#toOwn").value="";
       st.to = el.dataset.v; buildTo(); render();
-      if(st.to==="__own") $("#toOwn").focus();
       return;
     }
     if(g==="day"||g==="time"){
@@ -1865,12 +1856,22 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
   $("#own").addEventListener("input", function(){
     st.own=this.value;
-    // The field is only reachable through its own pill, which is already the pressed one,
-    // so typing must not clear the pressed state the way it did when the field was loose.
-    if(st.own.trim()) st.thing=null;
+    // Typing is choosing here too, so it clears any pressed task and owns the category.
+    if(st.own.trim()){
+      st.thing=null; st.cat="Something only I know I need";
+      $$('[data-group="thing"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
+    }
     render();
   });
-  $("#toOwn").addEventListener("input", function(){ st.toOwn=this.value; render(); });
+  // Typing IS choosing. There is no pill to press any more, so the field says so itself.
+  $("#toOwn").addEventListener("input", function(){
+    st.toOwn=this.value;
+    if(st.toOwn.trim()){
+      st.to="__own";
+      $$('[data-group="to"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
+    } else if(st.to==="__own"){ st.to=null; }
+    render();
+  });
   $("#nm").addEventListener("input", function(){ st.name=this.value; render(); });
   $("#city").addEventListener("input", function(){ st.city=this.value; render(); });
   $("#em").addEventListener("input", function(){ st.email=this.value; render(); });

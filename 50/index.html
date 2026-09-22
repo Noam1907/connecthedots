@@ -1272,20 +1272,22 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#cnTail").textContent = past ? "minutes lived" : "/ " + nf(goal) + " minutes lived";
     // The lived bar is allowed to be genuinely empty. Only a bar with lived minutes in it
     // gets the 2% floor that keeps a real number visible.
-    // Anat, 22.9, looking at 50 of 50,000: "too painted". She was right, and the bar was not
-    // lying so much as unlabelled. It measures the distance to the NEXT STOP, which is what
-    // makes it move at all on day 1, but it sits directly under "50 / 50,000 minutes lived"
-    // and the eye pairs the two. The caption below now names the bar's own scale, and the
-    // floor drops from 2% to 0.8% so a tiny number looks tiny instead of looking started.
-    $("#cntBar").style.width = (n <= prev ? 0 : Math.max(0.8, Math.min(100, (n - prev) / span * 100))) + "%";
+    // Anat asked about this twice, which means labelling it was not the answer. The bar
+    // measured the distance to the NEXT STOP, so one person filled a tenth of it. Relabelling
+    // made the sentence true and left the picture wrong, and the picture is what she read.
+    //
+    // So the bar measures THE WISH. 50 of 50,000 is a sliver, because 50 of 50,000 is a
+    // sliver. Day 1 is allowed to look like day 1: the numbers beside it do the moving, and
+    // the next stop is named in the line underneath where it can be read rather than inferred.
+    $("#cntBar").style.width = (n <= 0 ? 0 : Math.max(0.6, Math.min(100, n / goal * 100))) + "%";
     var g = $("#cntGhost");
-    if(g) g.style.width = (prom > 0 ? Math.max(0.8, Math.min(100, (gross - prev) / span * 100)) : 0) + "%";
+    if(g) g.style.width = (prom > 0 ? Math.max(0.6, Math.min(100, gross / goal * 100)) : 0) + "%";
     var promLine = prom > 0 ? nf(prom) + " more are promised. " : "";
     $("#msLine").textContent = past
       ? promLine + "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
       : (n === 0 && prom > 0
           ? nf(prom) + " minutes are promised so far. A minute joins this counter once it has actually been lived."
-          : promLine + nf(n - prev) + " of the next " + nf(span) + " minutes");
+          : promLine + "Next stop: " + nf(next) + " minutes");
     el.classList.toggle("past", past);
     el.hidden = false;
     showTotal(n);

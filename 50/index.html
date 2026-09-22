@@ -1,10 +1,11 @@
 <!doctype html>
+<!-- DESIGN-PASS by=lior on=2026-09-22 card=O-output/158-fifty-feedback-page-2026-09-19/DESIGN-PASS-2026-09-22.md shots=O-output/158-fifty-feedback-page-2026-09-19/shots -->
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="noindex">
 <!-- FORM-FLOW store=https://fifty.connecthedots.co/api/flow owner=Adam followup=48h -->
 <!-- The page takes a name, a city, an email and free text from strangers and posts them to
      the fifty-line rail. There is no form element anywhere in it and it is still a form:
@@ -217,8 +218,6 @@ h1,.h2,.goes .h,.five .h,.big-choice .t{overflow-wrap:break-word}
 .counter.past .track i{background:linear-gradient(90deg,var(--sky),var(--green),var(--sun))}
 .err{font-size:13.5px;line-height:1.35;font-weight:700;background:var(--white);border:2px dashed var(--tomato);border-radius:12px;padding:8px 11px}
 .mylink{display:block;margin-top:6px;font-size:13px;font-weight:800;color:var(--sun);word-break:break-all}
-#readyText{display:block}
-#readyText[dir="rtl"]{text-align:right}
 /* Below 360px a headline that cannot break runs off the page. The highlight stops being
    one tilted bar behind the line and becomes a mark that breaks with the words. */
 @media (max-width:359px){
@@ -399,6 +398,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .sub .subl{font-size:14px;line-height:1.35;font-weight:700}
 .sub .inline input{background:var(--cream)}
 .sub .inline button{background:var(--cream);color:var(--navy);font-weight:800;border:2.5px solid var(--cream)}
+#payMail input{width:100%;min-height:46px;border:2.5px solid var(--navy);border-radius:12px;padding:0 12px;font-family:inherit;font-size:16px;background:var(--cream);color:var(--navy)}
 .goes .talkline{font-size:13px;line-height:1.4;opacity:.8;margin-top:6px}
 .goes .talkline a{font-weight:800;color:var(--sun)}
 .goes .quiet{align-self:flex-start;text-decoration:none;font-size:14px;font-weight:800;padding:8px 14px;min-height:44px;display:flex;align-items:center;border:2px solid var(--cream);border-radius:999px;opacity:.75}
@@ -432,10 +432,20 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .mini{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .mini a,.mini button{min-height:44px;display:flex;align-items:center;justify-content:center;background:var(--sun);color:var(--navy);border:2.5px solid var(--navy);border-radius:999px;padding:0 14px;font-size:14px;font-weight:800;text-decoration:none}
 .mini .ghost{background:var(--white)}
+/* The second door on a dark screen: same size as the first, quieter by colour alone. */
+.cta.ghostcta{background:transparent;color:var(--cream);border-color:var(--cream);box-shadow:4px 4px 0 rgba(255,244,224,.28);font-size:19px}
+/* And the third thing is not a button at all. */
+.quietlink{display:block;text-align:center;margin-top:12px;color:var(--cream);opacity:.8;font-size:15px;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;min-height:44px;line-height:44px}
+.quietlink:hover{opacity:1}
 .started{background:var(--navy);color:var(--sun);border-radius:6px;padding:1px 6px}
 .privacy{font-size:12px;line-height:1.35;opacity:.75}
 .lang{display:flex;gap:6px;margin-bottom:6px}
-.lang button{min-height:32px;background:transparent;border:2px solid var(--navy);border-radius:999px;padding:0 10px;font-size:12px;font-weight:800;color:var(--navy)}
+#langWrap{display:flex;align-items:center;gap:9px;margin:4px 0 10px}
+#langWrap .rl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.72}
+#langWrap .lang{margin:0}
+#langWrap .lang button{border-color:var(--cream);color:var(--cream)}
+#langWrap .lang button[aria-pressed="true"]{background:var(--cream);color:var(--navy)}
+.lang button{min-height:44px;background:transparent;border:2px solid var(--navy);border-radius:999px;padding:0 10px;font-size:12px;font-weight:800;color:var(--navy)}
 .lang button[aria-pressed="true"]{background:var(--navy);color:var(--cream)}
 /* The line beside the step exists only where there is room for it: off on a phone. */
 .stage{display:none}
@@ -686,10 +696,202 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .openlede{font-size:13px;margin-top:4px}
   .spine{font-size:15px;margin-top:4px;padding-top:4px;padding-bottom:4px}
   .bunting{display:none}
+  /* Lior, 22.9. Measured, not estimated: on a 320x568 handset with the QA strip removed,
+     Start still ended at 577, nine pixels under the fold. The rule this page holds itself
+     to has no tolerance in it, so the opening pays the nine out of the space above the
+     logo, the kicker, and one notch of the lede's leading. No word and no element goes. */
+  .opentop{padding-top:0}
+  .opentitle .kicker{font-size:20px}
+  .openlede{margin-top:3px;line-height:1.35}
+}
+/* ════ v14 (Lior, 22.9): the three screens Anat reacted to ═══════════════════════
+   Nothing here touches a colour, a font or a word. Every rule below changes only
+   RANK: what the eye meets first, what it meets second, and what is allowed to be
+   the same size as something else. One law runs through all three screens: a screen
+   with two things the same size has no first thing.
+   Nothing outside these three blocks is reached by any selector in here. ───────── */
+
+/* ── 1. THE DOT SCREEN: the ledge ────────────────────────────────────────────────
+   The stack was one pill, one pill, one line, all full width, all down the left
+   edge: a list of three, which is what read as ugly. It becomes a descent. The pill
+   keeps the screen. Then a rule, and a single row under it carrying the other two,
+   so the second and third things are plainly the afterwards and not two more offers. */
+.ledge{
+  margin-top:18px;padding-top:14px;
+  border-top:2px solid rgba(255,244,224,.22);
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:8px 12px;
+}
+/* Sized to sit on ONE row at 375, which is the width she reviews on: the ledge has to
+   read as a single quiet band under the primary, not as two more offers stacked. Under
+   about 345px it wraps, and then it is a stair, which is the next-best true thing. */
+.ledge .cta.ghostcta{
+  width:auto;min-width:0;flex:0 1 auto;align-self:auto;
+  min-height:48px;padding:10px 17px;font-size:15px;gap:7px;
+  border-width:2.5px;box-shadow:none;
+}
+.ledge .cta.ghostcta:hover{box-shadow:3px 3px 0 rgba(255,244,224,.28)}
+.ledge .quietlink{
+  display:flex;align-items:center;flex:0 1 auto;
+  margin-top:0;text-align:left;font-size:14px;opacity:.68;
+  min-height:44px;line-height:1.2;
+}
+.ledge .quietlink:hover{opacity:1}
+/* "Start again" was a full-width button with centred text sitting alone under the bar, so
+   on a phone it read as a centred heading floating in the middle of a left-set screen:
+   the same adrift thing she named about the yellow pill. It is a way out, so it sits at
+   the left margin with everything else. Scoped to this one control by its data attribute. */
+.screen > .link[data-restart]{align-self:flex-start;text-align:left}
+
+/* ── 2. THE DOT SCREEN: the line of other people ─────────────────────────────────
+   Grey is a promise, gold is a minute somebody lived, and that gap is the picture
+   this whole campaign is making, so it stops being a dashed card in a column of
+   dashed cards and becomes a shelf: one rule, the label riding it, the dots under.
+   The two states differ by FILL and by the ring inside, never by hue alone, so the
+   picture still reads in a grey screenshot and to a colour-blind reader. */
+.screen.dark .others{
+  border:0;border-top:2px solid rgba(255,244,224,.22);
+  border-radius:0;padding:13px 0 0;gap:9px;
+}
+.screen.dark .others .oh{opacity:.55}
+.screen.dark .others li{
+  background:transparent;color:var(--cream);
+  border-color:rgba(255,244,224,.38);border-width:2px;font-weight:600;
+}
+.screen.dark .others li .av{
+  background:transparent;color:var(--cream);
+  border-color:rgba(255,244,224,.5);opacity:.8;box-shadow:none;
+}
+.screen.dark .others li.lived{
+  background:var(--sun);color:var(--navy);
+  border-color:var(--sun);font-weight:800;
+}
+.screen.dark .others li.lived .av{
+  background:var(--navy);color:var(--sun);
+  border-color:var(--navy);opacity:1;box-shadow:none;
+}
+.screen.dark .others li .wn{opacity:.62}
+.screen.dark .others li.lived .wn{opacity:.75}
+
+/* ── 3. THE MONEY SCREEN ─────────────────────────────────────────────────────────
+   Eleven blocks at one weight, evenly spaced, with a 74px disc at the top right.
+   The disc was the heaviest object on the card and it sat where the eye lands, so
+   the price was read before the argument that pays for it. Her order was right; the
+   ranking was not. Two registers now, the way a sleeve is set: the plate (argument,
+   price), a fold, then the small type (what it is, who else, the footnotes). */
+
+/* The plate. The coin drops to the foot of the headline instead of crowning it, and
+   loses a third of its area and its tilt. It is still the second thing read on the
+   screen and it still says the number; it no longer says it first. */
+/* The card's own edge. A 6px even glow of sun at 25% lands on navy as a dark olive ring
+   (83,84,42), which reads as a printing fault around a cream border. The House shadow is
+   a hard offset, so the card gets one, in tomato, like every other object on this page. */
+.five{box-shadow:5px 5px 0 var(--tomato)}
+.five .head{align-items:flex-end;gap:14px}
+/* Two sentences, and the eye should meet them as two. Without this the line breaks
+   after "For" and orphans it. No word moves: the browser is only told to even the
+   two lines, which lands the break where her full stop already is. */
+.five .h{text-wrap:balance}
+/* A navy disc on a yellow card is the highest contrast object on the screen, so it was
+   being read before the argument that pays for it. Same ink as the headline now, a size
+   below it: the price is met on the way out of the sentence instead of before it. */
+.five .coin{
+  width:58px;height:58px;font-size:22px;
+  transform:none;border:3px solid var(--navy);
+  background:transparent;color:var(--navy);
+}
+/* The fold. One hairline, and it is the only rule inside the card above the footnotes. */
+.five .gets{
+  border-top:2px solid rgba(27,40,56,.22);
+  padding-top:14px;margin-top:2px;gap:7px;
+}
+.five .gets li{font-size:15px}
+/* The small-type register. The vow was four lines of near-bold running the width of
+   the card, which made it argue with the headline instead of supporting it. */
+#fiveVow{font-size:14px;font-weight:600;line-height:1.42;opacity:.88}
+.five .hands{margin-top:2px}
+.five .hands .hrow{font-size:14px}
+/* The single live tier reads as one sentence, not a number with a caption. */
+.rungs.one .rung span{font-size:15px;opacity:.95;text-align:left}
+.five .rungs{margin-top:6px}
+/* The footnotes. Two of them sat centred and bold, at the weight of a promise, under
+   a button. They are asides: left set, quiet, in the order she wrote them. */
+#paySub{
+  font-size:12.5px;font-weight:600;line-height:1.38;
+  text-align:left;opacity:.78;margin-top:2px;
+}
+.giving{
+  font-size:12.5px;line-height:1.38;font-weight:600;opacity:.82;
+  border-top:2px dashed rgba(27,40,56,.4);padding-top:12px;margin-top:6px;
+}
+/* The way out stays plainly there, underlined, full label, 44px of thumb. It stops
+   being the same size as the thing it declines. */
+.five .link#skipPay{
+  align-self:flex-start;text-align:left;
+  font-size:14px;font-weight:700;opacity:.7;
+}
+.five .link#skipPay:hover{opacity:1}
+
+/* ── 4. THE FINALE: the credits ──────────────────────────────────────────────────
+   A centred stack of four blocks down the middle of a page that is left set on every
+   other screen, in which the two least important doors were drawn as the second
+   loudest thing on it. Her two questions, her order, her words: the first becomes a
+   credit line, the second becomes what it actually is, an offer with dates. */
+.ending{text-align:left}
+.endrow{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px 14px;flex-wrap:wrap;
+}
+.endrow .endl{margin-bottom:0;font-size:13.5px;font-weight:700;opacity:.78;flex:1 1 210px}
+.endi{justify-content:flex-start;gap:8px;flex:0 0 auto}
+.endi a{width:44px;height:44px;border-width:2px;opacity:.8}
+.endi a:hover{opacity:1}
+/* The heading of the only real offer left on the page. */
+.endl2{
+  margin-top:24px;margin-bottom:10px;
+  font-size:17px;font-weight:800;opacity:1;
+}
+/* Dates, one per row, the way a tour is listed. It is the only shape that survives
+   320px without two words breaking in half, and the only one that grows when there
+   is a third date, which there will be. */
+.talkdoors{flex-direction:column;gap:8px;margin-top:0}
+.tdoor{
+  flex:0 0 auto;flex-direction:row;align-items:center;justify-content:flex-start;
+  gap:10px;text-align:left;min-height:56px;
+  padding:10px 16px 10px 15px;
+  /* Square on the left so the sun edge reads as a bar and not as a crescent the
+     corner radius ate. A ticket stub, which is what a row in a list of dates is. */
+  border-radius:3px 14px 14px 3px;
+  border:0;border-left:5px solid var(--sun);
+  background:var(--cream);
+  transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s cubic-bezier(.2,.8,.2,1);
+}
+.tdoor b{font-size:17px;line-height:1.1}
+.tdoor span{margin-left:auto;font-size:12px;font-weight:700;opacity:.72;white-space:nowrap}
+/* The mark that says this leaves the page. Drawn from two borders, the same way the
+   play triangle on the film thumb is drawn: no icon font anywhere on this page. */
+.tdoor::after{
+  content:"";flex:0 0 auto;width:8px;height:8px;margin-left:2px;
+  border-right:2.5px solid var(--navy);border-top:2.5px solid var(--navy);
+  transform:rotate(45deg);opacity:.6;
+}
+.tdoor:hover{transform:translateX(3px);box-shadow:3px 3px 0 rgba(255,244,224,.35)}
+.tdoor:hover::after{opacity:.9}
+@media (prefers-reduced-motion:reduce){.tdoor,.tdoor:hover{transition:none;transform:none}}
+/* 320px: the credit line gives up its row before anything breaks. */
+@media (max-width:359px){
+  .endrow{gap:8px}
+  .endrow .endl{flex:1 1 100%}
+  .ledge .cta.ghostcta{font-size:15px;padding:10px 16px}
+  .ledge .quietlink{font-size:14px}
+  .tdoor b{font-size:16px}
+  .five .coin{width:52px;height:52px;font-size:19px}
 }
 </style>
 </head>
 <body>
+<div class="strip" role="note">QA build &middot; <b>22.09 23:05</b></div>
+
 <main class="app" id="app">
 
 <!-- The counter is empty and hidden until GET /api/line answers with a real number.
@@ -957,10 +1159,18 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
        The card above is HTML, which nobody can put on a story. This draws the same card as a
        picture, on a canvas, with no library and nothing fetched, and hands it to the phone's
        own share sheet. Where that does not exist it downloads, which is every desktop. -->
-  <button class="cta" type="button" id="cardShare" style="margin-top:6px">Share my card</button>
+  <!-- Anat, 22.9: "מכוער עיצובית". Three buttons at three sizes with the smallest one
+       adrift on the left. One primary, one secondary, and the calendar is a line, not a pill.
+       Lior, 22.9: the first fix made the second button the SAME size as the first, and two
+       buttons of one size are two primaries, which is none. So the screen steps instead of
+       stacking: one pill, then a ledge (a rule and a single row) carrying the two afterwards.
+       Three full-width rungs in a column was the ugly thing, not the count. -->
+  <button class="cta join" type="button" id="cardShare" style="margin-top:10px">Share my card</button>
   <div class="toast" id="cardSaved">Saved. It is in your downloads, ready to post.</div>
-  <div class="mini" style="margin-top:0"><a id="calLink" href="#" target="_blank" rel="noopener">Add to my calendar</a></div>
-  <button class="cta" data-go="pass" style="margin-top:6px;font-size:18px">Help get to 50,000 &rarr;</button>
+  <div class="ledge">
+    <button class="cta ghostcta" data-go="pass">Help get to 50,000 &rarr;</button>
+    <a class="quietlink" id="calLink" href="#" target="_blank" rel="noopener">Add to my calendar</a>
+  </div>
 </section>
 
 <!-- 5 PASS IT ON -->
@@ -974,12 +1184,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <button class="net fb" type="button" aria-pressed="false" data-v="fb">Facebook</button>
     <button class="net" type="button" aria-pressed="false" data-v="link" style="background:var(--cream)">Copy link</button>
   </div>
-  <div class="ready hidden" id="readyBox" aria-live="polite">
-    <span class="rl" id="readyLabel">Ready for WhatsApp, one chat at a time</span>
-    <span class="lang" id="langRow" data-group="lang"><button type="button" data-v="en" aria-pressed="true">English</button><button type="button" data-v="he" aria-pressed="false">עברית</button></span>
-    <span id="readyText"></span>
-  </div>
-  <div class="mini"><button type="button" id="sendShare">Take me to WhatsApp</button></div>
+  <!-- Anat, 22.9: “אין סיבה לכפתור שמקפיץ לכפתור.” Pressing WhatsApp opens WhatsApp, with the
+       message already written. The preview and the second button under it were one step too
+       many. The language is a setting and not a door, so it sits above the press, not behind
+       it: once the app is open there is nothing left to choose. -->
+  <div id="langWrap" role="group" aria-labelledby="langLbl"><span class="rl" id="langLbl">WhatsApp message</span><span class="lang" id="langRow" data-group="lang"><button type="button" data-v="en" aria-pressed="true">English</button><button type="button" data-v="he" aria-pressed="false">עברית</button></span></div>
   <div class="toast" id="noteShare">Copied. If it does not arrive already written, paste it.</div>
   <div class="carry"><span id="carryText">Your dot tracks every minute it inspires.</span><b class="mylink hidden" id="myLink"></b></div>
   <button class="cta" data-go="five" style="margin-top:6px">Next</button>
@@ -995,22 +1204,25 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
     <ul class="gets" id="listIs"></ul>
 
-    <div id="fiveVow" style="font-size:15px;line-height:1.35;font-weight:600">The list is being written right now, by the people on the line. Every entry is a real hand-over from a real person in the campaign: initials, dated, verified.</div>
+    <div id="fiveVow">The list is being written right now, by the people on the line. Every entry is a real hand-over from a real person in the campaign: initials, dated, verified.</div>
 
     <div class="hands" id="handsList"></div>
+
+    <!-- Anat, 22.9: “אין סיבה לכפתור שמקפיץ לכפתור.” The price used to open a field with a
+         Continue button under it, which is two presses to do one thing. The address sits here
+         instead, above the price, already filled in from the dot they just made, and the price
+         is the checkout. The field cannot go: PayPal takes the money in a tab this page never
+         hears from again, so an address that is not captured before the press is a payment
+         with nobody to deliver to. -->
+    <div class="sub" id="payMail">
+      <label class="subl" for="fiftyEm">The invoice and the weekly note go to</label>
+      <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the invoice and the weekly note">
+      <div class="err hidden" id="payErr"></div>
+    </div>
 
     <div class="rungs" id="rungs"></div>
 
     <div id="paySub">Same list, every tier. The extra is you, paying it forward. One time, not a subscription, and your invoice arrives straight away.</div>
-
-    <div class="sub" id="payMail" hidden>
-      <label class="subl" for="fiftyEm">Where should it go?</label>
-      <div class="inline">
-        <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the weekly note and the list">
-        <button type="button" id="fiftyBtn">Continue</button>
-      </div>
-      <div class="err hidden" id="payErr"></div>
-    </div>
 
     <div class="toast" id="paidBack">Thank you. Your invoice is on its way and the first weekly note follows.</div>
     <!-- PayPal opens in its own tab and never sends anybody back here, so this tab was a dead
@@ -1019,7 +1231,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <button class="cta" type="button" id="payDone" data-go="human" hidden style="margin-top:6px">Done. Carry on &rarr;</button>
     <div class="toast" id="notePay">Nothing is charged yet. Your free dot is claimed either way.</div>
     
-    <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
+    <div class="giving">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
 
     <button class="link" data-go="human" id="skipPay">Not now. My free dot stays claimed.</button>
   </div>
@@ -1067,14 +1279,24 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <!-- Anat, 22.9. The weekly-update field came off: it asked for an address this page
          already has, on the screen where somebody is leaving. What belongs here is where to
          find her next, and it is two questions, not a form. -->
+    <!-- Lior, 22.9. This was a centred stack: a line, two rings, a line, two tiles, all down
+         the middle of a page that is left set everywhere else, with the two least important
+         doors rendered as the second loudest thing on the screen. It becomes the credits at
+         the end of a record sleeve instead. Her two questions keep her order and her words.
+         The first is a credit line: the question and its two marks on ONE row, quiet.
+         The second is the real offer, so it gets a heading and a list of dates, left set,
+         one row per door, which is also the only shape that survives 320px and grows when
+         there is a third date. -->
     <div class="ending" id="endingRow" hidden>
-      <div class="endl">Want to know more about Connecting the Dots?</div>
-      <div class="endi">
-        <a id="soSite" href="#" target="_blank" rel="noopener" aria-label="connecthedots.co" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 0c3 3 4.5 6.5 4.5 10S15 19 12 22m0-20C9 5 7.5 8.5 7.5 12S9 19 12 22M2.5 9h19M2.5 15h19"/></svg></a>
-        <a id="soLi" href="#" target="_blank" rel="noopener" aria-label="Anat on LinkedIn" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.07-1.9-3.07-1.9 0-2.2 1.46-2.2 2.97V21h-4V9Z"/></svg></a>
+      <div class="endrow" id="socialRow" hidden>
+        <div class="endl">Want to know more about Connecting the Dots?</div>
+        <div class="endi">
+          <a id="soSite" href="#" target="_blank" rel="noopener" aria-label="connecthedots.co" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 0c3 3 4.5 6.5 4.5 10S15 19 12 22m0-20C9 5 7.5 8.5 7.5 12S9 19 12 22M2.5 9h19M2.5 15h19"/></svg></a>
+          <a id="soLi" href="#" target="_blank" rel="noopener" aria-label="Anat on LinkedIn" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.07-1.9-3.07-1.9 0-2.2 1.46-2.2 2.97V21h-4V9Z"/></svg></a>
+        </div>
       </div>
 
-      <div class="endl endl2">Join the next talk <b>The Human is the Loop</b></div>
+      <div class="endl endl2" id="talkLabel" hidden>Join the next talk <b>The Human is the Loop</b></div>
       <div class="talkdoors" id="talkDoors">
         <a id="talkTlv" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>Live in Tel Aviv</b><span>In Hebrew</span></a>
         <a id="talkOnline" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>Online</b><span>In English</span></a>
@@ -1588,7 +1810,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   }
   // WhatsApp still says "to one person" because that is literally what wa.me does: it opens
   // one chat. The screen above no longer caps the whole thing at one.
-  var NETLABEL = {wa:"Ready for WhatsApp, one chat at a time", li:"Ready as a LinkedIn post", fb:"Ready for Facebook", link:"Your link, copied"};
 
   function render(){
     var t = thing(), want = pick();
@@ -1670,6 +1891,24 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     var coin = $("#fiveCoin");
     if(coin && live.length) coin.textContent = "$" + (live[Math.min(tier, live.length-1)] || live[0]).usd;
     var ps = $("#paySub"); if(ps) ps.hidden = !live.length;
+    // The address is already theirs: they typed it to make the dot. Prefilling it is what
+    // turns the press into the whole transaction instead of the start of one.
+    var pm = $("#payMail"), em = $("#fiftyEm");
+    if(em && !em.value && st.email.trim()) em.value = st.email.trim();
+    if(pm) pm.hidden = !live.length;
+    // Once PayPal has them, no later render puts the price back on the screen. This used to
+    // read #paidBack's own class, which show() strips one line before it calls render(), so
+    // the guard was dead on every Back press: a person who had just paid came forward to a
+    // live-looking $5 button. Third state bug in this file with one shape, and the shape is
+    // reading a screen's state off the DOM instead of off st. st.paid was already in fresh().
+    if(st.paid){
+      if(pm) pm.hidden = true;
+      if(ps) ps.hidden = true;
+      if(rb) rb.hidden = true;
+      $("#paidBack").classList.add("on");
+      $("#payDone").hidden = false;
+      $("#skipPay").hidden = true;
+    }
     var li = $("#listIs");
     // Three lines with a tick, her 22.9 spec, not a paragraph. The talk line only exists
     // when there is a code behind it, so the list never promises what the mail omits.
@@ -1678,12 +1917,10 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
                   "The full list, day 100"];
       li.innerHTML = gets.map(function(g){ return '<li><b>\u2713</b><span>'+g+'</span></li>'; }).join("");
     }
-    // This line is why the HTML label never rendered once. A product change updated three
-    // strings and missed the fourth, and the fourth is the one that takes the money.
-    // Their own address, already typed once, put back in front of them.
-    $("#sendShare").textContent = st.net==="link" ? "Copy my link"
-      : (st.net==="wa" ? "Take me to WhatsApp" : (st.net==="li" ? "Take me to LinkedIn" : "Take me to Facebook"));
-    $("#langRow").style.display = st.net==="wa" ? "flex" : "none";
+    // The four network buttons say where they go, so nothing here has to relabel a fifth.
+    // The language only reaches the WhatsApp message, so the row is only on screen while
+    // WhatsApp is the chosen app. It is chosen on arrival, which is the state that matters.
+    $("#langWrap").style.display = st.net==="wa" ? "flex" : "none";
     $$('[data-group="lang"] button').forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.v===st.lang ? "true":"false"); });
     // The card carries the number the rail gave this dot, and no promise of a day-7
     // letter, because the sender behind that promise does not exist yet.
@@ -1706,11 +1943,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       : "Every dot on the line is 50 minutes.";
     $("#myLink").textContent = st.code ? myLabel() : "";
     $("#myLink").classList.toggle("hidden", !st.code);
-    $("#readyLabel").textContent = NETLABEL[st.net];
-    $("#readyBox").classList.toggle("hidden", !st.touchedNet);
-    $("#readyText").textContent = shareText();
-    // Hebrew reads right to left, or every line ends up with its full stop at the front.
-    $("#readyText").setAttribute("dir", (st.lang === "he" && st.net === "wa") ? "rtl" : "ltr");
     $$('[data-group="net"] .net').forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.v===st.net ? "true":"false"); });
   }
 
@@ -1852,14 +2084,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       var liveT = TIERS.filter(function(t){ return t.url; });
       PAY_URL = (liveT[tier] || {}).url || "";
       if(!PAY_URL){ $("#notePay").classList.add("on"); return; }
-      var box = $("#fiftyEm");
-      if(box && !box.value && st.email.trim()) box.value = st.email.trim();
-      $("#payMail").hidden = false; $("#rungs").hidden = true; $("#paySub").hidden = true;
-      if(box) box.focus();
+      goPay(el);
       return;
     }
     if(g==="lang"){ st.lang = el.dataset.v; render(); return; }
-    if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; render(); return; }
+    // One press. Pick the app and the app opens, written.
+    if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; render(); openShare(); return; }
     if(g==="thing"){
       $$('[data-group="thing"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
       el.setAttribute("aria-pressed","true");
@@ -1880,36 +2110,46 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }
   });
   $("#copyPrompt").addEventListener("click", function(){ copy($("#promptText").textContent, "notePrompt"); });
-  $("#sendShare").addEventListener("click", openShare);
   // 5. The weekly list. One field, stored on the rail, and the person hears back the same
   // minute. Nothing is claimed on screen that the rail did not confirm.
   // 7. The button is live the moment there is somewhere for it to go, and never before.
   // Her 22.9 flow: the button opens a checkout with a REQUIRED email, and the thank-you
   // names their dot. The email is not a nicety: PayPal takes the money in a tab this page
   // never hears from, so without it a payment arrives with nobody to deliver to.
-  $("#fiftyBtn").addEventListener("click", function(){
-    var box = $("#fiftyEm"), v = box.value.trim(), btn = this, err = $("#payErr");
+  function goPay(btn){
+    var box = $("#fiftyEm"), v = (box.value || st.email || "").trim(), err = $("#payErr");
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){
-      err.textContent = "That address needs an @ and a dot after it."; err.classList.remove("hidden");
+      err.textContent = "That address needs an @ and a dot after it, so the invoice can find you.";
+      err.classList.remove("hidden");
       box.focus(); return;
     }
     err.classList.add("hidden");
-    btn.disabled = true; btn.textContent = "\u2026";
+    box.value = v; st.email = v;
+    if(btn){ btn.disabled = true; }
     // Recorded on OUR side first, so the address exists whether or not they finish paying.
     api("/subscribe", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ email: v, source: "pay-intent" })
     }).then(function(){}, function(){});
-    window.open(PAY_URL, "_blank", "noopener");
+    // This page is built to be opened inside WhatsApp and LinkedIn, and their in-app browsers
+    // block a new tab. Latching the paid state before knowing a tab opened made the $5 door
+    // disappear for exactly the visitor who never reached PayPal, and there is nothing to
+    // recover with: st is not persisted, so a reload restarts the walk and costs them the dot.
+    // No tab means take this one instead; PayPal returns them to ?paid=1.
+    var tab = window.open(PAY_URL, "_blank", "noopener");
+    if(!tab){ location.href = PAY_URL; return; }
+    st.paid = true;
     $("#payMail").hidden = true;
+    $("#rungs").hidden = true;
+    $("#paySub").hidden = true;
     var n = st.dotNumber;
     $("#paidBack").textContent = (n ? "You're dot #" + nf(n) + ". " : "")
-      + "PayPal has your payment. The first weekly note lands " + nextSunday() + ".";
+      + "PayPal is open in the other tab. The moment it goes through the invoice follows, and the first weekly note lands " + nextSunday() + ".";
     $("#paidBack").classList.add("on");
     $("#payDone").hidden = false;
     $("#skipPay").hidden = true;
-  });
+  }
 
   // The card as a picture. 1080 by 1350, which is the portrait every phone app accepts.
   // Everything is drawn, so nothing can be blocked, and the two webfonts are already on the
@@ -2033,9 +2273,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // wording is the same promise the paid confirmation carries.
   if(/[?&]paid=1\b/.test(location.search)){
     try{
+      // Before show(), not after: show() calls render(), and render() reads st.paid. Setting it
+      // afterwards left this screen correct only because a later render happened to run.
+      st.paid = true;
       show("five");
       var pb = $("#paidBack"); if(pb) pb.classList.add("on");
-      st.paid = true;
     }catch(e){}
   }
 
@@ -2077,7 +2319,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     var rows = (d && d.rows) || [];
     if(!rows.length){ box.classList.add("hidden"); return; }
     var ul = $("#othersList"); ul.innerHTML = "";
-    rows.slice(0, 18).forEach(function(r){
+    // Lior, 22.9. Grey is a promise and gold is a minute somebody lived, and that gap is the
+    // picture the whole campaign is making. A lived dot buried at position nine in a wrapped
+    // list makes no picture at all, so the gold ones come first. Stable inside each group:
+    // the rail's own order is the recency order and it is not ours to shuffle.
+    var ordered = rows.slice(0).sort(function(a, b){ return (b.lived ? 1 : 0) - (a.lived ? 1 : 0); });
+    ordered.slice(0, 18).forEach(function(r){
       var li = document.createElement("li");
       if(r.lived) li.className = "lived";
       li.title = r.lived ? "Lived, and counted" : "A promise until day 7";
@@ -2129,6 +2376,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // it. A comment further down this file already states the rule: never name day 7 while the
   // sender is not armed. So ask the rail rather than hardcode either answer. Silence keeps
   // the modest sentence, which is true in both worlds.
+  // Lior, 22.9. The two halves of the ending used to share one switch, and the switch read
+  // the SOCIAL links only. Two ways for the page to lie followed from that: no social links
+  // hid the talk doors as well, and no talk hid nothing, so "Join the next talk" rendered as
+  // a heading over an empty box. Each half now answers for itself, and the ending appears
+  // when either half has somewhere real to go.
   (function(){
     var anyTalk = false;
     [["talkTlv","tlv"],["talkOnline","online"]].forEach(function(pair){
@@ -2136,16 +2388,17 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       if(el && url){ el.href = url; el.hidden = false; anyTalk = true; }
     });
     $("#talkDoors").hidden = !anyTalk;
-  })();
+    var tl = $("#talkLabel"); if(tl) tl.hidden = !anyTalk;
 
-  (function(){
-    var any = false;
+    var anySocial = false;
     [["soSite","site"],["soLi","li"]].forEach(function(pair){
       var el = $("#"+pair[0]), url = SOCIAL[pair[1]];
       if(!el) return;
-      if(url){ el.href = url; el.hidden = false; any = true; }
+      if(url){ el.href = url; el.hidden = false; anySocial = true; }
     });
-    $("#endingRow").hidden = !any;
+    var sr = $("#socialRow"); if(sr) sr.hidden = !anySocial;
+
+    $("#endingRow").hidden = !(anyTalk || anySocial);
   })();
 
   api("/flow").then(function(f){

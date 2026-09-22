@@ -195,16 +195,18 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 footer.house{max-width:var(--col);margin:0 auto;padding:18px var(--gutter) 28px;font-size:13px;line-height:1.5;color:var(--navy)}
 footer.house .b{font-weight:800}
 footer.house a{text-decoration:underline;text-decoration-color:var(--sky);text-underline-offset:3px;text-decoration-thickness:2px;display:inline-flex;align-items:center;min-height:44px}
-.talkdoors{display:flex;gap:9px;margin-top:8px}
+.talkdoors{display:flex;gap:9px;margin-top:2px}
 .tdoor{flex:1;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--cream);color:var(--navy);border:2.5px solid var(--navy);border-radius:16px;text-decoration:none;padding:8px 6px;line-height:1.15;text-align:center}
 .tdoor b{font-size:17px;font-weight:800}
 .tdoor span{font-size:11.5px;font-weight:700;opacity:.75}
 .tdoor:hover{box-shadow:3px 3px 0 var(--navy)}
-.follow{margin-top:14px;padding-top:12px;border-top:2px dashed var(--navy);text-align:center}
-.followl{font-size:14px;font-weight:800;margin-bottom:8px}
-.followi{display:flex;gap:10px;justify-content:center}
-.followi a{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;border:2.5px solid var(--navy);border-radius:999px;background:var(--white);color:var(--navy);text-decoration:none}
-.followi a:hover{box-shadow:3px 3px 0 var(--navy)}
+.ending{margin-top:16px;padding-top:14px;border-top:2px dashed rgba(255,244,224,.35);text-align:center}
+.endl{font-size:14.5px;font-weight:800;margin-bottom:9px;line-height:1.3}
+.endl b{color:var(--sun)}
+.endl2{margin-top:18px}
+.endi{display:flex;gap:10px;justify-content:center}
+.endi a{width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;border:2.5px solid var(--cream);border-radius:999px;background:transparent;color:var(--cream);text-decoration:none}
+.endi a:hover{background:var(--cream);color:var(--navy)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 /* v11 (20.9): the rail, the state past the wish, and the 320px repairs */
 [hidden]{display:none!important}
@@ -951,6 +953,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <div class="sc-meta" id="scMeta"><span class="claimed">Claimed</span> today</div>
     <div class="sc-foot" id="scFoot">One dot on the line · 100 days to 50 · 50,000 minutes back · connecthedots.co/50</div>
   </div>
+  <!-- Anat, 22.9: "אם רוצים שזה יעבוד ויתפשט זה צריך להיות קל לשתף את התמונה ככה."
+       The card above is HTML, which nobody can put on a story. This draws the same card as a
+       picture, on a canvas, with no library and nothing fetched, and hands it to the phone's
+       own share sheet. Where that does not exist it downloads, which is every desktop. -->
+  <button class="cta" type="button" id="cardShare" style="margin-top:6px">Share my card</button>
+  <div class="toast" id="cardSaved">Saved. It is in your downloads, ready to post.</div>
   <div class="mini" style="margin-top:0"><a id="calLink" href="#" target="_blank" rel="noopener">Add to my calendar</a></div>
   <button class="cta" data-go="pass" style="margin-top:6px;font-size:18px">Help get to 50,000 &rarr;</button>
 </section>
@@ -1056,40 +1064,20 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
     <!-- 5. One field. Nothing else asked for. FORM-FLOW covers it: stored, confirmed,
          and Anat's own inbox, same as every other form on this rail. -->
-    <div class="sub">
-      <label class="subl" id="subLabel" for="subEm">Want to watch the dots close? Leave your email. One update a week, nothing more.</label>
-      <div class="inline">
-        <input id="subEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the weekly update">
-        <button type="button" id="subBtn">Keep me posted</button>
-      </div>
-      <div class="toast" id="subOk">You are on the list. One a week, and one line to anat@connecthedots.co takes you off.</div>
-      <div class="toast" id="subFail">That did not send. Try again in a moment.</div>
-    </div>
-
-    <!-- 6 + 7. The talk, secondary in size and in colour, and with no date locked into it:
-         the page it points at is the one that carries the dates, including the online ones. -->
-    <div class="talkline">100 days in public, then the full story live. Come see what the agent couldn't do.</div>
-    <!-- Anat, 22.9: two doors to the talk at the end, in person and online. The online one
-         is in English and does not exist yet, so its button does not render. Same rule as the
-         film, the pay rungs and the social icons: a door that leads nowhere costs more than a
-         missing one. -->
-    <div class="talkdoors" id="talkDoors">
-      <a id="talkTlv" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>In person</b><span>Tel Aviv &middot; 2 November</span></a>
-      <a id="talkOnline" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>Online</b><span>In English &middot; 26 November</span></a>
-    </div>
-
-    <!-- Anat, 22.9: "for anyone not connected to me yet, this is the moment". Last thing on
-         the last screen, after the ask and after the talk, because a follow is what somebody
-         does when they have already decided they liked this.
-         Each icon renders ONLY when SOCIAL has a URL for it, the same rule as the film and
-         the pay button: a live-looking icon that leads nowhere costs more than a missing one.
-         LinkedIn is the only handle written down anywhere in this house. -->
-    <div class="follow" id="followRow" hidden>
-      <div class="followl">Not connected yet? This is the moment.</div>
-      <div class="followi">
+    <!-- Anat, 22.9. The weekly-update field came off: it asked for an address this page
+         already has, on the screen where somebody is leaving. What belongs here is where to
+         find her next, and it is two questions, not a form. -->
+    <div class="ending" id="endingRow" hidden>
+      <div class="endl">Want to know more about Connecting the Dots?</div>
+      <div class="endi">
+        <a id="soSite" href="#" target="_blank" rel="noopener" aria-label="connecthedots.co" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 0c3 3 4.5 6.5 4.5 10S15 19 12 22m0-20C9 5 7.5 8.5 7.5 12S9 19 12 22M2.5 9h19M2.5 15h19"/></svg></a>
         <a id="soLi" href="#" target="_blank" rel="noopener" aria-label="Anat on LinkedIn" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.07-1.9-3.07-1.9 0-2.2 1.46-2.2 2.97V21h-4V9Z"/></svg></a>
-        <a id="soFb" href="#" target="_blank" rel="noopener" aria-label="Anat on Facebook" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.62A22 22 0 0 0 14.3 3.5c-2.4 0-4.05 1.47-4.05 4.17V9.9H7.5V13h2.75v8h3.25Z"/></svg></a>
-        <a id="soIg" href="#" target="_blank" rel="noopener" aria-label="Anat on Instagram" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 1.8c-3.14 0-3.5.01-4.74.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71C3.42 8.5 3.4 8.86 3.4 12s.02 3.5.08 4.74c.04.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.6.08 4.74.08s3.5-.02 4.74-.08c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.08-1.6.08-4.74s-.02-3.5-.08-4.74c-.04-.9-.19-1.39-.32-1.71a2.9 2.9 0 0 0-.69-1.06 2.9 2.9 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32C15.5 4.01 15.14 4 12 4Zm0 3.03a4.97 4.97 0 1 1 0 9.94 4.97 4.97 0 0 1 0-9.94Zm0 8.2a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46Zm6.34-8.4a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0Z"/></svg></a>
+      </div>
+
+      <div class="endl endl2">Join the next talk <b>The Human is the Loop</b></div>
+      <div class="talkdoors" id="talkDoors">
+        <a id="talkTlv" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>Live in Tel Aviv</b><span>In Hebrew</span></a>
+        <a id="talkOnline" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>Online</b><span>In English</span></a>
       </div>
     </div>
   </div>
@@ -1258,14 +1246,13 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // is not built yet, so the button does not exist until this line has a URL in it.
   var TALK = {
     tlv:    "https://thehumanistheloop.co/?utm_source=fifty50&utm_medium=content&utm_campaign=talk-door-tlv",
-    online: ""
+    online: "https://thehumanistheloop.co/en/?utm_source=fifty50&utm_medium=content&utm_campaign=talk-door-en"
   };
   // Her doors. An empty string means that icon does not exist on the page at all. LinkedIn
   // is the only one this house has written down; Facebook and Instagram need her handles.
   var SOCIAL = {
-    li: "https://www.linkedin.com/in/anatdotconnector",
-    fb: "",
-    ig: ""
+    site: "https://connecthedots.co/?utm_source=fifty50&utm_medium=content&utm_campaign=ending-site",
+    li:   "https://www.linkedin.com/in/anatdotconnector"
   };
   // Anat reversed the seven-row gate the same evening: "לא לא...תחזיר מה פתאום". Zero means
   // the button takes money from now.
@@ -1694,12 +1681,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     // This line is why the HTML label never rendered once. A product change updated three
     // strings and missed the fourth, and the fourth is the one that takes the money.
     // Their own address, already typed once, put back in front of them.
-    var mine = st.email.trim(), sub = $("#subEm");
-    if(mine && !sub.disabled && !sub.value) sub.value = mine;
-    $("#subLabel").textContent = mine
-      ? "Want the weekly update at " + mine + " too? One a week, nothing more."
-      : "Want to watch the dots close? Leave your email. One update a week, nothing more.";
-    $("#subBtn").textContent = sub.disabled ? "Done \u2713" : (mine ? "Yes, keep me posted" : "Keep me posted");
     $("#sendShare").textContent = st.net==="link" ? "Copy my link"
       : (st.net==="wa" ? "Take me to WhatsApp" : (st.net==="li" ? "Take me to LinkedIn" : "Take me to Facebook"));
     $("#langRow").style.display = st.net==="wa" ? "flex" : "none";
@@ -1930,23 +1911,97 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#skipPay").hidden = true;
   });
 
-  $("#subBtn").addEventListener("click", function(){
-    var box = $("#subEm"), v = box.value.trim(), btn = this;
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ box.focus(); return; }
-    btn.disabled = true; btn.textContent = "\u2026";
-    $("#subFail").classList.remove("on");
-    api("/subscribe", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ email: v, source: "main" })
-    }).then(function(r){
-      if(!r || !r.stored) throw new Error("not stored");
-      btn.textContent = "Done \u2713"; box.disabled = true;
-      $("#subOk").classList.add("on");
-    }, function(){
-      btn.disabled = false; btn.textContent = "Keep me posted";
-      $("#subFail").classList.add("on");
+  // The card as a picture. 1080 by 1350, which is the portrait every phone app accepts.
+  // Everything is drawn, so nothing can be blocked, and the two webfonts are already on the
+  // page by the time anybody reaches this screen.
+  function drawCard(){
+    var W = 1080, H = 1350, P = 84;
+    var c = document.createElement("canvas"); c.width = W; c.height = H;
+    var x = c.getContext("2d");
+    x.fillStyle = "#FFF4E0"; x.fillRect(0,0,W,H);
+    x.strokeStyle = "#1B2838"; x.lineWidth = 10;
+    x.strokeRect(34,34,W-68,H-68);
+
+    x.fillStyle = "#1B2838";
+    x.font = "800 30px 'Bricolage Grotesque', system-ui, sans-serif";
+    x.textAlign = "left";
+    x.fillText("100 DAYS TO 50", P, 150);
+
+    // their own sentence, in the hand, wrapped to the card
+    var t = thing(), say = oath() || (t ? t.yes + "." : "");
+    x.font = "700 64px 'Caveat', cursive";
+    var words = String(say).split(/\s+/), line = "", y = 300, lines = [];
+    words.forEach(function(w){
+      var test = line ? line + " " + w : w;
+      if(x.measureText(test).width > W - P*2 && line){ lines.push(line); line = w; }
+      else line = test;
     });
+    if(line) lines.push(line);
+    lines.slice(0,9).forEach(function(l){ x.fillText(l, P, y); y += 84; });
+
+    // the signature line
+    y += 24;
+    x.strokeStyle = "#1B2838"; x.lineWidth = 4;
+    x.beginPath(); x.setLineDash([10,10]); x.moveTo(P, y); x.lineTo(W-P, y); x.stroke(); x.setLineDash([]);
+    x.font = "800 34px 'Bricolage Grotesque', system-ui, sans-serif";
+    var who = [st.name.trim(), st.city.trim()].filter(Boolean).join(", ") || "Signed today";
+    x.fillText(who.toUpperCase(), P, y + 58);
+
+    // The seal, bottom right, so the card is never a block of text with a hole under it.
+    // With a dot number it is their number. Without one it is the fifty minutes, which is
+    // true for everybody who reaches this screen.
+    var cx = W-P-110, cy = H-P-210;
+    x.beginPath(); x.arc(cx, cy, 110, 0, Math.PI*2);
+    x.fillStyle = "#FDD801"; x.fill(); x.lineWidth = 9; x.strokeStyle = "#1B2838"; x.stroke();
+    x.fillStyle = "#1B2838"; x.textAlign = "center";
+    if(st.dotNumber){
+      x.font = "800 28px 'Bricolage Grotesque', system-ui, sans-serif";
+      x.fillText("DOT NO.", cx, cy - 22);
+      x.font = "800 76px 'Bricolage Grotesque', system-ui, sans-serif";
+      x.fillText(String(st.dotNumber), cx, cy + 46);
+    } else {
+      x.font = "800 76px 'Bricolage Grotesque', system-ui, sans-serif";
+      x.fillText("50", cx, cy + 12);
+      x.font = "800 24px 'Bricolage Grotesque', system-ui, sans-serif";
+      x.fillText("MINUTES BACK", cx, cy + 48);
+    }
+    // and what the hour is, beside the seal, because the promise has a when
+    x.textAlign = "left"; x.fillStyle = "#1B2838";
+    x.font = "700 40px 'Caveat', cursive";
+    x.fillText(when(), P, cy + 10);
+
+    x.textAlign = "left"; x.fillStyle = "#1B2838";
+    x.font = "800 32px 'Bricolage Grotesque', system-ui, sans-serif";
+    x.fillText("connecthedots.co/50", P, H - P - 40);
+    x.font = "600 26px 'Bricolage Grotesque', system-ui, sans-serif";
+    x.fillText("50,000 minutes back to what only humans can do.", P, H - P + 4);
+    return c;
+  }
+
+  $("#cardShare").addEventListener("click", function(){
+    var btn = this;
+    function go(){
+      var c = drawCard();
+      c.toBlob(function(blob){
+        if(!blob){ btn.textContent = "Share my card"; return; }
+        var file = null;
+        try { file = new File([blob], "my-fifty-minutes.png", {type:"image/png"}); } catch(e){}
+        if(file && navigator.canShare && navigator.canShare({files:[file]})){
+          navigator.share({files:[file]}).then(function(){}, function(){}).then(function(){ btn.textContent = "Share my card"; });
+          return;
+        }
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = "my-fifty-minutes.png";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+        $("#cardSaved").classList.add("on");
+        btn.textContent = "Share my card";
+      }, "image/png");
+    }
+    btn.textContent = "\u2026";
+    // The hand font has to be loaded or the sentence draws in a fallback and looks like
+    // somebody else's card.
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(go, go); else go();
   });
 
   $("#own").addEventListener("input", function(){
@@ -2085,12 +2140,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
   (function(){
     var any = false;
-    [["soLi","li"],["soFb","fb"],["soIg","ig"]].forEach(function(pair){
+    [["soSite","site"],["soLi","li"]].forEach(function(pair){
       var el = $("#"+pair[0]), url = SOCIAL[pair[1]];
       if(!el) return;
       if(url){ el.href = url; el.hidden = false; any = true; }
     });
-    $("#followRow").hidden = !any;
+    $("#endingRow").hidden = !any;
   })();
 
   api("/flow").then(function(f){

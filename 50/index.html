@@ -362,6 +362,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .mdstats .s{display:flex;gap:8px;align-items:baseline;background:var(--white);border:2.5px solid var(--navy);border-radius:12px;padding:8px 11px}
 .mdstats .s b{font-size:19px;font-weight:800}
 .mdlink{font-family:var(--hand);font-size:22px;border:2.5px dashed var(--navy);border-radius:14px;padding:10px 14px;word-break:break-all}
+.rungs{display:flex;gap:8px}
+.rungs button{flex:1;min-height:54px;background:var(--white);border:2.5px solid var(--navy);border-radius:14px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:4px 2px;line-height:1.1}
+.rungs button b{font-size:19px}
+.rungs button span{font-size:10.5px;font-weight:700;opacity:.75;text-align:center}
+.rungs button[aria-pressed="true"]{background:var(--sun);box-shadow:3px 3px 0 var(--navy)}
 .gets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .gets li{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;line-height:1.3;font-weight:700}
 .gets li b{font-weight:800;flex-shrink:0}
@@ -977,6 +982,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <!-- THE ONE THING ON THIS SCREEN THAT SELLS. Her spec: navy pill, the widest and
          boldest thing here, sitting between the three things and the charity line, with the
          price inside it rather than fighting a coin for attention. -->
+    <div class="rungs" id="rungs"></div>
     <button class="pay" type="button" id="payBtn">Get the receipts &middot; $5</button>
     <!-- Anat's ruling, 22.9: one button, one price, VAT inside it. "זה באמת לא בשביל הכסף."
          So an Israeli buyer is never shown a price that grows at the last step, and she
@@ -1000,7 +1006,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <div id="talkPerk" style="font-size:12.5px;line-height:1.35;opacity:.85">Coming to Tel Aviv? Every buyer gets a discount code for Anat's talk in the confirmation mail. <a href="https://thehumanistheloop.co/?utm_source=fifty50&amp;utm_medium=content&amp;utm_campaign=the-49-screen" target="_blank" rel="noopener" style="font-weight:800">The Human is the Loop</a></div>
 
     <!-- Small, at the bottom, after the button. Her order. -->
-    <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every $5 goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
+    <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
 
     <button class="link" data-go="human" id="skipPay">Not now. Carry on.</button>
   </div>
@@ -1219,7 +1225,21 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // The checkout. Anat's ruling, 14.9 and again 20.9: Morning plus PayPal, not Gumroad.
   // ONE LINE turns the button on. Empty, the button says "Opens soon" and takes nothing,
   // because a live-looking button that leads nowhere costs more than a date does.
-  var PAY_URL = "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6";
+  // Anat, 22.9: "הייתי שמה כמה אפשרויות של 5$ 10$ 20$ כי יש אנשים שצריכים יותר מוטיבציה."
+  // Same product at every rung. The bigger number is not more list, it is more stake, which
+  // is the whole mechanic of this page pointed at the person instead of at the task.
+  //
+  // ONE BUTTON STILL, which was her other ruling: the amounts are pills and the single
+  // button follows whichever is chosen. A rung with no URL does not render, so the ladder
+  // appears one rung at a time as the links exist, and nothing on screen is ever a price
+  // that cannot be paid.
+  var TIERS = [
+    { usd: 5,  url: "https://www.paypal.com/ncp/payment/NQU6EAQ2827A6", say: "I am in" },
+    { usd: 10, url: "", say: "Hold me to it" },
+    { usd: 20, url: "", say: "Really hold me to it" }
+  ];
+  var tier = 0;
+  var PAY_URL = TIERS[0].url;
   // Anat's ruling, 22.9. Seven real hand-overs, each with its date and what happened next,
   // before a single dollar is taken. Below it the screen asks for an email instead.
   // Her doors. An empty string means that icon does not exist on the page at all. LinkedIn
@@ -1651,8 +1671,22 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }
     // This line is why the HTML label never rendered once. A product change updated three
     // strings and missed the fourth, and the fourth is the one that takes the money.
+    // The rungs, and the button that follows them. Only rungs with somewhere to go exist.
+    var live = TIERS.filter(function(t){ return t.url; });
+    var rb = $("#rungs");
+    if(rb){
+      rb.hidden = live.length < 2;
+      if(live.length > 1 && rb.childElementCount !== live.length){
+        rb.innerHTML = live.map(function(t,i){
+          return '<button type="button" data-rung="'+i+'" aria-pressed="'+(i===tier?"true":"false")+'">'
+               + '<b>$'+t.usd+'</b><span>'+t.say+'</span></button>';
+        }).join("");
+      }
+      $$('#rungs button').forEach(function(b){ b.setAttribute("aria-pressed", Number(b.dataset.rung)===tier ? "true":"false"); });
+    }
+    PAY_URL = (live[tier] || live[0] || {}).url || "";
     $("#payBtn").innerHTML = st.paid ? "Paid \u2713"
-      : (PAY_URL ? "Get the receipts &middot; $5" : "Opens soon &middot; $5");
+      : (PAY_URL ? "Get the receipts &middot; $" + (live[tier] || live[0]).usd : "Opens soon &middot; $5");
     $("#payBtn").disabled = !!st.paid;
     // Their own address, already typed once, put back in front of them.
     var mine = st.email.trim(), sub = $("#subEm");
@@ -1826,6 +1860,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       st.thing = el.dataset.v; st.cat = null; st.own=""; $("#own").value="";
       render(); show("time"); return;
     }
+    if(el.dataset.rung !== undefined){ tier = Number(el.dataset.rung); render(); return; }
     if(g==="lang"){ st.lang = el.dataset.v; render(); return; }
     if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; render(); return; }
     if(g==="thing"){

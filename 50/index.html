@@ -978,7 +978,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
          boldest thing here, sitting between the three things and the charity line, with the
          price inside it rather than fighting a coin for attention. -->
     <button class="pay" type="button" id="payBtn">Get the receipts &middot; $5</button>
-    <div id="paySub">One time. Not a subscription. Your receipt lands now.</div>
+    <!-- Anat's ruling, 22.9: one button, one price, VAT inside it. "זה באמת לא בשביל הכסף."
+         So an Israeli buyer is never shown a price that grows at the last step, and she
+         absorbs the 18% rather than route two rails for it. Saying so is the whole point:
+         a price that quietly becomes another price is the thing this line prevents. -->
+    <div id="paySub">One time, not a subscription. VAT included wherever you are. Your receipt lands now.</div>
 
     <!-- The address the receipts go to. Required, because a payment with no address is a
          person we cannot deliver to, and PayPal never tells this page who paid. -->

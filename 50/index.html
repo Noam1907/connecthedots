@@ -1000,8 +1000,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
     <div class="toast" id="paidBack">Thank you. Your receipt is on its way and the first weekly note follows.</div>
     <div class="toast" id="notePay">Nothing is charged yet. Your free dot is claimed either way.</div>
-    <div id="talkPerk" style="font-size:12.5px;line-height:1.35;opacity:.85">Coming to Tel Aviv? Every buyer gets a discount code for Anat's talk in the confirmation mail. <a href="https://thehumanistheloop.co/?utm_source=fifty50&amp;utm_medium=content&amp;utm_campaign=the-49-screen" target="_blank" rel="noopener" style="font-weight:800">The Human is the Loop</a></div>
-
+    
     <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
 
     <button class="link" data-go="human" id="skipPay">Not now. My free dot stays claimed.</button>
@@ -1253,11 +1252,8 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // does not disappear because the button came back. So the BUTTON is keyed to PAY_OPENS_AT
   // and the COPY is keyed to whether there is a list yet. Today they disagree, on purpose.
   var PAY_OPENS_AT = 0;
-  // The talk discount is promised in THREE places on this screen and delivered by the mail
-  // rail, where FIFTY_TALK_CODE is still an empty string. The mail is honest about it and
-  // omits the code; the page was not. One line: set this true when the code exists and all
-  // three promises come back at once.
-  var TALK_CODE_LIVE = false;
+  // The talk discount is gone, 22.9: Morning coupons live on a דף עסק at ₪24 a month and
+  // she declined. "לא משנה. אני לא משלמת עוד." The $5 buys two things now, not three.
   var GOAL = 50000; // the wish. A fallback only: the live goal comes from the rail.
   function fresh(){ return {thing:null, cat:null, handed:false, own:"", to:null, toOwn:"", day:"Friday", time:"evening", name:"", city:"", email:"", net:"wa", touchedNet:false, lang:"en", kept:null, started:false, failed:false, paid:false, code:null, dotNumber:null, stored:false, pickedWhen:false}; }
   var st = fresh();
@@ -1661,16 +1657,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#fiveVow").textContent = "Every entry will be a real hand-over from a real person in the campaign: initials, dated, verified.";
     var ps = $("#paySub"); if(ps) ps.hidden = !live.length;
     // And a buyer perk with no buyer and no code is a promise to nobody.
-    var perk = $("#talkPerk"); if(perk) perk.hidden = !(live.length && TALK_CODE_LIVE);
     // Its three siblings were gated and this one was not, so it promised a receipt nobody
     // could generate, in the present tense, under a head saying the list is still being written.
     var li = $("#listIs");
     // Three lines with a tick, her 22.9 spec, not a paragraph. The talk line only exists
     // when there is a code behind it, so the list never promises what the mail omits.
     if(li){
-      var gets = ["The weekly progress note: counter, new entries, best stories"];
-      if(TALK_CODE_LIVE) gets.push("The talk discount, with your receipt");
-      gets.push("The full list, day 100");
+      var gets = ["The weekly progress note: counter, new entries, best stories",
+                  "The full list, day 100"];
       li.innerHTML = gets.map(function(g){ return '<li><b>\u2713</b><span>'+g+'</span></li>'; }).join("");
     }
     // This line is why the HTML label never rendered once. A product change updated three

@@ -348,7 +348,11 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .hands .hm{font-weight:800;white-space:nowrap}
 .hands .soonrow{border-style:dashed;font-weight:700}
 .vouch{font-size:14px;line-height:1.35;font-weight:800;border-left:4px solid var(--navy);padding-left:10px}
-.listis{font-size:13.5px;line-height:1.35;font-weight:700;opacity:.9}
+.gets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.gets li{display:flex;gap:8px;align-items:flex-start;font-size:14.5px;line-height:1.3;font-weight:700}
+.gets li b{font-weight:800;flex-shrink:0}
+#paySub{font-size:13px;line-height:1.3;font-weight:700;opacity:.9;text-align:center;margin-top:-4px}
+#payErr{font-size:13px;font-weight:700;color:var(--navy)}
 
 /* "Only humans can: 1/ 2/ 3/". The dots became numbers because the line is now a list with
    a stem, and a bullet cannot finish a sentence the heading started. */
@@ -942,43 +946,40 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <section class="screen dark" data-s="five" aria-label="The 50,000">
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label" style="opacity:.8">The 50,000</span></div>
   <div class="five">
-    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">Every hand-over the campaign made. At day 100.</h1><div class="coin">$5</div></div>
-    <!-- Anat's final product call, 22.9: the list is not hers, it is the campaign's. Hundreds
-         of real hand-overs by real people beats one person's list of 49, and the credibility
-         moves from her to the room. Her line, with her connecting dash turned into a colon
-         because the house bans the dash and nothing else changed. -->
+    <div class="head"><h1 class="h" id="fiveHead" style="font-size:inherit;line-height:inherit;margin:0">Every hand-over the campaign made. At day 100.</h1></div>
     <div id="fiveVow" style="font-size:15.5px;line-height:1.35;font-weight:600">Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line.</div>
 
-    <!-- The live examples. Filled from HANDOVERS, which is the campaign's own record: day,
-         what was handed over, minutes that came back. Empty on day 1 and the block says so,
-         because a dated claim about a day that has not happened is not a claim she can vouch
-         for, and the line under it says she vouches for every one. -->
+    <!-- The live proof that the list is being written now. "Day X of 100" counts itself off
+         the birthday, so nobody has to remember to advance it. -->
     <div class="hands" id="handsList"></div>
 
+    <!-- Anat, 22.9: three lines with a tick, not a paragraph. -->
+    <ul class="gets" id="listIs"></ul>
 
-    <!-- Three things, and two of them arrive the day they pay. That is the answer to "what
-         does a buyer get on day 1", and it is Anat's, 22.9. -->
-    <div class="listis" id="listIs">Three things. The weekly progress note starts this week: the counter, the new entries, the best stories. The talk discount arrives with your receipt. The full list lands at day 100.</div>
+    <!-- THE ONE THING ON THIS SCREEN THAT SELLS. Her spec: navy pill, the widest and
+         boldest thing here, sitting between the three things and the charity line, with the
+         price inside it rather than fighting a coin for attention. -->
+    <button class="pay" type="button" id="payBtn">Get the receipts &middot; $5</button>
+    <div id="paySub">One time. Not a subscription. Your receipt lands now.</div>
 
-    <div style="font-size:14px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px">20% of every $5 goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
-
-    <button class="pay" type="button" id="payBtn">Get the 50,000. Every hand-over, at day 100. $5</button>
-    <div id="paySub" style="font-size:13px;line-height:1.35;font-weight:700;margin-top:-2px">Plus a weekly progress note and a discount for the live talk.</div>
-    <!-- Anat, 22.9: the button does not take money until the list has SEVEN real rows with
-         a date and a result, "אחרת מכרנו בדיוק את הדבר שבגללו אפשר לקנות את זה בכל בלוג".
-         Until then this takes the launch-day traffic instead of burning it. Her copy. -->
-    <div class="sub" id="waitList" hidden>
-      <label class="subl" for="fiftyEm">The list grows every day of the 100. Leave your email, get it when it closes.</label>
+    <!-- The address the receipts go to. Required, because a payment with no address is a
+         person we cannot deliver to, and PayPal never tells this page who paid. -->
+    <div class="sub" id="payMail" hidden>
+      <label class="subl" for="fiftyEm">Where should the receipts go?</label>
       <div class="inline">
-        <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the list when it closes">
-        <button type="button" id="fiftyBtn">Send it to me</button>
+        <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the receipts">
+        <button type="button" id="fiftyBtn">Continue</button>
       </div>
-      <div class="toast" id="fiftyOk">You are on it. The list lands when the 100 days close, and the weekly note comes meanwhile.</div>
-      <div class="toast" id="fiftyFail">That did not send. Try again in a moment.</div>
+      <div class="err hidden" id="payErr"></div>
     </div>
-    <div class="toast" id="paidBack">Thank you. Your first weekly note and your talk code are on their way, and the full list lands when the 100 days close.</div>
+
+    <div class="toast" id="paidBack">Thank you. Your receipt is on its way and the first weekly note follows.</div>
     <div class="toast" id="notePay">Nothing is charged yet. Your free dot is claimed either way.</div>
     <div id="talkPerk" style="font-size:12.5px;line-height:1.35;opacity:.85">Coming to Tel Aviv? Every buyer gets a discount code for Anat's talk in the confirmation mail. <a href="https://thehumanistheloop.co/?utm_source=fifty50&amp;utm_medium=content&amp;utm_campaign=the-49-screen" target="_blank" rel="noopener" style="font-weight:800">The Human is the Loop</a></div>
+
+    <!-- Small, at the bottom, after the button. Her order. -->
+    <div style="font-size:12.5px;line-height:1.35;font-weight:700;border-top:2px dashed var(--navy);padding-top:10px;opacity:.9">20% of every $5 goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
+
     <button class="link" data-go="human" id="skipPay">Not now. Carry on.</button>
   </div>
 </section>
@@ -1208,6 +1209,23 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 
   function nf(n){ return Number(n).toLocaleString("en-US"); }
+  // Anat, 22.9: "Day X of 100" that updates itself. It counts BACK from the birthday, so
+  // nobody has to remember to advance it and it cannot drift: day 100 is 31 December by
+  // construction, whatever day this page is opened.
+  var BIRTHDAY = new Date(2026, 11, 31);
+  function campaignDay(){
+    var today = new Date(); today.setHours(0,0,0,0);
+    var left = Math.round((BIRTHDAY - today) / 86400000);
+    return Math.min(100, Math.max(1, 100 - left));
+  }
+  // The day the first weekly note lands, named rather than vague. Sunday, the way the week
+  // starts here.
+  var DAYNAME = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  function nextSunday(){
+    var d = new Date(); d.setHours(0,0,0,0);
+    d.setDate(d.getDate() + ((7 - d.getDay()) % 7 || 7));
+    return d.getDate() + " " + ["January","February","March","April","May","June","July","August","September","October","November","December"][d.getMonth()];
+  }
   function prevStop(n, goal){
     if(goal > 0 && n >= goal) return Math.floor(n/goal)*goal;
     var p = 0; MILES.forEach(function(m){ if(m <= n) p = m; }); return p;
@@ -1559,7 +1577,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     var payOpen  = HANDOVERS.length >= PAY_OPENS_AT;  // can money be taken
     var listLive = HANDOVERS.length > 0;              // is there a list to speak of yet
     $("#payBtn").hidden = !payOpen;
-    $("#waitList").hidden = payOpen;
     // Past tense on an empty list is the same defect her ruling is about, one line higher up.
     $("#fiveHead").textContent = listLive
       ? "Every hand-over the campaign made. At day 100."
@@ -1567,29 +1584,24 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#fiveVow").textContent = listLive
       ? "Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line."
       : "Every entry will be a real hand-over from a real person in the campaign: initials, dated, counted on the line.";
-    var ps = $("#paySub");
-    if(ps){
-      ps.hidden = !payOpen;
-      ps.textContent = TALK_CODE_LIVE
-        ? "Plus a weekly progress note and a discount for the live talk."
-        : "Plus a weekly progress note while the 100 days run.";
-    }
+    var ps = $("#paySub"); if(ps) ps.hidden = !payOpen;
     // And a buyer perk with no buyer and no code is a promise to nobody.
     var perk = $("#talkPerk"); if(perk) perk.hidden = !(payOpen && TALK_CODE_LIVE);
     // Its three siblings were gated and this one was not, so it promised a receipt nobody
     // could generate, in the present tense, under a head saying the list is still being written.
     var li = $("#listIs");
-    // Keyed to the BUTTON, not to the list: "when it opens" was about the button, and the
-    // button is open. The talk clause only appears when there is a code behind it.
-    if(li) li.textContent = payOpen
-      ? ("The weekly progress note starts this week: the counter, the new entries, the best stories."
-         + (TALK_CODE_LIVE ? " The talk discount arrives with your receipt." : "")
-         + " The full list of every hand-over the campaign made lands at day 100.")
-      : "A weekly progress note, and the full list of every hand-over the campaign made at day 100.";
+    // Three lines with a tick, her 22.9 spec, not a paragraph. The talk line only exists
+    // when there is a code behind it, so the list never promises what the mail omits.
+    if(li){
+      var gets = ["The weekly progress note: counter, new entries, best stories"];
+      if(TALK_CODE_LIVE) gets.push("The talk discount, with your receipt");
+      gets.push("The full list, day 100");
+      li.innerHTML = gets.map(function(g){ return '<li><b>\u2713</b><span>'+g+'</span></li>'; }).join("");
+    }
     // This line is why the HTML label never rendered once. A product change updated three
     // strings and missed the fourth, and the fourth is the one that takes the money.
     $("#payBtn").innerHTML = st.paid ? "Paid \u2713"
-      : (PAY_URL ? "Get the 50,000. Every hand-over, at day 100. $5" : "Opens soon &middot; $5");
+      : (PAY_URL ? "Get the receipts &middot; $5" : "Opens soon &middot; $5");
     $("#payBtn").disabled = !!st.paid;
     // Their own address, already typed once, put back in front of them.
     var mine = st.email.trim(), sub = $("#subEm");
@@ -1688,7 +1700,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     if(HANDOVERS.length < 3){
       var r2 = document.createElement("div"); r2.className = "hrow soonrow";
       r2.textContent = HANDOVERS.length === 0
-        ? "Day 1 of 100. The list starts today and you will watch it fill."
+        ? "Day " + campaignDay() + " of 100. The list is being written now and you will watch it fill."
         : "The rest arrive one day at a time, in public.";
       box.appendChild(r2);
     }
@@ -1795,9 +1807,39 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // 5. The weekly list. One field, stored on the rail, and the person hears back the same
   // minute. Nothing is claimed on screen that the rail did not confirm.
   // 7. The button is live the moment there is somewhere for it to go, and never before.
+  // Her 22.9 flow: the button opens a checkout with a REQUIRED email, and the thank-you
+  // names their dot. The email is not a nicety: PayPal takes the money in a tab this page
+  // never hears from, so without it a payment arrives with nobody to deliver to.
   $("#payBtn").addEventListener("click", function(){
     if(!PAY_URL){ $("#notePay").classList.add("on"); return; }
+    var box = $("#fiftyEm");
+    if(box && !box.value && st.email.trim()) box.value = st.email.trim();
+    $("#payMail").hidden = false;
+    $("#payBtn").hidden = true;
+    $("#paySub").hidden = true;
+    if(box) box.focus();
+  });
+
+  $("#fiftyBtn").addEventListener("click", function(){
+    var box = $("#fiftyEm"), v = box.value.trim(), btn = this, err = $("#payErr");
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){
+      err.textContent = "That address needs an @ and a dot after it."; err.classList.remove("hidden");
+      box.focus(); return;
+    }
+    err.classList.add("hidden");
+    btn.disabled = true; btn.textContent = "\u2026";
+    // Recorded on OUR side first, so the address exists whether or not they finish paying.
+    api("/subscribe", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ email: v, source: "pay-intent" })
+    }).then(function(){}, function(){});
     window.open(PAY_URL, "_blank", "noopener");
+    $("#payMail").hidden = true;
+    var n = st.dotNumber;
+    $("#paidBack").textContent = (n ? "You're dot #" + nf(n) + ". " : "")
+      + "PayPal has your receipt. The first weekly note lands " + nextSunday() + ".";
+    $("#paidBack").classList.add("on");
   });
 
   $("#subBtn").addEventListener("click", function(){
@@ -1816,25 +1858,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     }, function(){
       btn.disabled = false; btn.textContent = "Keep me posted";
       $("#subFail").classList.add("on");
-    });
-  });
-
-  $("#fiftyBtn").addEventListener("click", function(){
-    var box = $("#fiftyEm"), v = box.value.trim(), btn = this;
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){ box.focus(); return; }
-    btn.disabled = true; btn.textContent = "\u2026";
-    $("#fiftyFail").classList.remove("on");
-    api("/subscribe", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ email: v, source: "the-list" })
-    }).then(function(r){
-      if(!r || !r.stored) throw new Error("not stored");
-      btn.textContent = "Done \u2713"; box.disabled = true;
-      $("#fiftyOk").classList.add("on");
-    }, function(){
-      btn.disabled = false; btn.textContent = "Send it to me";
-      $("#fiftyFail").classList.add("on");
     });
   });
 

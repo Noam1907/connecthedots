@@ -195,6 +195,11 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 footer.house{max-width:var(--col);margin:0 auto;padding:18px var(--gutter) 28px;font-size:13px;line-height:1.5;color:var(--navy)}
 footer.house .b{font-weight:800}
 footer.house a{text-decoration:underline;text-decoration-color:var(--sky);text-underline-offset:3px;text-decoration-thickness:2px;display:inline-flex;align-items:center;min-height:44px}
+.talkdoors{display:flex;gap:9px;margin-top:8px}
+.tdoor{flex:1;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--cream);color:var(--navy);border:2.5px solid var(--navy);border-radius:16px;text-decoration:none;padding:8px 6px;line-height:1.15;text-align:center}
+.tdoor b{font-size:17px;font-weight:800}
+.tdoor span{font-size:11.5px;font-weight:700;opacity:.75}
+.tdoor:hover{box-shadow:3px 3px 0 var(--navy)}
 .follow{margin-top:14px;padding-top:12px;border-top:2px dashed var(--navy);text-align:center}
 .followl{font-size:14px;font-weight:800;margin-bottom:8px}
 .followi{display:flex;gap:10px;justify-content:center}
@@ -362,7 +367,10 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .mdstats .s{display:flex;gap:8px;align-items:baseline;background:var(--white);border:2.5px solid var(--navy);border-radius:12px;padding:8px 11px}
 .mdstats .s b{font-size:19px;font-weight:800}
 .mdlink{font-family:var(--hand);font-size:22px;border:2.5px dashed var(--navy);border-radius:14px;padding:10px 14px;word-break:break-all}
-.commit{font-size:16px;line-height:1.3;font-weight:800;border-left:5px solid var(--navy);padding-left:11px}
+/* Anat, 22.9: "זה צריך קצת לבלוט כי זה הקטע." It is the argument of the whole screen, so it
+   stops being a quote in the margin and becomes the one dark block on a yellow card. */
+.commit{font-size:19px;line-height:1.25;font-weight:800;background:var(--navy);color:var(--cream);border-radius:16px;padding:14px 15px;box-shadow:4px 4px 0 var(--tomato)}
+.commit b{color:var(--sun)}
 .rungs{display:flex;gap:8px;align-items:stretch}
 .rungs.one{display:block}
 .rung{flex:1;min-height:66px;background:var(--navy);color:var(--cream);border:0;border-radius:16px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 4px;line-height:1.1;box-shadow:3px 3px 0 var(--tomato)}
@@ -981,7 +989,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     <!-- Anat's final version, 22.9. This line is the whole argument of the screen and it sits
          above the buttons on purpose: the money is not buying a document, it is buying the
          thing this page has been about since the first screen. -->
-    <div class="commit">The payment is not for the list. It is for you. People who pay, show up, for their own fifty minutes.</div>
+    <div class="commit">The payment is not for the list. <b>It is for you.</b> People who pay, show up, for their own fifty minutes.</div>
 
     <ul class="gets" id="listIs"></ul>
 
@@ -1058,8 +1066,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
     <!-- 6 + 7. The talk, secondary in size and in colour, and with no date locked into it:
          the page it points at is the one that carries the dates, including the online ones. -->
-    <div class="talkline">100 days in public, then the full story live. <a href="https://thehumanistheloop.co/" target="_blank" rel="noopener">The Human is the Loop, dates and tickets here</a>. Come see what the agent couldn't do.</div>
-    <a class="quiet" href="https://thehumanistheloop.co/" target="_blank" rel="noopener">See the talk &rarr;</a>
+    <div class="talkline">100 days in public, then the full story live. Come see what the agent couldn't do.</div>
+    <!-- Anat, 22.9: two doors to the talk at the end, in person and online. The online one
+         is in English and does not exist yet, so its button does not render. Same rule as the
+         film, the pay rungs and the social icons: a door that leads nowhere costs more than a
+         missing one. -->
+    <div class="talkdoors" id="talkDoors">
+      <a id="talkTlv" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>In person</b><span>Tel Aviv &middot; 2 November</span></a>
+      <a id="talkOnline" class="tdoor" href="#" target="_blank" rel="noopener" hidden><b>Online</b><span>In English &middot; 26 November</span></a>
+    </div>
 
     <!-- Anat, 22.9: "for anyone not connected to me yet, this is the moment". Last thing on
          the last screen, after the ask and after the talk, because a follow is what somebody
@@ -1237,6 +1252,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   var PAY_URL = TIERS[0].url;
   // Anat's ruling, 22.9. Seven real hand-overs, each with its date and what happened next,
   // before a single dollar is taken. Below it the screen asks for an email instead.
+  // The two ways to see the talk. The online one is in English, 26 November, and its page
+  // is not built yet, so the button does not exist until this line has a URL in it.
+  var TALK = {
+    tlv:    "https://thehumanistheloop.co/?utm_source=fifty50&utm_medium=content&utm_campaign=talk-door-tlv",
+    online: ""
+  };
   // Her doors. An empty string means that icon does not exist on the page at all. LinkedIn
   // is the only one this house has written down; Facebook and Instagram need her handles.
   var SOCIAL = {
@@ -2048,6 +2069,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   // it. A comment further down this file already states the rule: never name day 7 while the
   // sender is not armed. So ask the rail rather than hardcode either answer. Silence keeps
   // the modest sentence, which is true in both worlds.
+  (function(){
+    var anyTalk = false;
+    [["talkTlv","tlv"],["talkOnline","online"]].forEach(function(pair){
+      var el = $("#"+pair[0]), url = TALK[pair[1]];
+      if(el && url){ el.href = url; el.hidden = false; anyTalk = true; }
+    });
+    $("#talkDoors").hidden = !anyTalk;
+  })();
+
   (function(){
     var any = false;
     [["soLi","li"],["soFb","fb"],["soIg","ig"]].forEach(function(pair){

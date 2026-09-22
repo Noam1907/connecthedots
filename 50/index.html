@@ -298,6 +298,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .portrait img{box-shadow:6px 6px 0 var(--sun)}
 .counter .track i{background:linear-gradient(90deg,var(--sun),var(--sky),var(--green))}
 .counter .ms{font-size:12px;font-weight:700;opacity:.75;margin-top:4px}
+/* Anat, 22.9: two small lines, and the second number is the real one. */
+.tally{display:flex;gap:14px;margin-top:5px;font-size:12px;font-weight:700}
+.tally span{opacity:.7}
+.tally span:last-child{opacity:1}
+.tally b{font-size:15px;font-weight:800}
+.tally span:last-child b{background:var(--sun);border-radius:6px;padding:0 5px}
 .counter.bump .cn b{color:var(--navy)}
 .goes .cta{border-color:var(--cream);box-shadow:3px 3px 0 var(--sun)}
 .oath{box-shadow:3px 3px 0 var(--sun)}
@@ -384,8 +390,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .others .oh{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
 .others ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .others li{display:flex;align-items:center;gap:6px;background:var(--cream);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:3px 10px 3px 4px;font-size:13px;font-weight:700;line-height:1.2}
-.others li .av{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--sun);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
-.others li.lived .av{background:var(--green)}
+/* A dot joins the line GREY, the second they finish, and turns the campaign's gold only
+   when they come back on day 7 and say they lived it. The gap between the two is the picture
+   Anat wants the line to make, so it has to read at a glance.
+   NOTE, because it cost an hour: the comment must sit ABOVE the whole rule. Dropped between
+   `.others li` and `.av` it splits the selector in two and the second half never matches. */
+.others li .av{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:#D9D2C4;border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;opacity:.75}
+/* Gold, fully opaque, and a shadow, so it is not colour alone. */
+.others li.lived .av{background:var(--sun);opacity:1;box-shadow:2px 2px 0 var(--navy)}
+.others li.lived{font-weight:800}
 .others li .wn{opacity:.7;font-weight:600}
 
 /* the router, after a No */
@@ -666,6 +679,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 <div class="counter" id="counter" aria-live="polite" hidden>
   <div class="cn"><b id="ppl"></b><span class="people"> in the line</span> &middot; <b id="cnt"></b> <span id="cnTail"></span></div>
   <div class="track" aria-hidden="true"><i class="ghost" id="cntGhost"></i><i id="cntBar"></i></div>
+  <div class="tally" id="tally" hidden><span>On the line: <b id="tOn">0</b></span><span>Lived: <b id="tLived">0</b></span></div>
   <div class="ms" id="msLine"></div>
 </div>
 
@@ -1291,6 +1305,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     var over = Number(d.overGoal) || Math.max(0, n - goal);
     var span = (next - prev) || 1;
     $("#ppl").textContent = nf(d.dots);
+    // Everyone who signed, then the ones who came back and said they lived it. The second
+    // number is the one the counter is built on, so it is the one that is painted.
+    var tl = $("#tally");
+    if(tl && typeof d.dotsLived === "number"){
+      $("#tOn").textContent = nf(d.dots);
+      $("#tLived").textContent = nf(d.dotsLived);
+      tl.hidden = false;
+    }
     $("#cnt").textContent = nf(n);
     $("#cnTail").textContent = past ? "minutes lived" : "/ " + nf(goal) + " minutes lived";
     // The lived bar is allowed to be genuinely empty. Only a bar with lived minutes in it
@@ -1956,6 +1978,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     rows.slice(0, 18).forEach(function(r){
       var li = document.createElement("li");
       if(r.lived) li.className = "lived";
+      li.title = r.lived ? "Lived, and counted" : "A promise until day 7";
       var av = document.createElement("span"); av.className = "av"; av.textContent = r.i || "\u00b7";
       li.appendChild(av);
       var who = document.createElement("span");

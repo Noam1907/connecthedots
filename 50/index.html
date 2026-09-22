@@ -1187,7 +1187,19 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     fb: "",
     ig: ""
   };
-  var PAY_OPENS_AT = 7;
+  // Anat reversed the seven-row gate the same evening: "לא לא...תחזיר מה פתאום". Zero means
+  // the button takes money from now.
+  //
+  // THE TENSE IS A SEPARATE GATE AND IT STAYS. "Every entry IS a real hand-over" while the
+  // list holds nothing is the defect the seven rows were protecting against, and that defect
+  // does not disappear because the button came back. So the BUTTON is keyed to PAY_OPENS_AT
+  // and the COPY is keyed to whether there is a list yet. Today they disagree, on purpose.
+  var PAY_OPENS_AT = 0;
+  // The talk discount is promised in THREE places on this screen and delivered by the mail
+  // rail, where FIFTY_TALK_CODE is still an empty string. The mail is honest about it and
+  // omits the code; the page was not. One line: set this true when the code exists and all
+  // three promises come back at once.
+  var TALK_CODE_LIVE = false;
   var GOAL = 50000; // the wish. A fallback only: the live goal comes from the rail.
   function fresh(){ return {thing:null, cat:null, handed:false, own:"", to:null, toOwn:"", day:"Friday", time:"evening", name:"", city:"", email:"", net:"wa", touchedNet:false, lang:"en", kept:null, started:false, failed:false, paid:false, code:null, dotNumber:null, stored:false, pickedWhen:false}; }
   var st = fresh();
@@ -1544,9 +1556,10 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#joinCta").innerHTML = (st.stored ? "Help get to 50,000 minutes" : "Join the 50,000 human minutes") + " &rarr;";
     // The gate is the list itself, not a flag somebody has to remember to flip: the seventh
     // row with a date and a result turns the money on, and nothing else does.
-    var listLive = HANDOVERS.length >= PAY_OPENS_AT;
-    $("#payBtn").hidden = !listLive;
-    $("#waitList").hidden = listLive;
+    var payOpen  = HANDOVERS.length >= PAY_OPENS_AT;  // can money be taken
+    var listLive = HANDOVERS.length > 0;              // is there a list to speak of yet
+    $("#payBtn").hidden = !payOpen;
+    $("#waitList").hidden = payOpen;
     // Past tense on an empty list is the same defect her ruling is about, one line higher up.
     $("#fiveHead").textContent = listLive
       ? "Every hand-over the campaign made. At day 100."
@@ -1554,15 +1567,25 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#fiveVow").textContent = listLive
       ? "Every entry is a real hand-over from a real person in the campaign: initials, dated, counted on the line."
       : "Every entry will be a real hand-over from a real person in the campaign: initials, dated, counted on the line.";
-    var ps = $("#paySub"); if(ps) ps.hidden = !listLive;
+    var ps = $("#paySub");
+    if(ps){
+      ps.hidden = !payOpen;
+      ps.textContent = TALK_CODE_LIVE
+        ? "Plus a weekly progress note and a discount for the live talk."
+        : "Plus a weekly progress note while the 100 days run.";
+    }
     // And a buyer perk with no buyer and no code is a promise to nobody.
-    var perk = $("#talkPerk"); if(perk) perk.hidden = !listLive;
+    var perk = $("#talkPerk"); if(perk) perk.hidden = !(payOpen && TALK_CODE_LIVE);
     // Its three siblings were gated and this one was not, so it promised a receipt nobody
     // could generate, in the present tense, under a head saying the list is still being written.
     var li = $("#listIs");
-    if(li) li.textContent = listLive
-      ? "Three things. The weekly progress note starts this week: the counter, the new entries, the best stories. The talk discount arrives with your receipt. The full list lands at day 100."
-      : "Three things, when it opens. A weekly progress note, a discount for the talk, and the full list at day 100.";
+    // Keyed to the BUTTON, not to the list: "when it opens" was about the button, and the
+    // button is open. The talk clause only appears when there is a code behind it.
+    if(li) li.textContent = payOpen
+      ? ("The weekly progress note starts this week: the counter, the new entries, the best stories."
+         + (TALK_CODE_LIVE ? " The talk discount arrives with your receipt." : "")
+         + " The full list of every hand-over the campaign made lands at day 100.")
+      : "A weekly progress note, and the full list of every hand-over the campaign made at day 100.";
     // This line is why the HTML label never rendered once. A product change updated three
     // strings and missed the fourth, and the fourth is the one that takes the money.
     $("#payBtn").innerHTML = st.paid ? "Paid \u2713"

@@ -551,7 +551,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 }
 
 /* ── laptop: the step on the left, the line on the right ─────────────────────── */
-@media (min-width:900px){
+/* Anat's phone, 23.9. Hiding the panel was not enough: the grid kept its second column, so
+   the empty half stayed and the hero stayed squashed beside it. Her in-app browser reports a
+   desktop-width viewport — many Android in-app browsers do, whatever the viewport meta says —
+   so WIDTH ALONE CAN NEVER TELL A PHONE FROM A DESKTOP HERE.
+   The whole desktop layout now asks for a fine pointer as well as the width. A finger gets
+   the phone layout at any width; a mouse gets this one. A touchscreen laptop with a mouse
+   still reports pointer:fine, so it keeps the desktop layout, which is right. */
+@media (min-width:900px) and (pointer:fine){
   .app{
     max-width:1280px;
     display:grid;
@@ -567,13 +574,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .counter .ms{font-size:13px}
   .screen.on{grid-column:1;grid-row:2}
   .stage{grid-column:2;grid-row:2;display:block}
-  /* Anat's phone, 23.9: the panel was filling her first screen and pushing the whole hero
-     below it. At 375 it is correctly display:none, so her in-app browser is reporting a
-     desktop-width viewport — which many Android in-app browsers do, whatever the viewport
-     meta says. WIDTH CANNOT TELL A PHONE FROM A DESKTOP THERE, so it stops being asked
-     alone: a coarse pointer is a finger, and this panel is decoration a finger can neither
-     use nor scroll past. It now needs BOTH, and the fallback is to stay hidden. */
-  @media (pointer:coarse), (hover:none){ .stage{display:none} }
 
   .screen{
     position:relative;

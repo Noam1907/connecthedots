@@ -457,8 +457,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .onlyh{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-top:2px}
 
 /* The ending. Anat, 21.9: one call, and it is the most prominent thing on the screen. */
-.goes .agentline{font-size:16px;line-height:1.35;font-weight:700;color:var(--cream);background:none;border:0;padding:0}
-.cta.join{background:var(--sun);color:var(--navy);border-color:var(--cream);box-shadow:5px 5px 0 var(--tomato);font-size:21px;padding:18px 20px;min-height:64px}
+.goes .cta.join{background:var(--sun);color:var(--navy);border-color:var(--cream);box-shadow:5px 5px 0 var(--tomato);font-size:21px;padding:18px 20px;min-height:64px}
 .sub{display:flex;flex-direction:column;gap:8px;margin-top:2px}
 .sub .subl{font-size:14px;line-height:1.35;font-weight:700}
 .sub .inline input{background:var(--cream)}
@@ -974,6 +973,25 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .five .coin{width:60px;height:60px;font-size:23px}
 }
 </style>
+<!-- ANALYTICS. Anat, 23.9: "and of course get analytics, connect what's needed, so we can
+     follow it." This page has been live since 22.9 with NO analytics of any kind — not
+     PostHog, not anything — so nobody could say how many people opened it, where they left,
+     or whether a single person reached the money. The talk pages have carried this same
+     project key for weeks; the birthday page was simply never wired.
+
+     WHAT IT SENDS, and the limit is today's consent work: screen ids and coarse facts only.
+     Never a name, an email, a city or the task somebody handed over. Session recording is
+     off and person profiles are identified_only, same as the talk pages. -->
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+/* autocapture is OFF here, and it is the one setting that differs from the talk pages.
+   Autocapture puts the clicked element's own text into every event, and on this page that
+   text is the visitor's answer — the want they picked, the task they named. The page spent
+   today making sure the task never leaves, so it is not going to leave through analytics.
+   The named events below carry screen ids and coarse facts and nothing a person wrote. */
+posthog.init('phc_E7RT8uONsICJRF5lKqYhsyys29rP0BKObdRHyYSCdQx',{autocapture:false,disable_session_recording:true,api_host:'https://us.i.posthog.com',defaults:'2025-05-24',person_profiles:'identified_only'});
+posthog.register({page:'fifty', page_lang:'en'});
+</script>
 </head>
 <body>
 
@@ -1355,8 +1373,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   </div>
   <div style="font-family:var(--hand);font-size:28px;line-height:1.05;margin-top:2px">That's what <span id="finWhen">Friday evening</span> is for.</div>
   <div class="goes">
-    <!-- 3. Anat, 21.9. The one line that says what the whole walk was about. -->
-    <div class="agentline" id="agentLine">The agent got the tasks. We kept the judgment, the taste, and the guts.</div>
+    
 
     <!-- 4. Anat, 23.9: "השיתוף ... צריך להיות בסוף בצורה קצת יותר מצומצמת ... כלומר שלוחצים
          שיתוף שיגיע." The share was its own screen, with a heading, a lede and a Next button
@@ -1770,6 +1787,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
         st.code = r.code;
         st.dotNumber = (typeof r.dotNumber === "number") ? r.dotNumber : null;
         st.stored = true;
+        track("fifty_dot_stored", {});
         $("#dotLede").textContent = "The line just grew by 50.";
         if(r.line) drawLine(r.line, true);
       }
@@ -1802,7 +1820,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     } catch(e){}
   }
 
+  // One helper, wrapped: analytics must never be able to break the walk, and a blocker that
+  // removes posthog entirely is the normal case, not the exception.
+  function track(name, props){
+    try { if(window.posthog && posthog.capture) posthog.capture(name, props || {}); } catch(e){}
+  }
+
   function show(id, push){
+    // Every screen arrival, which is the funnel: where people stop is the whole question.
+    track("fifty_screen", {screen:id});
     $$(".screen").forEach(function(s){s.classList.toggle("on", s.dataset.s===id)});
     $$(".toast").forEach(function(t){t.classList.remove("on")});
     // The doubt is transient screen state, like a toast: it is opened by a press and it has to
@@ -1969,12 +1995,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     // confirmed. This link was promising the same dot unconditionally.
     var later = $("#laterBtn");
     if(later) later.textContent = st.stored ? "I will do it later. My dot stays" : "I will do it later";
-    // The finale's one line assumed a handover. On the road where somebody kept everything,
-    // the sentence is still true about the project and false about them.
-    var al = $("#agentLine");
-    if(al) al.textContent = st.handed
-      ? "The agent got the tasks. We kept the judgment, the taste, and the guts."
-      : "You kept it. The judgment, the taste and the guts were never the machine's anyway.";
     // Her spec for the last screen: it reflects BOTH sides, what they will do with the
     // 50, and what came off their shoulders. The oath carries the first. This is the second.
     var off = $("#offYou");
@@ -2201,13 +2221,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       return;
     }
     if(el.dataset.branch){
-      if(el.dataset.branch==="yes"){ st.handed = true; st.kept = null; $("#sureBox").hidden = true; }
+      if(el.dataset.branch==="yes"){ st.handed = true; st.kept = null; $("#sureBox").hidden = true; track("fifty_choice", {choice:"yes"}); }
       // A No no longer leaves the screen. It opens two words under the button that was
       // pressed, and the two answers there are the whole road: keep it, or change your mind.
       if(el.dataset.branch==="keep"){ st.handed = false;
         var k = thing();
         st.kept = k ? k.label : null;
         $("#sureBox").hidden = false;
+        track("fifty_choice", {choice:"keep"});
         render();
         // Measured at 320: the box opens 23px below the fold and "nearest" moved nothing,
         // because the element had only just stopped being hidden when it was asked. A frame
@@ -2226,6 +2247,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     // has to clear the keep before it moves, or the share writes a promise they did not make.
     if(el.id === "sureNo"){
       st.handed = true; st.kept = null; $("#sureBox").hidden = true;
+      track("fifty_doubt_reversed", {});
       render(); show("time"); return;
     }
     if(el.dataset.go && !el.disabled){
@@ -2244,11 +2266,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
       var liveT = TIERS.filter(function(t){ return t.url; });
       PAY_URL = (liveT[tier] || {}).url || "";
       if(!PAY_URL){ $("#notePay").classList.add("on"); return; }
+      track("fifty_pay_click", {});
       goPay(el);
       return;
     }
     // One press. Pick the app and the app opens, written.
-    if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; render(); openShare(); return; }
+    if(g==="net"){ st.net = el.dataset.v; st.touchedNet = true; track("fifty_share", {app:el.dataset.v}); render(); openShare(); return; }
     if(g==="thing"){
       $$('[data-group="thing"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
       el.setAttribute("aria-pressed","true");
@@ -2403,7 +2426,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     if(document.fonts && document.fonts.ready) document.fonts.ready.then(go, go); else go();
   });
 
-  $("#joinCta").addEventListener("click", shareAny);
+  $("#joinCta").addEventListener("click", function(){ track("fifty_share", {app:"sheet"}); shareAny(); });
 
   $("#own").addEventListener("input", function(){
     st.own=this.value;

@@ -1251,7 +1251,7 @@ posthog.register({page:'fifty', page_lang:'en'});
     <div class="tag">that's your dot</div>
   </div>
   <h1 style="font-size:clamp(26px,7.6vw,34px);line-height:1;letter-spacing:-.03em"><span style="display:block;color:var(--sun);font-size:.78em">Congratulations!!!</span>You just got your 50 minutes. <span style="color:var(--sun)">They're yours.</span></h1>
-  <p class="lede" style="margin-top:-6px"><span id="dotLede">That's 50 minutes back.</span><span id="cnt2Wrap" class="hidden"> <b id="cnt2" style="color:var(--sun)"></b> minutes on this line have been lived so far.</span></p>
+  <p class="lede" style="margin-top:-6px"><span id="dotLede">That's 50 minutes back.</span><span id="cnt2Wrap" class="hidden"> <b id="cnt2" style="color:var(--sun)"></b> minutes have been claimed on this line so far.</span></p>
   <div class="err hidden" id="railDown">Something went wrong and your dot did not save. The 50 minutes are still yours.</div>
   <button class="link hidden" id="filmEnd" type="button" style="align-self:flex-start">Watch the 15 second close &rarr;</button>
   <div class="others hidden" id="others">
@@ -1523,7 +1523,7 @@ posthog.register({page:'fifty', page_lang:'en'});
     packing:"Write my packing list. Ask where, how long, and what the weather is."
   };
 
-  var MILES = [500, 5000, 25000, 50000];
+  var MILES = [1000, 10000, 25000, 50000];
   // Screen one. Her order: the want before the machine, so this list is the first thing
   // anyone reads and it is about a life, not about a workload. "Something else" is the
   // ninth option and it opens the free field.
@@ -1671,17 +1671,21 @@ posthog.register({page:'fifty', page_lang:'en'});
     // colour on the bar and it is named underneath in its own words.
     var lived = d.totalMinutes, goal = Number(d.goal) || GOAL;
     var n = (typeof d.minutesPromised === "number" && d.minutesPromised >= lived) ? d.minutesPromised : lived;
-    // minutesPromised is the GROSS number on the rail - every dot ever signed, the lived
-    // ones included - so the minutes still WAITING to be lived are the difference. Reading
-    // it as "extra" double counts every dot that already came back, and on the rail's own
-    // half-and-half case it would have printed 50,000 promised on top of 25,000 lived.
     var gross = n;
-    // Still owed: claimed minus the ones that have already come back.
-    var prom = Math.max(0, gross - lived);
-    var next = Number(d.milestone) || nextStop(n, goal);
+    // The rail computes `milestone` from minutes LIVED, which was right while the headline
+    // was lived too. Now that the headline is what has been CLAIMED, taking the rail's
+    // number prints a stop the line has already passed: at 500 claimed it said "Next stop:
+    // 500 minutes". The stop has to be measured against the number standing next to it, so
+    // it is computed here from the same figure the visitor is reading.
+    var next = nextStop(n, goal);
     var prev = prevStop(n, goal);
-    var past = n > goal;
-    var over = Math.max(0, n - goal);
+    // The headline measures MOVEMENT and the wish measures ACHIEVEMENT, and they are not the
+    // same number. Movement is what has been claimed, which is the whole point of the 23.9
+    // change. Achievement is what has been lived, and nothing on this page may say the wish
+    // is met on anything but that. Computing `past` off the claimed figure would have
+    // announced 50,000 minutes won back while 45,000 of them were still only promised.
+    var past = d.beyondGoal === true || lived > goal;
+    var over = Number(d.overGoal) || Math.max(0, lived - goal);
     var span = (next - prev) || 1;
     $("#ppl").textContent = nf(d.dots);
     // Everyone who signed, then the ones who came back and said they lived it. The second
@@ -1693,6 +1697,9 @@ posthog.register({page:'fifty', page_lang:'en'});
       tl.hidden = false;
     }
     $("#cnt").textContent = nf(n);
+    // The denominator is the reader's only anchor, so it stays until the wish is genuinely
+    // met. `past` is now lived-driven, so it can no longer be dropped on the strength of
+    // promises alone.
     $("#cnTail").textContent = past ? "minutes claimed" : "/ " + nf(goal) + " minutes claimed";
     // The lived bar is allowed to be genuinely empty. Only a bar with lived minutes in it
     // gets the 2% floor that keeps a real number visible.

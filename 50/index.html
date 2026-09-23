@@ -1,9 +1,9 @@
 <!doctype html>
-<!-- DESIGN-PASS by=lior on=2026-09-23 card=O-output/158-fifty-feedback-page-2026-09-19/DESIGN-PASS-2026-09-23.md shots=O-output/158-fifty-feedback-page-2026-09-19/shots -->
+<!-- DESIGN-PASS by=lior on=2026-09-23 card=O-output/158-fifty-feedback-page-2026-09-19/DESIGN-PASS-2026-09-23b.md shots=O-output/158-fifty-feedback-page-2026-09-19/shots -->
 <!-- One stamp only, and it is the current one: design-gate.sh reads the FIRST DESIGN-PASS line
      it finds (grep -o ... | head -1), so a stack of historical stamps would make the gate check
      the oldest card forever. The history lives in the dated DESIGN-PASS-*.md cards beside it.
-     Previous pass: DESIGN-PASS-2026-09-22.md. -->
+     Previous pass: DESIGN-PASS-2026-09-23.md. -->
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
@@ -194,6 +194,9 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 .five{margin-top:4px;background:var(--sun);color:var(--navy);border:3px solid var(--cream);border-radius:26px;padding:20px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 0 6px rgba(253,216,1,.25)}
 .five .head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .five .h{font-size:29px;font-weight:800;line-height:.98;letter-spacing:-.02em}
+/* There is exactly one .coin on this page (#fiveCoin) and every declaration below that
+   carries a colour or a size is overridden at every width by ".five .coin" in the dated
+   block at the foot of this sheet. Read that block, not this line, for what ships. */
 .coin{background:var(--tomato);color:var(--cream);border:3px solid var(--navy);border-radius:50%;width:74px;height:74px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;transform:rotate(10deg);flex-shrink:0}
 .gets{display:flex;flex-direction:column;gap:9px}
 .gets div{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;line-height:1.3}
@@ -214,9 +217,24 @@ h1{margin:0;font-weight:800;letter-spacing:-.03em;line-height:.98;font-size:36px
 #stageMine.lit{stroke-dasharray:none;filter:drop-shadow(0 0 10px rgba(253,216,1,.85))}
 @media (prefers-reduced-motion: reduce){#stageDots circle{animation:none;opacity:1}}
 .hl-sun::before{background:var(--sun)}
-.human-list{display:flex;flex-direction:column;gap:9px}
-.human-list div{background:var(--cream);border:2.5px solid var(--navy);border-radius:16px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:17px;font-weight:700}
-.human-list div:nth-child(odd){transform:rotate(-1deg)} .human-list div:nth-child(even){transform:rotate(1deg)}
+/* Anat, 23.9: "can you find another design or even add icons to the last 3 sentences ... so it
+   would be more visual rather than more text." What was there was three identical bordered
+   capsules, each carrying a counter badge: three rows of text wearing boxes. The numbers ranked
+   three things that are not ranked, and at the emotional peak of the page the loudest ink on the
+   screen was the borders, not her headline. Icons alone inside the boxes would have added a
+   fourth object to each row and made it heavier, not lighter. So the boxes and the numbers go,
+   and what replaces them is the page's own spine: three dots on one line, each drawn as the
+   thing its sentence is about. Ink goes down, image goes up, and her three sentences are
+   untouched to the character. */
+.human-list{position:relative;display:flex;flex-direction:column;gap:0}
+/* The line the dots sit on: the dot-art gesture, stood on its end. */
+.human-list::before{content:"";position:absolute;left:23px;top:30px;bottom:30px;width:2px;background:var(--navy);opacity:.2}
+.human-list div{background:none;border:0;border-radius:0;padding:9px 0;display:flex;gap:14px;align-items:center;font-size:17px;font-weight:700;line-height:1.24;transform:none}
+.human-list .ic{position:relative;z-index:1;flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:2.5px solid var(--navy);display:flex;align-items:center;justify-content:center}
+.human-list .ic svg{width:27px;height:27px;display:block}
+.human-list .ic1{background:var(--tomato)}
+.human-list .ic2{background:var(--sky)}
+.human-list .ic3{background:var(--green)}
 .goes{margin:8px calc(-1 * var(--gutter)) 0;background:var(--navy);color:var(--cream);padding:24px var(--gutter) 28px;display:flex;flex-direction:column;gap:12px;flex:1}
 .goes .h{font-size:30px;font-weight:800;line-height:1;letter-spacing:-.02em}
 .goes .h em{font-style:normal;color:var(--sun)}
@@ -269,6 +287,10 @@ h1,.h2,.goes .h,.five .h,.big-choice .t{overflow-wrap:break-word}
   .sticky-note{font-size:22px}
   .oath .say,.sharecard .sc-say{font-size:26px}
   .inline input{font-size:15px;padding:0 9px}
+  .human-list div{font-size:15.5px;gap:12px;padding:8px 0}
+  .human-list .ic{width:42px;height:42px}
+  .human-list .ic svg{width:24px;height:24px}
+  .human-list::before{left:20px}
 }
 /* v2 (Cleo, 19.9): counter, 100-days badge, wish frame, share card, share grid */
 .counter{padding:10px var(--gutter) 0;background:var(--cream)}
@@ -315,7 +337,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .big-choice .t{font-size:23px}
 .preview{transform:none}
 .sharecard{transform:none;box-shadow:3px 3px 0 var(--tomato)}
-.human-list div:nth-child(odd),.human-list div:nth-child(even){transform:none}
 .tile{transform:none!important}
 .tile.bday{background:var(--sun);gap:8px}
 .tile.bday .pay{font-size:18px;min-height:50px}
@@ -432,10 +453,9 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 #paySub{font-size:13px;line-height:1.3;font-weight:700;opacity:.9;text-align:center;margin-top:-4px}
 #payErr{font-size:13px;font-weight:700;color:var(--navy)}
 
-/* "Only humans can: 1/ 2/ 3/". The dots became numbers because the line is now a list with
-   a stem, and a bullet cannot finish a sentence the heading started. */
+/* "Only humans can:" is the stem of the sentence each row finishes, so it stays a label and
+   never becomes a heading. The numbered badges it used to introduce are gone (23.9). */
 .onlyh{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-top:2px}
-.human-list div .num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--sun);border:2.5px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
 
 /* The ending. Anat, 21.9: one call, and it is the most prominent thing on the screen. */
 .goes .agentline{font-size:16px;line-height:1.35;font-weight:700;color:var(--cream);background:none;border:0;padding:0}
@@ -592,7 +612,10 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .big-choice .t{font-size:clamp(24px,2vw,30px)}
   .big-choice .s{font-size:16px}
   .cta{width:auto;align-self:flex-start;min-width:300px;max-width:100%;padding:17px 36px;font-size:22px;min-height:64px}
-  .human-list div{font-size:18px;padding:13px 18px}
+  .human-list div{font-size:18.5px;padding:11px 0;gap:16px}
+  .human-list .ic{width:54px;height:54px}
+  .human-list .ic svg{width:30px;height:30px}
+  .human-list::before{left:26px}
   .qs li{font-size:18px}
   .doit{padding:22px 24px}
   .doit .dh{font-size:25px}
@@ -833,14 +856,28 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
    after "For" and orphans it. No word moves: the browser is only told to even the
    two lines, which lands the break where her full stop already is. */
 .five .h{text-wrap:balance}
-/* A navy disc on a yellow card is the highest contrast object on the screen, so it was
-   being read before the argument that pays for it. Same ink as the headline now, a size
-   below it: the price is met on the way out of the sentence instead of before it. */
+/* Anat, 23.9: "5 USD should be slightly larger and probably in another colour." Earlier today
+   this was a navy outline sized below the headline, so the price was met on the way OUT of the
+   sentence. Her call reverses that, and she is right: on a screen whose whole argument is
+   "People who pay, show up", the price is the first number the eye should land on.
+   Sky, for three reasons and none of them taste. It is the only cool hue on the page, so an
+   all-yellow card cannot absorb it and the eye arrives by hue before it sorts anything by size.
+   Navy on sky is 6.9:1; cream on tomato, which is what this disc was before today, is 2.8:1 and
+   fails AA at any size, so the warm option is not available. And sky is the House's single
+   accent, whose job is the action, which on this screen is the money. It is NOT sun: sun is the
+   card itself here and load-bearing on the counter and the highlight.
+   It keeps the navy ring every badge on this page wears, and it stays flat: a tilt at this size
+   starts arguing with the headline beside it. */
 .five .coin{
-  width:58px;height:58px;font-size:22px;
+  width:68px;height:68px;font-size:26px;
   transform:none;border:3px solid var(--navy);
-  background:transparent;color:var(--navy);
+  background:var(--sky);color:var(--navy);
 }
+/* It has to keep the same relation to the headline as the card grows: 29px headline to a 68px
+   disc on the phone, 34px to 80px, 38px to 88px. A fixed disc on a widening card slides back
+   down the reading order, which is the thing she asked to have fixed. */
+@media (min-width:600px){ .five .coin{width:80px;height:80px;font-size:30px} }
+@media (min-width:900px){ .five .coin{width:88px;height:88px;font-size:33px} }
 /* The fold. One hairline, and it is the only rule inside the card above the footnotes. */
 .five .gets{
   border-top:2px solid rgba(27,40,56,.22);
@@ -926,7 +963,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .ledge .cta.ghostcta{font-size:15px;padding:10px 16px}
   .ledge .quietlink{font-size:14px}
   .tdoor b{font-size:16px}
-  .five .coin{width:52px;height:52px;font-size:19px}
+  .five .coin{width:60px;height:60px;font-size:23px}
 }
 </style>
 </head>
@@ -1294,10 +1331,14 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <div class="bar"><button class="back" data-back>&larr; Back</button><span class="label">What stays ours</span></div>
   <h1 style="font-size:clamp(30px,10.2vw,38px);line-height:.98;letter-spacing:-.03em">The human is the loop. <span class="hl hl-sun"><span>You are the loop.</span></span></h1>
   <div class="onlyh">Only humans can:</div>
+  <!-- 23.9. The icons are drawn, not fetched: inline SVG, no icon font, no network call, and
+       aria-hidden so a screen reader hears only her sentence (it used to hear "1", "2", "3").
+       Each one is the thing the sentence is about, not a stand-in for its category: an empty
+       speech bubble IS the silence, a wince IS the cringe. -->
   <div class="human-list">
-    <div><span class="num">1</span>Taste the coffee someone made you exactly right.</div>
-    <div><span class="num">2</span>Know from the silence in a room that something is wrong.</div>
-    <div><span class="num">3</span>Cringe at a story you're telling for the fifth time.</div>
+    <div><span class="ic ic1" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.6 9.8h11v4.1c0 3-2.5 5.4-5.5 5.4S4.6 16.9 4.6 13.9z"/><path d="M15.6 11.2c2.8-.5 3.9.7 3.9 2.1 0 1.5-1.2 2.4-3 2.4"/><path d="M3.2 20.8h14.4"/><path d="M8.3 7.1c0-1.7 1.2-2 1.2-3.6"/><path d="M12.3 7.1c0-1.7 1.2-2 1.2-3.6"/></svg></span>Taste the coffee someone made you exactly right.</div>
+    <div><span class="ic ic2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="4.6" width="17.6" height="11.6" rx="3.6"/><path d="M8.6 16.2 7.4 20.6 12.4 16.2"/></svg></span>Know from the silence in a room that something is wrong.</div>
+    <div><span class="ic ic3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M7.0 11.5q1.7-2.6 3.4 0"/><path d="M13.6 11.5q1.7-2.6 3.4 0"/><path d="M8.3 16.6 15.7 15.0"/></svg></span>Cringe at a story you're telling for the fifth time.</div>
   </div>
   <div style="font-family:var(--hand);font-size:28px;line-height:1.05;margin-top:2px">That's what <span id="finWhen">Friday evening</span> is for.</div>
   <div class="goes">
@@ -1315,7 +1356,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
            which took the action out of the loudest words on the screen. It is a button again
            and it does the thing itself: the phone's own share sheet, one press, with the four
            named doors under it for anyone who wants a particular app. -->
-      <button class="cta join" type="button" id="joinCta">Join the 50,000 human minutes &rarr;</button>
+      <button class="cta join" type="button" id="joinCta">Pass it on &rarr;</button>
       <div class="nets" data-group="net">
         <button class="net" type="button" aria-pressed="true" data-v="wa" style="background:var(--wa-btn)">WhatsApp</button>
         <button class="net" type="button" aria-pressed="false" data-v="li" style="background:var(--sky)">LinkedIn</button>
@@ -1949,10 +1990,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
     $("#finWhen").textContent = st.pickedWhen ? when() : "an hour you pick";
     $("#promptText").textContent = promptFor();
     $("#calLink").href = calUrl();
-    // One label. The "Help get to 50,000 minutes" variant was left over from the flow where
-    // this button led to the share SCREEN, and most visitors never saw the words a designer
-    // was asked to judge. Her line, always.
-    $("#joinCta").innerHTML = "Join the 50,000 human minutes &rarr;";
+    // Anat, 23.9: "why does it still say join the 50,000 when this is already someone who
+    // joined?" It did, because I had collapsed this to one label an hour earlier. The label
+    // has to describe what the press does FOR THIS PERSON: somebody holding a dot is already
+    // in, and the only thing left for them is to bring the next one. Somebody who kept
+    // everything human has genuinely not joined, and for them the invitation is still true.
+    // Her own word for the first case, off the screen this block replaced: "pass the chance on".
+    $("#joinCta").innerHTML = st.stored
+      ? "Pass it on &rarr;"
+      : "Join the 50,000 human minutes &rarr;";
     // Her final version, 22.9: the tiers ARE the buttons, the middle one is the one she
     // wants pressed, and a tier with nowhere to go does not render at all. So the row grows
     // as the links exist and nothing on screen is ever a price that cannot be paid.

@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="robots" content="noindex">
+<meta name="robots" content="index,follow">
 <!-- FORM-FLOW store=https://fifty.connecthedots.co/api/flow owner=Adam followup=48h -->
 <!-- The page takes a name, a city, an email and free text from strangers and posts them to
      the fifty-line rail. There is no form element anywhere in it and it is still a form:
@@ -1003,7 +1003,7 @@ posthog.register({page:'fifty', page_lang:'en'});
 <div class="counter" id="counter" aria-live="polite" hidden>
   <div class="cn"><b id="ppl"></b><span class="people"> in the line</span> &middot; <b id="cnt"></b> <span id="cnTail"></span></div>
   <div class="track" aria-hidden="true"><i class="ghost" id="cntGhost"></i><i id="cntBar"></i></div>
-  <div class="tally" id="tally" hidden><span>On the line: <b id="tOn">0</b></span><span>Lived: <b id="tLived">0</b></span></div>
+  <div class="tally" id="tally" hidden><span>Claimed it: <b id="tOn">0</b></span><span>Lived it: <b id="tLived">0</b></span></div>
   <div class="ms" id="msLine"></div>
 </div>
 
@@ -1659,17 +1659,29 @@ posthog.register({page:'fifty', page_lang:'en'});
   function drawLine(d, flash){
     var el = $("#counter");
     if(!d || typeof d.totalMinutes !== "number" || typeof d.dots !== "number"){ el.hidden = true; return; }
-    var n = d.totalMinutes, goal = Number(d.goal) || GOAL;
+    // 23.9, Anat: "זה שהחמישי יקח לו שבוע להשתנות זה לא מייצר תנועה."
+    // The headline used to be minutes LIVED, which only moves when somebody comes back on
+    // day seven and says yes. So a page watching its own launch sat still for a week at a
+    // time while people were signing every few minutes. A counter that cannot move on the
+    // thing that is actually happening is not a counter, it is a photograph.
+    //
+    // So the headline is now what has been CLAIMED: every dot ever signed, counted the
+    // second it is signed. It moves on the event the visitor just caused, which is the only
+    // event they can see themselves in. Lived is not demoted and not hidden, it keeps the
+    // colour on the bar and it is named underneath in its own words.
+    var lived = d.totalMinutes, goal = Number(d.goal) || GOAL;
+    var n = (typeof d.minutesPromised === "number" && d.minutesPromised >= lived) ? d.minutesPromised : lived;
     // minutesPromised is the GROSS number on the rail - every dot ever signed, the lived
     // ones included - so the minutes still WAITING to be lived are the difference. Reading
     // it as "extra" double counts every dot that already came back, and on the rail's own
     // half-and-half case it would have printed 50,000 promised on top of 25,000 lived.
-    var gross = (typeof d.minutesPromised === "number") ? d.minutesPromised : 0;
-    var prom = Math.max(0, gross - n);
+    var gross = n;
+    // Still owed: claimed minus the ones that have already come back.
+    var prom = Math.max(0, gross - lived);
     var next = Number(d.milestone) || nextStop(n, goal);
     var prev = prevStop(n, goal);
-    var past = d.beyondGoal === true || n > goal;
-    var over = Number(d.overGoal) || Math.max(0, n - goal);
+    var past = n > goal;
+    var over = Math.max(0, n - goal);
     var span = (next - prev) || 1;
     $("#ppl").textContent = nf(d.dots);
     // Everyone who signed, then the ones who came back and said they lived it. The second
@@ -1681,7 +1693,7 @@ posthog.register({page:'fifty', page_lang:'en'});
       tl.hidden = false;
     }
     $("#cnt").textContent = nf(n);
-    $("#cnTail").textContent = past ? "minutes lived" : "/ " + nf(goal) + " minutes lived";
+    $("#cnTail").textContent = past ? "minutes claimed" : "/ " + nf(goal) + " minutes claimed";
     // The lived bar is allowed to be genuinely empty. Only a bar with lived minutes in it
     // gets the 2% floor that keeps a real number visible.
     // Anat asked about this twice, which means labelling it was not the answer. The bar
@@ -1691,15 +1703,22 @@ posthog.register({page:'fifty', page_lang:'en'});
     // So the bar measures THE WISH. 50 of 50,000 is a sliver, because 50 of 50,000 is a
     // sliver. Day 1 is allowed to look like day 1: the numbers beside it do the moving, and
     // the next stop is named in the line underneath where it can be read rather than inferred.
-    $("#cntBar").style.width = (n <= 0 ? 0 : Math.max(0.6, Math.min(100, n / goal * 100))) + "%";
+    // Colour is earned, hatching is promised. The solid bar is ONLY the minutes somebody came
+    // back and said they lived; the hatched one behind it is everything claimed. That is the
+    // whole picture in one glance: grey grows the moment a person signs, colour grows the
+    // moment a person keeps it.
+    $("#cntBar").style.width = (lived <= 0 ? 0 : Math.max(0.6, Math.min(100, lived / goal * 100))) + "%";
     var g = $("#cntGhost");
-    if(g) g.style.width = (prom > 0 ? Math.max(0.6, Math.min(100, gross / goal * 100)) : 0) + "%";
-    var promLine = prom > 0 ? nf(prom) + " more are promised. " : "";
+    if(g) g.style.width = (gross > 0 ? Math.max(0.6, Math.min(100, gross / goal * 100)) : 0) + "%";
+    // The lived number is the one that has to survive the change, because it is the honest
+    // one. It is said in plain words rather than as a second big figure, so nobody has to
+    // work out which of two numbers to believe.
+    var livedLine = lived > 0
+      ? nf(lived) + " of them already lived. "
+      : "None lived yet, which is what day one looks like. ";
     $("#msLine").textContent = past
-      ? promLine + "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
-      : (n === 0 && prom > 0
-          ? nf(prom) + " minutes are promised so far. A minute joins this counter once it has actually been lived."
-          : promLine + "Next stop: " + nf(next) + " minutes");
+      ? livedLine + "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
+      : livedLine + "Next stop: " + nf(next) + " minutes";
     el.classList.toggle("past", past);
     el.hidden = false;
     showTotal(n);

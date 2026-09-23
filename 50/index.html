@@ -1240,7 +1240,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
          with nobody to deliver to. -->
     <div class="sub" id="payMail">
       <label class="subl" for="fiftyEm">The receipt and the weekly note go to</label>
-      <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the invoice and the weekly note">
+      <input id="fiftyEm" class="sans" type="email" maxlength="80" autocomplete="email" placeholder="Email" aria-label="Email for the receipt and the weekly note">
       <div class="err hidden" id="payErr"></div>
     </div>
 
@@ -2219,7 +2219,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   function goPay(btn){
     var box = $("#fiftyEm"), v = (box.value || st.email || "").trim(), err = $("#payErr");
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)){
-      err.textContent = "That address needs an @ and a dot after it, so the invoice can find you.";
+      err.textContent = "That address needs an @ and a dot after it, so the receipt can find you.";
       err.classList.remove("hidden");
       box.focus(); return;
     }

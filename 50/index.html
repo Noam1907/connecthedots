@@ -1,9 +1,9 @@
 <!doctype html>
-<!-- DESIGN-PASS by=lior on=2026-09-23 card=O-output/158-fifty-feedback-page-2026-09-19/DESIGN-PASS-2026-09-23b.md shots=O-output/158-fifty-feedback-page-2026-09-19/shots -->
+<!-- DESIGN-PASS by=lior on=2026-09-23 card=O-output/158-fifty-feedback-page-2026-09-19/DESIGN-PASS-2026-09-23c.md shots=O-output/158-fifty-feedback-page-2026-09-19/shots -->
 <!-- One stamp only, and it is the current one: design-gate.sh reads the FIRST DESIGN-PASS line
      it finds (grep -o ... | head -1), so a stack of historical stamps would make the gate check
      the oldest card forever. The history lives in the dated DESIGN-PASS-*.md cards beside it.
-     Previous pass: DESIGN-PASS-2026-09-23.md. -->
+     Previous pass: DESIGN-PASS-2026-09-23b.md. -->
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
@@ -767,10 +767,13 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .openlede{font-size:13px;margin-top:4px}
   .spine{font-size:15px;margin-top:4px;padding-top:4px;padding-bottom:4px}
   .bunting{display:none}
-  /* Lior, 22.9. Measured, not estimated: on a 320x568 handset with the QA strip removed,
-     Start still ended at 577, nine pixels under the fold. The rule this page holds itself
-     to has no tolerance in it, so the opening pays the nine out of the space above the
-     logo, the kicker, and one notch of the lede's leading. No word and no element goes. */
+  /* Lior, 22.9. Measured on a 320x568 handset with the QA strip removed: Start ended at
+     577, nine pixels under the fold, so the opening pays out of the space above the logo,
+     the kicker, and one notch of the lede's leading. No word and no element goes.
+     CORRECTED 23.9: this did NOT close the gap and the earlier wording claimed it did.
+     Start still ends at 582.05 on 320x568, fourteen pixels under. A comment that says a
+     case is paid for when it is not is how the next person is surprised by it, which is
+     exactly what happened today. It has its own row; it is not fixed here. */
   .opentop{padding-top:0}
   .opentitle .kicker{font-size:20px}
   .openlede{margin-top:3px;line-height:1.35}
@@ -972,6 +975,103 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .tdoor b{font-size:16px}
   .five .coin{width:60px;height:60px;font-size:23px}
 }
+/* ════ v15 (Lior, 23.9): the four stops on the line ═════════════════════════════
+   Anat, 23.9: "also maybe add marks on the line maybe for 1000, 10000, 25000 and 50000?"
+
+   The arithmetic underneath that request is brutal and it is the whole design problem.
+   500 claimed of 50,000 is ONE PERCENT. So the first mark lands at 2% of the track and
+   the other three at 20, 50 and 100, and for weeks almost the entire track is empty.
+   Four ticks on an empty track is a picture of having achieved nothing, which is the
+   exact opposite of what the headline change an hour earlier was for.
+
+   Two ways out were considered and both are refused, in writing, so nobody rebuilds them:
+   rescaling the bar to the next stop is the thing Anat read wrong twice, and the comment
+   above drawLine says why it may never come back - the bar measures THE WISH. Cutting the
+   track into four equal legs is that same lie wearing labels, because 500 would then fill
+   an eighth of the track. The SCALE DOES NOT MOVE. 50 of 50,000 stays a sliver.
+
+   What moves is the metaphor. An empty bar is a TANK, and a tank at 1% reads as empty.
+   The same 1%, on a ROAD with named gates, reads as having set off - because a road is
+   about where it goes and a tank is about what is missing. Nothing else changed: same
+   scale, same two bars, same numbers. The track stopped being a container and became a
+   route, and that is the entire fix.
+
+   It is also where the movement comes from, which is what she actually asked the counter
+   for. The bar will crawl for weeks; THE NEXT GATE WILL NOT. 500 to 1,000 is days away,
+   and the moment it lands that gate flips from sun to solid navy and the sun jumps to
+   10,000. That is a visible event on the timescale people are signing up on, and there
+   was no such event on this page before.
+
+   Hierarchy, and it is deliberate: the stop in play is loud (sun), the wish at the end is
+   firm (the finish line - the eye has to see where this road ends on day one), and the two
+   waypoints between them are quiet. Loud where we are, loud where we are going, quiet in
+   between. Exactly one sun element on the page, on the only stop that is in play.
+
+   NO NUMBERS ON THE PHONE, and that was measured, not decided. At 375x812 - her phone -
+   Start ends at 804.7 with 812 of viewport: 7.3 pixels of room. A row of numbers is 15.
+   Printing them here would put the door under the fold on the one page that may never do
+   that. So the numbers appear from 600px wide AND 860px tall, where the room is real, and
+   on every screen the sentence under the track names the stop that is in play.
+   ──────────────────────────────────────────────────────────────────────────────── */
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+/* The gates have to reach the rounded ends of the track and the sun block has to sit a
+   little proud of it, so the track stops clipping its children. The two bars keep their
+   capsule ends by carrying the radius themselves instead of borrowing the parent's. */
+.counter .track{overflow:visible}
+.counter .track i{border-radius:999px}
+/* The six-pixel floor above exists so a real number is never invisible. At zero lived it
+   paints six pixels of the EARNED gradient for minutes nobody has lived, which contradicts
+   this counter's own rule that the lived bar may be genuinely empty. Unreachable today
+   because dots only go up; wrong the moment a namespace is fresh or a row is deleted. */
+.counter .track i#cntBar[style*="width: 0%"]{min-width:0}
+.counter .stops{position:absolute;inset:0;display:block;pointer-events:none}
+/* Navy at half strength on a white track is 3.4:1, which clears the 3:1 that WCAG asks of
+   a graphic that carries meaning - and these carry the only meaning the far end of this
+   track has. The first draft sat at .28 and looked right at 1.8:1, which is how a mark that
+   nobody with tired eyes can see gets shipped. */
+.counter .stop{position:absolute;top:0;bottom:0;width:2px;transform:translateX(-50%);background:var(--navy);opacity:.5}
+.counter .stop.done{opacity:1}
+/* The wish, drawn as the end of the road rather than as a fourth waypoint. Sitting flush
+   against the track's own cap it just read as a thicker border, so it steps three pixels
+   clear of it and the white gap between the two is what makes it a finish line. */
+.counter .stop.end{width:3px;opacity:.78;transform:translateX(calc(-100% - 3px))}
+/* THE ONE IN PLAY, and this is the pixel that took the longest.
+   At 500 claimed the bar's head and the 1,000 gate are three and a half pixels apart on a
+   343px track. A solid block on the gate is therefore a block ON the bar: it swallowed the
+   only coloured pixels on the page and broke the rule this counter is built on, that colour
+   is earned and always visible. So the mark is a HIGHLIGHT rather than an object. A crisp
+   navy line says exactly where the stop is, and a wash of sun behind it says this is the one
+   in play. The line arriving at the gate shows through the wash instead of disappearing
+   under it, which is also the truer picture: at 500 of 1,000 we are halfway into that gate,
+   not behind it. */
+.counter .stop.next{width:2.5px;opacity:1}
+.counter .stop.next::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:13px;transform:translateX(-50%);background:var(--sun);opacity:.5;border-radius:3px}
+.counter .stop.end.next{transform:translateX(calc(-100% - 3px))}
+.counter .stop b{display:none;position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;line-height:1;letter-spacing:-.01em;white-space:nowrap;color:var(--navy);opacity:.72}
+/* .72 puts an 11px label at 5.5:1 on cream. Rank is carried by weight and by the marks
+   themselves, never by making a number too pale to read. */
+.counter .stop.done b,.counter .stop.next b{opacity:1;font-weight:800}
+/* The first and last labels would hang off the ends of the track if they stayed centred
+   on their own gate, so those two align to the track instead of to the mark. */
+.counter .stop.first b{left:-1px;transform:none}
+.counter .stop.end b{left:auto;right:0;transform:none}
+/* The stop labels cost 15px of margin, and exactly one rule pays that back: the
+   min-height:calc(100vh - 117px) below. This query MUST stay identical to that one. It did
+   not, and the gap was every iPad in portrait: 600-899px wide, tall enough to qualify, and
+   pointer:coarse so the compensation never fired. Measured at 744x1133 the Start button went
+   from 1133.30 of 1133, flush at the fold, to 1143.30, ten pixels under it. Widening a
+   breakpoint here without widening that one there spends space this layout does not have. */
+@media (min-width:900px) and (min-height:860px) and (pointer:fine){
+  .counter .stop b{display:block}
+  .counter .track{margin-bottom:15px}
+}
+/* The laptop column is sized against the counter's height, and the row of numbers adds
+   fifteen pixels to it. Both measurements move together, or Start drifts back under the
+   fold the way it did on 22.9. */
+@media (min-width:900px) and (min-height:860px) and (pointer:fine){
+  .screen{min-height:calc(100vh - 117px)}
+  .screen.dark{min-height:calc(100vh - 201px)}
+}
 </style>
 <!-- ANALYTICS. Anat, 23.9: "and of course get analytics, connect what's needed, so we can
      follow it." This page has been live since 22.9 with NO analytics of any kind — not
@@ -1002,9 +1102,14 @@ posthog.register({page:'fifty', page_lang:'en'});
      on screen, and the zero is the one that makes a real line look abandoned. -->
 <div class="counter" id="counter" aria-live="polite" hidden>
   <div class="cn"><b id="ppl"></b><span class="people"> in the line</span> &middot; <b id="cnt"></b> <span id="cnTail"></span></div>
-  <div class="track" aria-hidden="true"><i class="ghost" id="cntGhost"></i><i id="cntBar"></i></div>
+  <div class="track" aria-hidden="true"><i class="ghost" id="cntGhost"></i><i id="cntBar"></i><span class="stops" id="cntStops"></span></div>
   <div class="tally" id="tally" hidden><span>Claimed it: <b id="tOn">0</b></span><span>Lived it: <b id="tLived">0</b></span></div>
   <div class="ms" id="msLine"></div>
+  <!-- The track is aria-hidden, and the stops are drawn inside it, so a screen reader would
+       get the gates as nothing at all. This is the same four numbers in words: never seen,
+       always read. It is the only place the far stops are spoken, because the sentence above
+       names the next one and no other. -->
+  <p class="vh" id="msStops"></p>
 </div>
 
 <!-- 0 THE OPENING: what this is, whose it is, and why now -->
@@ -1645,6 +1750,44 @@ posthog.register({page:'fifty', page_lang:'en'});
     return (Math.floor(n/goal) + 1) * goal;
   }
 
+  // THE STOPS ON THE LINE. One source, and it is MILES above: the rail's MILESTONES is the
+  // same list, and a second copy here would be a number that can disagree with the one the
+  // sentence under the track is built from.
+  //
+  // Every position is measured against the WISH, the same denominator the two bars use, so
+  // a gate can never sit somewhere the bar's own arithmetic would not put it. A stop past
+  // the wish is not drawn at all: the track ends at the wish, so there is nowhere honest to
+  // put it. `end` is by POSITION and not by index, so a rail that ever answers with a
+  // different goal still gets a finish line at the end of its own road.
+  // `n` is what has been CLAIMED and `lived` is what came back. The waypoints answer to
+  // claimed, which is right and matches the "Next stop" sentence beside them. THE WISH DOES
+  // NOT. The last stop is the whole thing this page is for, and the rule three hundred lines
+  // below says nothing here may call it met on anything but lived. Marking it off claimed
+  // would paint the finish line solid, and tell a screen reader "50,000 reached", while
+  // 49,200 of those minutes had never happened. That is the same fault as the "lived" label
+  // on the claimed number this morning: the metric moved and a new renderer was written
+  // against the old figure.
+  function paintStops(n, lived, goal, next){
+    var box = $("#cntStops"); if(!box) return;
+    var g = goal > 0 ? goal : GOAL, out = [], said = [], first = true;
+    MILES.forEach(function(m){
+      if(m > g) return;
+      var pct = m / g * 100;
+      var cls = "stop";
+      // The wish is earned, every other stop is merely reached.
+      var passed = (pct >= 99.5) ? (lived >= m) : (m <= n);
+      if(passed) cls += " done";
+      if(m === next) cls += " next";
+      if(pct >= 99.5) cls += " end";
+      if(first){ cls += " first"; first = false; }
+      out.push('<span class="' + cls + '" style="left:' + pct + '%"><b>' + nf(m) + "</b></span>");
+      said.push(nf(m) + (passed ? " reached" : m === next ? " next" : ""));
+    });
+    box.innerHTML = out.join("");
+    var sr = $("#msStops");
+    if(sr) sr.textContent = said.length ? "Stops on the line: " + said.join(", ") + "." : "";
+  }
+
   // ONE number, and it is the rail's. Nothing here animates a number the line has not
   // reached. If the rail is unreachable, slow, or answers with nulls, the counter stays
   // hidden: a zero and a rail that is down look identical on screen, and the zero is the
@@ -1726,6 +1869,9 @@ posthog.register({page:'fifty', page_lang:'en'});
     $("#msLine").textContent = past
       ? livedLine + "The wish was " + nf(goal) + ", and the line is " + nf(over) + " minutes past it. Next stop: " + nf(next) + "."
       : livedLine + "Next stop: " + nf(next) + " minutes";
+    // The gates read the same three figures the bars and the sentence do, so the mark,
+    // the picture and the words can never disagree about which stop is in play.
+    paintStops(n, lived, goal, next);
     el.classList.toggle("past", past);
     el.hidden = false;
     showTotal(n);

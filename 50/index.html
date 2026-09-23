@@ -402,7 +402,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 
 /* Cleo, on the dot screen. A handwritten aside, not a banner: she is evidence that the
    thing the visitor just did is the thing this house actually runs on. */
-.cleoline{font-family:var(--hand);font-size:23px;line-height:1.1;color:var(--sun);border-left:3px solid var(--sun);padding-left:11px}
 
 /* The film on the opening screen. No frame, no dashed placeholder: either there is a video
    here or there is nothing here. */
@@ -1157,9 +1156,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <input id="city" class="field solid" type="text" maxlength="40" placeholder="City, country (optional)" autocomplete="address-level2" aria-label="City, country">
   <input id="em" class="field solid sans" type="email" maxlength="80" placeholder="Email" autocomplete="email" required aria-label="Email">
   <div class="err hidden" id="emErr"></div>
-  <div class="note">Your first initial, your city and what you would do with the 50 minutes join the line for others to see. Your name, your email and the task you hand over never do.</div>
-  <div class="note"><b>In a week I write and ask if you took them.</b> That mail goes to everyone on the line, free or not. It is the whole point of promising out loud.</div>
-  <div class="note"><b>Free.</b> <span id="mailPromise">Your prompt comes back on the next screen.</span> One line to <a href="mailto:anat@connecthedots.co">anat@connecthedots.co</a> takes you off.</div>
+  <!-- Anat, 23.9: "all the text under the name and city and email needs to shrink, it is
+       really far too much text. The opt out is not needed — if a person put in an email they
+       understand they get an email, and I can put an unsubscribe in my own mail."
+       Three long paragraphs become three short lines. Every fact that was load-bearing is
+       still here: what joins the line, what never does, and that a letter comes in a week.
+       The opt-out moves to where she says it belongs, which is the footer of her own mail. -->
+  <div class="note">Your initial, your city and what you would do join the line. Your name, your email and your task never do.</div>
+  <div class="note"><b>In a week I write to ask if you took them.</b></div>
+  <div class="note"><b>Free.</b> <span id="mailPromise">Your prompt comes back on the next screen.</span></div>
   <button class="cta" id="addDot" data-go="hand" disabled style="margin-top:auto"><svg width="18" height="18" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="#FDD801" stroke="#1B2838" stroke-width="3"/></svg>I promise. Add my dot</button>
 </section>
 
@@ -1230,7 +1235,6 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   <h1 style="font-size:clamp(26px,7.6vw,34px);line-height:1;letter-spacing:-.03em"><span style="display:block;color:var(--sun);font-size:.78em">Congratulations!!!</span>You just got your 50 minutes. <span style="color:var(--sun)">They're yours.</span></h1>
   <p class="lede" style="margin-top:-6px"><span id="dotLede">That's 50 minutes back.</span><span id="cnt2Wrap" class="hidden"> <b id="cnt2" style="color:var(--sun)"></b> minutes on this line have been lived so far.</span></p>
   <div class="err hidden" id="railDown">Something went wrong and your dot did not save. The 50 minutes are still yours.</div>
-  <div class="cleoline">The agent who took it? That's Cleo. She runs this whole operation. I just get the minutes back.</div>
   <button class="link hidden" id="filmEnd" type="button" style="align-self:flex-start">Watch the 15 second close &rarr;</button>
   <div class="others hidden" id="others">
     <div class="oh" id="othersHead">Others on the line</div>

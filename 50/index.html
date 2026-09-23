@@ -1265,10 +1265,10 @@ posthog.register({page:'fifty', page_lang:'en'});
     <button class="slot" aria-pressed="false" data-v="Sunday">Sun</button><button class="slot" aria-pressed="false" data-v="Monday">Mon</button><button class="slot" aria-pressed="false" data-v="Tuesday">Tue</button><button class="slot" aria-pressed="false" data-v="Wednesday">Wed</button>
   </div>
   <div class="row" data-group="day">
-    <button class="slot" aria-pressed="false" data-v="Thursday">Thu</button><button class="slot" aria-pressed="true" data-v="Friday">Fri</button><button class="slot" aria-pressed="false" data-v="Saturday">Sat</button>
+    <button class="slot" aria-pressed="false" data-v="Thursday">Thu</button><button class="slot" aria-pressed="false" data-v="Friday">Fri</button><button class="slot" aria-pressed="false" data-v="Saturday">Sat</button>
   </div>
   <div class="row" data-group="time">
-    <button class="slot" aria-pressed="false" data-v="morning">Morning</button><button class="slot" aria-pressed="false" data-v="afternoon">Afternoon</button><button class="slot" aria-pressed="true" data-v="evening">Evening</button>
+    <button class="slot" aria-pressed="false" data-v="morning">Morning</button><button class="slot" aria-pressed="false" data-v="afternoon">Afternoon</button><button class="slot" aria-pressed="false" data-v="evening">Evening</button>
   </div>
   <div class="label" style="margin-top:6px">Your oath</div>
   <div class="oath">
@@ -1285,7 +1285,7 @@ posthog.register({page:'fifty', page_lang:'en'});
        Three long paragraphs become three short lines. Every fact that was load-bearing is
        still here: what joins the line, what never does, and that a letter comes in a week.
        The opt-out moves to where she says it belongs, which is the footer of her own mail. -->
-  <div class="note">Your initial, your city and what you would do join the line. Your name, your email and your task never do.</div>
+  <div class="note" id="lineNote">Your initial, your city and what you would do join the line. Your name, your email and your task never do.</div>
   <div class="note"><b>In a week I write to ask if you took them.</b></div>
   <div class="note"><b>Free.</b> <span id="mailPromise">Your prompt comes back on the next screen.</span></div>
   <button class="cta" id="addDot" data-go="hand" disabled style="margin-top:auto"><svg width="18" height="18" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="10" fill="#FDD801" stroke="#1B2838" stroke-width="3"/></svg>I promise. Add my dot</button>
@@ -1476,7 +1476,7 @@ posthog.register({page:'fifty', page_lang:'en'});
     <div><span class="ic ic2" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="4.6" width="17.6" height="11.6" rx="3.6"/><path d="M8.6 16.2 7.4 20.6 12.4 16.2"/></svg></span>Know from the silence in a room that something is wrong.</div>
     <div><span class="ic ic3" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#1B2838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M7.0 11.5q1.7-2.6 3.4 0"/><path d="M13.6 11.5q1.7-2.6 3.4 0"/><path d="M8.3 16.6 15.7 15.0"/></svg></span>Cringe at a story you're telling for the fifth time.</div>
   </div>
-  <div style="font-family:var(--hand);font-size:28px;line-height:1.05;margin-top:2px">That's what <span id="finWhen">Friday evening</span> is for.</div>
+  <div style="font-family:var(--hand);font-size:28px;line-height:1.05;margin-top:2px">That's what <span id="finWhen">an hour you pick</span> is for.</div>
   <div class="goes">
     
 
@@ -1711,7 +1711,7 @@ posthog.register({page:'fifty', page_lang:'en'});
   // The talk discount is gone, 22.9: Morning coupons live on a דף עסק at ₪24 a month and
   // she declined. "לא משנה. אני לא משלמת עוד." The $5 buys two things now, not three.
   var GOAL = 50000; // the wish. A fallback only: the live goal comes from the rail.
-  function fresh(){ return {thing:null, cat:null, handed:false, own:"", to:null, toOwn:"", day:"Friday", time:"evening", name:"", city:"", email:"", net:"wa", touchedNet:false, lang:"en", kept:null, started:false, failed:false, paid:false, code:null, dotNumber:null, stored:false, pickedWhen:false}; }
+  function fresh(){ return {thing:null, cat:null, handed:false, own:"", to:null, toOwn:"", day:"", time:"", name:"", city:"", email:"", net:"wa", touchedNet:false, lang:"en", kept:null, started:false, failed:false, paid:false, code:null, dotNumber:null, stored:false, pickedWhen:false}; }
   var st = fresh();
   var hist = ["open"], posted = false;
   var $ = function(s,r){return (r||document).querySelector(s)};
@@ -2055,6 +2055,12 @@ posthog.register({page:'fifty', page_lang:'en'});
   }
   function wantLabel(){ var t = st.to==="__own" ? st.toOwn.trim() : st.to; return t || "…"; }
   function when(){ return st.day+" "+st.time; }
+  // Anat, 23.9, after Yaniv's confirmation said "Friday evening is yours now" for an hour he
+  // never chose: Friday evening was preselected, and pressing the button counted as choosing
+  // it. "If someone does not choose, there is no reason they can enter a city and an email."
+  // Nothing is preselected now, and the name, city and email fields do not exist on the
+  // screen until a day AND a time were pressed by the person.
+  function pickedBoth(){ return !!(st.day && st.time); }
   // The exact prompt this visitor was handed. The rail stores it verbatim because the
   // day-7 letter quotes it back, so the screen and the row read from this one function.
   function promptFor(){
@@ -2067,7 +2073,7 @@ posthog.register({page:'fifty', page_lang:'en'});
   // The want comes first in the sentence too, because it came first on the page. The
   // task is the second clause: the mechanism, not the subject.
   function oath(){
-    var t = thing(); var p = pick(); if(!t || !p) return "";
+    var t = thing(); var p = pick(); if(!t || !p || !pickedBoth()) return "";
     var head = /^I\b/.test(p) ? (when()+" is mine. "+p+".") : ("I'm taking "+when()+" back to "+p+".");
     return head+" "+t.yes+".";
   }
@@ -2089,7 +2095,7 @@ posthog.register({page:'fifty', page_lang:'en'});
   function heOath(){
     var w = st.to==="__own" ? st.toOwn.trim() : (HE_GO[st.to] || "");
     var th = st.own.trim() ? st.own.trim() : (HE_THING[st.thing] || "");
-    if(!w || !th) return "";
+    if(!w || !th || !pickedBoth()) return "";
     return (HE_DAY[st.day]||"") + " " + (HE_TIME[st.time]||"") + ". חמישים דקות, כדי " + w + ". את " + th + " הבינה המלאכותית עושה במקומי.";
   }
   function heShare(){
@@ -2176,9 +2182,11 @@ posthog.register({page:'fifty', page_lang:'en'});
     }
     var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(st.email.trim());
     var okName = st.name.trim().length > 0;
-    var ready = !!(t && want && okName && okMail);
+    var chose = pickedBoth();
+    ["#nm","#city","#em","#lineNote"].forEach(function(id){ var f=$(id); if(f) f.classList.toggle("hidden", !chose); });
+    var ready = !!(t && want && chose && okName && okMail);
     var s = oath();
-    $("#oathText").textContent = s;
+    $("#oathText").textContent = s || (t && want ? "Pick a day and a time, and your oath appears here." : "");
     $("#oathSig").textContent = signer() || "you";
     // A mistyped address says what is wrong instead of disabling the button in silence.
     var typed = st.email.trim(), badMail = typed !== "" && !okMail;
@@ -2382,8 +2390,8 @@ posthog.register({page:'fifty', page_lang:'en'});
       $("#startedBtn").disabled = false;
       $$('[data-group="thing"] .pill').forEach(function(c){c.setAttribute("aria-pressed","false")});
       $("#own").classList.add("hidden"); $("#sureBox").hidden = true;
-      $$('[data-group="day"] .slot').forEach(function(c){c.setAttribute("aria-pressed", c.dataset.v==="Friday"?"true":"false")});
-      $$('[data-group="time"] .slot').forEach(function(c){c.setAttribute("aria-pressed", c.dataset.v==="evening"?"true":"false")});
+      $$('[data-group="day"] .slot').forEach(function(c){c.setAttribute("aria-pressed","false")});
+      $$('[data-group="time"] .slot').forEach(function(c){c.setAttribute("aria-pressed","false")});
       hist=["open"]; try{history.replaceState({s:"open"},"","#open")}catch(e){}
       buildTo(); render(); show("open", false); return;
     }
@@ -2712,7 +2720,13 @@ posthog.register({page:'fifty', page_lang:'en'});
       $("#mdSay").textContent = c.sentence || "Your fifty minutes are on the line.";
       $("#mdWhen").textContent = c.when || "an hour you pick";
       var stats = [];
-      stats.push(["Minutes on the line through you", nf(c.totalMinutes || c.minutes || 0)]);
+      // `totalMinutes` is null when the rail could not total the line (its KV list quota,
+      // 23.9). The old `|| c.minutes || 0` fell straight through to this person's OWN
+      // minutes and printed them under the words "through you" — so the API learned to say
+      // "not known" and the screen went on showing 50 as fact. A row we cannot fill is a row
+      // we leave out; the two below still draw, and the card does not lie.
+      if(c.totalMinutes || c.totalMinutes === 0)
+        stats.push(["Minutes on the line through you", nf(c.totalMinutes)]);
       if(c.referred) stats.push(["People who joined through your link", nf(c.referred)]);
       stats.push([c.lived ? "Lived, and counted" : "A promise until day 7", c.lived ? "\u2713" : "\u00b7"]);
       $("#mdStats").innerHTML = stats.map(function(r){

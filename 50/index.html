@@ -419,7 +419,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 .lightbox .inner{width:100%;max-width:880px;position:relative}
 .lightbox video{display:block;width:100%;height:auto;border-radius:14px;background:#000}
 .lightbox .x{position:absolute;top:-52px;right:0;min-height:44px;background:var(--cream);color:var(--navy);border:3px solid var(--navy);border-radius:999px;padding:0 16px;font-size:15px;font-weight:800}
-@media (min-width:900px){ .vid{max-width:34em} }
+@media (min-width:900px) and (pointer:fine){ .vid{max-width:34em} }
 
 /* The 49. Her real hand-overs, in one fixed shape: day, what went, minutes that came back. */
 .hands{display:flex;flex-direction:column;gap:7px}
@@ -520,7 +520,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
    Type is set in vw clamps so the scale grows with the window instead of jumping. */
 
 /* ── shared by tablet and laptop ─────────────────────────────────────────────── */
-@media (min-width:600px){
+@media (min-width:600px) and (pointer:fine){
   body{background:var(--cream)}
   .app{border:0;border-radius:0;box-shadow:none;overflow:visible;min-height:0;margin:0 auto}
   .screen{min-height:0}
@@ -536,7 +536,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 }
 
 /* ── tablet: one column, wider, still one decision per screen ────────────────── */
-@media (min-width:600px) and (max-width:899px){
+@media (min-width:600px) and (max-width:899px) and (pointer:fine){
   .app{max-width:680px}
   .screen{padding:20px 32px 44px;gap:16px}
   .screen h1{font-size:42px!important;line-height:.97}
@@ -663,12 +663,12 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 }
 
 /* ── wide enough for the choices to sit three across instead of stacking ─────── */
-@media (min-width:1180px){
+@media (min-width:1180px) and (pointer:fine){
   .grid2{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
 /* ── the widest windows: the column stops growing, the white space does ──────── */
-@media (min-width:1280px){
+@media (min-width:1280px) and (pointer:fine){
   .app{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
   .screen{gap:16px}
   .stage{top:40px;padding-top:64px}
@@ -688,13 +688,15 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
    inheriting cream onto its own white card. */
 .screen.dark .err{background:var(--white);color:var(--navy)}
 @media (max-width:359px){ .spine{font-size:23px;padding-left:12px} }
-@media (min-width:600px){ .spine{font-size:30px;margin-top:16px} }
-@media (min-width:900px){ .spine{font-size:clamp(27px,2.25vw,34px);max-width:23em;padding-left:20px} }
+@media (min-width:600px) and (pointer:fine){ .spine{font-size:30px;margin-top:16px} }
+@media (min-width:900px) and (pointer:fine){ .spine{font-size:clamp(27px,2.25vw,34px);max-width:23em;padding-left:20px} }
 /* The spine is four lines the opening never carried, and four lines is the whole
    difference between a door above the fold and a door under it. The opening pays for
    them out of the decoration around it, never out of the line itself, so "Start" stays
    on the first screen at 375 and on a 820px laptop. (7.9: באמת??? כל כך למטה) */
-@media (max-width:899px){
+/* A finger gets these whatever width it claims: her phone reports ~900+, so max-width
+   alone left it without the phone rules it needs. */
+@media (max-width:899px), (pointer:coarse){
   .ctdlogo{height:44px}
   .bunting{height:34px;margin:4px 0 -8px}
   .portrait{width:150px;height:150px;margin:6px auto 0}
@@ -706,7 +708,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
   .spine{margin-top:10px;padding-top:8px;padding-bottom:8px}
   .openfoot{padding-top:12px}
 }
-@media (min-width:900px){
+@media (min-width:900px) and (pointer:fine){
   .ctdlogo{height:42px}
   .bunting{height:30px}
   .portrait{width:clamp(112px,9.2vw,138px);height:clamp(112px,9.2vw,138px);margin:10px 0 0}
@@ -731,7 +733,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
    So the rule gets a height, not just a width. Under 820px tall the opening screen gives
    up what it can spare and nothing else: the portrait, the gaps, and one step of the
    headline. Nothing below 900px wide is touched, so the phone is untouched. */
-@media (min-width:900px) and (max-height:820px){
+@media (min-width:900px) and (max-height:820px) and (pointer:fine){
   .screen.open h1{font-size:clamp(32px,3vw,42px)!important;line-height:.95}
   .spine{font-size:clamp(20px,1.6vw,24px);margin-top:6px;padding-top:6px;padding-bottom:6px}
   .portrait{width:clamp(88px,7vw,104px);height:clamp(88px,7vw,104px);margin:4px 0 0}
@@ -746,7 +748,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
    reach. A 375x667 handset (iPhone SE and 8, still a real share of traffic) put Start 145px
    under the fold: measured, not guessed. Nothing here fires on a 812px-tall phone, so the
    screen this page was designed on is untouched. */
-@media (max-width:899px) and (max-height:740px){
+@media (max-width:899px) and (max-height:740px), (pointer:coarse) and (max-height:740px){
   .screen.open h1{font-size:clamp(30px,8.6vw,38px);line-height:.98}
   .portrait{width:86px;height:86px;margin:2px 0 0}
   .portrait .fifty{width:36px;height:36px;font-size:15px;right:-6px}
@@ -759,7 +761,7 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 }
 /* One more step for the 568px phone (iPhone SE first generation and the 5s). Small share,
    but the rule this file wrote for itself does not have a traffic threshold in it. */
-@media (max-width:899px) and (max-height:600px){
+@media (max-width:899px) and (max-height:600px), (pointer:coarse) and (max-height:600px){
   .screen.open h1{font-size:26px;line-height:1}
   .portrait{width:66px;height:66px}
   .portrait .fifty{width:30px;height:30px;font-size:13px;right:-5px}
@@ -883,8 +885,8 @@ textarea.field{padding:10px 14px;font-size:22px;resize:vertical;min-height:84px}
 /* It has to keep the same relation to the headline as the card grows: 29px headline to a 68px
    disc on the phone, 34px to 80px, 38px to 88px. A fixed disc on a widening card slides back
    down the reading order, which is the thing she asked to have fixed. */
-@media (min-width:600px){ .five .coin{width:80px;height:80px;font-size:30px} }
-@media (min-width:900px){ .five .coin{width:88px;height:88px;font-size:33px} }
+@media (min-width:600px) and (pointer:fine){ .five .coin{width:80px;height:80px;font-size:30px} }
+@media (min-width:900px) and (pointer:fine){ .five .coin{width:88px;height:88px;font-size:33px} }
 /* The fold. One hairline, and it is the only rule inside the card above the footnotes. */
 .five .gets{
   border-top:2px solid rgba(27,40,56,.22);

@@ -1436,7 +1436,7 @@ posthog.register({page:'fifty', page_lang:'en'});
          "and the page says the same thing to the visitor's face on the $5 screen". The rail has
          meant it since that day; the sentence was never written. The second seat found it
          missing on 23.9, one screen away from a button that takes money. -->
-    <div class="giving" style="margin-bottom:8px">A paid dot carries your first name and your city on the line. A free one stays initials only. The task itself is never public either way.</div>
+    <div class="giving" style="margin-bottom:8px">Your initial, your city and what you would do join the line, whether you pay or not. Your name, your email and your task never do.</div>
     <div class="giving">20% of every payment goes to teaching children and young people what stays ours. The organisation is named when the 100 days close.</div>
 
     <button class="link" data-go="human" id="skipPay">Not now. My free dot stays claimed.</button>
@@ -2527,10 +2527,30 @@ posthog.register({page:'fifty', page_lang:'en'});
     x.fillStyle = "#1B2838";
     x.font = "800 30px 'Bricolage Grotesque', system-ui, sans-serif";
     x.textAlign = "left";
-    x.fillText("100 DAYS TO 50", P, 150);
+    // campaignDay() has been here and correct the whole time; the card never called it, so
+    // this string was wrong on the day it shipped and wrong every day after. Guarded, because
+    // a card that throws is a share button that does nothing.
+    var dayNo = 0;
+    try { dayNo = (typeof campaignDay === "function") ? campaignDay() : 0; } catch(e){}
+    x.fillText(dayNo > 0 ? ("DAY " + dayNo + " OF 100") : "50,000 HUMAN MINUTES", P, 150);
 
     // their own sentence, in the hand, wrapped to the card
-    var t = thing(), say = oath() || (t ? t.yes + "." : "");
+    // The road nobody walked in testing. On "No, I keep it" oath() is empty AND thing() is
+    // null, so `say` was "" and this drew an empty rectangle — the one thing that visitor
+    // had to share. Her own approved line is already on the page; use it.
+    var t = thing();
+    var kept = false;
+    try { kept = (typeof keptEverything === "function") && keptEverything(); } catch(e){}
+    // Its own sentence, not KEPT_SHARE with the question sliced off: the only "?" in that
+    // string is the last character, so splitting on it removed the punctuation and left the
+    // question standing. The card ended on the word "do", under her name.
+    //
+    // The last fallback is deliberately NOT in the first person. It is reachable only off-road
+    // (no thing chosen and not kept), and a signed card must never assert a promise the person
+    // did not make.
+    var say = kept
+      ? "I kept everything human. 0 minutes to AI, all 50 to myself."
+      : (oath() || (t ? t.yes + "." : "50 minutes back to what only humans can do."));
     x.font = "700 64px 'Caveat', cursive";
     var words = String(say).split(/\s+/), line = "", y = 300, lines = [];
     words.forEach(function(w){
@@ -2588,9 +2608,24 @@ posthog.register({page:'fifty', page_lang:'en'});
         if(!blob){ btn.textContent = "Share my card"; return; }
         var file = null;
         try { file = new File([blob], "my-fifty-minutes.png", {type:"image/png"}); } catch(e){}
-        if(file && navigator.canShare && navigator.canShare({files:[file]})){
-          navigator.share({files:[file]}).then(function(){}, function(){}).then(function(){ btn.textContent = "Share my card"; });
-          return;
+        // THE CARD CARRIES THE LINK, or the loop it exists for is open. This shared the PNG
+        // and nothing else, so the only address on it was PIXELS — a stranger had to read
+        // "connecthedots.co/50" off an image and type it by hand — and the ?from= code was
+        // dropped, which made "your dot carries 50 more for everyone who joins through it"
+        // unearnable through the one button built to spread. Her note is three lines up:
+        // "אם רוצים שזה יעבוד ויתפשט זה צריך להיות קל לשתף את התמונה ככה".
+        // shareAny() on the finale screen has passed {text, url} all along; this one did not.
+        //
+        // Tried richest first. Some targets refuse files alongside a url, so canShare decides
+        // rather than a guess, and the file-only form stays as the fallback it always was.
+        if(file && navigator.canShare){
+          var withLink = {files:[file], text:shareText(), url:myUrl()};
+          var payload = navigator.canShare(withLink) ? withLink
+                      : (navigator.canShare({files:[file]}) ? {files:[file]} : null);
+          if(payload){
+            navigator.share(payload).then(function(){}, function(){}).then(function(){ btn.textContent = "Share my card"; });
+            return;
+          }
         }
         var a = document.createElement("a");
         a.href = URL.createObjectURL(blob); a.download = "my-fifty-minutes.png";

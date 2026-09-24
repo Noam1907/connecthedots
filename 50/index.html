@@ -1101,9 +1101,8 @@ posthog.register({page:'fifty', page_lang:'en'});
      No number is better than a wrong one: a zero and a rail that is down look identical
      on screen, and the zero is the one that makes a real line look abandoned. -->
 <div class="counter" id="counter" aria-live="polite" hidden>
-  <div class="cn"><b id="ppl"></b><span class="people"> in the line</span> &middot; <b id="cnt"></b> <span id="cnTail"></span></div>
+  <div class="cn"><b id="cnt"></b> <span id="cnTail"></span></div>
   <div class="track" aria-hidden="true"><i class="ghost" id="cntGhost"></i><i id="cntBar"></i><span class="stops" id="cntStops"></span></div>
-  <div class="tally" id="tally" hidden><span>Claimed it: <b id="tOn">0</b></span><span>Lived it: <b id="tLived">0</b></span></div>
   <div class="ms" id="msLine"></div>
   <!-- The track is aria-hidden, and the stops are drawn inside it, so a screen reader would
        get the gates as nothing at all. This is the same four numbers in words: never seen,
@@ -1830,15 +1829,8 @@ posthog.register({page:'fifty', page_lang:'en'});
     var past = d.beyondGoal === true || lived > goal;
     var over = Number(d.overGoal) || Math.max(0, lived - goal);
     var span = (next - prev) || 1;
-    $("#ppl").textContent = nf(d.dots);
-    // Everyone who signed, then the ones who came back and said they lived it. The second
-    // number is the one the counter is built on, so it is the one that is painted.
-    var tl = $("#tally");
-    if(tl && typeof d.dotsLived === "number"){
-      $("#tOn").textContent = nf(d.dots);
-      $("#tLived").textContent = nf(d.dotsLived);
-      tl.hidden = false;
-    }
+    // 24.9, Anat: the headcount came off. What the line is about is minutes, so the counter
+    // carries minutes only. d.dots is still required above because it proves the rail answered.
     $("#cnt").textContent = nf(n);
     // The denominator is the reader's only anchor, so it stays until the wish is genuinely
     // met. `past` is now lived-driven, so it can no longer be dropped on the strength of
